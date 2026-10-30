@@ -406,6 +406,75 @@ body{
  }
 }
 
+
+/* Emphasize exam information and copyright footer */
+.foot{
+ display:flex;align-items:flex-start;gap:17px;
+ padding:22px 25px;margin:25px 0 22px;
+ border:1.5px solid #b8d8df;border-left:5px solid #079c9c;
+ border-radius:19px;
+ background:linear-gradient(115deg,#e8faf7 0%,#f4f8ff 68%,#f1efff 100%);
+ box-shadow:0 10px 26px rgba(25,73,92,.075);
+ color:#3e5b73;font-size:13px;line-height:1.85;
+}
+.foot-icon{
+ width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;
+ border-radius:15px;background:linear-gradient(145deg,#d2f5ee,#dfeeff);
+ border:1px solid #c2e8e4;box-shadow:0 5px 12px rgba(25,106,117,.08);
+ font-size:23px;
+}
+.foot-body{min-width:0;flex:1}
+.foot-heading{
+ font-size:11px;font-weight:950;letter-spacing:1.15px;
+ color:#087e83;margin:0 0 5px;
+}
+.foot-main{margin:0;color:#334f68;font-size:13px;line-height:1.9}
+.foot-main strong{color:#1a3c58;font-weight:850}
+.foot-main .total-score{
+ display:inline-block;margin-left:3px;padding:2px 10px;border-radius:999px;
+ background:linear-gradient(115deg,#078f91,#087f9c);color:#fff;
+ box-shadow:0 4px 10px rgba(7,127,140,.17);white-space:nowrap;
+}
+.foot-note{
+ margin:11px 0 0;padding-top:10px;border-top:1px solid rgba(133,173,192,.3);
+ color:#647c92;font-size:11.5px;line-height:1.8;
+}
+.foot-note>span[aria-hidden="true"]{font-weight:900;color:#188f91}
+.foot-note-sep{margin:0 5px;color:#9caebe}
+.copyright{
+ display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;
+ width:max-content;max-width:calc(100% - 30px);
+ margin:18px auto 28px;padding:11px 19px;
+ border:1px solid #c9d8e8;border-radius:999px;
+ background:linear-gradient(115deg,#eaf0fb,#e7f8f5);
+ box-shadow:0 8px 22px rgba(27,56,88,.08);
+ color:#5d7088;font-size:12px;font-weight:650;letter-spacing:.1px;
+ text-align:center;
+}
+.copyright-badge{
+ width:27px;height:27px;display:grid;place-items:center;flex:0 0 27px;
+ border-radius:50%;background:linear-gradient(135deg,#172d4b,#087f8a);
+ color:#fff;font-size:13px;font-weight:950;
+ box-shadow:0 4px 10px rgba(23,64,82,.16);
+}
+.copyright-year{color:#526b84;font-weight:800}
+.copyright-separator{width:1px;height:20px;background:#c7d7e5}
+.copyright strong{color:#1c3653;font-weight:900}
+.copyright-text{color:#647a90}
+@media(max-width:600px){
+ .foot{gap:11px;padding:17px 15px;margin:19px 0 15px;border-radius:16px}
+ .foot-icon{width:38px;height:38px;flex-basis:38px;border-radius:12px;font-size:20px}
+ .foot-heading{font-size:10px;letter-spacing:.85px}
+ .foot-main{font-size:12px;line-height:1.8}
+ .foot-note{font-size:11px;line-height:1.75;margin-top:9px;padding-top:8px}
+ .copyright{
+  width:calc(100% - 20px);max-width:420px;border-radius:17px;
+  padding:12px 13px;gap:8px;margin:15px auto 22px;font-size:11px;
+ }
+ .copyright-badge{width:25px;height:25px;flex-basis:25px}
+ .copyright-separator{height:16px}
+}
+
 </style></head><body><header class="topbar"><div class="brand">📘 Thi<span>Nhanh</span><span class="mini">VẬT LÍ · HÓA HỌC</span></div><span class="menu-link">CHỌN MÔN HỌC</span></header>
 <main id="landing" class="page">
 <section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Vật lí và Hóa học với ngân hàng đề đang hoạt động. Toán, Tiếng Anh và Lịch sử đã được tạo sẵn; khi bạn gửi tài liệu, mình sẽ bổ sung dữ liệu và đề thi cho từng môn.</p></div><div class="hero-art">🎯</div></section>
@@ -416,7 +485,20 @@ body{
 <article class="subject pending"><div class="icon">🌐</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Tiếng Anh</h2><p>Đã tạo khu vực môn Tiếng Anh. Chưa có đề cho đến khi bạn gửi tài liệu, cấu trúc ôn tập hoặc nguồn câu hỏi.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
 <article class="subject pending"><div class="icon">📜</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Lịch sử</h2><p>Đã tạo khu vực môn Lịch sử. Khi bạn gửi tài liệu, mình sẽ xây dựng bộ câu hỏi và đề thi theo đúng nội dung đó.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
 </div>
-<div class="foot">Mỗi đề có 18 câu trắc nghiệm (4,5 điểm), 4 câu đúng/sai (4 điểm theo mức điểm từng câu trong tài liệu), và 6 câu trả lời ngắn (1,5 điểm). Tổng: 10 điểm. Lịch sử chi tiết được lưu trong trình duyệt. Muốn tổng hợp điểm của nhiều người trên Google Sheets, cần hoàn tất bước kết nối bảng điểm.</div>
+<div class="foot">
+ <div class="foot-icon" aria-hidden="true">📘</div>
+ <div class="foot-body">
+  <div class="foot-heading">CẤU TRÚC ĐỀ &amp; LƯU KẾT QUẢ</div>
+  <p class="foot-main">Mỗi đề có <strong>18 câu trắc nghiệm (4,5 điểm)</strong>, <strong>4 câu đúng/sai (4 điểm theo mức điểm từng câu trong tài liệu)</strong>, và <strong>6 câu trả lời ngắn (1,5 điểm)</strong>. Tổng: <strong class="total-score">10 điểm</strong>.</p>
+  <p class="foot-note"><span aria-hidden="true">◷</span> Lịch sử chi tiết được lưu trong trình duyệt. <span class="foot-note-sep">·</span> <span aria-hidden="true">☁</span> Muốn tổng hợp điểm của nhiều người trên Google Sheets, cần hoàn tất bước kết nối bảng điểm.</p>
+ </div>
+</div>
 </main>
-<footer class="copyright">© 2026 Nguyễn Khánh Lâm · Bản quyền được bảo lưu.</footer>
+<footer class="copyright">
+ <span class="copyright-badge" aria-hidden="true">©</span>
+ <span class="copyright-year">2026</span>
+ <span class="copyright-separator" aria-hidden="true"></span>
+ <strong>Nguyễn Khánh Lâm</strong>
+ <span class="copyright-text">Bản quyền được bảo lưu.</span>
+</footer>
 </body></html>
