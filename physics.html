@@ -812,6 +812,19 @@ button{touch-action:manipulation}
   .score-meme-caption{font-size:9px;max-width:94px}
 }
 
+
+/* ThiNhanh navigation: chương học và tiện ích */
+.tip-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.tip-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px;box-shadow:0 6px 20px rgba(24,48,75,.04)}
+.tip-card>span{display:grid;place-items:center;width:42px;height:42px;background:#e7f8f5;border-radius:13px;font-size:22px;margin-bottom:10px}
+.tip-card h3{margin:4px 0 7px;font-size:16px;color:var(--ink)}
+.tip-card p{font-size:12px;line-height:1.75;color:var(--muted);margin:0}
+.stat-overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:15px 0 22px}
+.stat-tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px;box-shadow:0 6px 18px rgba(24,48,75,.04)}
+.stat-tile .label{font-size:11px;color:var(--muted);display:block;margin-bottom:7px}
+.stat-tile strong{font-size:24px;line-height:1.2;color:var(--ink)}
+@media(max-width:760px){.tip-grid{grid-template-columns:1fr}.stat-overview{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stat-tile{padding:13px}.stat-tile strong{font-size:20px}}
+
 </style>
 </head>
 <body>
@@ -823,30 +836,46 @@ button{touch-action:manipulation}
 <aside class="sidebar">
  <div class="side-label">KHÔNG GIAN LUYỆN THI</div>
  <button class="navbtn active" data-view="home"><span class="ico">⌂</span> Tổng quan</button>
- <button class="navbtn" data-view="browse"><span class="ico">▤</span> 10 đề thi</button>
+ <button class="navbtn" data-view="chapters"><span class="ico">▦</span> Chương học</button>
  <button class="navbtn" data-view="history"><span class="ico">◷</span> Lịch sử làm bài</button>
- <div class="sidebox"><b>📘 Bộ đề Vật lí nhiệt</b>Biên soạn theo 7 chủ đề trong tài liệu bạn gửi. Đáp án và giải thích chỉ hiện sau khi nộp bài.</div>
+ <button class="navbtn" data-view="statistics"><span class="ico">▥</span> Thống kê điểm</button>
+ <button class="navbtn" data-view="tips"><span class="ico">✦</span> Mẹo ôn tập</button>
 </aside>
 <main>
 <section class="view active" id="view-home">
- <div class="pagehead"><div><div class="eyebrow">BỘ LUYỆN THI VẬT LÍ 12</div><h1>Chinh phục Vật lí nhiệt.</h1><p>10 đề tăng dần độ khó, có tính giờ, chấm tự động và giải thích từng câu.</p></div><button class="btn primary" data-goto="browse">Vào kho đề →</button></div>
- <div class="hero"><div><div class="eyebrow">THI THỬ THEO CẤU TRÚC THPT</div><h2>50 phút. 28 câu lớn. Thang điểm 10.</h2><p>Rèn tư duy, vận dụng công thức, đọc số liệu thí nghiệm và giải bài toán nhiệt nhiều giai đoạn.</p><button class="btn" style="background:#fff;color:#117c82" data-goto="browse">Chọn đề thi <span>→</span></button></div><div class="hero-art">🌡️</div></div>
+ <div class="pagehead"><div><div class="eyebrow">BỘ LUYỆN THI VẬT LÍ 12</div><h1>Chinh phục Vật lí nhiệt.</h1><p>10 đề tăng dần độ khó, có tính giờ, chấm tự động và giải thích từng câu.</p></div><button class="btn primary" data-goto="chapters">Vào kho đề →</button></div>
+ <div class="hero"><div><div class="eyebrow">THI THỬ THEO CẤU TRÚC THPT</div><h2>50 phút. 28 câu lớn. Thang điểm 10.</h2><p>Rèn tư duy, vận dụng công thức, đọc số liệu thí nghiệm và giải bài toán nhiệt nhiều giai đoạn.</p><button class="btn" style="background:#fff;color:#117c82" data-goto="chapters">Chọn đề thi <span>→</span></button></div><div class="hero-art">🌡️</div></div>
 
- <div class="section-head chapter-heading"><h2>Chọn mạch kiến thức</h2><span class="tiny">Chuyên đề 1 · Vật lí nhiệt</span></div>
- <div class="chapter-grid" id="chapter-cards"></div>
- <p class="chapter-note">Các đề có thể chứa câu hỏi tích hợp nhiều mạch kiến thức; hãy xem đây là nhóm ôn tập theo trọng tâm của đề.</p>
+ 
 
  <div class="stats"><div class="stat"><div class="stat-icon">▤</div><div><strong id="stat-exams">10</strong><span>Đề thi hoàn chỉnh</span></div></div><div class="stat"><div class="stat-icon">✓</div><div><strong id="stat-attempts">0</strong><span>Lượt đã hoàn thành</span></div></div><div class="stat"><div class="stat-icon">↗</div><div><strong id="stat-average">—</strong><span>Điểm trung bình</span></div></div></div>
  <div class="info-box"><b>Cấu trúc và chấm điểm:</b> Phần I: 18 câu trắc nghiệm × 0,25 = 4,5 điểm. Phần II: 4 câu đúng/sai, mỗi câu tối đa 1 điểm theo thang điểm từng phần. Phần III: 6 câu trả lời ngắn × 0,25 = 1,5 điểm. Tổng 10 điểm.</div>
- <div class="section-head"><h2>Đề thi theo cấp độ</h2><button class="linkbtn" data-goto="browse">Xem đủ 10 đề →</button></div><div class="cards" id="featured-cards"></div>
  <div class="footnote">ThiNhanh · Bản luyện thi cá nhân · Lịch sử được lưu trong trình duyệt hiện tại.</div>
 </section>
+<section class="view" id="view-chapters">
+ <div class="pagehead"><div><div class="eyebrow">THƯ VIỆN VẬT LÍ 12</div><h1>Chọn chương học</h1><p>Chọn một chương để mở các đề thuộc chương đó. Đề thi sẽ không hiện cho đến khi bạn chọn chương.</p></div></div>
+ <div class="chapter-grid" id="chapter-cards"></div>
+ <div class="footnote">Chọn một chương để xem các đề được xếp trong chương đó. Bạn có thể quay lại đây để đổi chương bất cứ lúc nào.</div>
+</section>
 <section class="view" id="view-browse">
- <div class="pagehead"><div><div class="eyebrow">THƯ VIỆN BÀI THI</div><h1>Kho 10 đề Vật lí nhiệt</h1><p>Chọn đúng cấp độ phù hợp với mục tiêu luyện tập.</p></div></div>
- <div class="toolbar"><div class="search"><input id="searchInput" placeholder="Tìm theo tên đề hoặc nội dung…"></div><select id="chapterFilter" class="chapter-select"><option value="">Tất cả chương / mạch kiến thức</option></select><select id="difficultyFilter"><option value="">Tất cả cấp độ</option><option>Dễ</option><option>Khá</option><option>Khó</option><option>Siêu khó</option></select><select id="sortFilter"><option value="level">Theo độ khó</option><option value="az">Tên A–Z</option><option value="questions">Nhiều câu khó nhất</option></select></div>
+ <div class="pagehead"><div><div class="eyebrow">THƯ VIỆN BÀI THI</div><h1 id="browseTitle">Đề thi theo chương</h1><p id="browseDescription">Chọn một chương để xem đề thi.</p></div></div>
+ <div class="toolbar"><div class="search"><input id="searchInput" placeholder="Tìm theo tên đề hoặc nội dung…"></div><select id="chapterFilter" class="chapter-select"><option value="">Chọn chương</option></select><select id="difficultyFilter"><option value="">Tất cả cấp độ</option><option>Dễ</option><option>Khá</option><option>Khó</option><option>Siêu khó</option></select><select id="sortFilter"><option value="level">Theo độ khó</option><option value="az">Tên A–Z</option><option value="questions">Nhiều câu khó nhất</option></select></div>
  <div class="info-box"><b>Mẹo thi:</b> Mỗi đề gồm 18 câu chọn A/B/C/D, 4 câu đúng/sai (mỗi câu có 4 ý a–d), và 6 câu trả lời ngắn. Đồng hồ chạy 50 phút; khi nộp bài, hệ thống hiện điểm thành phần và lời giải.</div>
  <div class="cards" id="all-cards"></div>
  <div class="footnote">Độ khó được xếp theo thiết kế của bộ đề: 2 dễ · 2 khá · 4 khó · 2 siêu khó.</div>
+</section>
+<section class="view" id="view-statistics">
+ <div class="pagehead"><div><div class="eyebrow">THEO DÕI TIẾN BỘ</div><h1>Thống kê điểm</h1><p>Tổng hợp kết quả những lần làm bài đã lưu trên trình duyệt này.</p></div></div>
+ <div id="statisticsContent"></div>
+</section>
+<section class="view" id="view-tips">
+ <div class="pagehead"><div><div class="eyebrow">HỌC TẬP THÔNG MINH</div><h1>Mẹo ôn tập</h1><p>Một vài cách luyện đề hiệu quả hơn mỗi ngày.</p></div></div>
+ <div class="tip-grid">
+  <article class="tip-card"><span>🎯</span><h3>Chọn đúng chương</h3><p>Bắt đầu từ chương bạn còn yếu, làm đề theo chương rồi mới chuyển sang đề tổng hợp.</p></article>
+  <article class="tip-card"><span>⏱️</span><h3>Luyện như thi thật</h3><p>Canh giờ, hạn chế mở tài liệu trong lúc làm và cố gắng hoàn thành bài trước khi hết giờ.</p></article>
+  <article class="tip-card"><span>🧠</span><h3>Ôn lại câu sai</h3><p>Đọc lời giải sau khi nộp bài, ghi lại công thức hoặc kiến thức khiến bạn chọn sai.</p></article>
+  <article class="tip-card"><span>📈</span><h3>Theo dõi tiến bộ</h3><p>So sánh điểm giữa các lần làm. Mục tiêu là hiểu thêm sau mỗi đề, không chỉ nhìn điểm số.</p></article>
+ </div>
 </section>
 <section class="view" id="view-history">
  <div class="pagehead"><div><div class="eyebrow">THEO DÕI TIẾN BỘ</div><h1>Lịch sử làm bài</h1><p>Xem lại điểm tổng, điểm thành phần và đáp án đã làm.</p></div><button class="btn outline" id="clearHistory">Xóa lịch sử</button></div>
@@ -858,7 +887,7 @@ button{touch-action:manipulation}
  <div class="takegrid"><section class="takepanel"><div class="eyebrow" id="sectionLabel">PHẦN I · TRẮC NGHIỆM</div><h2 id="questionTitle">Câu hỏi</h2><div class="questiontext" id="questionText"></div><div id="responseArea"></div><div class="takenav"><button class="btn outline" id="takePrev">← Câu trước</button><div class="spacer"></div><button class="btn primary" id="takeNext">Câu tiếp →</button></div></section><aside class="qnavpanel"><b>Danh sách câu hỏi</b><div class="qnavgrid" id="qnavgrid"></div><div class="qnavlegend"><span><i class="legenddot" style="background:var(--teal)"></i>Đã xong</span><span><i class="legenddot" style="background:var(--navy)"></i>Đang xem</span></div><hr style="border:0;border-top:1px solid var(--line);margin:16px 0"><div class="tiny">Đã hoàn thành: <b id="answeredCount">0</b>/28 câu lớn</div><div class="tiny" style="margin-top:7px">Chưa làm hết vẫn có thể nộp bài; câu bỏ trống không có điểm.</div><button class="btn primary" style="width:100%;margin-top:14px" id="submitExam">Nộp bài</button></aside></div>
 </section>
 <section class="view" id="view-result">
- <div class="pagehead"><div><div class="eyebrow">TỔNG KẾT BÀI THI</div><h1>Kết quả của bạn</h1><p>Xem điểm từng phần, đáp án chuẩn và lời giải.</p></div><button class="btn primary" data-goto="browse">Làm đề khác →</button></div>
+ <div class="pagehead"><div><div class="eyebrow">TỔNG KẾT BÀI THI</div><h1>Kết quả của bạn</h1><p>Xem điểm từng phần, đáp án chuẩn và lời giải.</p></div><button class="btn primary" data-goto="chapters">Làm đề khác →</button></div>
  <div id="resultBody"></div>
 </section>
 </main></div>
@@ -929,14 +958,14 @@ function toast(s){const el=$('toast');el.textContent=s;el.classList.add('show');
 function levelClass(s){return s==='Dễ'?'easy':s==='Khá'?'mid':s==='Khó'?'hard':'super'}
 function iconFor(e){return e.difficulty==='Dễ'?'🌱':e.difficulty==='Khá'?'📘':e.difficulty==='Khó'?'🔥':'🧠'}
 
-const CHAPTER_GROUPS = [{"id":"matter","kicker":"MẠCH KIẾN THỨC 01","title":"Cấu tạo chất & chuyển thể","desc":"Mô hình phân tử, trạng thái vật chất và các hiện tượng chuyển thể.","ids":["e01","e02"]},{"id":"temperature","kicker":"MẠCH KIẾN THỨC 02","title":"Nhiệt độ & nhiệt dung riêng","desc":"Thang nhiệt độ, đo nhiệt độ và các bài toán nhiệt dung riêng.","ids":["e03"]},{"id":"internal","kicker":"MẠCH KIẾN THỨC 03","title":"Nội năng & Định luật I","desc":"Công, nhiệt lượng, biến thiên nội năng và bảo toàn năng lượng.","ids":["e04","e06"]},{"id":"phase","kicker":"MẠCH KIẾN THỨC 04","title":"Nhiệt nóng chảy & hóa hơi","desc":"Nhiệt lượng trong các quá trình nóng chảy, bay hơi và hóa hơi.","ids":["e05"]},{"id":"experiment","kicker":"MẠCH KIẾN THỨC 05","title":"Thực nghiệm & xử lí số liệu","desc":"Phân tích phép đo, công suất, hiệu suất và số liệu thí nghiệm.","ids":["e07"]},{"id":"integrated","kicker":"ÔN TẬP TỔNG HỢP","title":"Bài toán nhiệt tổng hợp","desc":"Các đề tích hợp nhiều mạch kiến thức và bài toán vận dụng cao.","ids":["e08","e09","e10"]}];
+const CHAPTER_GROUPS = [{"id":"matter","kicker":"CHƯƠNG 1","title":"Cấu tạo chất & chuyển thể","desc":"Mô hình phân tử, trạng thái vật chất và các hiện tượng chuyển thể.","ids":["e01","e02"]},{"id":"temperature","kicker":"CHƯƠNG 2","title":"Nhiệt độ & nhiệt dung riêng","desc":"Thang nhiệt độ, đo nhiệt độ và các bài toán nhiệt dung riêng.","ids":["e03"]},{"id":"internal","kicker":"CHƯƠNG 3","title":"Nội năng & Định luật I","desc":"Công, nhiệt lượng, biến thiên nội năng và bảo toàn năng lượng.","ids":["e04","e06"]},{"id":"phase","kicker":"CHƯƠNG 4","title":"Nhiệt nóng chảy & hóa hơi","desc":"Nhiệt lượng trong các quá trình nóng chảy, bay hơi và hóa hơi.","ids":["e05"]},{"id":"experiment","kicker":"CHƯƠNG 5","title":"Thực nghiệm & xử lí số liệu","desc":"Phân tích phép đo, công suất, hiệu suất và số liệu thí nghiệm.","ids":["e07"]},{"id":"integrated","kicker":"ÔN TẬP TỔNG HỢP","title":"Bài toán nhiệt tổng hợp","desc":"Các đề tích hợp nhiều mạch kiến thức và bài toán vận dụng cao.","ids":["e08","e09","e10"]}];
 function getChapterGroup(examId){return CHAPTER_GROUPS.find(group=>group.ids.includes(examId))||CHAPTER_GROUPS[CHAPTER_GROUPS.length-1]}
 function renderChapterCards(){
  const wrap=$('chapter-cards');
  const selector=$('chapterFilter');
  if(selector){
   const current=selector.value||'';
-  selector.innerHTML='<option value="">Tất cả chương / mạch kiến thức</option>'+CHAPTER_GROUPS.map(g=>'<option value="'+g.id+'">'+g.kicker+' · '+g.title+'</option>').join('');
+  selector.innerHTML='<option value="">Chọn chương</option>'+CHAPTER_GROUPS.map(g=>'<option value="'+g.id+'">'+g.kicker+' · '+g.title+'</option>').join('');
   selector.value=current;
  }
  if(wrap){
@@ -945,19 +974,36 @@ function renderChapterCards(){
    return '<button type="button" class="chapter-card" data-chapter="'+g.id+'"><span class="chapter-kicker">'+g.kicker+'</span><strong>'+g.title+'</strong><p>'+g.desc+'</p><span class="chapter-count">'+count+' đề hiện có · Chọn để xem</span></button>';
   }).join('');
   wrap.querySelectorAll('[data-chapter]').forEach(button=>button.addEventListener('click',()=>{
+   const selected=button.getAttribute('data-chapter');
    const select=$('chapterFilter');
-   if(select)select.value=button.getAttribute('data-chapter');
+   if(select)select.value=selected;
+   $('searchInput').value='';
+   $('difficultyFilter').value='';
+   $('sortFilter').value='level';
    go('browse');
   }));
  }
 }
 function card(e){return `<article class="examcard"><div class="cardtop"><div class="subject-icon">${iconFor(e)}</div><span class="tag">50 PHÚT</span></div><div class="level ${levelClass(e.difficulty)}">● ${esc(e.difficulty.toUpperCase())}</div><h3>${esc(e.title)}</h3><p>${esc(e.desc)}</p><div class="cardmeta"><span>▤ 18 trắc nghiệm</span><span>◉ 4 đúng/sai</span><span>⌨ 6 ngắn</span></div><div class="cardbottom"><span class="author">Thang điểm 10</span><button class="btn primary small" onclick="startExam('${e.id}')">Làm bài →</button></div></article>`}
-function go(view){if(currentView==='take'&&view!=='take'&&activeExam&&!confirm('Bạn đang làm bài. Thoát sẽ hủy bài hiện tại. Tiếp tục?'))return;clearInterval(timerTick);currentView=view;document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+view));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===view));if(view==='home')renderHome();if(view==='browse')renderBrowse();if(view==='history')renderHistory();window.scrollTo({top:0,behavior:'smooth'})}
+function go(view){if(currentView==='take'&&view!=='take'&&activeExam&&!confirm('Bạn đang làm bài. Thoát sẽ hủy bài hiện tại. Tiếp tục?'))return;clearInterval(timerTick);currentView=view;document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+view));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===view));if(view==='home')renderHome();if(view==='chapters')renderChapterCards();if(view==='browse')renderBrowse();if(view==='history')renderHistory();if(view==='statistics')renderStatistics();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>go(b.dataset.view));
 document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>go(b.dataset.goto));
-function renderHome(){ $('stat-exams').textContent=BANK.length;$('stat-attempts').textContent=historyItems.length;$('stat-average').textContent=historyItems.length?(historyItems.reduce((s,h)=>s+h.totalScore,0)/historyItems.length).toFixed(1)+'/10':'—';$('featured-cards').innerHTML=BANK.slice(0,3).map(card).join('');renderChapterCards()}
-function renderBrowse(){filterCards()}
-function filterCards(){let query=$('searchInput').value.toLowerCase(),level=$('difficultyFilter').value,sort=$('sortFilter').value,chapter=$('chapterFilter')?$('chapterFilter').value:'';let arr=BANK.filter(e=>(!level||e.difficulty===level)&&(!chapter||getChapterGroup(e.id).id===chapter)&&(!query||(e.title+' '+e.desc+' '+e.difficulty).toLowerCase().includes(query)));if(sort==='az')arr.sort((a,b)=>a.title.localeCompare(b.title,'vi'));else if(sort==='questions')arr.sort((a,b)=>{let rank={'Siêu khó':4,'Khó':3,'Khá':2,'Dễ':1};return rank[b.difficulty]-rank[a.difficulty]});$('all-cards').innerHTML=arr.map(card).join('')||'<div class="empty" style="grid-column:1/-1">🔎<b>Không tìm thấy đề phù hợp</b>Thử từ khóa khác nhé.</div>'}
+function renderHome(){ $('stat-exams').textContent=BANK.length;$('stat-attempts').textContent=historyItems.length;$('stat-average').textContent=historyItems.length?(historyItems.reduce((s,h)=>s+h.totalScore,0)/historyItems.length).toFixed(1)+'/10':'—';renderChapterCards()}
+function renderBrowse(){
+ const select=$('chapterFilter');
+ const chapterId=select?select.value:'';
+ if(!chapterId){
+  $('browseTitle').textContent='Chọn chương trước khi làm đề';
+  $('browseDescription').textContent='Các đề sẽ xuất hiện sau khi bạn chọn một chương trong mục Chương học.';
+  $('all-cards').innerHTML='<div class="empty" style="grid-column:1/-1">📚<b>Chưa có đề được mở</b>Vào mục <b>Chương học</b> và chọn chương bạn muốn luyện tập.</div>';
+  return;
+ }
+ const group=CHAPTER_GROUPS.find(g=>g.id===chapterId);
+ $('browseTitle').textContent=group?'Đề thi · '+group.title:'Đề thi theo chương';
+ $('browseDescription').textContent=group?group.desc:'Chọn cấp độ hoặc tìm theo từ khóa để lọc đề.';
+ filterCards();
+}
+function filterCards(){let query=$('searchInput').value.toLowerCase(),level=$('difficultyFilter').value,sort=$('sortFilter').value,chapter=$('chapterFilter')?$('chapterFilter').value:'';if(!chapter){$('all-cards').innerHTML='<div class="empty" style="grid-column:1/-1">📚<b>Chọn một chương trước nhé</b>Chọn chương ở trang Chương học để mở đề.</div>';return}let arr=BANK.filter(e=>(!level||e.difficulty===level)&&(!chapter||getChapterGroup(e.id).id===chapter)&&(!query||(e.title+' '+e.desc+' '+e.difficulty).toLowerCase().includes(query)));if(sort==='az')arr.sort((a,b)=>a.title.localeCompare(b.title,'vi'));else if(sort==='questions')arr.sort((a,b)=>{let rank={'Siêu khó':4,'Khó':3,'Khá':2,'Dễ':1};return rank[b.difficulty]-rank[a.difficulty]});$('all-cards').innerHTML=arr.map(card).join('')||'<div class="empty" style="grid-column:1/-1">🔎<b>Không tìm thấy đề phù hợp</b>Thử từ khóa khác nhé.</div>'}
 ['searchInput','difficultyFilter','sortFilter','chapterFilter'].forEach(id=>$(id).addEventListener(id==='searchInput'?'input':'change',filterCards));
 function sectionInfo(i){if(i<18)return {label:'PHẦN I · TRẮC NGHIỆM NHIỀU LỰA CHỌN',no:i+1,sub:'Chọn một đáp án đúng · 0,25 điểm/câu'};if(i<22)return {label:'PHẦN II · TRẮC NGHIỆM ĐÚNG/SAI',no:i-17,sub:'Đánh giá đúng/sai cho cả 4 ý · tối đa 1 điểm/câu'};return {label:'PHẦN III · TRẢ LỜI NGẮN',no:i-21,sub:'Nhập kết quả số · 0,25 điểm/câu'}}
 function emptyAnswer(q){if(q.type==='tf')return [null,null,null,null];return null}
@@ -1044,6 +1090,24 @@ function renderResult(h){const e= h.questions? h : null;const questions=h.questi
  else {body+=`<div class="${d.ok?'correct':'incorrect'}" style="margin:6px 0">${d.ok?'Đúng · +0,25 điểm':'Chưa đúng · +0 điểm'}</div><p><b>${esc(q.q)}</b></p><div class="answerline">Bạn nhập: <b>${esc(d.answer===null||String(d.answer).trim()===''?'(bỏ trống)':d.answer)}</b></div><div class="answerline correct">Đáp án chuẩn: <b>${fmt(q.answer,5)}${q.unit?' '+esc(q.unit):''}</b></div><p class="tiny">Giải thích: ${esc(q.why)}</p>`}
  body+='</div>'});
  $('resultBody').innerHTML=body
+}
+function renderStatistics(){
+ const el=$('statisticsContent');
+ const total=historyItems.length;
+ const average=total?historyItems.reduce((sum,item)=>sum+Number(item.totalScore||0),0)/total:0;
+ const best=total?Math.max(...historyItems.map(item=>Number(item.totalScore||0))):0;
+ const passed=historyItems.filter(item=>Number(item.totalScore)>=5).length;
+ const latest=historyItems.slice(0,10);
+ el.innerHTML='<div class="stat-overview">'+
+  '<div class="stat-tile"><span class="label">Tổng lượt làm</span><strong>'+total+'</strong></div>'+
+  '<div class="stat-tile"><span class="label">Điểm trung bình</span><strong>'+(total?average.toFixed(2).replace('.',','):'—')+'</strong></div>'+
+  '<div class="stat-tile"><span class="label">Điểm cao nhất</span><strong>'+(total?best.toFixed(2).replace('.',','):'—')+'</strong></div>'+
+  '<div class="stat-tile"><span class="label">Lượt đạt từ 5 điểm</span><strong>'+passed+'</strong></div>'+
+ '</div>'+
+ '<div class="section-head"><h2>10 lượt làm gần nhất</h2></div>'+
+ (latest.length?'<div class="tablewrap"><table class="table"><thead><tr><th>Đề thi</th><th>Ngày làm</th><th>Điểm /10</th></tr></thead><tbody>'+
+ latest.map(item=>'<tr><td><b>'+esc(item.title)+'</b></td><td>'+new Date(item.date).toLocaleString('vi-VN')+'</td><td class="score">'+fmt(item.totalScore,2)+'/10</td></tr>').join('')+
+ '</tbody></table></div>':'<div class="empty">📊<b>Chưa có dữ liệu thống kê</b>Hoàn thành một đề để xem điểm trung bình và tiến bộ của bạn.</div>');
 }
 function renderHistory(){const el=$('historyContent');if(!historyItems.length){el.innerHTML='<div class="empty">◷<b>Chưa có lịch sử làm bài</b>Hoàn thành một đề để xem điểm và đáp án tại đây.</div>';return}el.innerHTML=`<div class="tablewrap"><table class="table"><thead><tr><th>Đề thi</th><th>Cấp độ</th><th>Ngày làm</th><th>Trắc nghiệm</th><th>Đúng/Sai</th><th>Ngắn</th><th>Tổng điểm</th><th></th></tr></thead><tbody>${historyItems.map(h=>`<tr><td><b>${esc(h.title)}</b></td><td>${esc(h.difficulty)}</td><td>${new Date(h.date).toLocaleDateString('vi-VN')}</td><td>${fmt(h.mcPoints,2)}/4,5</td><td>${fmt(h.tfPoints,2)}/4</td><td>${fmt(h.shortPoints,2)}/1,5</td><td class="score">${fmt(h.totalScore,2)}/10</td><td><button class="btn soft small" onclick="viewHistory('${h.id}')">Xem lại</button></td></tr>`).join('')}</tbody></table></div>`}
 window.viewHistory=id=>{let h=historyItems.find(x=>x.id===id);if(h){renderResult(h);currentView='result';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-result'));window.scrollTo(0,0)}}
