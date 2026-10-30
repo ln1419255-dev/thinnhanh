@@ -1324,6 +1324,43 @@ main{min-width:0}
 
 /* Restore original rounded-square ThiNhanh header logo */
 .logo-image{border-radius:13px!important;overflow:hidden;clip-path:none;box-shadow:0 6px 15px rgba(13,88,100,.18)}
+
+/* Nổi bật các mục lớn bằng khung màu */
+.pagehead{
+ position:relative;isolation:isolate;overflow:hidden;
+ padding:20px 22px;margin:4px 0 24px;
+ border:1.5px solid #c8dfe7;border-left:5px solid #0aa9a5;
+ border-radius:19px;
+ background:linear-gradient(118deg,#e7f9f5 0%,#f4f8ff 62%,#f0efff 100%);
+ box-shadow:0 10px 25px rgba(25,65,92,.065);
+}
+.pagehead:after{
+ content:"";position:absolute;z-index:-1;pointer-events:none;
+ width:170px;height:170px;right:-45px;top:-115px;border-radius:50%;
+ background:radial-gradient(circle,rgba(108,199,208,.2),rgba(108,199,208,0) 70%);
+}
+.pagehead>div{position:relative;z-index:1;min-width:0}
+.pagehead .eyebrow{
+ background:rgba(255,255,255,.78);border-color:#cdeae7;color:#087f83;
+ box-shadow:0 2px 7px rgba(24,96,105,.04);
+}
+.pagehead h1{color:#183550;margin-top:10px}
+.pagehead p{color:#5f748b;max-width:720px}
+.pagehead>.btn{position:relative;z-index:1}
+.section-head{
+ padding:13px 17px;margin:20px 0 14px;
+ border:1px solid #cddfe9;border-left:4px solid #7568df;
+ border-radius:14px;
+ background:linear-gradient(115deg,#f0efff 0%,#f7f9ff 65%,#eefaf8 100%);
+ box-shadow:0 6px 17px rgba(47,53,113,.045);
+}
+.section-head h2{color:#253d5b;margin:0;letter-spacing:-.3px}
+@media(max-width:760px){
+ .pagehead{padding:16px 16px;margin-bottom:18px;border-radius:16px;border-left-width:4px}
+ .pagehead h1{margin-top:9px}
+ .section-head{padding:11px 13px;margin:15px 0 11px;border-radius:12px}
+}
+
 </style>
 </head>
 <body>
