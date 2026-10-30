@@ -358,6 +358,45 @@ body{
  border-color:#91a9c2;
 }
 
+
+/* THINANH MOTION PACK — remove this block to disable the added animations */
+@keyframes tnMotionEnter{
+ from{opacity:0;transform:translateY(15px)}
+ to{opacity:1;transform:translateY(0)}
+}
+@keyframes tnIconFloatIn{
+ 0%{opacity:0;transform:translateY(8px) scale(.94) rotate(-3deg)}
+ 100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+}
+#landing>.hero{
+ animation:tnMotionEnter .7s cubic-bezier(.2,.75,.25,1) backwards;
+}
+#landing .subject{
+ animation:tnMotionEnter .58s cubic-bezier(.2,.75,.25,1) backwards;
+}
+#landing .subject:nth-child(1){animation-delay:.07s}
+#landing .subject:nth-child(2){animation-delay:.13s}
+#landing .subject:nth-child(3){animation-delay:.19s}
+#landing .subject:nth-child(4){animation-delay:.25s}
+#landing .subject:nth-child(5){animation-delay:.31s}
+#landing .subject .icon{
+ transition:transform .28s cubic-bezier(.2,.75,.25,1),box-shadow .28s ease;
+}
+#landing .subject:hover .icon{
+ transform:translateY(-2px) rotate(-4deg) scale(1.06);
+ box-shadow:0 10px 20px rgba(24,89,115,.13);
+}
+#landing .foot{animation:tnMotionEnter .55s .28s backwards}
+.copyright{animation:tnMotionEnter .55s .34s backwards}
+.btn:active{transform:scale(.975)}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{
+  animation:none!important;
+  transition:none!important;
+  scroll-behavior:auto!important;
+ }
+}
+
 </style></head><body><header class="topbar"><div class="brand">📘 Thi<span>Nhanh</span><span class="mini">VẬT LÍ · HÓA HỌC</span></div><span class="menu-link">CHỌN MÔN HỌC</span></header>
 <main id="landing" class="page">
 <section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Vật lí và Hóa học với ngân hàng đề đang hoạt động. Toán, Tiếng Anh và Lịch sử đã được tạo sẵn; khi bạn gửi tài liệu, mình sẽ bổ sung dữ liệu và đề thi cho từng môn.</p></div><div class="hero-art">🎯</div></section>
