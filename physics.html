@@ -876,22 +876,22 @@ function chooseScoreMeme(score) {
   let key, caption, fallbackEmoji, fallbackTitle;
   if (numericScore > 8) {
     key = 'high';
-    caption = 'TRÊN 8: Hôm nay flex nhẹ cũng được 😎';
+    caption = 'Hôm nay flex nhẹ cũng được 😎';
     fallbackEmoji = '🏆';
     fallbackTitle = 'Meme flex điểm cao';
   } else if (numericScore > 6.5) {
     key = 'good';
-    caption = 'TRÊN 6,5 ĐẾN 8: Khá ổn áp đó 🔥';
+    caption = 'Khá ổn áp đó 🔥';
     fallbackEmoji = '🔥';
     fallbackTitle = 'Khá ổn áp';
   } else if (numericScore >= 5) {
     key = 'pass';
-    caption = '5 ĐẾN 6,5: Qua cửa rồi, thở phào 😮‍💨';
+    caption = 'Qua cửa rồi, thở phào 😮‍💨';
     fallbackEmoji = '😮‍💨';
     fallbackTitle = 'Vừa qua cửa';
   } else {
     key = 'low';
-    caption = 'DƯỚI 5: Xem lời giải rồi gỡ ở đề sau 💪';
+    caption = 'Xem lời giải rồi gỡ ở đề sau 💪';
     fallbackEmoji = '💀';
     fallbackTitle = 'Đề sau gỡ lại';
   }
@@ -908,7 +908,6 @@ function renderResult(h){const e= h.questions? h : null;const questions=h.questi
   </div>
   <div>
    <div class="score-meme-caption">${esc(meme.caption)}</div>
-   <div class="score-meme-sub">Meme: <a href="${esc(meme.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(meme.source)}</a>. Ảnh được chọn ngẫu nhiên trong nhóm điểm tương ứng.</div>
   </div>
  </section>
  <div class="breakdown"><div class="breakitem"><strong>${fmt(h.mcPoints,2)} / 4,5</strong><span>Phần I · Trắc nghiệm</span></div><div class="breakitem"><strong>${fmt(h.tfPoints,2)} / 4,0</strong><span>Phần II · Đúng/Sai</span></div><div class="breakitem"><strong>${fmt(h.shortPoints,2)} / 1,5</strong><span>Phần III · Trả lời ngắn</span></div></div><div class="info-box"><b>Chấm đúng/sai theo từng câu:</b> số ý đúng 0 → 0 điểm; 1 → 0,1 điểm; 2 → 0,25 điểm; 3 → 0,5 điểm; 4 → 1 điểm. Câu trả lời ngắn chấp nhận sai số nhỏ như ghi trong phần hướng dẫn mỗi câu.</div><div class="section-head"><h2>Đáp án và giải thích</h2><span class="tiny">Xanh = đúng · Đỏ = chưa đúng</span></div>`;
