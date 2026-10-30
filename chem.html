@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ThiNhanh — 10 đề Hóa học 12</title>
+<style>
+:root{--ink:#14283f;--muted:#718096;--line:#e3eaf1;--bg:#f5f7fb;--white:#fff;--teal:#08aeb0;--teal2:#e5fbfa;--orange:#fa875b;--navy:#172d49;--green:#16856d;--red:#cb5151;--shadow:0 10px 35px rgba(31,55,83,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}button,input{font:inherit}button{cursor:pointer}
+.topbar{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(18px,calc((100vw - 1240px)/2));position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:11px;font-size:20px;font-weight:850;letter-spacing:-.5px}.logo{display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:var(--teal);color:#fff;font-size:22px}.brand small{display:block;font-size:10px;letter-spacing:1.5px;color:var(--muted);font-weight:700;margin-top:-2px}
+.topright{display:flex;align-items:center;gap:10px}.pill{padding:8px 12px;background:#f0f5f8;border-radius:10px;font-size:11px;color:#52677c;font-weight:800}.avatar{width:36px;height:36px;background:#e0f7f5;color:#087f82;display:grid;place-items:center;border-radius:50%;font-weight:800}
+.layout{max-width:1240px;margin:25px auto;padding:0 20px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:24px}.sidebar{align-self:start;background:#fff;border:1px solid var(--line);border-radius:17px;padding:13px;position:sticky;top:92px}
+.side-label{color:#9aa8b8;font-size:10px;font-weight:850;letter-spacing:1.5px;padding:13px 10px 8px}.navbtn{width:100%;border:0;background:transparent;color:#64758a;text-align:left;padding:11px 12px;border-radius:11px;display:flex;align-items:center;gap:11px;font-weight:750;margin:2px 0}.navbtn .ico{font-size:18px;width:22px;text-align:center}.navbtn:hover,.navbtn.active{background:var(--teal2);color:#07878a}.sidebox{margin:20px 5px 5px;padding:13px;background:#f5f8fb;border-radius:12px;font-size:12px;color:#74859a}.sidebox b{display:block;color:var(--ink);margin-bottom:5px}
+main{min-width:0}.view{display:none}.view.active{display:block}.eyebrow{font-size:11px;color:var(--teal);font-weight:850;letter-spacing:1.7px;text-transform:uppercase}.pagehead{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin:3px 0 22px}.pagehead h1{font-size:30px;line-height:1.2;letter-spacing:-1px;margin:6px 0 7px}.pagehead p{color:var(--muted);margin:0}
+.btn{border:0;padding:11px 15px;border-radius:11px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.15s}.btn.primary{background:var(--teal);color:#fff;box-shadow:0 5px 13px #08aeb02e}.btn.primary:hover{background:#068f92;transform:translateY(-1px)}.btn.dark{background:var(--navy);color:#fff}.btn.soft{background:#edf3f7;color:#415770}.btn.outline{background:#fff;border:1px solid var(--line);color:#51677d}.btn.warn{background:#fff0e9;color:#b8522c}.btn.small{padding:8px 11px;font-size:12px}
+.hero{background:linear-gradient(115deg,#13324b,#175768 68%,#087e81);border-radius:20px;color:#fff;padding:27px 29px;display:flex;align-items:center;justify-content:space-between;gap:20px;overflow:hidden;position:relative;box-shadow:var(--shadow)}.hero:after{content:"✦";position:absolute;font-size:180px;right:19%;top:-65px;color:#ffffff0c;pointer-events:none}.hero h2{font-size:25px;letter-spacing:-.6px;margin:9px 0}.hero p{margin:0 0 18px;color:#d1e7ea;max-width:490px}.hero .eyebrow{color:#77e4df}.hero-art{font-size:76px;padding:5px 24px;z-index:1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:18px 0 25px}.stat{border:1px solid var(--line);border-radius:15px;background:#fff;padding:17px 18px;display:flex;align-items:center;gap:13px}.stat-icon{width:42px;height:42px;background:#e9fafa;color:#078b8e;display:grid;place-items:center;border-radius:13px;font-size:20px}.stat strong{font-size:23px;display:block;line-height:1.1}.stat span{font-size:12px;color:var(--muted);display:block;margin-top:5px}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:24px 0 13px;gap:10px}.section-head h2{font-size:18px;margin:0;letter-spacing:-.3px}.linkbtn{border:0;background:transparent;color:#078f92;font-weight:800}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.examcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;display:flex;flex-direction:column;min-height:224px;box-shadow:0 4px 15px #20395205}.examcard:hover{box-shadow:var(--shadow);transform:translateY(-2px);transition:.18s}.cardtop{display:flex;justify-content:space-between;align-items:center}.subject-icon{width:42px;height:42px;border-radius:13px;background:#e5f9f8;display:grid;place-items:center;font-size:21px}.tag{font-size:10px;text-transform:uppercase;letter-spacing:.6px;font-weight:850;background:#f0f5f8;color:#708093;border-radius:7px;padding:5px 8px}.level{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:850;margin-top:13px}.level.easy{color:#16856d}.level.mid{color:#2872b7}.level.hard{color:#b96a29}.level.super{color:#9954b7}.examcard h3{font-size:16px;margin:5px 0 6px;line-height:1.35}.examcard p{font-size:12px;color:var(--muted);margin:0 0 15px}.cardmeta{display:flex;gap:13px;color:#7c8b9d;font-size:11px;margin-top:auto;padding-bottom:13px}.cardbottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #eff3f6;padding-top:12px}.author{font-size:11px;color:#8190a0}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:15px 0 18px}.search{flex:1;min-width:190px}.search input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:#fff;outline:none}.toolbar select{padding:12px;border:1px solid var(--line);border-radius:11px;background:white;color:#52677c}.search input:focus,.toolbar select:focus{border-color:#70cecf;box-shadow:0 0 0 3px #08aeb015;outline:none}
+.info-box{background:#ecfbfa;border:1px solid #c6f0ed;border-radius:13px;padding:14px 16px;color:#315d68;font-size:13px;margin:14px 0 18px}.info-box b{color:#087f82}.empty{padding:40px 20px;text-align:center;color:var(--muted);background:#fff;border:1px dashed #ccd9e3;border-radius:15px}.empty b{display:block;color:var(--ink);font-size:17px;margin:10px}
+.tablewrap{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:auto}.table{width:100%;border-collapse:collapse;text-align:left}.table th,.table td{padding:14px 17px;border-bottom:1px solid #edf1f5;font-size:13px;white-space:nowrap}.table th{color:#8290a0;font-size:10px;text-transform:uppercase;letter-spacing:1px;background:#fafbfd}.table tr:last-child td{border-bottom:0}.score{font-weight:850;color:var(--green)}
+.examtop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.examprogress{height:6px;background:#e7eef2;border-radius:20px;overflow:hidden;margin:0 0 17px}.examprogress div{height:100%;background:var(--teal);width:0;transition:width .12s}.timer{font-size:14px;font-weight:900;color:#b9562e;background:#fff1e9;border-radius:10px;padding:9px 13px}.takegrid{display:grid;grid-template-columns:minmax(0,1fr) 235px;gap:16px}.takepanel,.qnavpanel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:23px}.takepanel h2{font-size:20px;margin:6px 0 15px;line-height:1.35}.questiontext{line-height:1.75;font-size:16px;margin:0 0 22px;white-space:pre-line}.answerlist{display:grid;gap:10px}.takeanswer{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--line);padding:13px;border-radius:12px;cursor:pointer;line-height:1.5}.takeanswer:hover{border-color:#73cfd0}.takeanswer.selected{border-color:var(--teal);background:var(--teal2)}.letter{height:27px;width:27px;display:grid;place-items:center;flex:0 0 27px;border-radius:8px;background:#eff4f6;font-size:12px;font-weight:900}.selected .letter{background:var(--teal);color:#fff}.takenav{display:flex;gap:9px;margin-top:25px}.takenav .spacer{flex:1}.qnavgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:12px 0}.qnav{border:1px solid var(--line);background:#fff;padding:9px 0;border-radius:8px;font-weight:800;font-size:12px}.qnav.on{background:var(--navy);color:#fff}.qnav.done{box-shadow:inset 0 -3px var(--teal)}.tiny{font-size:12px;color:var(--muted)}.qnavlegend{display:flex;flex-wrap:wrap;gap:9px;font-size:11px;color:var(--muted);margin-top:11px}.legenddot{width:9px;height:9px;border-radius:3px;display:inline-block;margin-right:4px}
+.tfrow{border:1px solid var(--line);border-radius:12px;padding:13px;margin:10px 0}.tfstatement{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}.tfstatement p{margin:0;line-height:1.55}.tfchoices{display:flex;gap:6px}.tfchoice{border:1px solid #dce6ec;background:#fff;color:#53677b;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:850;min-width:65px}.tfchoice.on-true{border-color:#1b9b7d;background:#e8faf3;color:#14745e}.tfchoice.on-false{border-color:#db8c63;background:#fff0e7;color:#a74b28}.shortinput{width:100%;max-width:340px;padding:13px 14px;border:1px solid #ccdbe4;border-radius:11px;font-size:17px}.shortnote{font-size:12px;color:var(--muted);margin-top:8px}
+.result-hero{background:#fff;border:1px solid var(--line);padding:25px;border-radius:17px;display:flex;align-items:center;gap:22px;margin-bottom:18px}.scorecircle{height:100px;width:100px;flex:0 0 100px;border-radius:50%;display:grid;place-items:center;background:var(--teal2);color:#087e80;font-size:25px;font-weight:900;border:7px solid #c1f1ed}.result-hero h2{margin:0 0 6px}.breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.breakitem{padding:15px;border:1px solid var(--line);border-radius:13px;background:#fff}.breakitem strong{font-size:20px;display:block}.breakitem span{font-size:12px;color:var(--muted)}
+.reviewrow{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px;margin:10px 0}.correct{color:var(--green);font-weight:800}.incorrect{color:var(--red);font-weight:800}.answerline{padding:5px 0;font-size:13px;line-height:1.5}.footnote{color:#8c9aaa;font-size:11px;text-align:center;margin:25px 0}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:#142c42;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);transition:.2s;z-index:99;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:1000px){.layout{grid-template-columns:185px 1fr;gap:14px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.takegrid{grid-template-columns:1fr}.qnavpanel{order:-1}.qnavgrid{grid-template-columns:repeat(7,1fr)}}
+@media(max-width:680px){.topbar{padding:0 12px;height:63px}.brand{font-size:17px}.pill{display:none}.layout{display:block;padding:0 11px;margin:14px auto}.sidebar{position:static;display:flex;overflow:auto;gap:4px;padding:7px;margin-bottom:16px}.side-label,.sidebox{display:none}.navbtn{white-space:nowrap;width:auto;padding:9px 10px;font-size:12px}.navbtn .ico{font-size:16px;width:auto}.pagehead h1{font-size:25px}.pagehead{align-items:center}.hero{padding:21px}.hero-art{font-size:49px;padding:0}.hero h2{font-size:21px}.stats{gap:7px}.stat{padding:13px 10px;gap:7px}.stat-icon{display:none}.stat strong{font-size:20px}.cards{grid-template-columns:1fr}.takepanel,.qnavpanel{padding:15px}.qnavgrid{grid-template-columns:repeat(7,1fr)}.tfstatement{grid-template-columns:1fr}.tfchoices{justify-content:flex-start}.result-hero{align-items:flex-start;flex-direction:column}.breakdown{grid-template-columns:1fr}.pagehead .btn{font-size:12px;padding:9px}.examtop{flex-wrap:wrap}}
+
+/* ThiNhanh exam app — clean mobile-first polish */
+html{scroll-behavior:smooth}body{overflow-x:hidden;background:#f3f7fa;color:#182b45}
+.topbar{background:rgba(255,255,255,.97);box-shadow:0 4px 18px rgba(22,47,72,.05);border-bottom-color:#e3ebf2}
+.brand{letter-spacing:-.7px}.logo{background:linear-gradient(135deg,#08aaa9,#087d8a);box-shadow:0 5px 12px #08aaa92b}
+.layout{gap:20px}.sidebar{border-radius:16px;box-shadow:0 7px 22px rgba(22,47,72,.045)}
+.navbtn{min-height:42px;border-radius:10px}.navbtn.active{background:#e5f8f6;color:#087f80}
+.hero{border-radius:22px;background:linear-gradient(118deg,#142d49 0%,#15596e 62%,#087f83 100%);box-shadow:0 17px 36px rgba(19,54,77,.14);padding:30px}
+.hero h2{font-size:clamp(22px,3vw,29px);font-weight:900;letter-spacing:-.7px}.hero p{line-height:1.8;font-size:14px}
+.pagehead h1{font-weight:900;letter-spacing:-1.1px}
+.stat,.examcard,.takepanel,.qnavpanel,.result-hero,.reviewrow,.breakitem,.formcard{box-shadow:0 6px 22px rgba(24,48,75,.045);border-color:#e3ebf2}
+.examcard{border-radius:17px;padding:18px}.examcard:hover{border-color:#b9dfdd;box-shadow:0 12px 25px rgba(24,48,75,.09)}
+.btn{min-height:42px;border-radius:11px}.btn.primary{background:linear-gradient(110deg,#08aaa9,#087f8c)}
+.btn.dark{background:#18324f}.btn.soft{background:#edf4f7}.btn.outline{border-color:#dce6ee}
+.search input,.toolbar select,.shortinput{min-height:44px;border-radius:11px}.takegrid{align-items:start}
+.takepanel,.qnavpanel{border-radius:17px}.takepanel{min-width:0}.questiontext{overflow-wrap:anywhere}
+.takeanswer{min-height:48px;align-items:center}.tfrow{border-radius:13px}.tfchoice{min-height:40px;border-radius:9px}
+.qnav{min-height:39px;border-radius:9px}.shortinput{font-size:16px}
+.toast{max-width:calc(100vw - 28px);text-align:center}img,svg,canvas,video{max-width:100%}
+@media(max-width:1000px){
+ .layout{grid-template-columns:180px minmax(0,1fr);gap:13px;padding:0 14px}
+ .takegrid{grid-template-columns:minmax(0,1fr)}.qnavpanel{order:-1}
+ .qnavgrid{grid-template-columns:repeat(7,minmax(0,1fr))}
+}
+@media(max-width:680px){
+ html,body{width:100%;max-width:100%;overflow-x:hidden}body{font-size:14px}
+ .topbar{height:60px;padding:0 11px;gap:8px}.brand{font-size:17px;gap:8px}
+ .logo{width:34px;height:34px;font-size:18px;border-radius:11px}.topright{gap:6px}
+ .pill{display:none}.avatar{width:32px;height:32px;font-size:12px}
+ .layout{display:flex;flex-direction:column;gap:11px;padding:0 10px;margin:11px auto;width:100%}
+ .sidebar{position:static;top:auto;display:flex;align-items:center;gap:5px;overflow-x:auto;overflow-y:hidden;white-space:nowrap;width:100%;max-width:100%;padding:6px;margin:0;border-radius:13px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+ .sidebar::-webkit-scrollbar{display:none}.side-label,.sidebox{display:none}
+ .navbtn{display:inline-flex;flex:0 0 auto;width:auto;min-height:39px;padding:8px 11px;font-size:12px;margin:0;border-radius:9px}
+ .navbtn .ico{font-size:15px;width:auto}main{width:100%;min-width:0}
+ .pagehead{display:block;margin:5px 0 15px}.pagehead h1{font-size:25px;line-height:1.2;margin:5px 0}
+ .pagehead p{font-size:12px;line-height:1.55}.pagehead>.btn{margin-top:12px;width:100%}
+ .hero{padding:19px;border-radius:16px;display:block}.hero:after{font-size:110px;right:4%;top:-42px}
+ .hero h2{font-size:20px;margin:5px 0 8px;line-height:1.25}.hero p{font-size:12px;line-height:1.65;margin-bottom:14px}
+ .hero-art{font-size:38px;padding:0}.stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:12px 0 17px}
+ .stat{padding:11px 7px;border-radius:11px;display:block;text-align:center;min-width:0}.stat-icon{display:none}
+ .stat strong{font-size:18px;overflow-wrap:anywhere}.stat span{font-size:10px;line-height:1.25}
+ .section-head{margin:17px 0 10px;align-items:center}.section-head h2{font-size:16px}
+ .cards{grid-template-columns:minmax(0,1fr);gap:10px}.examcard{min-height:0;padding:14px;border-radius:14px}
+ .examcard h3{font-size:15px}.examcard p{font-size:12px;margin-bottom:10px}.cardmeta{padding-bottom:10px}
+ .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+ .toolbar .search{grid-column:1/-1;min-width:0;width:100%}.toolbar select{width:100%;min-width:0;padding:10px;font-size:12px}
+ .info-box{padding:11px 12px;font-size:11px;line-height:1.6;margin:11px 0}.empty{padding:26px 14px}
+ .tablewrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.table th,.table td{padding:10px 12px;font-size:11px}
+ .examtop{align-items:flex-start;gap:8px;margin-bottom:12px}.examtop>div:first-child{min-width:0;flex:1}
+ .examtop h1{font-size:19px!important;line-height:1.25;overflow-wrap:anywhere}
+ .examtop .eyebrow{font-size:9px;letter-spacing:1px;margin-top:8px!important}.examtop .tiny{font-size:10px;line-height:1.4}
+ .examtop .btn{min-height:36px;padding:8px 10px;font-size:11px}.timer{flex:0 0 auto;font-size:13px;padding:8px 10px;border-radius:9px}
+ .examprogress{margin-bottom:11px}.takegrid{display:flex;flex-direction:column;gap:10px}
+ .qnavpanel{order:-1;width:100%;padding:12px;border-radius:14px}.qnavpanel>b{font-size:13px}
+ .qnavgrid{grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:9px 0}
+ .qnav{min-height:38px;padding:7px 0;font-size:12px;border-radius:8px}
+ .qnavlegend{font-size:10px;gap:10px;margin-top:8px}.qnavpanel hr{margin:10px 0!important}
+ .qnavpanel .tiny{font-size:10px;line-height:1.45}.qnavpanel #submitExam{margin-top:10px!important;width:100%;min-height:44px}
+ .takepanel{width:100%;padding:15px;border-radius:14px}
+ .takepanel .eyebrow{font-size:10px;letter-spacing:1.1px}.takepanel h2{font-size:18px;line-height:1.35;margin:5px 0 10px}
+ .questiontext{font-size:14px;line-height:1.75;margin-bottom:15px;overflow-wrap:anywhere}
+ .answerlist{gap:8px}.takeanswer{min-height:48px;padding:11px 10px;gap:9px;font-size:13px;line-height:1.5;align-items:flex-start}
+ .letter{width:25px;height:25px;flex:0 0 25px;font-size:11px}.tfrow{padding:11px;margin:8px 0}
+ .tfstatement{grid-template-columns:minmax(0,1fr);gap:8px}.tfstatement p{font-size:13px;line-height:1.55}
+ .tfchoices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .tfchoice{min-width:0;width:100%;min-height:42px;font-size:12px;padding:8px 6px}
+ .shortinput{width:100%;max-width:none;min-height:48px;font-size:16px;padding:12px}
+ .shortnote{font-size:11px;line-height:1.5}.takenav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:17px}
+ .takenav .spacer{display:none}.takenav .btn{width:100%;min-height:44px;padding:10px 8px;font-size:12px}
+ .result-hero{padding:17px;gap:14px;align-items:center;flex-direction:row;border-radius:14px}
+ .scorecircle{width:72px;height:72px;flex:0 0 72px;font-size:20px;border-width:5px}
+ .result-hero h2{font-size:17px;line-height:1.3}.result-hero p{font-size:12px;line-height:1.5}
+ .breakdown{grid-template-columns:1fr;gap:7px}.breakitem{padding:12px;border-radius:11px}
+ .breakitem strong{font-size:17px}.breakitem span{font-size:11px}
+ .reviewrow{padding:12px;border-radius:12px}.answerline{font-size:12px;overflow-wrap:anywhere}
+ .footnote{font-size:10px;line-height:1.5;margin:17px 0}.toast{bottom:12px;font-size:12px;padding:10px 13px}
+}
+@media(max-width:380px){
+ .layout{padding:0 8px}.navbtn{padding:8px 9px;font-size:11px}
+ .qnavgrid{grid-template-columns:repeat(6,minmax(0,1fr))}.stats{gap:4px}
+ .stat strong{font-size:16px}.stat span{font-size:9px}.examtop h1{font-size:17px!important}
+ .result-hero{align-items:flex-start}
+}
+
+/* ThiNhanh complete visual system v3 */
+:root{--ink:#172c46;--muted:#718198;--line:#e3eaf1;--bg:#f4f7fb;--white:#fff;--teal:#079c9c;--teal2:#e4f8f5;--orange:#e88a54;--navy:#18324f;--green:#16856d;--red:#c34f5b;--shadow:0 8px 26px rgba(26,49,76,.055)}
+html{scroll-padding-top:86px;scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 5% 5%,#eaf8f6 0,transparent 25%),#f4f7fb;color:var(--ink);font-size:14px}
+button,input,select{font:inherit}
+button{touch-action:manipulation}
+:focus-visible{outline:3px solid #8edbd6!important;outline-offset:3px!important}
+.topbar{height:68px;padding:0 max(16px,calc((100vw - 1280px)/2));background:rgba(255,255,255,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(222,231,240,.9);box-shadow:0 5px 22px rgba(28,50,76,.045)}
+.brand{font-size:20px;letter-spacing:-.7px;gap:10px}
+.brand small{display:block;color:#8695a8;font-size:9px;line-height:1.2;letter-spacing:1.35px;font-weight:850}
+.logo{width:39px;height:39px;border-radius:13px;background:linear-gradient(140deg,#0aada9,#087d8b);box-shadow:0 6px 15px rgba(8,156,153,.2)}
+.topright{gap:9px}.pill{background:#f1f6f8;border:1px solid #e8eef2;color:#60738b;padding:7px 11px;border-radius:999px;font-size:10px;letter-spacing:.45px}
+.avatar{width:35px;height:35px;background:#e4f7f4;color:#087d7e}
+.layout{max-width:1300px;margin:23px auto;padding:0 19px;grid-template-columns:224px minmax(0,1fr);gap:23px}
+.sidebar{top:86px;padding:12px;border-radius:18px;border-color:#e4ebf2;box-shadow:0 8px 24px rgba(25,48,73,.045)}
+.side-label{font-size:9px;letter-spacing:1.25px;padding:12px 10px 9px}
+.navbtn{min-height:43px;padding:10px 11px;margin:3px 0;border-radius:11px;color:#667991;font-size:13px;transition:background .16s,color .16s}
+.navbtn:hover{background:#f3f8fa;color:#1f4c60}
+.navbtn.active{background:#e6f7f4;color:#087f80;box-shadow:inset 3px 0 0 #0aa5a0}
+.navbtn .ico{width:20px;text-align:center;font-size:16px}
+.sidebox{background:linear-gradient(145deg,#f1f8fa,#f7fafc);border:1px solid #e8eff2;border-radius:13px;line-height:1.65;padding:13px;margin-top:17px}
+.sidebox b{display:block;color:#29435d;margin-bottom:5px}
+.view{display:none}.view.active{display:block;animation:tnFade .2s ease}
+@keyframes tnFade{from{opacity:.55;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.pagehead{align-items:center;margin:4px 0 20px;gap:14px}
+.pagehead h1{font-size:clamp(24px,3vw,31px);line-height:1.18;letter-spacing:-1.15px;margin:5px 0 6px;font-weight:900;color:#192f49}
+.pagehead p{font-size:12px;line-height:1.65;color:#78889b;margin:0}
+.eyebrow{font-size:9px;color:#078f90;letter-spacing:1.45px;font-weight:900;line-height:1.5}
+.hero{padding:27px 29px;border:1px solid rgba(255,255,255,.35);border-radius:21px;background:linear-gradient(120deg,#152d49 0%,#17576b 62%,#07888b 100%);box-shadow:0 17px 38px rgba(19,53,76,.14)}
+.hero:after{content:"";position:absolute;width:245px;height:245px;right:-75px;bottom:-188px;border:1px solid rgba(255,255,255,.14);border-radius:50%;box-shadow:0 0 0 22px rgba(255,255,255,.025),0 0 0 48px rgba(255,255,255,.018);pointer-events:none}
+.hero h2{font-size:clamp(22px,2.4vw,28px);line-height:1.2;letter-spacing:-.8px;margin:8px 0 9px;font-weight:900}
+.hero p{font-size:12px;line-height:1.8;color:#d7e9ed;max-width:510px;margin:0 0 16px}
+.hero .eyebrow{color:#9de9df}
+.hero .btn{position:relative;z-index:1}
+.hero-art{font-size:64px;padding:5px 20px}
+.stats{gap:11px;margin:16px 0 21px}
+.stat{border:1px solid #e4ebf1;border-radius:15px;background:rgba(255,255,255,.94);padding:15px 16px;gap:12px;box-shadow:0 5px 17px rgba(24,48,75,.035)}
+.stat-icon{width:39px;height:39px;flex:0 0 39px;border-radius:12px;display:grid;place-items:center;background:#e7f8f5;color:#078c8a;font-size:17px}
+.stat:nth-child(2) .stat-icon{background:#eff0ff;color:#7163c8}.stat:nth-child(3) .stat-icon{background:#fff3e9;color:#bd7643}
+.stat strong{display:block;font-size:22px;line-height:1.2;letter-spacing:-.5px;color:#203954}
+.stat span{display:block;color:#8492a4;font-size:10px;margin-top:4px;line-height:1.35}
+.info-box{background:#eaf8f6;border:1px solid #d3eeea;border-left:3px solid #0b9f9b;border-radius:12px;padding:13px 15px;color:#486875;font-size:11px;line-height:1.75;margin:14px 0 18px}
+.info-box b{color:#1b5c60}
+.section-head{margin:22px 0 12px;gap:10px}
+.section-head h2{font-size:16px;font-weight:900;letter-spacing:-.3px;margin:0;color:#203750}
+.linkbtn{border:0;background:transparent;color:#078d8e;font-weight:850;font-size:11px;padding:8px 4px}
+.linkbtn:hover{text-decoration:underline}
+.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.examcard{min-height:225px;padding:16px;border:1px solid #e3eaf1;border-radius:16px;background:rgba(255,255,255,.97);box-shadow:0 5px 17px rgba(23,48,75,.04);transition:transform .18s,border-color .18s,box-shadow .18s}
+.examcard:hover{transform:translateY(-3px);border-color:#c7e4e2;box-shadow:0 13px 28px rgba(24,49,75,.085)}
+.cardtop{gap:8px}
+.subject-icon{width:38px;height:38px;border-radius:12px;background:#eaf7f6;display:grid;place-items:center;font-size:19px}
+.cardtop .tag{background:#f3f6f8;color:#73849a;border:1px solid #e8edf1;padding:5px 8px}
+.level{font-size:9px;letter-spacing:.75px;margin-top:12px}
+.level.easy{color:#13836b}.level.mid{color:#5b70c8}.level.hard{color:#c16b36}.level.super{color:#bd4f61}
+.examcard h3{font-size:14px;line-height:1.4;letter-spacing:-.2px;margin:5px 0 7px;color:#213850}
+.examcard p{font-size:11px;line-height:1.55;color:#78889a;margin:0 0 12px}
+.cardmeta{gap:8px 11px;flex-wrap:wrap;font-size:9px;line-height:1.4;color:#8593a4;margin-top:auto;padding-bottom:11px}
+.cardbottom{border-top:1px solid #edf1f4;padding-top:10px;gap:7px}
+.author{font-size:10px;color:#8190a2;font-weight:750}
+.btn{min-height:40px;padding:10px 14px;border-radius:11px;font-size:12px;font-weight:850;box-shadow:none;transition:transform .16s,box-shadow .16s,background .16s}
+.btn.primary{background:linear-gradient(110deg,#08aaa6,#087d88);color:#fff;box-shadow:0 5px 13px rgba(8,145,145,.16)}
+.btn.primary:hover{box-shadow:0 8px 18px rgba(8,145,145,.22)}
+.btn.outline{background:#fff;color:#4f657d;border:1px solid #dfe7ee}
+.btn.outline:hover{background:#f7fbfc;border-color:#c7dce2}
+.btn.soft{background:#eef6f6;color:#147c7e;border:1px solid #e1f0ee}
+.btn.small,.btn.small:where(button){min-height:33px;padding:7px 10px;font-size:10px;border-radius:9px}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.search{min-width:210px}
+.search input,.toolbar select{height:43px;padding:9px 13px;border:1px solid #dfe7ef;border-radius:11px;background:#fff;color:#324a63;font-size:12px;outline:none;box-shadow:0 3px 10px rgba(23,48,75,.025)}
+.search input{width:100%}
+.search input::placeholder{color:#a0adba}
+.search input:focus,.toolbar select:focus,.shortinput:focus{border-color:#7dc9c6;box-shadow:0 0 0 3px rgba(8,160,158,.1)}
+.toolbar{gap:9px;margin:13px 0 15px}
+.toolbar select{min-width:155px}
+.empty{grid-column:1/-1;background:#fff;border:1px dashed #d8e3eb;border-radius:15px;padding:32px 18px;text-align:center;color:#8492a3;font-size:12px;line-height:1.8}
+.empty b{display:block;color:#334c65;font-size:14px;margin:5px 0}
+.examtop{padding:0 0 10px;border-bottom:1px solid #e4ebf1}
+.examtop .eyebrow{margin-top:12px!important}
+.examtop h1{color:#1a324d;letter-spacing:-.8px}
+.examtop .tiny{color:#8a98a9;font-size:10px}
+.timer{font-variant-numeric:tabular-nums;font-size:14px;padding:10px 14px;background:#fff2e9;color:#a95930;border:1px solid #f7e3d4;border-radius:11px;box-shadow:0 3px 10px rgba(160,94,48,.05)}
+.examprogress{height:7px;background:#e6edf1;border-radius:999px;margin:13px 0 15px}
+.examprogress #takeProgress{height:100%;background:linear-gradient(90deg,#08aaa6,#55c9b8);border-radius:999px;transition:width .2s}
+.takegrid{grid-template-columns:minmax(0,1fr) 245px;gap:15px;align-items:start}
+.takepanel{min-width:0;background:#fff;border:1px solid #e3eaf1;border-radius:17px;padding:22px;box-shadow:0 7px 22px rgba(24,48,75,.045)}
+.takepanel .eyebrow{margin-bottom:5px}
+.takepanel h2{font-size:16px;line-height:1.45;letter-spacing:-.25px;margin:6px 0 14px;color:#263f58}
+.questiontext{font-size:14px;line-height:1.8;color:#344b63;margin:0 0 18px}
+.answerlist{gap:9px}
+.takeanswer{position:relative;width:100%;min-height:49px;align-items:center;padding:12px 13px;border:1px solid #e2e9ef;border-radius:12px;background:#fff;color:#354b62;font-size:13px;text-align:left;transition:border-color .15s,background .15s,box-shadow .15s}
+.takeanswer:hover{background:#f8fcfc;border-color:#b9deda}
+.takeanswer.selected{border-color:#079c9c;background:#eaf8f6;box-shadow:inset 0 0 0 1px rgba(7,156,156,.15)}
+.letter{width:27px;height:27px;flex:0 0 27px;display:grid;place-items:center;border-radius:9px;background:#f1f5f7;color:#667d91;font-size:11px;font-weight:900}
+.takeanswer.selected .letter{background:#078f90;color:#fff}
+.tfrow{border-color:#e5ebf0;background:#fbfcfe;padding:13px;margin:9px 0}
+.tfstatement{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px}
+.tfstatement p{font-size:12px;line-height:1.65;color:#354b63;margin:0}
+.tfstatement p>b{color:#087f80}
+.tfchoices{gap:7px}
+.tfchoice{border:1px solid #dfe7ed;background:#fff;color:#65788c;border-radius:9px;padding:8px 13px;font-size:11px;font-weight:850;min-width:65px}
+.tfchoice:hover{border-color:#9ccfcb;background:#f4fbfa}
+.tfchoice.on-true{border-color:#49b79f;background:#e5f7f1;color:#128168}
+.tfchoice.on-false{border-color:#d98c91;background:#fff0f1;color:#b64d57}
+.shortinput{width:100%;max-width:360px;min-height:49px;padding:12px 14px;border:1px solid #d8e3eb;border-radius:11px;background:#fff;color:#213a54;font-size:16px}
+.shortnote{color:#8997a7;font-size:10px;line-height:1.6;margin-top:8px}
+.qnavpanel{position:sticky;top:84px;padding:18px;border-radius:17px;box-shadow:0 7px 22px rgba(24,48,75,.045)}
+.qnavpanel>b{font-size:13px;color:#29435c}
+.qnavgrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.qnav{border:1px solid #e2e9ef;background:#fff;color:#718297;min-height:38px;border-radius:9px;transition:background .13s,border-color .13s}
+.qnav:hover{border-color:#98d0cc;background:#f5fbfa}
+.qnav.on{background:#18334f;border-color:#18334f;color:#fff;box-shadow:0 4px 9px rgba(24,51,79,.14)}
+.qnav.done:not(.on){background:#e4f7f2;border-color:#bde7dd;color:#13816e}
+.qnavlegend{display:flex;flex-wrap:wrap;gap:11px;font-size:10px;color:#8190a2}
+.legenddot{width:8px;height:8px;display:inline-block;border-radius:50%;margin-right:5px}
+.takenav{align-items:center;margin-top:22px;padding-top:15px;border-top:1px solid #edf1f4}
+.takenav .spacer{flex:1}
+.takenav .btn{min-width:118px}
+.result-hero{border:1px solid #e2eaf0;box-shadow:0 7px 23px rgba(24,48,75,.045);padding:22px;border-radius:17px;background:linear-gradient(120deg,#fff,#fafdfe)}
+.result-hero h2{font-size:20px;letter-spacing:-.5px;margin:7px 0;color:#203850}
+.result-hero p{font-size:12px;line-height:1.65;color:#718399;margin:5px 0}
+.result-hero .btn{margin-top:9px}
+.scorecircle{background:#e7f8f5;border-color:#b9e9e0;color:#087f7e}
+.breakdown{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:13px 0}
+.breakitem{background:#fff;border:1px solid #e3eaf1;border-radius:13px;padding:14px}
+.breakitem strong{display:block;color:#213c55;font-size:17px;line-height:1.3}
+.breakitem span{display:block;color:#8190a1;font-size:10px;margin-top:5px}
+.reviewrow{padding:17px;border-radius:14px;border-color:#e4ebf1;box-shadow:0 4px 15px rgba(24,48,75,.03)}
+.reviewrow>p{font-size:12px;line-height:1.75;color:#40566d}
+.reviewrow .answerline{font-size:11px;line-height:1.7;padding:3px 0;color:#64768a;overflow-wrap:anywhere}
+.reviewrow .tiny{font-size:10px;line-height:1.75;color:#8491a2}
+.correct{color:#15826d;font-weight:850}.incorrect{color:#c34f5b;font-weight:850}
+.result-hero+.breakdown+.info-box{margin-top:12px}
+.tablewrap{width:100%;overflow-x:auto;border:1px solid #e3eaf1;border-radius:14px;background:#fff;box-shadow:0 5px 18px rgba(24,48,75,.035);-webkit-overflow-scrolling:touch}
+.table{background:#fff;min-width:770px}
+.table th{background:#f4f8fa;color:#718398;font-size:10px;letter-spacing:.35px;text-transform:uppercase;font-weight:900;padding:12px 13px;border-bottom:1px solid #e6edf2;white-space:nowrap}
+.table td{padding:12px 13px;border-bottom:1px solid #edf1f4;color:#60748a;font-size:11px;white-space:nowrap}
+.table tbody tr:hover{background:#f8fbfc}
+.table td b{color:#29435c}.table .score{color:#087f80;font-weight:900}
+.toast{border:1px solid rgba(255,255,255,.1);box-shadow:0 12px 30px rgba(14,32,50,.24);max-width:calc(100vw - 26px);font-size:12px;text-align:center}
+.footnote{font-size:10px;line-height:1.7;color:#91a0af;margin:22px 0}
+@media(max-width:1050px){
+ .layout{grid-template-columns:190px minmax(0,1fr);gap:15px;padding:0 14px}
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .takegrid{grid-template-columns:minmax(0,1fr)}.qnavpanel{position:static;order:-1}
+ .qnavgrid{grid-template-columns:repeat(7,minmax(0,1fr))}
+}
+@media(max-width:680px){
+ html,body{width:100%;max-width:100%;overflow-x:hidden}
+ body{font-size:13px}
+ .topbar{height:59px;padding:0 10px;gap:8px}
+ .brand{font-size:17px;gap:8px}.brand small{font-size:8px;letter-spacing:1px}
+ .logo{width:34px;height:34px;flex:0 0 34px;border-radius:11px;font-size:18px}
+ .topright{gap:5px}.pill{display:none}.avatar{width:31px;height:31px;font-size:11px}
+ .layout{display:flex;flex-direction:column;gap:10px;width:100%;padding:0 9px;margin:10px auto}
+ .sidebar{position:static;display:flex;align-items:center;gap:5px;overflow-x:auto;overflow-y:hidden;white-space:nowrap;width:100%;max-width:100%;padding:6px;margin:0;border-radius:13px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+ .sidebar::-webkit-scrollbar{display:none}.side-label,.sidebox{display:none}
+ .navbtn{display:inline-flex;flex:0 0 auto;width:auto;min-height:37px;padding:8px 10px;margin:0;font-size:11px;gap:6px;border-radius:9px}
+ .navbtn .ico{width:auto;font-size:14px}
+ main{width:100%;min-width:0}
+ .pagehead{display:block;margin:3px 0 13px}
+ .pagehead h1{font-size:24px;line-height:1.2;letter-spacing:-.8px;margin:5px 0}
+ .pagehead p{font-size:11px;line-height:1.55}
+ .pagehead>.btn{width:100%;margin-top:11px}
+ .eyebrow{font-size:8px;letter-spacing:1.15px}
+ .hero{display:block;padding:18px 17px;border-radius:16px}
+ .hero h2{font-size:19px;line-height:1.25;margin:5px 0 8px}
+ .hero p{font-size:11px;line-height:1.7;margin-bottom:12px}
+ .hero-art{font-size:34px;padding:0}
+ .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:11px 0 14px}
+ .stat{display:block;text-align:center;min-width:0;padding:10px 5px;border-radius:11px}
+ .stat-icon{display:none}.stat strong{font-size:17px;overflow-wrap:anywhere}.stat span{font-size:9px;line-height:1.25;margin-top:3px}
+ .info-box{font-size:10px;line-height:1.65;padding:10px 11px;margin:10px 0 13px;border-radius:10px}
+ .section-head{margin:16px 0 9px}.section-head h2{font-size:15px}
+ .linkbtn{font-size:10px;padding:6px 0}
+ .cards{grid-template-columns:minmax(0,1fr);gap:9px}
+ .examcard{padding:13px;border-radius:13px;min-height:0}
+ .subject-icon{width:34px;height:34px;border-radius:10px;font-size:17px}
+ .level{margin-top:9px;font-size:8px}
+ .examcard h3{font-size:13px;margin:4px 0 5px}
+ .examcard p{font-size:10px;line-height:1.55;margin-bottom:9px}
+ .cardmeta{gap:6px 9px;font-size:8px;padding-bottom:9px}
+ .cardbottom{padding-top:9px}.author{font-size:9px}
+ .btn{min-height:40px;font-size:11px;padding:9px 11px;border-radius:10px}
+ .btn.small,.btn.small:where(button){min-height:34px;font-size:10px;padding:7px 9px}
+ .toolbar{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:10px 0 11px}
+ .toolbar .search{grid-column:1/-1;min-width:0;width:100%}
+ .search input,.toolbar select{width:100%;min-width:0;height:42px;padding:9px 10px;font-size:11px}
+ .empty{padding:23px 13px;font-size:11px}
+ .examtop{align-items:flex-start;gap:7px;margin-bottom:10px;padding-bottom:9px}
+ .examtop>div:first-child{min-width:0;flex:1}
+ .examtop h1{font-size:18px!important;line-height:1.25;overflow-wrap:anywhere}
+ .examtop .eyebrow{font-size:8px;letter-spacing:1px;margin-top:7px!important}
+ .examtop .tiny{font-size:9px;line-height:1.4}
+ .examtop .btn{min-height:34px;padding:7px 9px;font-size:10px}
+ .timer{flex:0 0 auto;font-size:12px;padding:8px 9px;border-radius:9px}
+ .examprogress{height:6px;margin:10px 0 11px}
+ .takegrid{display:flex;flex-direction:column;gap:9px}
+ .qnavpanel{order:-1;width:100%;padding:10px;border-radius:13px}
+ .qnavpanel>b{font-size:11px}
+ .qnavgrid{grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:8px 0}
+ .qnav{min-height:32px;padding:5px 0;font-size:10px;border-radius:7px}
+ .qnavlegend{font-size:9px;gap:9px}.qnavpanel hr{margin:8px 0!important}
+ .qnavpanel .tiny{font-size:9px;line-height:1.4}
+ .qnavpanel #submitExam{width:100%;min-height:40px;margin-top:8px!important}
+ .takepanel{width:100%;padding:14px;border-radius:14px}
+ .takepanel .eyebrow{font-size:8px;letter-spacing:1px}
+ .takepanel h2{font-size:15px;line-height:1.4;margin:5px 0 10px}
+ .questiontext{font-size:12px;line-height:1.75;margin-bottom:13px;overflow-wrap:anywhere}
+ .answerlist{gap:7px}
+ .takeanswer{min-height:46px;padding:10px 9px;gap:8px;font-size:11px;line-height:1.5;align-items:flex-start;border-radius:10px}
+ .letter{width:24px;height:24px;flex:0 0 24px;font-size:10px;border-radius:8px}
+ .tfrow{padding:10px;margin:7px 0;border-radius:10px}
+ .tfstatement{grid-template-columns:minmax(0,1fr);gap:7px}
+ .tfstatement p{font-size:11px;line-height:1.55}
+ .tfchoices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .tfchoice{width:100%;min-width:0;min-height:39px;padding:7px 5px;font-size:10px;border-radius:8px}
+ .shortinput{width:100%;max-width:none;min-height:47px;padding:11px 12px;font-size:16px;border-radius:10px}
+ .shortnote{font-size:9px;line-height:1.55}
+ .takenav{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:15px;padding-top:12px}
+ .takenav .spacer{display:none}.takenav .btn{width:100%;min-width:0;min-height:41px;padding:9px 7px;font-size:10px}
+ .result-hero{padding:14px;gap:12px;align-items:center;flex-direction:row;border-radius:14px;margin-bottom:12px}
+ .scorecircle{width:68px;height:68px;flex:0 0 68px;font-size:19px;border-width:5px}
+ .result-hero h2{font-size:16px;line-height:1.25;margin:5px 0}
+ .result-hero p{font-size:10px;line-height:1.5;margin:4px 0}
+ .breakdown{grid-template-columns:1fr;gap:7px;margin:10px 0}
+ .breakitem{padding:10px 11px;border-radius:10px}
+ .breakitem strong{font-size:15px}.breakitem span{font-size:9px;margin-top:3px}
+ .reviewrow{padding:12px;border-radius:11px;margin:8px 0}
+ .reviewrow .eyebrow{font-size:8px}.reviewrow>p{font-size:11px;line-height:1.65}
+ .reviewrow .answerline{font-size:10px;line-height:1.65}
+ .reviewrow .tiny{font-size:9px;line-height:1.6}
+ .tablewrap{border-radius:11px}.table{min-width:730px}
+ .table th{font-size:9px;padding:10px}.table td{font-size:10px;padding:10px}
+ .footnote{font-size:9px;margin:14px 0}.toast{bottom:10px;font-size:11px;padding:9px 12px}
+}
+@media(max-width:380px){
+ .layout{padding:0 7px}.navbtn{padding:7px 8px;font-size:10px}
+ .qnavgrid{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+ .qnav{min-height:30px;font-size:9px}
+ .stats{gap:4px}.stat strong{font-size:15px}.stat span{font-size:8px}
+ .examtop h1{font-size:16px!important}.timer{font-size:11px}
+ .result-hero{align-items:flex-start}.scorecircle{width:60px;height:60px;flex-basis:60px;font-size:17px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
+/* Exam room: clearer hierarchy, less header bulk, richer question focus */
+.topbar{height:59px;padding:0 max(13px,calc((100vw - 1280px)/2))}
+.brand{font-size:17px;letter-spacing:-.45px;gap:8px}
+.brand small{font-size:8px;letter-spacing:1.05px;margin-top:2px}
+.logo{width:34px;height:34px;border-radius:11px;font-size:19px}
+.topright{gap:7px}.pill{font-size:9px;padding:6px 9px}.avatar{width:31px;height:31px;font-size:10px}
+.examtop{padding:0 0 12px;gap:12px;align-items:center}
+.examtop>div:first-child{min-width:0}
+.examtop #leaveExam{min-height:34px;padding:7px 11px;font-size:10px}
+.examtop .eyebrow{display:block;margin-top:8px!important;font-size:9px;letter-spacing:1.2px}
+.examtop h1{font-size:22px!important;line-height:1.18;letter-spacing:-.8px;margin-top:4px!important}
+.examtop .tiny{font-size:10px;line-height:1.45}
+.timer{min-width:82px;text-align:center;font-size:14px;font-weight:900;border-radius:12px;padding:10px 12px;background:linear-gradient(145deg,#fff6ef,#ffede2);border:1px solid #f5dfd0;box-shadow:0 5px 14px rgba(178,103,56,.07)}
+.examprogress{height:8px;background:#e7edf1;border-radius:999px;overflow:hidden;margin:12px 0 16px}
+#takeProgress{height:100%;background:linear-gradient(90deg,#079d9c,#56c9b5);border-radius:999px;transition:width .22s ease}
+.takegrid{gap:16px}
+.takepanel{position:relative;overflow:hidden;padding:25px;border:1px solid #e1eaf0;border-radius:20px;background:linear-gradient(180deg,#fff 0%,#fff 78%,#fbfdfd 100%);box-shadow:0 12px 30px rgba(23,49,75,.065)}
+.takepanel:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,#0aa7a2 0%,#58c9b6 58%,#8adcc8 100%)}
+.takepanel .eyebrow{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;background:#eaf8f6;border:1px solid #d8f0eb;border-radius:999px;color:#087f80;font-size:9px;letter-spacing:1.05px;margin:2px 0 9px}
+.takepanel h2{font-size:18px;line-height:1.4;letter-spacing:-.45px;color:#203a54;margin:3px 0 14px;padding-bottom:13px;border-bottom:1px solid #edf1f4}
+.questiontext{position:relative;padding:18px 19px;margin:0 0 17px;background:linear-gradient(135deg,#f4f8fb,#f8fbfc);border:1px solid #e8eff3;border-left:4px solid #16a4a0;border-radius:13px;color:#263f58;font-size:15px;line-height:1.85;white-space:pre-line;overflow-wrap:anywhere}
+.answerlist{gap:10px}
+.takeanswer{min-height:54px;padding:12px 14px;border-radius:13px;border:1px solid #e2eaf0;background:#fff;box-shadow:0 3px 10px rgba(29,53,78,.025);font-size:13px;line-height:1.55;transition:transform .15s,border-color .15s,background .15s,box-shadow .15s}
+.takeanswer:hover{transform:translateX(2px);border-color:#a8d8d3;background:#fbfefd;box-shadow:0 5px 14px rgba(17,117,117,.07)}
+.takeanswer.selected{border-color:#079b99;background:linear-gradient(110deg,#e8f8f5,#f4fcfa);box-shadow:inset 0 0 0 1px rgba(7,156,156,.13),0 4px 12px rgba(8,145,140,.07)}
+.letter{width:30px;height:30px;flex:0 0 30px;border-radius:10px;background:#eef3f6;color:#526b80;font-size:12px}
+.takeanswer.selected .letter{background:linear-gradient(135deg,#0aa7a2,#087e86);color:#fff}
+.tfrow{background:linear-gradient(120deg,#fbfcfe,#f7fafb);border:1px solid #e4ebf0;border-radius:13px;padding:15px;margin:10px 0}
+.tfstatement{grid-template-columns:minmax(0,1fr) auto;gap:14px}
+.tfstatement p{font-size:13px;line-height:1.7;color:#314a62}
+.tfstatement p>b{display:inline-grid;place-items:center;width:23px;height:23px;margin-right:5px;border-radius:7px;background:#e7f6f3;color:#087e7d}
+.tfchoices{gap:8px}
+.tfchoice{min-width:76px;min-height:39px;padding:9px 13px;border-radius:10px;background:#fff;font-size:12px;border:1px solid #dfe7ed;box-shadow:0 2px 7px rgba(30,54,78,.025)}
+.tfchoice.on-true{background:#e6f8f1;border-color:#7acdb6;color:#137b63;box-shadow:inset 0 0 0 1px #c4ecdf}
+.tfchoice.on-false{background:#fff0f1;border-color:#e5a1a4;color:#ad4651;box-shadow:inset 0 0 0 1px #f7d8da}
+.shortinput{max-width:420px;min-height:54px;padding:14px 16px;border-radius:13px;background:#fbfdfd;border:1px solid #dbe7ec;font-size:18px;font-weight:700}
+.shortinput::placeholder{font-size:13px;font-weight:500;color:#a1adba}
+.shortnote{font-size:11px;line-height:1.7;margin-top:9px;color:#8292a2}
+.takenav{margin-top:22px;padding-top:16px;border-top:1px solid #edf1f4}
+.takenav .btn{min-height:43px;min-width:125px;border-radius:11px}
+.qnavpanel{padding:19px;border:1px solid #e1eaf0;border-radius:18px;background:linear-gradient(180deg,#fff,#fbfdfd);box-shadow:0 9px 24px rgba(23,49,75,.05)}
+.qnavpanel>b{display:block;color:#263f58;font-size:14px;margin-bottom:10px}
+.qnavgrid{gap:8px;margin:13px 0}
+.qnav{min-height:40px;border-radius:10px;font-size:12px;border:1px solid #e2eaf0;background:#fff;box-shadow:0 2px 6px rgba(27,51,76,.025)}
+.qnav.on{background:linear-gradient(135deg,#18334f,#24506b);border-color:#18334f;box-shadow:0 5px 12px rgba(24,51,79,.17);color:white}
+.qnav.done:not(.on){background:#e6f7f2;border-color:#c7eade;color:#128069}
+.qnavlegend{font-size:10px;gap:13px}
+.qnavpanel #submitExam{min-height:44px;border-radius:12px;box-shadow:0 6px 15px rgba(8,145,145,.15)}
+@media(max-width:680px){
+ .topbar{height:53px;padding:0 9px}
+ .brand{font-size:15px;gap:7px}.brand small{font-size:7px;letter-spacing:.8px}
+ .logo{width:30px;height:30px;flex-basis:30px;font-size:16px;border-radius:9px}
+ .avatar{width:28px;height:28px}.topright{gap:5px}
+ .layout{margin-top:8px}
+ .examtop{align-items:center;padding-bottom:9px;margin-bottom:8px}
+ .examtop #leaveExam{min-height:31px;padding:6px 9px;font-size:9px}
+ .examtop h1{font-size:18px!important;line-height:1.2;margin-top:3px!important}
+ .examtop .eyebrow{font-size:8px;margin-top:6px!important}
+ .examtop .tiny{font-size:9px}.timer{min-width:68px;padding:8px 8px;font-size:12px;border-radius:9px}
+ .examprogress{height:6px;margin:8px 0 10px}
+ .takegrid{gap:8px}
+ .takepanel{padding:17px 13px 14px;border-radius:15px}
+ .takepanel:before{height:4px}
+ .takepanel .eyebrow{font-size:8px;padding:5px 8px;letter-spacing:.8px;margin-bottom:7px}
+ .takepanel h2{font-size:15px;line-height:1.35;margin:2px 0 10px;padding-bottom:10px}
+ .questiontext{padding:13px 12px;margin-bottom:12px;border-radius:10px;border-left-width:3px;font-size:12px;line-height:1.75}
+ .answerlist{gap:7px}
+ .takeanswer{min-height:48px;padding:10px 9px;border-radius:10px;font-size:11px;gap:8px}
+ .letter{width:26px;height:26px;flex-basis:26px;border-radius:8px;font-size:10px}
+ .tfrow{padding:11px 10px;margin:7px 0;border-radius:10px}
+ .tfstatement{grid-template-columns:minmax(0,1fr);gap:8px}
+ .tfstatement p{font-size:11px;line-height:1.6}
+ .tfstatement p>b{width:21px;height:21px;font-size:10px}
+ .tfchoices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .tfchoice{min-width:0;width:100%;min-height:41px;font-size:11px}
+ .shortinput{min-height:49px;padding:12px;font-size:17px}
+ .shortnote{font-size:9px;line-height:1.6}
+ .takenav{gap:7px;margin-top:15px;padding-top:12px}
+ .takenav .btn{min-width:0;width:100%;min-height:40px;font-size:10px;padding:8px 7px}
+ .qnavpanel{padding:12px;border-radius:13px}
+ .qnavpanel>b{font-size:12px;margin-bottom:7px}
+ .qnavgrid{grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:8px 0}
+ .qnav{min-height:33px;border-radius:8px;font-size:10px}
+ .qnavlegend{font-size:9px}
+ .qnavpanel #submitExam{min-height:41px;margin-top:8px!important}
+}
+@media(max-width:380px){
+ .brand{font-size:14px}.brand small{display:none}
+ .examtop h1{font-size:16px!important}
+ .takepanel{padding:15px 11px 12px}
+ .qnavgrid{gap:4px}
+}
+@media(hover:hover){
+ .qnav:hover{border-color:#9fd4cf;background:#f4fbfa}
+ .tfchoice:hover{border-color:#8ecbc5;transform:translateY(-1px)}
+}
+@media(prefers-reduced-motion:reduce){.view.active{animation:none}.takeanswer,.qnav,.tfchoice{transition:none}}
+
+/* Chapter / topic navigation */
+.chapter-heading{margin:20px 0 11px}
+.chapter-heading h2{font-size:16px}
+.chapter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:0 0 18px}
+.chapter-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:0;padding:16px 17px;border:1px solid #e1eaf0;border-radius:15px;background:linear-gradient(145deg,#fff,#fbfdfd);box-shadow:0 5px 16px rgba(23,48,75,.035);text-align:left;cursor:pointer;transition:transform .16s,border-color .16s,box-shadow .16s}
+.chapter-card:hover{transform:translateY(-2px);border-color:#9dd3ce;box-shadow:0 10px 22px rgba(22,70,76,.08)}
+.chapter-card:focus-visible{outline:3px solid #8edbd6;outline-offset:3px}
+.chapter-kicker{font-size:9px;font-weight:900;letter-spacing:1.05px;text-transform:uppercase;color:#078e8e}
+.chapter-card strong{font-size:14px;line-height:1.35;letter-spacing:-.2px;color:#203a54}
+.chapter-card p{font-size:10px;line-height:1.6;color:#74859a;margin:0}
+.chapter-count{display:inline-flex;align-items:center;gap:5px;margin-top:auto;padding:5px 8px;background:#eaf7f5;border:1px solid #d8efeb;border-radius:999px;color:#087c7d;font-size:9px;font-weight:850}
+.chapter-note{font-size:10px;line-height:1.6;color:#8291a2;margin:-5px 0 14px}
+.chapter-select{min-width:180px}
+@media(max-width:680px){
+ .chapter-heading{margin:15px 0 8px}
+ .chapter-heading h2{font-size:14px}
+ .chapter-grid{grid-template-columns:1fr;gap:8px;margin-bottom:13px}
+ .chapter-card{padding:13px 14px;border-radius:12px;gap:5px}
+ .chapter-card strong{font-size:12px}.chapter-card p{font-size:9px}
+ .chapter-count{font-size:8px;padding:4px 7px}
+ .chapter-select{grid-column:1/-1;min-width:0;width:100%}
+}
+
+.menu-link{font-size:10px!important;min-height:34px!important;padding:8px 10px!important;text-decoration:none!important;white-space:nowrap}
+@media(max-width:680px){.menu-link{font-size:9px!important;min-height:31px!important;padding:7px 8px!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+ <div class="brand"><div class="logo">✓</div><div>ThiNhanh<small>HỌC TỐT · THI TỐT</small></div></div>
+ <div class="topright"><a class="btn outline menu-link" href="./index.html">← Chọn môn</a><span class="pill">10 ĐỀ · 50 PHÚT/ĐỀ · THANG 10</span><div class="avatar">TN</div></div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+ <div class="side-label">KHÔNG GIAN LUYỆN THI</div>
+ <button class="navbtn active" data-view="home"><span class="ico">⌂</span> Tổng quan</button>
+ <button class="navbtn" data-view="browse"><span class="ico">▤</span> 10 đề thi</button>
+ <button class="navbtn" data-view="history"><span class="ico">◷</span> Lịch sử làm bài</button>
+ <div class="sidebox"><b>🧪 Bộ đề Hóa học 12</b>Biên soạn theo hai tài liệu Hóa 12 bạn gửi: Ester – Lipid và Carbohydrate. Đáp án và giải thích chỉ hiện sau khi nộp bài.</div>
+</aside>
+<main>
+<section class="view active" id="view-home">
+ <div class="pagehead"><div><div class="eyebrow">BỘ LUYỆN THI HÓA HỌC 12</div><h1>Chinh phục Hóa học 12.</h1><p>10 đề Hóa học tăng dần độ khó, có tính giờ, chấm tự động và giải thích từng câu.</p></div><button class="btn primary" data-goto="browse">Vào kho đề →</button></div>
+ <div class="hero"><div><div class="eyebrow">THI THỬ THEO CẤU TRÚC THPT</div><h2>50 phút. 28 câu lớn. Thang điểm 10.</h2><p>Rèn tư duy, vận dụng phương trình phản ứng, tính lượng chất, hiệu suất và suy luận từ dữ liệu hóa hữu cơ.</p><button class="btn" style="background:#fff;color:#117c82" data-goto="browse">Chọn đề thi <span>→</span></button></div><div class="hero-art">🧪</div></div>
+
+ <div class="section-head chapter-heading"><h2>Chọn chương học</h2><span class="tiny">Học theo từng chương</span></div>
+ <div class="chapter-grid" id="chapter-cards"></div>
+ <p class="chapter-note">Lưu ý: bộ hiện có 10 đề; các đề nền tảng và tổng hợp có nội dung giao thoa giữa hai chương. Số đề trong từng nhóm được ghi rõ để tránh nhầm là 10 đề riêng cho mỗi chương.</p>
+
+ <div class="stats"><div class="stat"><div class="stat-icon">▤</div><div><strong id="stat-exams">10</strong><span>Đề thi hoàn chỉnh</span></div></div><div class="stat"><div class="stat-icon">✓</div><div><strong id="stat-attempts">0</strong><span>Lượt đã hoàn thành</span></div></div><div class="stat"><div class="stat-icon">↗</div><div><strong id="stat-average">—</strong><span>Điểm trung bình</span></div></div></div>
+ <div class="info-box"><b>Cấu trúc và chấm điểm:</b> Phần I: 18 câu trắc nghiệm × 0,25 = 4,5 điểm. Phần II: 4 câu đúng/sai, mỗi câu tối đa 1 điểm theo thang điểm từng phần. Phần III: 6 câu trả lời ngắn × 0,25 = 1,5 điểm. Tổng 10 điểm.</div>
+ <div class="section-head"><h2>Đề thi theo cấp độ</h2><button class="linkbtn" data-goto="browse">Xem đủ 10 đề →</button></div><div class="cards" id="featured-cards"></div>
+ <div class="footnote">ThiNhanh · Bản luyện thi cá nhân · Lịch sử được lưu trong trình duyệt hiện tại.</div>
+</section>
+<section class="view" id="view-browse">
+ <div class="pagehead"><div><div class="eyebrow">THƯ VIỆN BÀI THI</div><h1>Kho đề Hóa học 12</h1><p>Chọn đúng cấp độ phù hợp với mục tiêu luyện tập.</p></div></div>
+ <div class="toolbar"><div class="search"><input id="searchInput" placeholder="Tìm theo tên đề hoặc nội dung…"></div><select id="chapterFilter" class="chapter-select"><option value="">Tất cả chương / mạch kiến thức</option></select><select id="difficultyFilter"><option value="">Tất cả cấp độ</option><option>Dễ</option><option>Khá</option><option>Khó</option><option>Siêu khó</option></select><select id="sortFilter"><option value="level">Theo độ khó</option><option value="az">Tên A–Z</option><option value="questions">Nhiều câu khó nhất</option></select></div>
+ <div class="info-box"><b>Mẹo thi:</b> Mỗi đề gồm 18 câu chọn A/B/C/D, 4 câu đúng/sai (mỗi câu có 4 ý a–d), và 6 câu trả lời ngắn. Đồng hồ chạy 50 phút; khi nộp bài, hệ thống hiện điểm thành phần và lời giải.</div>
+ <div class="cards" id="all-cards"></div>
+ <div class="footnote">Mỗi chương có 10 đề: 2 dễ · 2 khá · 4 khó · 2 siêu khó. Mỗi đề gồm 18 trắc nghiệm, 4 đúng/sai và 6 trả lời ngắn.</div>
+</section>
+<section class="view" id="view-history">
+ <div class="pagehead"><div><div class="eyebrow">THEO DÕI TIẾN BỘ</div><h1>Lịch sử làm bài</h1><p>Xem lại điểm tổng, điểm thành phần và đáp án đã làm.</p></div><button class="btn outline" id="clearHistory">Xóa lịch sử</button></div>
+ <div id="historyContent"></div>
+</section>
+<section class="view" id="view-take">
+ <div class="examtop"><div><button class="btn outline small" id="leaveExam">← Thoát bài thi</button><div class="eyebrow" id="takeMeta" style="margin-top:12px">ĐỀ THI</div><h1 id="takeTitle" style="margin:3px 0 0;font-size:25px">Tên đề</h1><div class="tiny" id="takeInstructions" style="margin-top:5px">18 trắc nghiệm · 4 đúng/sai · 6 trả lời ngắn</div></div><div class="timer" id="timer">50:00</div></div>
+ <div class="examprogress"><div id="takeProgress"></div></div>
+ <div class="takegrid"><section class="takepanel"><div class="eyebrow" id="sectionLabel">PHẦN I · TRẮC NGHIỆM</div><h2 id="questionTitle">Câu hỏi</h2><div class="questiontext" id="questionText"></div><div id="responseArea"></div><div class="takenav"><button class="btn outline" id="takePrev">← Câu trước</button><div class="spacer"></div><button class="btn primary" id="takeNext">Câu tiếp →</button></div></section><aside class="qnavpanel"><b>Danh sách câu hỏi</b><div class="qnavgrid" id="qnavgrid"></div><div class="qnavlegend"><span><i class="legenddot" style="background:var(--teal)"></i>Đã xong</span><span><i class="legenddot" style="background:var(--navy)"></i>Đang xem</span></div><hr style="border:0;border-top:1px solid var(--line);margin:16px 0"><div class="tiny">Đã hoàn thành: <b id="answeredCount">0</b>/28 câu lớn</div><div class="tiny" style="margin-top:7px">Chưa làm hết vẫn có thể nộp bài; câu bỏ trống không có điểm.</div><button class="btn primary" style="width:100%;margin-top:14px" id="submitExam">Nộp bài</button></aside></div>
+</section>
+<section class="view" id="view-result">
+ <div class="pagehead"><div><div class="eyebrow">TỔNG KẾT BÀI THI</div><h1>Kết quả của bạn</h1><p>Xem điểm từng phần, đáp án chuẩn và lời giải.</p></div><button class="btn primary" data-goto="browse">Làm đề khác →</button></div>
+ <div id="resultBody"></div>
+</section>
+</main></div>
+<div class="toast" id="toast"></div>
+<script>
+
+const LEVELS=['Dễ','Dễ','Khá','Khá','Khó','Khó','Khó','Khó','Siêu khó','Siêu khó'];
+function mc(q,right,wrong,s,i,why){const a=[right,...wrong].slice(0,4),r=(s+i*3)%4;return {type:'mc',q,options:a.slice(r).concat(a.slice(0,r)),correct:(4-r)%4,why}}
+function tf(q,a){return {type:'tf',q,statements:a.map(x=>({text:x[0],correct:x[1],why:x[2]}))}}
+function sh(q,a,why,unit=''){return {type:'short',q,answer:+a.toFixed(4),tol:.01,why,unit}}
+const E=[
+{f:'CH₃COOCH₃',n:'methyl acetate',a:'CH₃COOH',al:'CH₃OH',salt:'CH₃COONa'},
+{f:'CH₃COOC₂H₅',n:'ethyl acetate',a:'CH₃COOH',al:'C₂H₅OH',salt:'CH₃COONa'},
+{f:'HCOOCH₃',n:'methyl formate',a:'HCOOH',al:'CH₃OH',salt:'HCOONa'},
+{f:'HCOOC₂H₅',n:'ethyl formate',a:'HCOOH',al:'C₂H₅OH',salt:'HCOONa'},
+{f:'C₂H₅COOCH₃',n:'methyl propionate',a:'C₂H₅COOH',al:'CH₃OH',salt:'C₂H₅COONa'},
+{f:'CH₃COOCH=CH₂',n:'vinyl acetate',a:'CH₃COOH',al:'CH₂=CH–OH',salt:'CH₃COONa'},
+{f:'CH₂=CHCOOCH₃',n:'methyl acrylate',a:'CH₂=CHCOOH',al:'CH₃OH',salt:'CH₂=CHCOONa'},
+{f:'CH₃CH₂CH₂COOC₂H₅',n:'ethyl butyrate',a:'CH₃CH₂CH₂COOH',al:'C₂H₅OH',salt:'CH₃CH₂CH₂COONa'}
+];
+const FA=[
+{name:'palmitic acid',f:'C₁₅H₃₁COOH',sat:true},
+{name:'stearic acid',f:'C₁₇H₃₅COOH',sat:true},
+{name:'oleic acid',f:'C₁₇H₃₃COOH',sat:false},
+{name:'linoleic acid',f:'C₁₇H₃₁COOH',sat:false}
+];
+function c1mc(s){
+ const p=(s*3+1)%5,e=E[p],e2=E[(p+2)%5],e3=E[(p+4)%5],f=FA[s%4];
+ return [
+ mc('Nhóm chức đặc trưng của ester đơn chức là nhóm nào?','–COO–',['–COOH','–CHO','–OH'],s,0,'Ester đơn chức có dạng R–COO–R’.'),
+ mc('Ester no, đơn chức, mạch hở có công thức tổng quát nào?','CₙH₂ₙO₂ (n ≥ 2)',['CₙH₂ₙ₊₂O₂ (n ≥ 2)','CₙH₂ₙ₋₂O₂ (n ≥ 2)','CₙH₂ₙO (n ≥ 2)'],s,1,'Công thức trong tài liệu là CₙH₂ₙO₂ với n ≥ 2.'),
+ mc('Ester '+e.f+' có tên gọi nào phù hợp?',e.n,[e2.n,e3.n,'glycerol ester','fatty acid salt'],s,2,'Tên ester gồm tên gốc alcohol và tên gốc acid có đuôi –ate.'),
+ mc('Sản phẩm ester tạo thành khi cho '+e.a+' phản ứng với '+e.al+' (H₂SO₄ đặc, đun nóng) là công thức nào?',e.f,[e2.f,e3.f,'CH₃COOH'],s,3,'Phản ứng ester hóa tạo ester và nước.'),
+ mc('Thủy phân '+e.f+' trong môi trường acid, sản phẩm hữu cơ thu được là cặp nào?',e.a+' và '+e.al,[e2.a+' và '+e2.al,e3.a+' và '+e3.al,'muối sodium và alcohol'],s,4,'Thủy phân ester trong môi trường acid thường tạo carboxylic acid và alcohol.'),
+ mc('Xà phòng hóa '+e.f+' bằng NaOH dư, cặp sản phẩm chính là gì?',e.salt+' và '+e.al,[e2.salt+' và '+e2.al,e.a+' và '+e.al,'glycerol và glucose'],s,5,'Thủy phân ester trong base tạo muối carboxylate và alcohol.'),
+ mc('Nhận xét nào phù hợp với tính chất vật lí thường gặp của ester có phân tử khối nhỏ?','Thường là chất lỏng, ít tan trong nước và nhẹ hơn nước.',['Thường tan vô hạn trong nước.','Giữa các phân tử luôn tạo liên kết hydrogen mạnh.','Luôn nặng hơn nước.'],s,6,'Ester phân tử khối nhỏ thường là chất lỏng, nhẹ hơn nước và ít tan trong nước.'),
+ mc('Giữa các phân tử ester giống nhau, nhận xét nào đúng?','Không tạo được liên kết hydrogen với nhau.',['Luôn tạo liên kết hydrogen như carboxylic acid.','Có liên kết ion giữa các phân tử.','Có liên kết kim loại.'],s,7,'Phân tử ester không có nhóm –OH để tạo liên kết hydrogen với nhau.'),
+ mc('Ester có dạng HCOOR’ có tính chất riêng nào được nêu trong tài liệu?','Có thể tham gia phản ứng tráng gương.',['Không thể bị thủy phân.','Luôn tạo glycerol.','Chỉ phản ứng với iodine.'],s,8,'Các ester HCOOR’ có thể tham gia phản ứng tráng gương.'),
+ mc('Nếu gốc hydrocarbon của ester có liên kết C=C, chất có thể tham gia phản ứng nào?','Phản ứng cộng H₂ trong điều kiện thích hợp.',['Chỉ phản ứng trung hòa với NaCl.','Không thể tham gia phản ứng cộng.','Chỉ phản ứng thủy phân tạo glucose.'],s,9,'Gốc không no có C=C có thể cộng hydrogen.'),
+ mc('Lipid có đặc điểm hòa tan nào sau đây?','Không tan trong nước nhưng tan trong dung môi hữu cơ không phân cực.',['Tan tốt trong nước.','Chỉ tan trong dung dịch acid mạnh.','Tan trong nước và không tan trong dung môi hữu cơ.'],s,10,'Định nghĩa lipid nhấn mạnh tính không tan trong nước và tan trong dung môi hữu cơ không phân cực.'),
+ mc('Chất béo (triglyceride) được cấu tạo từ thành phần nào?','Glycerol và các acid béo.',['Glucose và fructose.','Ethanol và acetic acid.','Glycerol và amino acid.'],s,11,'Chất béo là triester của glycerol với acid béo.'),
+ mc('Công thức nào là của '+f.name+'?',f.f,['C₃H₅(OH)₃','CH₃COOH','C₆H₁₂O₆'],s,12,'Bảng acid béo trong tài liệu liệt kê công thức tương ứng với tên acid.'),
+ mc('Chất béo chứa chủ yếu gốc acid béo '+(f.sat?'no':'không no')+' thường có trạng thái nào?',f.sat?'Thường ở trạng thái rắn.':'Thường ở trạng thái lỏng.',[f.sat?'Thường ở trạng thái khí.':'Luôn ở trạng thái rắn.','Tan hoàn toàn trong nước.','Có khối lượng riêng lớn hơn nước trong mọi trường hợp.'],s,13,'Chất béo giàu gốc acid béo no thường rắn, giàu gốc không no thường lỏng.'),
+ mc('Thủy phân hoàn toàn triglyceride trong môi trường acid, sản phẩm luôn có glycerol và chất nào?','Các acid béo.',['Glucose.','Ethanol.','Sodium chloride.'],s,14,'Thủy phân chất béo trong môi trường acid tạo glycerol và acid béo.'),
+ mc('Xà phòng hóa hoàn toàn 1 mol triglyceride cần bao nhiêu mol NaOH?','3 mol NaOH.',['1 mol NaOH.','2 mol NaOH.','6 mol NaOH.'],s,15,'Một mol triglyceride có ba liên kết ester nên cần ba mol base.'),
+ mc('1 mol triolein cộng hydrogen hoàn toàn cần bao nhiêu mol H₂?','3 mol H₂.',['1 mol H₂.','2 mol H₂.','6 mol H₂.'],s,16,'Triolein có ba liên kết đôi C=C.'),
+ mc('Hiện tượng chất béo bị ôi khi để lâu trong không khí chủ yếu do quá trình nào?','Oxi hóa chậm các gốc acid béo không no.',['Thủy phân tinh bột.','Lên men glucose.','Kết tinh glycerol.'],s,17,'Oxygen có thể oxi hóa các gốc acid béo không no, gây mùi khó chịu.')
+ ];
+}
+function c1tf(s){
+ const e=E[(s+1)%5],f=FA[s%4];
+ return [
+ tf('Các nhận định về cấu tạo ester.',[
+ ['Ester đơn chức thường có dạng R–COO–R’.',true,'Đây là dạng cấu tạo ester đơn chức.'],
+ ['Trong công thức R–COO–R’, gốc R’ có thể là hydrogen.',false,'R’ là gốc hydrocarbon, không thể là H.'],
+ ['Ester no, đơn chức, mạch hở có công thức CₙH₂ₙO₂ với n ≥ 2.',true,'Đây là công thức tổng quát trong tài liệu.'],
+ ['Phân tử ester có nhóm chức –COOH thay cho –COO–.',false,'–COOH là nhóm carboxyl của carboxylic acid.']
+ ]),
+ tf('Các nhận định về phản ứng của ester.',[
+ ['Thủy phân ester trong môi trường acid thường là phản ứng thuận nghịch.',true,'Tài liệu mô tả thủy phân acid thường là phản ứng thuận nghịch.'],
+ ['Xà phòng hóa ester thường là phản ứng một chiều.',true,'Thủy phân trong môi trường base thường diễn ra một chiều.'],
+ ['Xà phòng hóa '+e.f+' tạo muối '+e.salt+' và alcohol '+e.al+'.',true,'Đây là cặp sản phẩm từ phần acid và alcohol của ester.'],
+ ['Ester có gốc C=C không thể tham gia phản ứng cộng hydrogen.',false,'Liên kết C=C có thể cộng H₂ trong điều kiện thích hợp.']
+ ]),
+ tf('Các nhận định về lipid và chất béo.',[
+ ['Lipid không tan trong nước nhưng tan trong dung môi hữu cơ không phân cực.',true,'Đây là đặc điểm định nghĩa lipid.'],
+ ['Chất béo là triester của glycerol với acid béo.',true,'Chất béo còn được gọi là triglyceride.'],
+ ['Glycerol có ba nhóm hydroxy.',true,'Công thức glycerol là C₃H₅(OH)₃.'],
+ ['Một mol triglyceride chỉ cần một mol NaOH để xà phòng hóa hoàn toàn.',false,'Một mol triglyceride có ba liên kết ester nên cần ba mol NaOH.']
+ ]),
+ tf('Các nhận định về acid béo và tính chất chất béo.',[
+ ['Palmitic acid là acid béo no.',true,'Palmitic acid có công thức C₁₅H₃₁COOH.'],
+ [f.name+' có công thức '+f.f+'.',true,'Công thức và tên được liệt kê trong bảng acid béo.'],
+ ['Hydrogen hóa các gốc acid béo không no có thể làm chất béo lỏng trở nên rắn hơn.',true,'Phản ứng cộng H₂ làm giảm số liên kết đôi C=C.'],
+ ['Oxi hóa chậm các gốc acid béo không no trong không khí có thể gây mùi ôi.',true,'Đây là nguyên nhân ôi dầu mỡ được nêu trong tài liệu.']
+ ])
+ ];
+}
+function c1short(s){
+ const n=3+s%4,x=.10+.02*s,fat=.04+.01*s,g=.10+.01*s,u=.02+.01*s,tri=.01+.005*s;
+ return [
+ sh('Ester no, đơn chức, mạch hở có công thức CₙH₂ₙO₂. Tính phân tử khối khi n = '+n+'.',14*n+32,'M = 12n + 2n + 32 = 14n + 32.'),
+ sh('Giả sử phản ứng xà phòng hóa '+x.toFixed(2)+' mol ethyl acetate xảy ra hoàn toàn với NaOH dư. Số mol sodium acetate thu được là bao nhiêu?',x,'Tỉ lệ mol ester đơn chức : muối carboxylate là 1 : 1.','mol'),
+ sh('Xà phòng hóa hoàn toàn '+fat.toFixed(2)+' mol triglyceride cần bao nhiêu mol NaOH?',3*fat,'Một mol triglyceride có ba liên kết ester nên cần ba mol NaOH.','mol'),
+ sh('Thủy phân hoàn toàn '+g.toFixed(2)+' mol chất béo, khối lượng glycerol thu được là bao nhiêu gam? (M glycerol = 92 g/mol)',92*g,'Tỉ lệ triglyceride : glycerol là 1 : 1; m = n × M.','g'),
+ sh('Cho '+u.toFixed(2)+' mol triolein hydrogen hóa hoàn toàn. Số mol H₂ tối thiểu cần dùng là bao nhiêu?',3*u,'Mỗi mol triolein có ba liên kết đôi C=C.','mol'),
+ sh('Xà phòng hóa '+tri.toFixed(3)+' mol tristearin hoàn toàn. Khối lượng sodium stearate thu được là bao nhiêu gam? (M = 306 g/mol)',3*tri*306,'1 mol triglyceride tạo 3 mol muối; m = 3n × 306.','g')
+ ];
+}
+function c2mc(s){
+ const x=.05+.05*s,names=['glucose','fructose','saccharose','maltose'],name=names[s%4],formula=s%4<2?'C₆H₁₂O₆':'C₁₂H₂₂O₁₁',fw=formula==='C₆H₁₂O₆'?['C₆H₁₀O₅','C₁₂H₂₂O₁₁','C₅H₁₀O₅']:['C₆H₁₂O₆','C₆H₁₀O₅','C₅H₁₀O₅'];
+ return [
+ mc('Carbohydrate được mô tả trong tài liệu là nhóm hợp chất hữu cơ nào?','Hợp chất hữu cơ tạp chức, thường có công thức chung Cₙ(H₂O)ₘ.',['Hợp chất hữu cơ đơn chức, luôn có công thức CₙH₂ₙ.','Hợp chất vô cơ chứa carbon.','Hợp chất hữu cơ chỉ có nhóm carboxyl.'],s,0,'Carbohydrate là hợp chất hữu cơ tạp chức, thường có công thức Cₙ(H₂O)ₘ.'),
+ mc('Glucose và fructose thuộc nhóm carbohydrate nào?','Monosaccharide.',['Disaccharide.','Polysaccharide.','Oligosaccharide.'],s,1,'Glucose và fructose là các monosaccharide.'),
+ mc('Công thức phân tử của '+name+' là công thức nào?',formula,fw,s,2,'Glucose và fructose có C₆H₁₂O₆; saccharose và maltose có C₁₂H₂₂O₁₁.'),
+ mc('Ở dạng mạch hở, glucose có nhóm chức đặc trưng nào?','Aldehyde (–CHO).',['Ketone (>C=O) là nhóm chức duy nhất.','Carboxyl (–COOH).','Ester (–COO–).'],s,3,'Công thức mạch hở glucose là CH₂OH–[CHOH]₄–CHO.'),
+ mc('Có thể phân biệt glucose và fructose bằng thuốc thử nào theo nội dung tài liệu?','Nước bromine.',['Dung dịch Cu(OH)₂ ở nhiệt độ thường.','Thuốc thử Tollens.','Nước cất.'],s,4,'Glucose làm mất màu nước bromine; fructose không có phản ứng này trong điều kiện nêu.'),
+ mc('Khi cho '+x.toFixed(2)+' mol glucose tác dụng với thuốc thử Tollens dư, số mol Ag lý thuyết tạo thành là bao nhiêu?',(2*x).toFixed(2)+' mol',[x.toFixed(2)+' mol',(3*x).toFixed(2)+' mol',(4*x).toFixed(2)+' mol'],s,5,'1 mol glucose tạo 2 mol Ag với thuốc thử Tollens.'),
+ mc('Glucose và fructose hòa tan Cu(OH)₂ ở nhiệt độ thường tạo dung dịch xanh lam đậm do tính chất nào?','Có nhiều nhóm hydroxy liền kề (tính chất polyalcohol).',['Có nhóm carboxyl.','Có liên kết glycoside.','Có nhóm ester.'],s,6,'Phản ứng với Cu(OH)₂ ở nhiệt độ thường thể hiện tính chất polyalcohol.'),
+ mc('Lên men hoàn toàn glucose tạo ra những sản phẩm nào?','Ethanol và carbon dioxide.',['Glucose và oxygen.','Glycerol và sodium chloride.','Lactic acid và oxygen trong mọi trường hợp.'],s,7,'C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂.'),
+ mc('Thủy phân hoàn toàn saccharose thu được cặp monosaccharide nào?','Glucose và fructose.',['Hai phân tử glucose.','Fructose và maltose.','Glucose và cellulose.'],s,8,'Saccharose bị thủy phân tạo glucose và fructose.'),
+ mc('Liên kết glycoside trong saccharose được mô tả phù hợp nhất là gì?','Liên kết giữa gốc α-glucose và β-fructose qua C1 và C2 (1,2-glycoside).',['Liên kết α-1,4 giữa hai gốc glucose.','Liên kết β-1,4 giữa các gốc glucose.','Liên kết α-1,6 tạo mạch nhánh.'],s,9,'Saccharose gồm một gốc α-glucose và một gốc β-fructose, liên kết 1,2-glycoside.'),
+ mc('Maltose được cấu tạo từ hai gốc nào?','Hai gốc glucose liên kết α-1,4-glycoside.',['Một glucose và một fructose liên kết 1,2.','Hai gốc fructose liên kết β-1,4.','Nhiều gốc β-glucose liên kết β-1,4.'],s,10,'Maltose gồm hai gốc glucose, liên kết α-1,4-glycoside.'),
+ mc('Trong tinh bột, amylose có đặc điểm cấu tạo nào?','Mạch không phân nhánh, chủ yếu có liên kết α-1,4-glycoside.',['Mạch không phân nhánh, liên kết β-1,4.','Chỉ có liên kết α-1,6.','Gồm các gốc fructose.'],s,11,'Amylose là dạng mạch không phân nhánh của tinh bột với liên kết α-1,4.'),
+ mc('Nhỏ dung dịch iodine vào hồ tinh bột ở nhiệt độ thường, hiện tượng nào xuất hiện?','Xuất hiện màu xanh tím.',['Màu đỏ gạch.','Kết tủa bạc.','Dung dịch mất màu hoàn toàn và không đổi lại.'],s,12,'Tinh bột tạo hợp chất màu xanh tím với iodine.'),
+ mc('Cellulose được cấu tạo bởi nhiều gốc nào và liên kết gì?','β-glucose, liên kết β-1,4-glycoside.',['α-glucose, liên kết α-1,6.','Fructose, liên kết β-1,2.','Glucose và fructose, liên kết α-1,2.'],s,13,'Cellulose gồm β-glucose nối bằng liên kết β-1,4.'),
+ mc('Thủy phân hoàn toàn tinh bột hoặc cellulose trong môi trường acid, đun nóng, thu được chất nào?','Glucose.',['Fructose.','Saccharose.','Glycerol.'],s,14,'Cả tinh bột và cellulose đều thủy phân tạo glucose.'),
+ mc('Thuốc thử nào có thể hòa tan cellulose theo nội dung tài liệu?','Nước Schweizer (hệ Cu(OH)₂ và NH₃).',['Nước iodine.','Nước bromine.','Dung dịch NaCl loãng.'],s,15,'Cellulose tan trong nước Schweizer theo phần tính chất vật lí của tài liệu.'),
+ mc('Carbohydrate nào có nhiều trong mật ong?','Fructose.',['Cellulose.','Tinh bột.','Maltose là thành phần duy nhất.'],s,16,'Tài liệu ghi fructose có nhiều trong mật ong.'),
+ mc('Tinh bột và cellulose thuộc nhóm carbohydrate nào?','Polysaccharide.',['Monosaccharide.','Disaccharide.','Không phải carbohydrate.'],s,17,'Tinh bột và cellulose là polysaccharide.')
+ ];
+}
+function c2tf(s){
+ return [
+ tf('Các nhận định về khái niệm và phân loại carbohydrate.',[
+ ['Carbohydrate là hợp chất hữu cơ tạp chức, thường có công thức chung Cₙ(H₂O)ₘ.',true,'Đúng theo định nghĩa trong tài liệu.'],
+ ['Glucose và fructose thuộc nhóm disaccharide.',false,'Cả hai đều là monosaccharide.'],
+ ['Saccharose và maltose là các disaccharide.',true,'Mỗi phân tử được tạo bởi hai gốc monosaccharide.'],
+ ['Tinh bột và cellulose thuộc nhóm polysaccharide.',true,'Đây là hai polysaccharide tự nhiên.']
+ ]),
+ tf('Các nhận định về glucose và fructose.',[
+ ['Glucose có nhóm aldehyde ở dạng mạch hở.',true,'Công thức mạch hở glucose có nhóm –CHO.'],
+ ['Fructose có nhóm ketone ở dạng mạch hở.',true,'Công thức mạch hở fructose có nhóm >C=O ở vị trí ketone.'],
+ ['Glucose và fructose có cùng công thức phân tử C₆H₁₂O₆.',true,'Hai chất là đồng phân cấu tạo.'],
+ ['Có thể phân biệt glucose và fructose bằng thuốc thử Tollens.',false,'Cả hai đều có thể phản ứng với Tollens; nước bromine là thuốc thử phân biệt được nêu.']
+ ]),
+ tf('Các nhận định về saccharose và maltose.',[
+ ['Thủy phân saccharose thu được glucose và fructose.',true,'Đây là sản phẩm thủy phân của saccharose.'],
+ ['Maltose gồm hai gốc fructose.',false,'Maltose gồm hai gốc glucose.'],
+ ['Maltose có liên kết α-1,4-glycoside.',true,'Đúng theo cấu trúc maltose trong tài liệu.'],
+ ['Saccharose có khả năng phản ứng tráng bạc như maltose.',false,'Saccharose không có nhóm –OH hemiacetal tự do nên không có phản ứng tráng bạc.']
+ ]),
+ tf('Các nhận định về tinh bột và cellulose.',[
+ ['Amylose có mạch không phân nhánh với liên kết α-1,4-glycoside.',true,'Đúng theo cấu trúc amylose.'],
+ ['Amylopectin có các liên kết α-1,6-glycoside tạo nhánh.',true,'Amylopectin có liên kết α-1,4 và α-1,6.'],
+ ['Cellulose gồm các gốc β-glucose nối bằng liên kết β-1,4-glycoside.',true,'Đúng theo cấu trúc cellulose trong tài liệu.'],
+ ['Tinh bột không tạo màu với iodine.',false,'Tinh bột tạo hợp chất màu xanh tím với iodine.']
+ ])
+ ];
+}
+function c2short(s){
+ const n=.05+.05*s,suc=.05+.025*s,starch=16.2+1.8*s,glu=.05+.025*s;
+ return [
+ sh('Tính phân tử khối của glucose có công thức C₆H₁₂O₆. Cho C = 12, H = 1, O = 16.',180,'M = 6×12 + 12×1 + 6×16 = 180.'),
+ sh('Tính phân tử khối của saccharose có công thức C₁₂H₂₂O₁₁. Cho C = 12, H = 1, O = 16.',342,'M = 12×12 + 22×1 + 11×16 = 342.'),
+ sh('Cho '+n.toFixed(2)+' mol glucose phản ứng hoàn toàn với thuốc thử Tollens dư. Khối lượng Ag thu được là bao nhiêu gam? (M Ag = 108 g/mol)',216*n,'1 mol glucose tạo 2 mol Ag; m = 2n × 108.','g'),
+ sh('Thủy phân hoàn toàn '+suc.toFixed(3)+' mol saccharose. Tổng số mol monosaccharide (glucose và fructose) thu được là bao nhiêu?',2*suc,'1 mol saccharose tạo 1 mol glucose và 1 mol fructose.','mol'),
+ sh('Lên men hoàn toàn '+glu.toFixed(2)+' mol glucose. Khối lượng ethanol lý thuyết thu được là bao nhiêu gam? (M ethanol = 46 g/mol)',92*glu,'1 mol glucose tạo 2 mol ethanol; m = 2n × 46.','g'),
+ sh('Thủy phân hoàn toàn '+starch.toFixed(1)+' g tinh bột. Tính khối lượng glucose lý thuyết thu được. Cho M(C₆H₁₀O₅) = 162 và M(C₆H₁₂O₆) = 180.',starch*180/162,'162 g mắt xích tinh bột nhận thêm nước tạo 180 g glucose.','g')
+ ];
+}
+function buildChemBank(){
+ const bank=[];
+ for(let s=0;s<10;s++)bank.push({id:'h1e'+String(s+1).padStart(2,'0'),title:'Chương 1 · Ester – Lipid · Đề '+String(s+1).padStart(2,'0'),difficulty:LEVELS[s],desc:['Nhận biết cấu tạo, danh pháp và tính chất cơ bản của ester.','Luyện phản ứng thủy phân, ester hóa và lipid.','Vận dụng kiến thức ester – lipid ở mức thông hiểu.','Kết hợp cấu tạo, phản ứng và bài toán chất béo.','Bài tập vận dụng về ester và triglyceride.','Tính toán phản ứng và tính chất chất béo.','Tổng hợp nhiều dạng phản ứng ester – lipid.','Vận dụng cao về thủy phân và hydrogen hóa.','Thử thách tổng hợp chuyên sâu Ester – Lipid.','Đề tổng hợp mức cao về ester, chất béo và acid béo.'][s],subject:'Hóa học · Chương 1',chapter:'ch1',minutes:50,questions:[...c1mc(s),...c1tf(s),...c1short(s)]});
+ for(let s=0;s<10;s++)bank.push({id:'h2e'+String(s+1).padStart(2,'0'),title:'Chương 2 · Carbohydrate · Đề '+String(s+1).padStart(2,'0'),difficulty:LEVELS[s],desc:['Nhận biết phân loại và cấu tạo carbohydrate.','Luyện tính chất glucose, fructose và disaccharide.','Vận dụng phản ứng đặc trưng của monosaccharide.','Tổng hợp saccharose, maltose và polysaccharide.','Bài tập tính toán phản ứng carbohydrate.','Vận dụng về thủy phân và lên men.','Tổng hợp cấu tạo và tính chất carbohydrate.','Bài tập nhiều bước về glucose và polysaccharide.','Thử thách tổng hợp chuyên sâu Carbohydrate.','Đề tổng hợp mức cao về mono-, di- và polysaccharide.'][s],subject:'Hóa học · Chương 2',chapter:'ch2',minutes:50,questions:[...c2mc(s),...c2tf(s),...c2short(s)]});
+ return bank;
+}
+const BANK=buildChemBank();
+;
+const HISTORY_KEY='thinhanh_chemistry_exam_history_v1';
+let historyItems=loadHistory(), currentView='home', activeExam=null, answers=[], activeQ=0, seconds=3000, timerTick=null;
+const $=id=>document.getElementById(id);
+function loadHistory(){try{let x=JSON.parse(localStorage.getItem(HISTORY_KEY));return Array.isArray(x)?x:[]}catch(e){return []}}
+function saveHistory(){try{localStorage.setItem(HISTORY_KEY,JSON.stringify(historyItems))}catch(e){toast('Trình duyệt không cho lưu lịch sử; điểm hiện tại vẫn hiển thị.')}} 
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function fmt(n,d=2){return Number(n).toLocaleString('vi-VN',{maximumFractionDigits:d,minimumFractionDigits:0})}
+function toast(s){const el=$('toast');el.textContent=s;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2400)}
+function levelClass(s){return s==='Dễ'?'easy':s==='Khá'?'mid':s==='Khó'?'hard':'super'}
+function iconFor(e){return e.difficulty==='Dễ'?'🌱':e.difficulty==='Khá'?'📘':e.difficulty==='Khó'?'🔥':'🧠'}
+
+const CHAPTER_GROUPS=[
+ {id:'ch1',kicker:'CHƯƠNG 1',title:'Ester – Lipid',desc:'10 đề riêng về cấu tạo, danh pháp, tính chất ester, lipid, chất béo và acid béo.',ids:["h1e01","h1e02","h1e03","h1e04","h1e05","h1e06","h1e07","h1e08","h1e09","h1e10"]},
+ {id:'ch2',kicker:'CHƯƠNG 2',title:'Carbohydrate',desc:'10 đề riêng về glucose, fructose, saccharose, maltose, tinh bột và cellulose.',ids:["h2e01","h2e02","h2e03","h2e04","h2e05","h2e06","h2e07","h2e08","h2e09","h2e10"]}
+];
+function getChapterGroup(examId){return CHAPTER_GROUPS.find(group=>group.ids.includes(examId))||CHAPTER_GROUPS[CHAPTER_GROUPS.length-1]}
+function renderChapterCards(){
+ const wrap=$('chapter-cards');
+ const selector=$('chapterFilter');
+ if(selector){
+  const current=selector.value||'';
+  selector.innerHTML='<option value="">Tất cả chương / mạch kiến thức</option>'+CHAPTER_GROUPS.map(g=>'<option value="'+g.id+'">'+g.kicker+' · '+g.title+'</option>').join('');
+  selector.value=current;
+ }
+ if(wrap){
+  wrap.innerHTML=CHAPTER_GROUPS.map(g=>{
+   const count=BANK.filter(e=>g.ids.includes(e.id)).length;
+   return '<button type="button" class="chapter-card" data-chapter="'+g.id+'"><span class="chapter-kicker">'+g.kicker+'</span><strong>'+g.title+'</strong><p>'+g.desc+'</p><span class="chapter-count">'+count+' đề hiện có · Chọn để xem</span></button>';
+  }).join('');
+  wrap.querySelectorAll('[data-chapter]').forEach(button=>button.addEventListener('click',()=>{
+   const select=$('chapterFilter');
+   if(select)select.value=button.getAttribute('data-chapter');
+   go('browse');
+  }));
+ }
+}
+function card(e){return `<article class="examcard"><div class="cardtop"><div class="subject-icon">${iconFor(e)}</div><span class="tag">50 PHÚT</span></div><div class="level ${levelClass(e.difficulty)}">● ${esc(e.difficulty.toUpperCase())}</div><h3>${esc(e.title)}</h3><p>${esc(e.desc)}</p><div class="cardmeta"><span>▤ 18 trắc nghiệm</span><span>◉ 4 đúng/sai</span><span>⌨ 6 ngắn</span></div><div class="cardbottom"><span class="author">Thang điểm 10</span><button class="btn primary small" onclick="startExam('${e.id}')">Làm bài →</button></div></article>`}
+function go(view){if(currentView==='take'&&view!=='take'&&activeExam&&!confirm('Bạn đang làm bài. Thoát sẽ hủy bài hiện tại. Tiếp tục?'))return;clearInterval(timerTick);currentView=view;document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+view));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===view));if(view==='home')renderHome();if(view==='browse')renderBrowse();if(view==='history')renderHistory();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>go(b.dataset.view));
+document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>go(b.dataset.goto));
+function renderHome(){ $('stat-exams').textContent=BANK.length;$('stat-attempts').textContent=historyItems.length;$('stat-average').textContent=historyItems.length?(historyItems.reduce((s,h)=>s+h.totalScore,0)/historyItems.length).toFixed(1)+'/10':'—';$('featured-cards').innerHTML=BANK.slice(0,3).map(card).join('');renderChapterCards()}
+function renderBrowse(){filterCards()}
+function filterCards(){let query=$('searchInput').value.toLowerCase(),level=$('difficultyFilter').value,sort=$('sortFilter').value,chapter=$('chapterFilter')?$('chapterFilter').value:'';let arr=BANK.filter(e=>(!level||e.difficulty===level)&&(!chapter||getChapterGroup(e.id).id===chapter)&&(!query||(e.title+' '+e.desc+' '+e.difficulty).toLowerCase().includes(query)));if(sort==='az')arr.sort((a,b)=>a.title.localeCompare(b.title,'vi'));else if(sort==='questions')arr.sort((a,b)=>{let rank={'Siêu khó':4,'Khó':3,'Khá':2,'Dễ':1};return rank[b.difficulty]-rank[a.difficulty]});$('all-cards').innerHTML=arr.map(card).join('')||'<div class="empty" style="grid-column:1/-1">🔎<b>Không tìm thấy đề phù hợp</b>Thử từ khóa khác nhé.</div>'}
+['searchInput','difficultyFilter','sortFilter','chapterFilter'].forEach(id=>$(id).addEventListener(id==='searchInput'?'input':'change',filterCards));
+function sectionInfo(i){if(i<18)return {label:'PHẦN I · TRẮC NGHIỆM NHIỀU LỰA CHỌN',no:i+1,sub:'Chọn một đáp án đúng · 0,25 điểm/câu'};if(i<22)return {label:'PHẦN II · TRẮC NGHIỆM ĐÚNG/SAI',no:i-17,sub:'Đánh giá đúng/sai cho cả 4 ý · tối đa 1 điểm/câu'};return {label:'PHẦN III · TRẢ LỜI NGẮN',no:i-21,sub:'Nhập kết quả số · 0,25 điểm/câu'}}
+function emptyAnswer(q){if(q.type==='tf')return [null,null,null,null];return null}
+function isComplete(i){let q=activeExam.questions[i],a=answers[i];if(q.type==='tf')return Array.isArray(a)&&a.every(x=>x===true||x===false);if(q.type==='short')return a!==null&&String(a).trim()!=='';return a!==null}
+function answeredCount(){return answers.filter((a,i)=>isComplete(i)).length}
+function renderTake(){let q=activeExam.questions[activeQ],info=sectionInfo(activeQ);$('sectionLabel').textContent=info.label;$('questionTitle').textContent=`Câu ${info.no} · ${info.sub}`;$('questionText').textContent=q.q;
+ let area='';
+ if(q.type==='mc'){area='<div class="answerlist">'+q.options.map((o,j)=>`<button class="takeanswer ${answers[activeQ]===j?'selected':''}" data-choice="${j}"><span class="letter">${String.fromCharCode(65+j)}</span><span>${esc(o)}</span></button>`).join('')+'</div>'}
+ else if(q.type==='tf'){area='<div>'+q.statements.map((s,j)=>`<div class="tfrow"><div class="tfstatement"><p><b>${'abcd'[j]})</b> ${esc(s.text)}</p><div class="tfchoices"><button class="tfchoice ${answers[activeQ][j]===true?'on-true':''}" data-tf="${j}" data-val="true">Đúng</button><button class="tfchoice ${answers[activeQ][j]===false?'on-false':''}" data-tf="${j}" data-val="false">Sai</button></div></div></div>`).join('')+'</div>'}
+ else {area=`<div><input class="shortinput" id="shortInput" inputmode="decimal" autocomplete="off" placeholder="Nhập đáp án bằng số" value="${answers[activeQ]===null?'':esc(answers[activeQ])}"><div class="shortnote">Nhập số, dùng dấu phẩy hoặc dấu chấm cho phần thập phân. Đơn vị đã ghi trong đề nếu cần.</div></div>`}
+ $('responseArea').innerHTML=area;
+ document.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>{answers[activeQ]=Number(b.dataset.choice);renderTake()});
+ document.querySelectorAll('[data-tf]').forEach(b=>b.onclick=()=>{let j=Number(b.dataset.tf);answers[activeQ][j]=b.dataset.val==='true';renderTake()});
+ if(q.type==='short')$('shortInput').addEventListener('input',e=>{answers[activeQ]=e.target.value;refreshProgressOnly()});
+ $('takePrev').disabled=activeQ===0;$('takeNext').textContent=activeQ===activeExam.questions.length-1?'Về câu 1 ↑':'Câu tiếp →';
+ $('qnavgrid').innerHTML=activeExam.questions.map((_,i)=>`<button class="qnav ${i===activeQ?'on':''} ${isComplete(i)?'done':''}" onclick="jumpQuestion(${i})">${i+1}</button>`).join('');
+ refreshProgressOnly();
+}
+function refreshProgressOnly(){$('answeredCount').textContent=answeredCount();$('takeProgress').style.width=(answeredCount()/activeExam.questions.length*100)+'%';document.querySelectorAll('.qnav').forEach((b,i)=>{if(b){b.classList.toggle('done',isComplete(i));b.classList.toggle('on',i===activeQ)}})}
+window.jumpQuestion=i=>{if(activeExam){activeQ=i;renderTake();window.scrollTo({top:0,behavior:'smooth'})}}
+function startExam(id){const e=BANK.find(x=>x.id===id);if(!e)return;activeExam=e;answers=e.questions.map(emptyAnswer);activeQ=0;seconds=e.minutes*60;clearInterval(timerTick);currentView='take';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-take'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));const chapter=getChapterGroup(e.id),chapterNo=chapter.ids.indexOf(e.id)+1;$('takeMeta').textContent=`${e.difficulty.toUpperCase()} · ${chapter.kicker} · ĐỀ ${String(chapterNo).padStart(2,'0')}/10`;$('takeTitle').textContent=e.title;$('timer').style.background='#fff1e9';renderTake();updateTimer();timerTick=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){clearInterval(timerTick);finishExam(true)}},1000);window.scrollTo(0,0)}
+function updateTimer(){let m=Math.floor(Math.max(0,seconds)/60),s=Math.max(0,seconds)%60;$('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(seconds<300)$('timer').style.background='#ffe5e5'}
+$('takePrev').onclick=()=>{if(activeQ>0){activeQ--;renderTake()}};
+$('takeNext').onclick=()=>{if(activeQ===activeExam.questions.length-1)activeQ=0;else activeQ++;renderTake()};
+$('leaveExam').onclick=()=>{if(confirm('Bạn chắc chắn muốn thoát? Bài làm hiện tại sẽ bị hủy.')){clearInterval(timerTick);activeExam=null;go('browse')}};
+function parseNumeric(v){if(v===null||v===undefined)return NaN;let s=String(v).trim().replace(/\s/g,'').replace(',','.');if(!s)return NaN;return Number(s)}
+function scoreExam(e,ans){let mcPoints=0,tfPoints=0,shortPoints=0,detail=[];
+ e.questions.forEach((q,i)=>{let a=ans[i],record={index:i,q,type:q.type,answer:a};
+ if(q.type==='mc'){record.ok=a===q.correct;record.points=record.ok?0.25:0;record.correct=q.correct;record.why=q.why;mcPoints+=record.points}
+ else if(q.type==='tf'){let count=q.statements.reduce((n,s,j)=>n+(Array.isArray(a)&&a[j]===s.correct?1:0),0);let map={0:0,1:0.1,2:0.25,3:0.5,4:1};record.countCorrect=count;record.points=map[count];record.statements=q.statements;tfPoints+=record.points}
+ else {let val=parseNumeric(a);record.value=val;record.correct=q.answer;record.ok=Number.isFinite(val)&&Math.abs(val-q.answer)<=q.tol;record.points=record.ok?0.25:0;record.why=q.why;record.unit=q.unit;record.tol=q.tol;shortPoints+=record.points}
+ detail.push(record);
+ });
+ return {mcPoints:+mcPoints.toFixed(2),tfPoints:+tfPoints.toFixed(2),shortPoints:+shortPoints.toFixed(2),totalScore:+(mcPoints+tfPoints+shortPoints).toFixed(2),detail}
+}
+function missingCount(){let missing=0;activeExam.questions.forEach((q,i)=>{const a=answers[i];if(q.type==='tf'){q.statements.forEach((_,j)=>{if(!Array.isArray(a)||!(a[j]===true||a[j]===false))missing++})}else if(q.type==='short'){if(a===null||String(a).trim()==='')missing++}else if(a===null)missing++});return missing}
+$('submitExam').onclick=()=>finishExam(false);
+function finishExam(auto){if(!activeExam)return;clearInterval(timerTick);const e=activeExam,result=scoreExam(e,answers);const item={id:'hist-'+Date.now(),examId:e.id,title:e.title,difficulty:e.difficulty,date:Date.now(),auto,answers:JSON.parse(JSON.stringify(answers)),totalScore:result.totalScore,mcPoints:result.mcPoints,tfPoints:result.tfPoints,shortPoints:result.shortPoints,detail:result.detail,questions:e.questions};historyItems.unshift(item);saveHistory();activeExam=null;renderResult(item);currentView='result';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-result'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));window.scrollTo(0,0)}
+function displayAnswer(q,a){if(q.type==='mc')return a===null||a===undefined?'Chưa trả lời':String.fromCharCode(65+a)+'. '+q.options[a];if(q.type==='short')return a===null||String(a).trim()===''?'Chưa trả lời':String(a);return Array.isArray(a)?a.map((v,i)=>`${'abcd'[i]}) ${v===null?'Chưa chọn':v?'Đúng':'Sai'}`).join(' · '):'Chưa trả lời'}
+function renderResult(h){const e= h.questions? h : null;const questions=h.questions||[];let body=`<div class="result-hero"><div class="scorecircle">${fmt(h.totalScore,2)}</div><div><div class="eyebrow">${h.auto?'HẾT GIỜ · ĐÃ TỰ ĐỘNG NỘP':'ĐÃ NỘP BÀI'} · ${esc(h.difficulty)}</div><h2>${h.totalScore>=8?'Làm tốt lắm!':h.totalScore>=5?'Bạn đang tiến bộ!':'Hãy xem kĩ lời giải và thử lại nhé!'}</h2><p class="tiny">${esc(h.title)} · ${new Date(h.date).toLocaleString('vi-VN')}</p><p>Điểm quy đổi theo cấu trúc THPT: <b>${fmt(h.totalScore,2)}/10</b>.</p><button class="btn outline small" onclick="startExam('${h.examId}')">Làm lại đề này ↻</button></div></div>
+ <div class="breakdown"><div class="breakitem"><strong>${fmt(h.mcPoints,2)} / 4,5</strong><span>Phần I · Trắc nghiệm</span></div><div class="breakitem"><strong>${fmt(h.tfPoints,2)} / 4,0</strong><span>Phần II · Đúng/Sai</span></div><div class="breakitem"><strong>${fmt(h.shortPoints,2)} / 1,5</strong><span>Phần III · Trả lời ngắn</span></div></div><div class="info-box"><b>Chấm đúng/sai theo từng câu:</b> số ý đúng 0 → 0 điểm; 1 → 0,1 điểm; 2 → 0,25 điểm; 3 → 0,5 điểm; 4 → 1 điểm. Câu trả lời ngắn chấp nhận sai số nhỏ như ghi trong phần hướng dẫn mỗi câu.</div><div class="section-head"><h2>Đáp án và giải thích</h2><span class="tiny">Xanh = đúng · Đỏ = chưa đúng</span></div>`;
+ h.detail.forEach(d=>{let q=d.q;const num=d.index+1,section=sectionInfo(d.index);body+=`<div class="reviewrow"><div class="eyebrow">${section.label} · CÂU ${section.no}</div>`;
+ if(d.type==='mc'){body+=`<div class="${d.ok?'correct':'incorrect'}" style="margin:6px 0">${d.ok?'Đúng · +0,25 điểm':'Chưa đúng · +0 điểm'}</div><p><b>${esc(q.q)}</b></p>`;q.options.forEach((o,j)=>{const right=j===q.correct,chosen=d.answer===j;body+=`<div class="answerline" style="color:${right?'#16856d':chosen?'#cb5151':'#6c7d90'}">${String.fromCharCode(65+j)}. ${esc(o)} ${right?'✓ Đáp án đúng':chosen?'← Bạn đã chọn':''}</div>`});body+=`<p class="tiny">Giải thích: ${esc(q.why)}</p>`}
+ else if(d.type==='tf'){body+=`<div class="${d.countCorrect===4?'correct':'incorrect'}" style="margin:6px 0">Đúng ${d.countCorrect}/4 ý · +${fmt(d.points,2)} điểm</div><p><b>${esc(q.q)}</b></p>`;q.statements.forEach((s,j)=>{const user=Array.isArray(d.answer)?d.answer[j]:null,ok=user===s.correct;body+=`<div class="answerline"><span class="${ok?'correct':'incorrect'}">${'abcd'[j]}) ${s.correct?'Đúng':'Sai'} là đáp án chuẩn · Bạn chọn: ${user===null||user===undefined?'Chưa chọn':user?'Đúng':'Sai'} ${ok?'✓':'✗'}</span><div class="tiny" style="margin:3px 0 7px">${esc(s.text)} — ${esc(s.why)}</div></div>`})}
+ else {body+=`<div class="${d.ok?'correct':'incorrect'}" style="margin:6px 0">${d.ok?'Đúng · +0,25 điểm':'Chưa đúng · +0 điểm'}</div><p><b>${esc(q.q)}</b></p><div class="answerline">Bạn nhập: <b>${esc(d.answer===null||String(d.answer).trim()===''?'(bỏ trống)':d.answer)}</b></div><div class="answerline correct">Đáp án chuẩn: <b>${fmt(q.answer,5)}${q.unit?' '+esc(q.unit):''}</b></div><p class="tiny">Giải thích: ${esc(q.why)}</p>`}
+ body+='</div>'});
+ $('resultBody').innerHTML=body
+}
+function renderHistory(){const el=$('historyContent');if(!historyItems.length){el.innerHTML='<div class="empty">◷<b>Chưa có lịch sử làm bài</b>Hoàn thành một đề để xem điểm và đáp án tại đây.</div>';return}el.innerHTML=`<div class="tablewrap"><table class="table"><thead><tr><th>Đề thi</th><th>Cấp độ</th><th>Ngày làm</th><th>Trắc nghiệm</th><th>Đúng/Sai</th><th>Ngắn</th><th>Tổng điểm</th><th></th></tr></thead><tbody>${historyItems.map(h=>`<tr><td><b>${esc(h.title)}</b></td><td>${esc(h.difficulty)}</td><td>${new Date(h.date).toLocaleDateString('vi-VN')}</td><td>${fmt(h.mcPoints,2)}/4,5</td><td>${fmt(h.tfPoints,2)}/4</td><td>${fmt(h.shortPoints,2)}/1,5</td><td class="score">${fmt(h.totalScore,2)}/10</td><td><button class="btn soft small" onclick="viewHistory('${h.id}')">Xem lại</button></td></tr>`).join('')}</tbody></table></div>`}
+window.viewHistory=id=>{let h=historyItems.find(x=>x.id===id);if(h){renderResult(h);currentView='result';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-result'));window.scrollTo(0,0)}}
+$('clearHistory').onclick=()=>{if(confirm('Bạn muốn xóa toàn bộ lịch sử làm bài trong trình duyệt này?')){historyItems=[];saveHistory();renderHistory();renderHome();toast('Đã xóa lịch sử làm bài.')}};
+renderHome();renderBrowse();
+</script>
+</body></html>
