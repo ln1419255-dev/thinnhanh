@@ -861,6 +861,8 @@ let currentCandidateName = '';
 function askCandidateName() {
   let saved = '';
   try { saved = localStorage.getItem(CANDIDATE_NAME_KEY) || ''; } catch (e) {}
+  // Keep the current local-only experience until the owner connects a real Sheets endpoint.
+  if (!GOOGLE_SHEETS_ENDPOINT) return saved || 'Chưa nhập tên';
   const entered = window.prompt('Nhập tên người làm bài để lưu điểm lên bảng điểm chung:', saved);
   if (entered === null) return null;
   const cleaned = entered.trim().replace(/\s+/g, ' ').slice(0, 60);
@@ -871,7 +873,6 @@ function askCandidateName() {
   try { localStorage.setItem(CANDIDATE_NAME_KEY, cleaned); } catch (e) {}
   return cleaned;
 }
-
 function sendScoreToSheets(item) {
   if (!GOOGLE_SHEETS_ENDPOINT) return;
   const payload = {
