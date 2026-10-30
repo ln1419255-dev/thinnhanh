@@ -1251,6 +1251,71 @@ main{min-width:0}
  .qnav{font-size:10px;min-height:29px}
 }
 
+
+/* THINANH MOTION PACK — remove this block to disable the added animations */
+@keyframes tnMotionEnter{
+ from{opacity:0;transform:translateY(12px)}
+ to{opacity:1;transform:translateY(0)}
+}
+@keyframes tnMotionSoftScale{
+ from{opacity:0;transform:translateY(9px) scale(.99)}
+ to{opacity:1;transform:translateY(0) scale(1)}
+}
+.view.active{
+ animation:tnMotionEnter .34s cubic-bezier(.2,.75,.25,1) backwards;
+}
+.view.active .pagehead{
+ animation:tnMotionEnter .42s cubic-bezier(.2,.75,.25,1) backwards;
+}
+.view.active .hero,
+.view.active .info-box,
+.view.active .toolbar,
+.view.active .tablewrap,
+.view.active .result-hero,
+.view.active .takepanel,
+.view.active .qnavpanel{
+ animation:tnMotionEnter .46s cubic-bezier(.2,.75,.25,1) .035s backwards;
+}
+.view.active .stats>.stat,
+.view.active .cards>.examcard,
+.view.active .chapter-grid>.chapter-card,
+.view.active .tip-grid>.tip-card,
+.view.active .breakdown>.breakitem{
+ animation:tnMotionSoftScale .46s cubic-bezier(.2,.75,.25,1) backwards;
+}
+.view.active .stats>.stat:nth-child(1),
+.view.active .cards>.examcard:nth-child(1),
+.view.active .chapter-grid>.chapter-card:nth-child(1),
+.view.active .tip-grid>.tip-card:nth-child(1){animation-delay:.05s}
+.view.active .stats>.stat:nth-child(2),
+.view.active .cards>.examcard:nth-child(2),
+.view.active .chapter-grid>.chapter-card:nth-child(2),
+.view.active .tip-grid>.tip-card:nth-child(2){animation-delay:.105s}
+.view.active .stats>.stat:nth-child(3),
+.view.active .cards>.examcard:nth-child(3),
+.view.active .chapter-grid>.chapter-card:nth-child(3),
+.view.active .tip-grid>.tip-card:nth-child(3){animation-delay:.16s}
+.view.active .cards>.examcard:nth-child(4),
+.view.active .chapter-grid>.chapter-card:nth-child(4),
+.view.active .tip-grid>.tip-card:nth-child(4){animation-delay:.215s}
+.view.active .cards>.examcard:nth-child(5),
+.view.active .tip-grid>.tip-card:nth-child(5){animation-delay:.27s}
+.view.active .cards>.examcard:nth-child(6),
+.view.active .tip-grid>.tip-card:nth-child(6){animation-delay:.325s}
+.btn:active,.navbtn:active,.qnav:active,.takeanswer:active{
+ transform:scale(.98);
+}
+.chapter-card:active,.examcard:active,.tip-card:active{
+ transform:scale(.995);
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{
+  animation:none!important;
+  transition:none!important;
+  scroll-behavior:auto!important;
+ }
+}
+
 </style>
 </head>
 <body>
