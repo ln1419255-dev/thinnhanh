@@ -216,6 +216,130 @@ iframe{height:calc(100vh - 125px);min-height:620px;border:1px solid #dfe8f0;bord
   letter-spacing:.2px;
 }
 
+
+/* THINHANH VISUAL REFRESH — remove this marked block to restore the previous look */
+:root{
+ --ink:#172b46;--muted:#718199;--line:#e2eaf4;--teal:#0aaea9;--teal-dark:#07878c;
+ --purple:#7568e8;--bg:#f3f7fc;--card:#fff;
+}
+body{
+ background:
+  radial-gradient(ellipse at 0% 0%,rgba(76,220,205,.18),transparent 34%),
+  radial-gradient(ellipse at 100% 12%,rgba(141,128,255,.15),transparent 31%),
+  linear-gradient(180deg,#f8fbff 0%,#f1f5fb 58%,#f8faff 100%);
+ color:var(--ink);
+}
+.topbar{
+ height:70px;background:rgba(250,253,255,.86);
+ border-bottom:1px solid rgba(220,231,242,.9);
+ box-shadow:0 8px 30px rgba(23,43,70,.055);
+}
+.brand{font-size:20px;letter-spacing:-.7px;gap:9px}
+.brand .mini{color:#74839a;border-left-color:#dce5f0}
+.menu-link{background:linear-gradient(135deg,#eafaf8,#eff2ff);border-color:#dce9f0;color:#4d6480}
+.btn{
+ border-radius:14px;padding:12px 18px;
+ background:linear-gradient(115deg,#0bb8ad,#087f9c);
+ box-shadow:0 9px 20px rgba(7,147,156,.2);
+ transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 13px 26px rgba(7,147,156,.24);filter:saturate(1.08)}
+.btn:active{transform:translateY(0)}
+.btn.chem{background:linear-gradient(115deg,#7868e8,#5469d8);box-shadow:0 9px 20px rgba(103,100,222,.2)}
+.btn.chem:hover{box-shadow:0 13px 26px rgba(103,100,222,.26)}
+.page{max-width:1240px;margin:34px auto 0;padding:0 24px}
+.hero{
+ border-radius:30px;padding:clamp(34px,5vw,58px);
+ background:linear-gradient(118deg,#132744 0%,#164d66 54%,#078d91 100%);
+ border:1px solid rgba(255,255,255,.25);
+ box-shadow:0 25px 55px rgba(18,55,80,.18);
+}
+.hero h1{font-size:clamp(35px,4.3vw,51px);line-height:1.08;letter-spacing:-1.9px;max-width:680px}
+.hero p{color:#d7e9f0;font-size:15.5px;line-height:1.9;max-width:670px}
+.badge{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.24);color:#bffff6}
+.hero-art{
+ width:158px;height:158px;flex-basis:158px;border-radius:38px;
+ background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.06));
+ border-color:rgba(255,255,255,.3);
+ box-shadow:0 22px 48px rgba(5,30,51,.22),inset 0 1px 0 rgba(255,255,255,.24);
+}
+.subjects{gap:20px;margin:30px 0}
+.subject{
+ min-height:316px;padding:27px 27px 25px;border-radius:24px;
+ border:1px solid rgba(219,230,242,.95);
+ background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(250,252,255,.95));
+ box-shadow:0 9px 27px rgba(23,46,77,.055);
+ transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.subject:after{top:27px;bottom:27px;width:4px;border-radius:0 8px 8px 0}
+.subject:hover{transform:translateY(-5px);border-color:#b8e8e5;box-shadow:0 18px 38px rgba(23,46,77,.105)}
+.subject:before{right:-58px;top:-88px;width:230px;height:230px;opacity:.8}
+.subject:nth-child(3n+2):before{background:radial-gradient(circle,#dcd9ff 0,rgba(220,217,255,0) 70%)}
+.subject:nth-child(3n):before{background:radial-gradient(circle,#ffe6d9 0,rgba(255,230,217,0) 70%)}
+.subject .icon{
+ width:58px;height:58px;display:grid;place-items:center;border-radius:18px;
+ background:linear-gradient(145deg,#d6faf3,#e6f7ff);color:#087f88;
+ font-size:28px;box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 6px 14px rgba(24,89,115,.07);
+}
+.subject:nth-child(3n+2) .icon{background:linear-gradient(145deg,#e5e1ff,#eaf1ff);color:#6155ca}
+.subject:nth-child(3n) .icon{background:linear-gradient(145deg,#ffeadf,#fff3e9);color:#b75c36}
+.subject h2{font-size:24px;letter-spacing:-.6px;margin:15px 0 8px}
+.subject p{font-size:13.5px;line-height:1.85;color:#6a7b91;margin:0 0 17px}
+.subject .meta{gap:7px;margin-top:auto;margin-bottom:16px}
+.subject .tag{font-size:10px;padding:6px 9px;border-radius:999px;background:#edf9f7;border-color:#d8f0ec;color:#287b7c;letter-spacing:.2px}
+.subject .btn{min-width:0;width:max-content;border-radius:12px}
+.subject.pending{
+ border:1.5px dashed #c5d2e2;
+ background:linear-gradient(145deg,rgba(255,255,255,.8),rgba(244,247,252,.92));
+ box-shadow:none;
+}
+.subject.pending:after{background:linear-gradient(180deg,#b7c3d4,#dbe3ed);opacity:.8}
+.subject.pending .icon{background:linear-gradient(145deg,#edf2f7,#f7f9fc);color:#8291a4;box-shadow:none}
+.subject.pending h2{color:#52657d}
+.subject.pending .pending-status{background:#edf3f8;border-color:#dfe7ef;color:#6b7d92}
+.subject.pending .pending-tag{background:#f3f6f9;border-color:#e1e8f0;color:#728399}
+.subject.pending:before{background:radial-gradient(circle,#dfe8f5 0,rgba(223,232,245,0) 70%);opacity:.65}
+.foot{
+ border:1px solid rgba(224,233,244,.9);border-radius:18px;
+ background:rgba(255,255,255,.72);box-shadow:0 6px 20px rgba(21,42,70,.025);
+ color:#708097;line-height:1.9;padding:17px 20px;
+}
+.copyright{margin:18px auto 24px;color:#7f8ea3;font-size:12px}
+@media(min-width:1100px){
+ #landing .subjects{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px}
+}
+@media(min-width:601px) and (max-width:1099px){
+ #landing .subjects{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .subject{min-height:300px}
+}
+@media(max-width:760px){
+ .topbar{height:60px;padding:0 15px}
+ .brand{font-size:17px}
+ .brand .mini{font-size:8px;letter-spacing:.8px;margin-left:4px;padding-left:8px}
+ .page{margin-top:22px;padding:0 15px}
+ .hero{border-radius:24px;padding:30px 24px}
+ .hero h1{font-size:clamp(32px,6vw,43px);letter-spacing:-1.2px}
+ .hero p{font-size:14px;line-height:1.8}
+ .subjects{gap:15px;margin:20px 0}
+ .subject{min-height:0;padding:23px;border-radius:21px}
+ .subject .btn{width:100%}
+ .foot{font-size:11.5px;padding:14px 15px}
+}
+@media(max-width:600px){
+ .topbar{height:58px;padding:0 12px}
+ .brand{font-size:16px;gap:6px}
+ .brand .mini{display:none}
+ .menu-link{font-size:8px;padding:7px 10px;letter-spacing:.8px}
+ #landing .subjects{grid-template-columns:1fr!important}
+ .hero{padding:25px 20px;border-radius:22px}
+ .hero h1{font-size:34px;line-height:1.1}
+ .subject{padding:21px}
+ .subject h2{font-size:22px}
+}
+@media(prefers-reduced-motion:reduce){
+ .subject,.btn{transition:none!important}
+}
+
 </style></head><body><header class="topbar"><div class="brand">📘 Thi<span>Nhanh</span><span class="mini">VẬT LÍ · HÓA HỌC</span></div><span class="menu-link">CHỌN MÔN HỌC</span></header>
 <main id="landing" class="page">
 <section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Vật lí và Hóa học với ngân hàng đề đang hoạt động. Toán, Tiếng Anh và Lịch sử đã được tạo sẵn; khi bạn gửi tài liệu, mình sẽ bổ sung dữ liệu và đề thi cho từng môn.</p></div><div class="hero-art">🎯</div></section>
