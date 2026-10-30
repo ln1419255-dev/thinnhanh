@@ -163,12 +163,46 @@ iframe{height:calc(100vh - 125px);min-height:620px;border:1px solid #dfe8f0;bord
 .menu-link{font-size:9px;font-weight:900;letter-spacing:1.2px;color:#8292a4;padding:9px 12px;border-radius:999px;background:#f1f6f8;border:1px solid #e3ebf0}
 .subject .btn{cursor:pointer}
 .subject a.btn{display:inline-flex;align-items:center;justify-content:center}
+
+/* Future subjects: visible placeholders only; no navigation until source data is added */
+.subject.pending{
+ position:relative;
+ border:1.5px dashed #b9c8d6;
+ background:linear-gradient(145deg,#fff,#f8fafc);
+ box-shadow:none;
+}
+.subject.pending:hover{transform:none;box-shadow:none}
+.subject.pending .pending-status{
+ display:inline-flex;
+ align-items:center;
+ width:max-content;
+ margin-top:12px;
+ padding:6px 9px;
+ border:1px solid #dfe7ee;
+ border-radius:999px;
+ background:#f1f5f8;
+ color:#61748a;
+ font-size:10px;
+ font-weight:850;
+ letter-spacing:.45px;
+}
+.subject.pending .icon{background:#eef3f7;color:#536a80}
+.subject.pending h2{margin-top:12px}
+.subject.pending .pending-tag{
+ background:#f0f4f7;
+ border-color:#e2e9ef;
+ color:#66798c;
+}
+
 </style></head><body><header class="topbar"><div class="brand">📘 Thi<span>Nhanh</span><span class="mini">VẬT LÍ · HÓA HỌC</span></div><span class="menu-link">CHỌN MÔN HỌC</span></header>
 <main id="landing" class="page">
-<section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Hai môn học.</h1><p>Chọn môn để vào kho đề. Vật lí có 10 đề; Hóa học chia riêng Chương 1 Ester – Lipid và Chương 2 Carbohydrate, mỗi chương 10 đề.</p></div><div class="hero-art">🎯</div></section>
+<section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Vật lí và Hóa học với ngân hàng đề đang hoạt động. Toán, Tiếng Anh và Lịch sử đã được tạo sẵn; khi bạn gửi tài liệu, mình sẽ bổ sung dữ liệu và đề thi cho từng môn.</p></div><div class="hero-art">🎯</div></section>
 <div class="subjects">
 <article class="subject"><div class="icon">⚛️</div><h2>Vật lí</h2><p>10 đề Vật lí nhiệt theo tài liệu 134 trang, gồm cấu trúc chất, chuyển thể, nội năng, nhiệt dung riêng, nhiệt nóng chảy và nhiệt hóa hơi.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn" href="./physics.html" style="text-decoration:none">Vào môn Vật lí →</a></article>
 <article class="subject"><div class="icon">🧪</div><h2>Hóa học</h2><p>20 đề chia riêng theo chương: 10 đề Ester – Lipid và 10 đề Carbohydrate.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn chem" href="./chem.html" style="text-decoration:none">Vào môn Hóa học →</a></article>
+<article class="subject pending"><div class="icon">📐</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Toán</h2><p>Đã tạo khu vực môn Toán. Khi bạn gửi tài liệu hoặc nội dung ôn tập, mình sẽ bổ sung câu hỏi và đề luyện thi.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
+<article class="subject pending"><div class="icon">🌐</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Tiếng Anh</h2><p>Đã tạo khu vực môn Tiếng Anh. Chưa có đề cho đến khi bạn gửi tài liệu, cấu trúc ôn tập hoặc nguồn câu hỏi.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
+<article class="subject pending"><div class="icon">📜</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Lịch sử</h2><p>Đã tạo khu vực môn Lịch sử. Khi bạn gửi tài liệu, mình sẽ xây dựng bộ câu hỏi và đề thi theo đúng nội dung đó.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
 </div>
 <div class="foot">Mỗi đề có 18 câu trắc nghiệm (4,5 điểm), 4 câu đúng/sai (4 điểm theo mức điểm từng câu trong tài liệu), và 6 câu trả lời ngắn (1,5 điểm). Tổng: 10 điểm. Đây là ứng dụng HTML chạy trên thiết bị; lưu lịch sử cục bộ trong trình duyệt, chưa đồng bộ lên máy chủ.</div>
 </main>
