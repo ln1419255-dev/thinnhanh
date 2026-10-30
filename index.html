@@ -2,15 +2,62 @@
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ThiNhanh — Vật lí & Hóa học</title>
 <style>
-:root{--ink:#152d47;--muted:#718297;--line:#e0e8ef;--teal:#08aaa9;--purple:#7663d8;--bg:#f4f7fb}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,system-ui,"Segoe UI",Arial,sans-serif}
-button{font:inherit;cursor:pointer}.topbar{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(18px,calc((100vw - 1160px)/2));position:sticky;top:0;z-index:10}
-.brand{font-size:21px;font-weight:900;letter-spacing:-.5px}.brand span{color:var(--teal)}.mini{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:1px;margin-left:8px}
-.btn{border:0;border-radius:11px;padding:11px 15px;background:var(--teal);color:white;font-weight:850}.btn.ghost{background:#edf3f7;color:#3c5268}.btn.chem{background:var(--purple)}
-.page{max-width:1160px;margin:28px auto;padding:0 18px}.hero{background:linear-gradient(118deg,#153552,#176c7b);border-radius:22px;color:white;padding:32px;display:flex;justify-content:space-between;align-items:center;gap:20px;box-shadow:0 15px 38px #17385212}
-.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.12;margin:9px 0 12px;letter-spacing:-1px}.hero p{color:#d6e8ef;max-width:680px;margin:0}.badge{display:inline-block;background:#ffffff20;border:1px solid #ffffff35;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:900;letter-spacing:1px}.hero-art{font-size:70px}
-.subjects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:19px;margin:22px 0}.subject{background:white;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 24px #1a36500a;display:flex;flex-direction:column}.subject .icon{font-size:37px}.subject h2{margin:8px 0 5px;font-size:23px}.subject p{color:var(--muted);margin:5px 0 18px}.subject .meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.tag{background:#f0f5f8;color:#65758a;border-radius:8px;padding:5px 8px;font-size:11px;font-weight:800}.subject .btn{align-self:flex-start;margin-top:auto}.foot{color:#8392a2;font-size:12px;margin:18px 0 28px;line-height:1.7}.screen{display:none}.screen.active{display:block}.backbar{max-width:1300px;margin:12px auto 7px;padding:0 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}.framebox{padding:0 10px 10px}iframe{display:block;width:100%;height:calc(100vh - 114px);min-height:680px;border:1px solid var(--line);border-radius:14px;background:white}.small{font-size:12px;color:var(--muted)}
-@media(max-width:680px){.topbar{padding:0 13px;height:60px}.brand{font-size:18px}.mini{display:none}.page{margin:16px auto;padding:0 12px}.hero{padding:23px;display:block}.hero-art{display:none}.subjects{grid-template-columns:1fr;gap:12px}.subject{padding:19px}.backbar{margin-top:8px}iframe{height:calc(100vh - 120px);min-height:650px;border-radius:10px}}
+:root{--ink:#182b49;--muted:#6e7e96;--line:#e4eaf3;--teal:#08aaa9;--teal-dark:#087f88;--purple:#7866db;--bg:#f5f7fc;--card:#fff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font:15px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:radial-gradient(ellipse at 8% 7%,#dff8f5 0,transparent 31%),radial-gradient(ellipse at 92% 22%,#ece8ff 0,transparent 30%),linear-gradient(180deg,#f8fbff 0%,#f3f6fb 58%,#f7f9fc 100%);min-height:100vh}
+button{font:inherit;cursor:pointer}
+.topbar{height:74px;background:rgba(255,255,255,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(221,230,240,.85);box-shadow:0 6px 28px rgba(31,52,78,.045);display:flex;align-items:center;justify-content:space-between;padding:0 max(18px,calc((100vw - 1160px)/2));position:sticky;top:0;z-index:10}
+.brand{font-size:22px;font-weight:950;letter-spacing:-.8px;display:flex;align-items:center;gap:8px;color:#192f4c}
+.brand>span:first-of-type{background:linear-gradient(115deg,#08a8a9,#267ac1);background-clip:text;-webkit-background-clip:text;color:transparent}
+.brand .mini{font-size:10px;color:#76879c;font-weight:900;letter-spacing:1.6px;margin-left:9px;padding-left:14px;border-left:1px solid #d9e2ed}
+.btn{border:1px solid transparent;border-radius:12px;padding:12px 17px;background:linear-gradient(110deg,#09b0ae,#078d9c);color:white;font-weight:850;box-shadow:0 7px 15px rgba(8,170,169,.18);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 11px 22px rgba(8,170,169,.24);filter:saturate(1.08)}
+.btn:active{transform:translateY(0)}
+.btn:focus-visible{outline:3px solid #9de2e0;outline-offset:3px}
+.btn.ghost{background:#fff;color:#3b536f;border-color:#dfe7f0;box-shadow:0 4px 12px #1a355009}
+.btn.ghost:hover{border-color:#b8d8df;background:#f6ffff;box-shadow:0 8px 16px #1a355010}
+.btn.chem{background:linear-gradient(110deg,#7765db,#6157c7);box-shadow:0 7px 15px rgba(111,96,211,.19)}
+.btn.chem:hover{box-shadow:0 11px 22px rgba(111,96,211,.27)}
+.page{max-width:1160px;margin:37px auto 0;padding:0 20px}
+.hero{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(118deg,#142b49 0%,#17546b 56%,#078b91 100%);border:1px solid rgba(255,255,255,.32);border-radius:28px;color:white;padding:clamp(29px,5vw,52px);display:flex;justify-content:space-between;align-items:center;gap:30px;box-shadow:0 24px 55px rgba(22,54,83,.17)}
+.hero:before{content:"";position:absolute;z-index:-1;width:430px;height:430px;right:-95px;top:-235px;border-radius:50%;background:radial-gradient(circle at 35% 60%,rgba(89,239,222,.35),rgba(89,239,222,0) 66%);pointer-events:none}
+.hero:after{content:"";position:absolute;z-index:-1;width:330px;height:330px;right:7%;bottom:-265px;border:1px solid rgba(255,255,255,.13);border-radius:50%;box-shadow:0 0 0 28px rgba(255,255,255,.025),0 0 0 58px rgba(255,255,255,.022),0 0 0 92px rgba(255,255,255,.017);pointer-events:none}
+.hero>div:first-child{max-width:760px;position:relative;z-index:1}
+.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.08;margin:17px 0 17px;letter-spacing:-1.7px;font-weight:900}
+.hero p{color:#deedf4;max-width:690px;margin:0;font-size:16px;line-height:1.8}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.23);border-radius:999px;padding:8px 13px;font-size:10px;font-weight:950;letter-spacing:1.4px;color:#e8fffc;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.hero-art{width:142px;height:142px;flex:0 0 142px;display:grid;place-items:center;font-size:69px;border:1px solid rgba(255,255,255,.28);border-radius:37px;background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.055));box-shadow:0 20px 50px rgba(4,29,48,.17),inset 0 1px 0 rgba(255,255,255,.2);transform:rotate(3deg);animation:floatBook 5s ease-in-out infinite}
+@keyframes floatBook{0%,100%{transform:translateY(0) rotate(3deg)}50%{transform:translateY(-7px) rotate(0deg)}}
+.subjects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:26px 0}
+.subject{position:relative;isolation:isolate;overflow:hidden;background:rgba(255,255,255,.9);border:1px solid #e2e9f2;border-radius:23px;padding:28px;box-shadow:0 12px 32px rgba(28,52,83,.055);display:flex;flex-direction:column;min-height:294px;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.subject:before{content:"";position:absolute;z-index:-1;right:-78px;top:-94px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,#c8f6f0 0,rgba(200,246,240,0) 70%);opacity:.75;transition:transform .3s ease}
+.subject:nth-child(2):before{background:radial-gradient(circle,#e0d9ff 0,rgba(224,217,255,0) 72%)}
+.subject:after{content:"";position:absolute;left:0;top:26px;bottom:26px;width:4px;border-radius:0 6px 6px 0;background:linear-gradient(180deg,#09b3b0,#43d6c7);opacity:.9}
+.subject:nth-child(2):after{background:linear-gradient(180deg,#8c7af0,#b9aaff)}
+.subject:hover{transform:translateY(-5px);box-shadow:0 20px 42px rgba(28,52,83,.1);border-color:#cfe4e9}
+.subject:hover:before{transform:scale(1.12)}
+.subject .icon{width:66px;height:66px;border-radius:21px;display:grid;place-items:center;font-size:34px;background:linear-gradient(145deg,#e0fbf7,#f1fffd);box-shadow:inset 0 0 0 1px #d2f3ed,0 8px 18px rgba(25,154,145,.07)}
+.subject:nth-child(2) .icon{background:linear-gradient(145deg,#eeeaff,#f8f6ff);box-shadow:inset 0 0 0 1px #e0dafb,0 8px 18px rgba(111,96,211,.07)}
+.subject h2{margin:19px 0 6px;font-size:26px;letter-spacing:-.6px;font-weight:900}
+.subject p{color:#64758d;margin:5px 0 20px;line-height:1.8;font-size:14px;max-width:490px}
+.subject .meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 23px}
+.tag{background:#f0f5f8;color:#576b84;border:1px solid #e8edf2;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;letter-spacing:.2px}
+.subject:nth-child(1) .tag:nth-child(1),.subject:nth-child(1) .tag:nth-child(2){background:#e7faf6;color:#148078;border-color:#d2f2eb}
+.subject:nth-child(1) .tag:nth-child(3){background:#fff4e7;color:#9f6b22;border-color:#f9e6c9}
+.subject:nth-child(1) .tag:nth-child(4){background:#fff0f1;color:#af5261;border-color:#f6dadd}
+.subject:nth-child(2) .tag:nth-child(1),.subject:nth-child(2) .tag:nth-child(2){background:#f0edff;color:#6e60c0;border-color:#e5e0ff}
+.subject:nth-child(2) .tag:nth-child(3){background:#fff4e7;color:#9f6b22;border-color:#f9e6c9}
+.subject:nth-child(2) .tag:nth-child(4){background:#fff0f1;color:#af5261;border-color:#f6dadd}
+.subject .btn{align-self:flex-start;margin-top:auto;min-width:190px}
+.foot{background:rgba(255,255,255,.62);border:1px solid rgba(225,233,243,.8);border-radius:16px;color:#7a899e;font-size:12px;margin:20px 0 35px;padding:16px 18px;line-height:1.9}
+.screen{display:none}.screen.active{display:block}
+.backbar{max-width:1300px;margin:14px auto 9px;padding:0 18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.framebox{padding:0 12px 12px}
+iframe{display:block;width:100%;height:calc(100vh - 122px);min-height:680px;border:1px solid #e0e8f1;border-radius:18px;background:white;box-shadow:0 10px 32px rgba(29,53,83,.06)}
+.small{font-size:12px;color:var(--muted)}
+@media(max-width:760px){.topbar{padding:0 15px;height:64px}.brand{font-size:20px}.brand .mini{display:none}.page{margin:20px auto 0;padding:0 13px}.hero{padding:28px 23px;border-radius:22px;display:block}.hero h1{font-size:clamp(31px,9vw,42px);letter-spacing:-1.2px;margin:14px 0}.hero p{font-size:14px;line-height:1.75}.hero-art{display:none}.subjects{grid-template-columns:1fr;gap:15px;margin:17px 0}.subject{padding:23px 22px;min-height:0;border-radius:20px}.subject h2{font-size:24px}.subject p{font-size:14px}.subject .btn{width:100%}.backbar{margin-top:8px;padding:0 13px;align-items:flex-start;flex-direction:column}.backbar .small{line-height:1.5}iframe{height:calc(100vh - 130px);min-height:650px;border-radius:12px}.foot{margin-bottom:22px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero-art{animation:none}*,*:before,*:after{transition:none!important}}
 </style></head><body>
 <header class="topbar"><div class="brand">📘 Thi<span>Nhanh</span><span class="mini">VẬT LÍ · HÓA HỌC</span></div><button class="btn ghost" id="homeBtn" onclick="goHome()" style="display:none">⌂ Chọn môn</button></header>
 <main id="landing" class="page">
