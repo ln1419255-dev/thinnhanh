@@ -853,6 +853,56 @@ function buildChemBank(){
 }
 const BANK=buildChemBank();
 ;
+const GOOGLE_SHEETS_ENDPOINT = ''; // Dán URL Web App Google Apps Script kết thúc bằng /exec vào đây sau khi triển khai.
+const SUBJECT_NAME = 'Hóa học';
+const CANDIDATE_NAME_KEY = 'thinhanh_candidate_name_v1';
+let currentCandidateName = '';
+
+function askCandidateName() {
+  let saved = '';
+  try { saved = localStorage.getItem(CANDIDATE_NAME_KEY) || ''; } catch (e) {}
+  const entered = window.prompt('Nhập tên người làm bài để lưu điểm lên bảng điểm chung:', saved);
+  if (entered === null) return null;
+  const cleaned = entered.trim().replace(/\s+/g, ' ').slice(0, 60);
+  if (!cleaned) {
+    toast('Bạn cần nhập tên để bắt đầu bài thi.');
+    return null;
+  }
+  try { localStorage.setItem(CANDIDATE_NAME_KEY, cleaned); } catch (e) {}
+  return cleaned;
+}
+
+function sendScoreToSheets(item) {
+  if (!GOOGLE_SHEETS_ENDPOINT) return;
+  const payload = {
+    candidateName: item.candidateName,
+    subject: item.subject,
+    examId: item.examId,
+    examTitle: item.title,
+    difficulty: item.difficulty,
+    submittedAt: new Date(item.date).toISOString(),
+    submittedAutomatically: !!item.auto,
+    mcPoints: item.mcPoints,
+    tfPoints: item.tfPoints,
+    shortPoints: item.shortPoints,
+    totalScore: item.totalScore,
+    attemptId: item.id
+  };
+  try {
+    fetch(GOOGLE_SHEETS_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: new URLSearchParams({payload: JSON.stringify(payload)})
+    }).then(() => {
+      toast('Đã gửi yêu cầu lưu điểm lên Google Sheets.');
+    }).catch(() => {
+      toast('Không gửi được điểm lên bảng chung; điểm vẫn lưu trên thiết bị.');
+    });
+  } catch (e) {
+    toast('Không gửi được điểm lên bảng chung; điểm vẫn lưu trên thiết bị.');
+  }
+}
+
 const HISTORY_KEY='thinhanh_chemistry_exam_history_v1';
 let historyItems=loadHistory(), currentView='home', activeExam=null, answers=[], activeQ=0, seconds=3000, timerTick=null;
 const $=id=>document.getElementById(id);
@@ -916,7 +966,7 @@ function renderTake(){let q=activeExam.questions[activeQ],info=sectionInfo(activ
 }
 function refreshProgressOnly(){$('answeredCount').textContent=answeredCount();$('takeProgress').style.width=(answeredCount()/activeExam.questions.length*100)+'%';document.querySelectorAll('.qnav').forEach((b,i)=>{if(b){b.classList.toggle('done',isComplete(i));b.classList.toggle('on',i===activeQ)}})}
 window.jumpQuestion=i=>{if(activeExam){activeQ=i;renderTake();window.scrollTo({top:0,behavior:'smooth'})}}
-function startExam(id){const e=BANK.find(x=>x.id===id);if(!e)return;activeExam=e;answers=e.questions.map(emptyAnswer);activeQ=0;seconds=e.minutes*60;clearInterval(timerTick);currentView='take';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-take'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));const chapter=getChapterGroup(e.id),chapterNo=chapter.ids.indexOf(e.id)+1;$('takeMeta').textContent=`${e.difficulty.toUpperCase()} · ${chapter.kicker} · ĐỀ ${String(chapterNo).padStart(2,'0')}/10`;$('takeTitle').textContent=e.title;$('timer').style.background='#fff1e9';renderTake();updateTimer();timerTick=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){clearInterval(timerTick);finishExam(true)}},1000);window.scrollTo(0,0)}
+function startExam(id){const e=BANK.find(x=>x.id===id);if(!e)return;const candidateName=askCandidateName();if(!candidateName)return;currentCandidateName=candidateName;activeExam=e;answers=e.questions.map(emptyAnswer);activeQ=0;seconds=e.minutes*60;clearInterval(timerTick);currentView='take';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-take'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));const chapter=getChapterGroup(e.id),chapterNo=chapter.ids.indexOf(e.id)+1;$('takeMeta').textContent=`${e.difficulty.toUpperCase()} · ${chapter.kicker} · ĐỀ ${String(chapterNo).padStart(2,'0')}/10`;$('takeTitle').textContent=e.title;$('timer').style.background='#fff1e9';renderTake();updateTimer();timerTick=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){clearInterval(timerTick);finishExam(true)}},1000);window.scrollTo(0,0)}
 function updateTimer(){let m=Math.floor(Math.max(0,seconds)/60),s=Math.max(0,seconds)%60;$('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(seconds<300)$('timer').style.background='#ffe5e5'}
 $('takePrev').onclick=()=>{if(activeQ>0){activeQ--;renderTake()}};
 $('takeNext').onclick=()=>{if(activeQ===activeExam.questions.length-1)activeQ=0;else activeQ++;renderTake()};
@@ -933,7 +983,7 @@ function scoreExam(e,ans){let mcPoints=0,tfPoints=0,shortPoints=0,detail=[];
 }
 function missingCount(){let missing=0;activeExam.questions.forEach((q,i)=>{const a=answers[i];if(q.type==='tf'){q.statements.forEach((_,j)=>{if(!Array.isArray(a)||!(a[j]===true||a[j]===false))missing++})}else if(q.type==='short'){if(a===null||String(a).trim()==='')missing++}else if(a===null)missing++});return missing}
 $('submitExam').onclick=()=>finishExam(false);
-function finishExam(auto){if(!activeExam)return;clearInterval(timerTick);const e=activeExam,result=scoreExam(e,answers);const item={id:'hist-'+Date.now(),examId:e.id,title:e.title,difficulty:e.difficulty,date:Date.now(),auto,answers:JSON.parse(JSON.stringify(answers)),totalScore:result.totalScore,mcPoints:result.mcPoints,tfPoints:result.tfPoints,shortPoints:result.shortPoints,detail:result.detail,questions:e.questions};historyItems.unshift(item);saveHistory();activeExam=null;renderResult(item);currentView='result';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-result'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));window.scrollTo(0,0)}
+function finishExam(auto){if(!activeExam)return;clearInterval(timerTick);const e=activeExam,result=scoreExam(e,answers);const item={id:'hist-'+Date.now(),candidateName:currentCandidateName,subject:SUBJECT_NAME,examId:e.id,title:e.title,difficulty:e.difficulty,date:Date.now(),auto,answers:JSON.parse(JSON.stringify(answers)),totalScore:result.totalScore,mcPoints:result.mcPoints,tfPoints:result.tfPoints,shortPoints:result.shortPoints,detail:result.detail,questions:e.questions};historyItems.unshift(item);saveHistory();sendScoreToSheets(item);activeExam=null;renderResult(item);currentView='result';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-result'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));window.scrollTo(0,0)}
 function displayAnswer(q,a){if(q.type==='mc')return a===null||a===undefined?'Chưa trả lời':String.fromCharCode(65+a)+'. '+q.options[a];if(q.type==='short')return a===null||String(a).trim()===''?'Chưa trả lời':String(a);return Array.isArray(a)?a.map((v,i)=>`${'abcd'[i]}) ${v===null?'Chưa chọn':v?'Đúng':'Sai'}`).join(' · '):'Chưa trả lời'}
 function renderResult(h){const e= h.questions? h : null;const questions=h.questions||[];let body=`<div class="result-hero"><div class="scorecircle">${fmt(h.totalScore,2)}</div><div><div class="eyebrow">${h.auto?'HẾT GIỜ · ĐÃ TỰ ĐỘNG NỘP':'ĐÃ NỘP BÀI'} · ${esc(h.difficulty)}</div><h2>${h.totalScore>=8?'Làm tốt lắm!':h.totalScore>=5?'Bạn đang tiến bộ!':'Hãy xem kĩ lời giải và thử lại nhé!'}</h2><p class="tiny">${esc(h.title)} · ${new Date(h.date).toLocaleString('vi-VN')}</p><p>Điểm quy đổi theo cấu trúc THPT: <b>${fmt(h.totalScore,2)}/10</b>.</p><button class="btn outline small" onclick="startExam('${h.examId}')">Làm lại đề này ↻</button></div></div>
  <div class="breakdown"><div class="breakitem"><strong>${fmt(h.mcPoints,2)} / 4,5</strong><span>Phần I · Trắc nghiệm</span></div><div class="breakitem"><strong>${fmt(h.tfPoints,2)} / 4,0</strong><span>Phần II · Đúng/Sai</span></div><div class="breakitem"><strong>${fmt(h.shortPoints,2)} / 1,5</strong><span>Phần III · Trả lời ngắn</span></div></div><div class="info-box"><b>Chấm đúng/sai theo từng câu:</b> số ý đúng 0 → 0 điểm; 1 → 0,1 điểm; 2 → 0,25 điểm; 3 → 0,5 điểm; 4 → 1 điểm. Câu trả lời ngắn chấp nhận sai số nhỏ như ghi trong phần hướng dẫn mỗi câu.</div><div class="section-head"><h2>Đáp án và giải thích</h2><span class="tiny">Xanh = đúng · Đỏ = chưa đúng</span></div>`;
