@@ -685,6 +685,73 @@ button{touch-action:manipulation}
  .score-meme-visual .meme-fallback b{font-size:10px}
 }
 
+
+/* Bố cục kết quả: điểm bên trái, meme bên phải, câu nói dưới ảnh */
+.result-hero{
+  display:grid!important;
+  grid-template-columns:96px minmax(0,1fr) 176px;
+  align-items:center;
+  gap:18px;
+}
+.result-hero .scorecircle{margin:0}
+.result-hero>div:nth-child(2){min-width:0}
+.score-meme{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  min-width:0;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  align-self:center;
+}
+.score-meme-visual{width:154px;height:154px;flex:0 0 154px}
+.score-meme-caption{
+  width:100%;
+  text-align:center;
+  font-size:13px;
+  font-weight:900;
+  line-height:1.45;
+  color:#193c55;
+  overflow-wrap:anywhere;
+}
+@media(max-width:760px){
+  .result-hero{
+    grid-template-columns:72px minmax(0,1fr) 112px;
+    gap:10px;
+    padding:16px;
+  }
+  .result-hero .scorecircle{
+    width:68px;height:68px;flex-basis:68px;font-size:18px;border-width:5px;
+  }
+  .result-hero h2{font-size:16px;line-height:1.3}
+  .result-hero p{font-size:10px;line-height:1.5;overflow-wrap:anywhere}
+  .result-hero .btn{min-height:34px;padding:7px 8px;font-size:10px}
+  .score-meme-visual{width:104px;height:104px;flex-basis:104px}
+  .score-meme-caption{font-size:10px;line-height:1.4}
+}
+@media(max-width:390px){
+  .result-hero{
+    grid-template-columns:58px minmax(0,1fr) 86px;
+    gap:7px;
+    padding:12px;
+  }
+  .result-hero .scorecircle{
+    width:56px;height:56px;flex-basis:56px;font-size:15px;
+  }
+  .result-hero h2{font-size:14px}
+  .result-hero p{font-size:9px}
+  .result-hero .btn{font-size:9px;padding:6px}
+  .score-meme-visual{width:82px;height:82px;flex-basis:82px}
+  .score-meme-caption{font-size:9px}
+}
+
 </style>
 </head>
 <body>
@@ -1027,36 +1094,35 @@ $('submitExam').onclick=()=>finishExam(false);
 function finishExam(auto){if(!activeExam)return;clearInterval(timerTick);const e=activeExam,result=scoreExam(e,answers);const item={id:'hist-'+Date.now(),candidateName:currentCandidateName,subject:SUBJECT_NAME,examId:e.id,title:e.title,difficulty:e.difficulty,date:Date.now(),auto,answers:JSON.parse(JSON.stringify(answers)),totalScore:result.totalScore,mcPoints:result.mcPoints,tfPoints:result.tfPoints,shortPoints:result.shortPoints,detail:result.detail,questions:e.questions,meme:chooseScoreMeme(result.totalScore)};historyItems.unshift(item);saveHistory();sendScoreToSheets(item);activeExam=null;renderResult(item);currentView='result';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-result'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));window.scrollTo(0,0)}
 function displayAnswer(q,a){if(q.type==='mc')return a===null||a===undefined?'Chưa trả lời':String.fromCharCode(65+a)+'. '+q.options[a];if(q.type==='short')return a===null||String(a).trim()===''?'Chưa trả lời':String(a);return Array.isArray(a)?a.map((v,i)=>`${'abcd'[i]}) ${v===null?'Chưa chọn':v?'Đúng':'Sai'}`).join(' · '):'Chưa trả lời'}
 const SCORE_MEME_POOLS = {"high":[{"image":"https://www.vjol.info/wp-content/uploads/2025/12/meme-10-diem.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/meme-10d.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/meme-muoi-diem.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/anh-10-diem-meme.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-meme-gif.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-meme-ba-gia.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-khong-co-nhung-meme.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-thanh-lich-0-diem-tinh-tao.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-binh-tinh-trong-long-bao-to.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-cho-do-tinh-bo-khi-bi-boc.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"}],"good":[{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-1.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-2.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-5.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-6.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-8.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-14.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-15.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-16.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-17.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-18.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"}],"pass":[{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-13.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-20.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-21.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-22.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-23.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-24.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-30.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-31.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-33.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-34.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"}],"low":[{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-9.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-11.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-12.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-25.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-27.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-28.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-29.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-32.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-35.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://photo.znews.vn/w660/Uploaded/bpivptvx/2019_07_14/1.jpg","source":"Znews","sourceUrl":"https://znews.vn/biet-diem-thi-xong-lam-gi-duoi-goc-nhin-hai-huoc-cua-dan-mang-post966784.html"}]};
+const SCORE_MEME_QUOTES = {"high":["Điểm này mà khiêm tốn thì hơi phí 😎","Không phải ăn may, là có học bài nha 📚","Phòng thi hôm nay là sân khấu của tui ✨","Đề khó? Chắc khó với người khác thôi 😌","Điểm cao đâu tự nhiên mà có!","Flex nhẹ một cái rồi về 😏","Bản lĩnh được đổi bằng từng trang vở 🏆","Thành quả của những đêm ôn bài đây rồi!","Không cần nói nhiều, bảng điểm lên tiếng.","9+ là câu trả lời cho mọi nghi ngờ 🔥"],"good":["Ổn áp, còn một chút nữa là bùng nổ 🔥","Không hoàn hảo nhưng rất có triển vọng!","Điểm này tự thưởng trà sữa được rồi 🧋","Biết bài, có chiến thuật, có tương lai!","Qua đề bằng thực lực, không bằng niềm tin 😎","Lần sau nhích thêm chút nữa là đẹp!","Điểm số nói rằng: đang đi đúng hướng 📈","Chưa phải đỉnh, nhưng đáng tự hào!","Không cần max điểm, miễn là tiến bộ.","Vững vàng nha, còn cửa bứt phá!"],"pass":["Đi qua cơn bão rồi, nghỉ lấy sức 😮‍💨","Qua môn thôi cũng là một chiến thắng!","Điểm danh dự đang mỉm cười với bạn 😅","Không cao nhưng còn nguyên cơ hội comeback.","Chúc mừng, bạn đã vượt qua cửa ải!","Một bước nhỏ, một lần học thêm!","Lần sau mình tiến lên nấc nữa nhé 💪","Hồi hộp chút thôi, vẫn hạ cánh an toàn!","Thở đi, điểm đã ra rồi 😭➡️😮‍💨","Đạt mục tiêu tối thiểu, giờ hướng tới cao hơn!"],"low":["Điểm số hôm nay không định nghĩa bạn 💙","Buồn chút thôi, rồi mình gỡ lại 💪","Đề này thắng một ván, không thắng cả mùa.","Một lần sai là dữ liệu để tiến bộ 📈","Đóng tab buồn, mở sách ôn nào!","Không sao, comeback mới là phần hay 😤","Điểm dưới 5, ý chí không được dưới 5!","Học từ câu sai, chiến đề kế tiếp!","Thua keo này, mình ôn keo khác!","Hôm nay là điểm bắt đầu, không phải kết thúc."]};
 function chooseScoreMeme(score) {
   const numericScore = Number(score);
-  let key, caption, fallbackEmoji, fallbackTitle;
+  let key, fallbackEmoji, fallbackTitle;
   if (numericScore > 8) {
     key = 'high';
-    caption = 'Hôm nay flex nhẹ cũng được 😎';
     fallbackEmoji = '🏆';
     fallbackTitle = 'Meme flex điểm cao';
   } else if (numericScore > 6.5) {
     key = 'good';
-    caption = 'Khá ổn áp đó 🔥';
     fallbackEmoji = '🔥';
     fallbackTitle = 'Khá ổn áp';
   } else if (numericScore >= 5) {
     key = 'pass';
-    caption = 'Qua cửa rồi, thở phào 😮‍💨';
     fallbackEmoji = '😮‍💨';
     fallbackTitle = 'Vừa qua cửa';
   } else {
     key = 'low';
-    caption = 'Xem lời giải rồi gỡ ở đề sau 💪';
     fallbackEmoji = '💀';
     fallbackTitle = 'Đề sau gỡ lại';
   }
   const pool = SCORE_MEME_POOLS[key] || SCORE_MEME_POOLS.low;
   const chosen = pool[Math.floor(Math.random() * pool.length)];
+  const quotes = SCORE_MEME_QUOTES[key] || SCORE_MEME_QUOTES.low;
+  const caption = quotes[Math.floor(Math.random() * quotes.length)];
   return { ...chosen, caption, band: key, fallbackEmoji, fallbackTitle };
 }
 
-function renderResult(h){const e= h.questions? h : null;const questions=h.questions||[];const meme=h.meme||chooseScoreMeme(h.totalScore);let body=`<div class="result-hero"><div class="scorecircle">${fmt(h.totalScore,2)}</div><div><div class="eyebrow">${h.auto?'HẾT GIỜ · ĐÃ TỰ ĐỘNG NỘP':'ĐÃ NỘP BÀI'} · ${esc(h.difficulty)}</div><h2>${h.totalScore>=8?'Làm tốt lắm!':h.totalScore>=5?'Bạn đang tiến bộ!':'Hãy xem kĩ lời giải và thử lại nhé!'}</h2><p class="tiny">${esc(h.title)} · ${new Date(h.date).toLocaleString('vi-VN')}</p><p>Điểm quy đổi theo cấu trúc THPT: <b>${fmt(h.totalScore,2)}/10</b>.</p><button class="btn outline small" onclick="startExam('${h.examId}')">Làm lại đề này ↻</button></div></div>
+function renderResult(h){const e= h.questions? h : null;const questions=h.questions||[];const meme=h.meme||chooseScoreMeme(h.totalScore);const quotes=SCORE_MEME_QUOTES[meme.band]||SCORE_MEME_QUOTES.low;if(!quotes.includes(meme.caption))meme.caption=quotes[Math.floor(Math.random()*quotes.length)];let body=`<div class="result-hero"><div class="scorecircle">${fmt(h.totalScore,2)}</div><div><div class="eyebrow">${h.auto?'HẾT GIỜ · ĐÃ TỰ ĐỘNG NỘP':'ĐÃ NỘP BÀI'} · ${esc(h.difficulty)}</div><h2>${h.totalScore>=8?'Làm tốt lắm!':h.totalScore>=5?'Bạn đang tiến bộ!':'Hãy xem kĩ lời giải và thử lại nhé!'}</h2><p class="tiny">${esc(h.title)} · ${new Date(h.date).toLocaleString('vi-VN')}</p><p>Điểm quy đổi theo cấu trúc THPT: <b>${fmt(h.totalScore,2)}/10</b>.</p><button class="btn outline small" onclick="startExam('${h.examId}')">Làm lại đề này ↻</button></div>
  <section class="score-meme">
   <div class="score-meme-visual">
    <img src="${esc(meme.image)}" alt="Meme phản ứng theo điểm" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.style.display='grid'">
@@ -1066,6 +1132,7 @@ function renderResult(h){const e= h.questions? h : null;const questions=h.questi
    <div class="score-meme-caption">${esc(meme.caption)}</div>
   </div>
  </section>
+ </div>
  <div class="breakdown"><div class="breakitem"><strong>${fmt(h.mcPoints,2)} / 4,5</strong><span>Phần I · Trắc nghiệm</span></div><div class="breakitem"><strong>${fmt(h.tfPoints,2)} / 4,0</strong><span>Phần II · Đúng/Sai</span></div><div class="breakitem"><strong>${fmt(h.shortPoints,2)} / 1,5</strong><span>Phần III · Trả lời ngắn</span></div></div><div class="info-box"><b>Chấm đúng/sai theo từng câu:</b> số ý đúng 0 → 0 điểm; 1 → 0,1 điểm; 2 → 0,25 điểm; 3 → 0,5 điểm; 4 → 1 điểm. Câu trả lời ngắn chấp nhận sai số nhỏ như ghi trong phần hướng dẫn mỗi câu.</div><div class="section-head"><h2>Đáp án và giải thích</h2><span class="tiny">Xanh = đúng · Đỏ = chưa đúng</span></div>`;
  h.detail.forEach(d=>{let q=d.q;const num=d.index+1,section=sectionInfo(d.index);body+=`<div class="reviewrow"><div class="eyebrow">${section.label} · CÂU ${section.no}</div>`;
  if(d.type==='mc'){body+=`<div class="${d.ok?'correct':'incorrect'}" style="margin:6px 0">${d.ok?'Đúng · +0,25 điểm':'Chưa đúng · +0 điểm'}</div><p><b>${esc(q.q)}</b></p>`;q.options.forEach((o,j)=>{const right=j===q.correct,chosen=d.answer===j;body+=`<div class="answerline" style="color:${right?'#16856d':chosen?'#cb5151':'#6c7d90'}">${String.fromCharCode(65+j)}. ${esc(o)} ${right?'✓ Đáp án đúng':chosen?'← Bạn đã chọn':''}</div>`});body+=`<p class="tiny">Giải thích: ${esc(q.why)}</p>`}
