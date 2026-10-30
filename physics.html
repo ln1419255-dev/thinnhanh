@@ -710,7 +710,7 @@ function askCandidateName() {
   try { saved = localStorage.getItem(CANDIDATE_NAME_KEY) || ''; } catch (e) {}
   const entered = window.prompt('Nhập tên người làm bài để lưu điểm lên bảng điểm chung:', saved);
   if (entered === null) return null;
-  const cleaned = entered.trim().replace(/\\s+/g, ' ').slice(0, 60);
+  const cleaned = entered.trim().replace(/\s+/g, ' ').slice(0, 60);
   if (!cleaned) {
     toast('Bạn cần nhập tên để bắt đầu bài thi.');
     return null;
