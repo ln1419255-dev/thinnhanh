@@ -39,7 +39,7 @@ button{font:inherit;cursor:pointer}
 .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.23);border-radius:999px;padding:8px 13px;font-size:10px;font-weight:950;letter-spacing:1.4px;color:#e8fffc;box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
 .hero-art{width:142px;height:142px;flex:0 0 142px;display:grid;place-items:center;font-size:69px;border:1px solid rgba(255,255,255,.28);border-radius:37px;background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.055));box-shadow:0 20px 50px rgba(4,29,48,.17),inset 0 1px 0 rgba(255,255,255,.2);transform:rotate(3deg);animation:floatBook 5s ease-in-out infinite}
 @keyframes floatBook{0%,100%{transform:translateY(0) rotate(3deg)}50%{transform:translateY(-7px) rotate(0deg)}}
-.subjects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:26px 0}
+.subjects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:26px 0}
 .subject{position:relative;isolation:isolate;overflow:hidden;background:rgba(255,255,255,.9);border:1px solid #e2e9f2;border-radius:23px;padding:28px;box-shadow:0 12px 32px rgba(28,52,83,.055);display:flex;flex-direction:column;min-height:294px;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
 .subject:before{content:"";position:absolute;z-index:-1;right:-78px;top:-94px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,#c8f6f0 0,rgba(200,246,240,0) 70%);opacity:.75;transition:transform .3s ease}
 .subject:nth-child(2):before{background:radial-gradient(circle,#e0d9ff 0,rgba(224,217,255,0) 72%)}
@@ -490,9 +490,9 @@ body{
 .brand-logo{border-radius:13px!important;overflow:hidden;clip-path:none;box-shadow:0 6px 15px rgba(15,57,83,.16)}
 </style></head><body><header class="topbar"><div class="brand"><img class="brand-logo" src="./assets/thinnhanh-logo.svg?v=3" alt=""><span class="brand-name">Thi<span>Nhanh</span></span></div><span class="menu-link">CHỌN MÔN HỌC</span></header>
 <main id="landing" class="page">
-<section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Vật lí và Hóa học với ngân hàng đề đang hoạt động. Toán, Tiếng Anh và Lịch sử đã được tạo sẵn; khi bạn gửi tài liệu, mình sẽ bổ sung dữ liệu và đề thi cho từng môn.</p></div><div class="hero-art">🎯</div></section>
+<section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Toán Chương 1, Vật lí và Hóa học với ngân hàng đề tương tác. Tiếng Anh và Lịch sử đã được tạo sẵn; dữ liệu sẽ được bổ sung khi có tài liệu.</p></div><div class="hero-art">🎯</div></section>
 <div class="subjects">
-<article class="subject pending"><div class="icon">📐</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Toán</h2><p>Đã tạo khu vực môn Toán. Khi bạn gửi tài liệu hoặc nội dung ôn tập, mình sẽ bổ sung câu hỏi và đề luyện thi.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
+<article class="subject"><div class="icon">📐</div><h2>Toán</h2><p>10 đề Toán 12 Chương 1, đa dạng đồ thị, khảo sát hàm số và bài toán thực tế bằng đạo hàm.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn" href="./math.html" style="text-decoration:none">Vào môn Toán →</a></article>
 <article class="subject"><div class="icon">⚛️</div><h2>Vật lí</h2><p>10 đề Vật lí nhiệt theo tài liệu 134 trang, gồm cấu trúc chất, chuyển thể, nội năng, nhiệt dung riêng, nhiệt nóng chảy và nhiệt hóa hơi.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn" href="./physics.html" style="text-decoration:none">Vào môn Vật lí →</a></article>
 <article class="subject"><div class="icon">🧪</div><h2>Hóa học</h2><p>20 đề chia riêng theo chương: 10 đề Ester – Lipid và 10 đề Carbohydrate.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn chem" href="./chem.html" style="text-decoration:none">Vào môn Hóa học →</a></article>
 <article class="subject pending"><div class="icon">🌐</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Tiếng Anh</h2><p>Đã tạo khu vực môn Tiếng Anh. Chưa có đề cho đến khi bạn gửi tài liệu, cấu trúc ôn tập hoặc nguồn câu hỏi.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
@@ -502,7 +502,7 @@ body{
  <div class="foot-icon" aria-hidden="true">📘</div>
  <div class="foot-body">
   <div class="foot-heading">CẤU TRÚC ĐỀ &amp; LƯU KẾT QUẢ</div>
-  <p class="foot-main">Mỗi đề có <strong>18 câu trắc nghiệm (4,5 điểm)</strong>, <strong>4 câu đúng/sai (4 điểm theo mức điểm từng câu trong tài liệu)</strong>, và <strong>6 câu trả lời ngắn (1,5 điểm)</strong>. Tổng: <strong class="total-score">10 điểm</strong>.</p>
+  <p class="foot-main"><strong>Cấu trúc theo từng môn:</strong> Toán: 12 câu trắc nghiệm (3 điểm), 4 câu đúng/sai (4 điểm), 6 câu trả lời ngắn (3 điểm). Vật lí/Hóa học: 18 câu trắc nghiệm (4,5 điểm), 4 câu đúng/sai (4 điểm), 6 câu trả lời ngắn (1,5 điểm). Tổng mỗi đề: <strong class="total-score">10 điểm</strong>.</p>
   <p class="foot-note"><span aria-hidden="true">◷</span> Lịch sử chi tiết được lưu trong trình duyệt. <span class="foot-note-sep">·</span> <span aria-hidden="true">☁</span> Muốn tổng hợp điểm của nhiều người trên Google Sheets, cần hoàn tất bước kết nối bảng điểm.</p>
  </div>
 </div>
