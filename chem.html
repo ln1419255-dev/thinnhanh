@@ -1361,6 +1361,38 @@ main{min-width:0}
  .section-head{padding:11px 13px;margin:15px 0 11px;border-radius:12px}
 }
 
+
+/* Highlight copyright footer across study pages */
+.copyright{
+ display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px;
+ width:max-content;max-width:calc(100% - 30px);
+ margin:20px auto 30px;padding:11px 19px;
+ border:1.5px solid #a9cbdc;border-radius:999px;
+ background:linear-gradient(115deg,#e5efff 0%,#dff8f2 100%);
+ box-shadow:0 9px 24px rgba(25,56,88,.11);
+ color:#526b84;font-size:12px;font-weight:650;letter-spacing:.1px;
+ text-align:center;
+}
+.copyright-badge{
+ width:29px;height:29px;display:grid;place-items:center;flex:0 0 29px;
+ border-radius:50%;background:linear-gradient(135deg,#172d4b,#087f8a);
+ color:#fff;font-size:13px;font-weight:950;
+ box-shadow:0 4px 10px rgba(23,64,82,.18);
+}
+.copyright-year{color:#526b84;font-weight:800}
+.copyright-separator{width:1px;height:20px;background:#b8ccde}
+.copyright strong{color:#173650;font-weight:950}
+.copyright-text{color:#415d76;font-weight:700}
+@media(max-width:600px){
+ .copyright{
+  width:calc(100% - 20px);max-width:430px;
+  border-radius:17px;padding:12px 13px;gap:8px;
+  margin:17px auto 24px;font-size:11px;
+ }
+ .copyright-badge{width:25px;height:25px;flex-basis:25px}
+ .copyright-separator{height:16px}
+}
+
 </style>
 </head>
 <body>
@@ -1427,7 +1459,13 @@ main{min-width:0}
  <div id="resultBody"></div>
 </section>
 </main></div>
-<footer class="copyright">© 2026 Nguyễn Khánh Lâm · Bản quyền được bảo lưu.</footer>
+<footer class="copyright">
+ <span class="copyright-badge" aria-hidden="true">©</span>
+ <span class="copyright-year">2026</span>
+ <span class="copyright-separator" aria-hidden="true"></span>
+ <strong>Nguyễn Khánh Lâm</strong>
+ <span class="copyright-text">Bản quyền được bảo lưu.</span>
+</footer>
 <div class="toast" id="toast"></div>
 <script>
 
