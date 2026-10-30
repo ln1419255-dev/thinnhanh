@@ -194,13 +194,22 @@ iframe{height:calc(100vh - 125px);min-height:620px;border:1px solid #dfe8f0;bord
  color:#66798c;
 }
 
+
+/* Desktop subject order: Mathematics, Physics, Chemistry across the first row */
+@media (min-width: 900px) {
+  .subjects {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+}
+
 </style></head><body><header class="topbar"><div class="brand">📘 Thi<span>Nhanh</span><span class="mini">VẬT LÍ · HÓA HỌC</span></div><span class="menu-link">CHỌN MÔN HỌC</span></header>
 <main id="landing" class="page">
 <section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Vật lí và Hóa học với ngân hàng đề đang hoạt động. Toán, Tiếng Anh và Lịch sử đã được tạo sẵn; khi bạn gửi tài liệu, mình sẽ bổ sung dữ liệu và đề thi cho từng môn.</p></div><div class="hero-art">🎯</div></section>
 <div class="subjects">
+<article class="subject pending"><div class="icon">📐</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Toán</h2><p>Đã tạo khu vực môn Toán. Khi bạn gửi tài liệu hoặc nội dung ôn tập, mình sẽ bổ sung câu hỏi và đề luyện thi.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
 <article class="subject"><div class="icon">⚛️</div><h2>Vật lí</h2><p>10 đề Vật lí nhiệt theo tài liệu 134 trang, gồm cấu trúc chất, chuyển thể, nội năng, nhiệt dung riêng, nhiệt nóng chảy và nhiệt hóa hơi.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn" href="./physics.html" style="text-decoration:none">Vào môn Vật lí →</a></article>
 <article class="subject"><div class="icon">🧪</div><h2>Hóa học</h2><p>20 đề chia riêng theo chương: 10 đề Ester – Lipid và 10 đề Carbohydrate.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn chem" href="./chem.html" style="text-decoration:none">Vào môn Hóa học →</a></article>
-<article class="subject pending"><div class="icon">📐</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Toán</h2><p>Đã tạo khu vực môn Toán. Khi bạn gửi tài liệu hoặc nội dung ôn tập, mình sẽ bổ sung câu hỏi và đề luyện thi.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
 <article class="subject pending"><div class="icon">🌐</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Tiếng Anh</h2><p>Đã tạo khu vực môn Tiếng Anh. Chưa có đề cho đến khi bạn gửi tài liệu, cấu trúc ôn tập hoặc nguồn câu hỏi.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
 <article class="subject pending"><div class="icon">📜</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Lịch sử</h2><p>Đã tạo khu vực môn Lịch sử. Khi bạn gửi tài liệu, mình sẽ xây dựng bộ câu hỏi và đề thi theo đúng nội dung đó.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
 </div>
