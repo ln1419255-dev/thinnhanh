@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ThiNhanh</title>
+<link rel="icon" type="image/svg+xml" href="./assets/thinnhanh-logo.svg?v=1">
 <meta name="description" content="ThiNhanh — nền tảng luyện đề và theo dõi kết quả học tập trực tuyến.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ThiNhanh">
@@ -475,7 +476,16 @@ body{
  .copyright-separator{height:16px}
 }
 
-</style></head><body><header class="topbar"><div class="brand">📘 Thi<span>Nhanh</span><span class="mini">VẬT LÍ · HÓA HỌC</span></div><span class="menu-link">CHỌN MÔN HỌC</span></header>
+
+/* ThiNhanh mascot logo */
+.brand-logo{width:42px;height:42px;flex:0 0 42px;display:block;object-fit:cover;border-radius:13px;box-shadow:0 6px 15px rgba(15,57,83,.16)}
+.brand>span:first-of-type.brand-name{background:none!important;color:#172b46!important;-webkit-background-clip:border-box;background-clip:border-box}
+.brand-name{display:inline-block;font-weight:950;letter-spacing:inherit;white-space:nowrap;line-height:1}
+.brand-name>span{background:linear-gradient(115deg,#08a8a9,#267ac1);background-clip:text;-webkit-background-clip:text;color:transparent}
+@media(max-width:760px){.brand-logo{width:38px;height:38px;flex-basis:38px}}
+@media(max-width:600px){.brand-logo{width:35px;height:35px;flex-basis:35px}}
+
+</style></head><body><header class="topbar"><div class="brand"><img class="brand-logo" src="./assets/thinnhanh-logo.svg?v=1" alt=""><span class="brand-name">Thi<span>Nhanh</span></span><span class="mini">VẬT LÍ · HÓA HỌC</span></div><span class="menu-link">CHỌN MÔN HỌC</span></header>
 <main id="landing" class="page">
 <section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Vật lí và Hóa học với ngân hàng đề đang hoạt động. Toán, Tiếng Anh và Lịch sử đã được tạo sẵn; khi bạn gửi tài liệu, mình sẽ bổ sung dữ liệu và đề thi cho từng môn.</p></div><div class="hero-art">🎯</div></section>
 <div class="subjects">
