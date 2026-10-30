@@ -545,6 +545,43 @@ button{touch-action:manipulation}
   }
 }
 
+
+/* Desktop exam typography: improve readability without changing phone sizing */
+@media (min-width: 681px) {
+  #view-take .examtop h1 { font-size: 25px !important; }
+  #view-take .examtop .tiny { font-size: 12px !important; line-height: 1.55 !important; }
+  #view-take .takepanel .eyebrow { font-size: 11px !important; }
+  #view-take .takepanel h2 { font-size: 21px !important; line-height: 1.5 !important; }
+  #view-take .questiontext {
+    font-size: 18px !important;
+    line-height: 1.8 !important;
+  }
+  #view-take .takeanswer {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+    min-height: 58px;
+    padding: 14px 15px;
+  }
+  #view-take .letter {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+    font-size: 14px !important;
+  }
+  #view-take .tfstatement p {
+    font-size: 15px !important;
+    line-height: 1.75 !important;
+  }
+  #view-take .tfchoice {
+    min-height: 44px;
+    font-size: 14px !important;
+    padding: 10px 15px;
+  }
+  #view-take .shortinput { font-size: 19px !important; }
+  #view-take .shortnote { font-size: 12px !important; }
+  #view-take .takenav .btn { font-size: 14px !important; }
+}
+
 </style>
 </head>
 <body>
