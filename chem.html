@@ -752,6 +752,66 @@ button{touch-action:manipulation}
   .score-meme-caption{font-size:9px}
 }
 
+
+/* Bản nâng cấp kích thước khung điểm và meme — v2 */
+.result-hero{
+  grid-template-columns:116px minmax(0,1fr) 194px;
+  gap:22px;
+  min-height:226px;
+  padding:26px 28px;
+  border-radius:20px;
+}
+.result-hero .scorecircle{
+  width:108px;height:108px;flex-basis:108px;
+  font-size:28px;border-width:7px;
+  box-shadow:0 8px 20px rgba(8,127,126,.08);
+}
+.result-hero .eyebrow{font-size:10px;letter-spacing:1.3px}
+.result-hero h2{font-size:22px;line-height:1.3;margin:8px 0}
+.result-hero p{font-size:13px;line-height:1.7}
+.result-hero .btn{margin-top:10px}
+.score-meme-visual{width:174px;height:174px;flex-basis:174px}
+.score-meme-caption{font-size:14px;line-height:1.5;max-width:194px;margin:0 auto}
+@media(max-width:900px){
+  .result-hero{grid-template-columns:100px minmax(0,1fr) 158px;gap:14px;padding:21px}
+  .result-hero .scorecircle{width:94px;height:94px;flex-basis:94px;font-size:24px}
+  .score-meme-visual{width:144px;height:144px;flex-basis:144px}
+  .score-meme-caption{font-size:12px}
+}
+@media(max-width:680px){
+  .result-hero{
+    grid-template-columns:76px minmax(0,1fr) 118px;
+    gap:9px;
+    min-height:0;
+    padding:15px 12px;
+    border-radius:15px;
+  }
+  .result-hero .scorecircle{
+    width:72px;height:72px;flex-basis:72px;font-size:19px;border-width:5px;
+  }
+  .result-hero .eyebrow{font-size:8px;letter-spacing:.7px}
+  .result-hero h2{font-size:15px;line-height:1.3;margin:5px 0}
+  .result-hero p{font-size:10px;line-height:1.5;margin:4px 0}
+  .result-hero .btn{font-size:10px;min-height:34px;padding:7px 8px;margin-top:7px}
+  .score-meme-visual{width:112px;height:112px;flex-basis:112px}
+  .score-meme-caption{font-size:10px;line-height:1.4;max-width:118px}
+}
+@media(max-width:390px){
+  .result-hero{
+    grid-template-columns:62px minmax(0,1fr) 94px;
+    gap:6px;
+    padding:12px 9px;
+  }
+  .result-hero .scorecircle{
+    width:58px;height:58px;flex-basis:58px;font-size:16px;border-width:4px;
+  }
+  .result-hero h2{font-size:13px}
+  .result-hero p{font-size:9px}
+  .result-hero .btn{font-size:9px;padding:6px}
+  .score-meme-visual{width:88px;height:88px;flex-basis:88px}
+  .score-meme-caption{font-size:9px;max-width:94px}
+}
+
 </style>
 </head>
 <body>
