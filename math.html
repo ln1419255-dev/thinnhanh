@@ -1532,7 +1532,7 @@ function toast(s){const el=$('toast');el.textContent=s;el.classList.add('show');
 function levelClass(s){return s==='Dễ'?'easy':s==='Khá'?'mid':s==='Khó'?'hard':'super'}
 function iconFor(e){return e.difficulty==='Dễ'?'🌱':e.difficulty==='Khá'?'📘':e.difficulty==='Khó'?'🔥':'🧠'}
 
-const CHAPTER_GROUPS = [{"id":"chapter1","kicker":"CHƯƠNG 1","title":"Ứng dụng đạo hàm","desc":"10 đề Toán 12: khảo sát hàm số, tính đơn điệu, cực trị, tiệm cận, đồ thị và bài toán thực tế về chuyển động, kinh tế, diện tích – thể tích.","ids":["m01","m02","m03","m04","m05","m06","m07","m08","m09","m10"]}];
+const CHAPTER_GROUPS = [{"id":"chapter1","kicker":"CHƯƠNG 1","title":"Ứng dụng đạo hàm","desc":"11 đề Toán 12: khảo sát hàm số, đồ thị, bảng biến thiên và một đề riêng gồm toàn bài toán thực tế về chuyển động, kinh tế, y tế, tăng trưởng, hình học và tối ưu chi phí.","ids":["m01","m02","m03","m04","m05","m06","m07","m08","m09","m10","m11"]}];
 function getChapterGroup(examId){return CHAPTER_GROUPS.find(group=>group.ids.includes(examId))||CHAPTER_GROUPS[CHAPTER_GROUPS.length-1]}
 function renderChapterCards(){
  const wrap=$('chapter-cards');
