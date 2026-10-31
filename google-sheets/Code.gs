@@ -11,9 +11,9 @@ const HEADERS = [
   'Môn',
   'Tên đề',
   'Mức độ',
-  'Trắc nghiệm /4,5',
-  'Đúng/Sai /4',
-  'Trả lời ngắn /1,5',
+  'Điểm trắc nghiệm',
+  'Điểm Đúng/Sai',
+  'Điểm trả lời ngắn',
   'Tổng điểm /10',
   'Nộp tự động do hết giờ',
   'Mã lượt thi'
@@ -36,7 +36,8 @@ function doPost(e) {
 
     var p = JSON.parse(raw);
     var subject = safeText(p.subject, 30);
-    if (subject !== 'Vật lí' && subject !== 'Hóa học') {
+    var isTinHoc = subject === 'Tin học';
+    if (subject !== 'Toán' && subject !== 'Vật lí' && subject !== 'Hóa học' && !isTinHoc) {
       return jsonOutput({ ok: false, error: 'Môn học không hợp lệ.' });
     }
 
@@ -46,9 +47,11 @@ function doPost(e) {
       return jsonOutput({ ok: false, error: 'Thiếu tên người làm hoặc tên đề.' });
     }
 
-    var mc = boundedScore(p.mcPoints, 4.5);
+    // Tin học giữa kì hiện dùng 30 câu trắc nghiệm (6 điểm) + 16 ý Đúng/Sai (4 điểm).
+    // Toán, Vật lí và Hóa học dùng cấu trúc 4,5 + 4 + 1,5.
+    var mc = boundedScore(p.mcPoints, isTinHoc ? 6 : 4.5);
     var tf = boundedScore(p.tfPoints, 4);
-    var shortPart = boundedScore(p.shortPoints, 1.5);
+    var shortPart = boundedScore(p.shortPoints, isTinHoc ? 0 : 1.5);
     var total = boundedScore(p.totalScore, 10);
     if (Math.abs(total - (mc + tf + shortPart)) > 0.12) {
       return jsonOutput({ ok: false, error: 'Điểm tổng không khớp các phần.' });
@@ -69,6 +72,9 @@ function doPost(e) {
         .setBackground('#16324f')
         .setFontColor('#ffffff')
         .setWrap(true);
+    } else {
+      // Chuẩn hóa nhãn cột cũ để đọc được điểm của các môn có thang phần khác nhau.
+      sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
     }
 
     var submittedAt = safeDate(p.submittedAt);
