@@ -424,8 +424,9 @@ renderExamCards();renderHome();renderHistory();renderStatistics();
 
 <script id="meme-lightbox-script">
 (function(){
-  if(document.getElementById('meme-lightbox-script')) return;
+  if(document.getElementById('meme-lightbox')) return;
   var modal=document.createElement('div');
+  modal.id='meme-lightbox';
   modal.className='meme-lightbox';
   modal.hidden=true;
   modal.setAttribute('role','dialog');
