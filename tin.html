@@ -300,6 +300,91 @@ html[data-theme="dark"] .meme-lightbox-panel{background:#101928!important;border
  .topbar .topright .tn-theme-toggle{margin-left:0}
 }
 @media(prefers-reduced-motion:reduce){.tn-theme-toggle,.tn-theme-toggle *{transition:none!important}}
+
+/* Dark-mode consistency sweep: score tiles, progress and secondary states */
+html[data-theme="dark"] .stat-tile{
+  background:linear-gradient(145deg,#142337,#111d2c)!important;
+  border-color:#2a3c53!important;
+  color:#d9e5f3!important;
+  box-shadow:0 7px 22px rgba(0,0,0,.18)!important;
+}
+html[data-theme="dark"] .stat-tile strong,
+html[data-theme="dark"] .stat-tile b{color:#e6effb!important}
+html[data-theme="dark"] .stat-tile span,
+html[data-theme="dark"] .stat-tile small{color:#a9bbcf!important}
+html[data-theme="dark"] .examprogress{background:#26374d!important}
+html[data-theme="dark"] .examprogress>div{background:linear-gradient(90deg,#18b7ad,#6ce3d2)!important}
+html[data-theme="dark"] .stat-icon{
+  background:#193c42!important;
+  border-color:#2b555b!important;
+  color:#8ce8d9!important;
+}
+html[data-theme="dark"] .btn.warn{
+  background:#3a2826!important;
+  border-color:#69423b!important;
+  color:#ffc0a9!important;
+  box-shadow:none!important;
+}
+html[data-theme="dark"] .btn.ghost{
+  background:#172538!important;
+  border-color:#344a62!important;
+  color:#dce8f6!important;
+  box-shadow:none!important;
+}
+html[data-theme="dark"] .qnavpanel hr,
+html[data-theme="dark"] .review-card-head,
+html[data-theme="dark"] .question-top{border-color:#2a3c53!important}
+html[data-theme="dark"] .stat-tile .score,
+html[data-theme="dark"] .score{color:#83e0b5!important}
+html[data-theme="dark"] .result-hero .small,
+html[data-theme="dark"] .result-hero .tiny{color:#a9bbcf!important}
+
+/* Tin học dark-mode: badges, review notes and question markers */
+html[data-theme="dark"] .exam-num,
+html[data-theme="dark"] .question-number,
+html[data-theme="dark"] .empty-icon,
+html[data-theme="dark"] .tip-icon{
+  background:#193c42!important;
+  border-color:#2b555b!important;
+  color:#8ce8d9!important;
+  box-shadow:none!important;
+}
+html[data-theme="dark"] .section-count{
+  background:#202e41!important;
+  border-color:#36485d!important;
+  color:#c5d4e6!important;
+}
+html[data-theme="dark"] .review-explanation,
+html[data-theme="dark"] .review-note,
+html[data-theme="dark"] .legacy-note{
+  background:#172538!important;
+  border-color:#30445e!important;
+  color:#c7d7e7!important;
+}
+html[data-theme="dark"] .review-explanation strong,
+html[data-theme="dark"] .review-note strong{color:#e4edf8!important}
+html[data-theme="dark"] .exam-meta,
+html[data-theme="dark"] .review-note small{color:#a9bbcf!important}
+html[data-theme="dark"] .question-top,
+html[data-theme="dark"] .review-card-head{border-color:#2a3c53!important}
+html[data-theme="dark"] .result-chip{
+  background:#172538!important;
+  border-color:#30445e!important;
+  color:#d5e3f2!important;
+}
+html[data-theme="dark"] .result-chip strong{color:#e4edf8!important}
+html[data-theme="dark"] .answer-note{
+  background:#172538!important;
+  border-color:#30445e!important;
+  color:#d5e3f2!important;
+}
+html[data-theme="dark"] .answer-note.ok{
+  background:#153528!important;border-color:#2b7756!important;color:#9ce6b6!important;
+}
+html[data-theme="dark"] .answer-note.bad{
+  background:#3a222c!important;border-color:#7d3b4c!important;color:#ffb5c1!important;
+}
+
 </style>
 </head>
 <body>
