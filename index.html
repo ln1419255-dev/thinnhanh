@@ -488,8 +488,23 @@ body{
 
 /* Restore original rounded-square ThiNhanh header logo */
 .brand-logo{border-radius:13px!important;overflow:hidden;clip-path:none;box-shadow:0 6px 15px rgba(15,57,83,.16)}
+
+/* Thông điệp truyền cảm hứng ở đầu trang chủ */
+.motivation-banner{
+ display:flex;align-items:center;justify-content:center;gap:12px;
+ max-width:100%;margin:0 0 17px;padding:13px 20px;
+ border:1px solid #dce8f1;border-radius:16px;
+ background:linear-gradient(110deg,rgba(255,255,255,.96),rgba(237,250,249,.96) 58%,rgba(243,241,255,.96));
+ box-shadow:0 8px 24px rgba(25,55,85,.055);
+ text-align:center;
+}
+.motivation-mark{flex:0 0 auto;color:#0ba7a3;font-size:19px;line-height:1}
+.motivation-banner p{margin:0;color:#27435f;font-size:clamp(13px,1.5vw,17px);font-weight:850;line-height:1.6;letter-spacing:.05px}
+.motivation-dash{color:#0a9998;padding:0 3px}
+@media(max-width:760px){.motivation-banner{gap:8px;margin-bottom:12px;padding:11px 12px;border-radius:13px}.motivation-mark{font-size:16px}.motivation-banner p{font-size:13px;line-height:1.55}}
 </style></head><body><header class="topbar"><div class="brand"><img class="brand-logo" src="./assets/thinnhanh-logo.svg?v=3" alt=""><span class="brand-name">Thi<span>Nhanh</span></span></div><span class="menu-link">CHỌN MÔN HỌC</span></header>
 <main id="landing" class="page">
+<div class="motivation-banner" role="note" aria-label="Thông điệp truyền cảm hứng"><span class="motivation-mark" aria-hidden="true">✦</span><p>Tương lai của bạn, chỉ bạn mới biết <span class="motivation-dash">—</span> Thứ bạn muốn, chỉ có thể tự giành lấy.</p></div>
 <section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Toán Chương 1, Vật lí, Hóa học và Tin học với các bộ đề tương tác. Tiếng Anh và Lịch sử đang chờ bổ sung dữ liệu.</p></div><div class="hero-art">🎯</div></section>
 <div class="subjects">
 <article class="subject"><div class="icon">📐</div><h2>Toán</h2><p>10 đề Toán 12 Chương 1, đa dạng đồ thị, khảo sát hàm số và bài toán thực tế bằng đạo hàm.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn" href="./math.html" style="text-decoration:none">Vào môn Toán →</a></article>
