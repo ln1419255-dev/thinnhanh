@@ -1393,6 +1393,16 @@ main{min-width:0}
  .copyright-separator{height:16px}
 }
 
+
+/* Công thức và ký hiệu: phân số rõ tử/mẫu, dấu phép tính thoáng hơn */
+.math-frac{display:inline-grid;grid-template-rows:auto auto;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .2em;white-space:nowrap;font-size:1.04em;min-width:1.05em;color:inherit}
+.math-frac>span:first-child{display:block;border-bottom:2px solid currentColor;padding:0 .22em .12em;min-width:100%;font-weight:500}
+.math-frac>span:last-child{display:block;padding:.12em .22em 0;font-weight:500}
+.math-sup,.math-sub{font-size:.78em;line-height:0;font-weight:inherit}
+.math-sup{vertical-align:super}
+.math-sub{vertical-align:sub}
+.questiontext .math-frac,.answerline .math-frac,.reviewrow .math-frac{font-size:1.02em}
+
 </style>
 </head>
 <body>
@@ -1579,10 +1589,15 @@ function renderBrowse(){
 }
 function filterCards(){let query=$('searchInput').value.toLowerCase(),level=$('difficultyFilter').value,sort=$('sortFilter').value,chapter=$('chapterFilter')?$('chapterFilter').value:'';if(!chapter){$('all-cards').innerHTML='<div class="empty" style="grid-column:1/-1">📚<b>Chọn một chương trước nhé</b>Chọn chương ở trang Chương học để mở đề.</div>';return}let arr=BANK.filter(e=>(!level||e.difficulty===level)&&(!chapter||getChapterGroup(e.id).id===chapter)&&(!query||(e.title+' '+e.desc+' '+e.difficulty).toLowerCase().includes(query)));if(sort==='az')arr.sort((a,b)=>a.title.localeCompare(b.title,'vi'));else if(sort==='questions')arr.sort((a,b)=>{let rank={'Siêu khó':4,'Khó':3,'Khá':2,'Dễ':1};return rank[b.difficulty]-rank[a.difficulty]});$('all-cards').innerHTML=arr.map(card).join('')||'<div class="empty" style="grid-column:1/-1">🔎<b>Không tìm thấy đề phù hợp</b>Thử từ khóa khác nhé.</div>'}
 ['searchInput'].forEach(id=>$(id).addEventListener('input',filterCards));['difficultyFilter','sortFilter'].forEach(id=>$(id).addEventListener('change',filterCards));$('chapterFilter').addEventListener('change',renderBrowse);
-function cleanMathText(s){return String(s??'').replace(/3·(\d+)x/g,(_,n)=>String(3*Number(n))+'x').replace(/2·(\d+)x²/g,(_,n)=>String(2*Number(n))+'x²').replace(/x\s*[−-]\s*\(\s*[−-]\s*(\d+)\s*\)/g,(_,n)=>'x+'+n).replace(/x\s*[−-]\s*\(\s*0\s*\)/g,'x').replace(/\+\s*-/g,'−').replace(/·/g,' × ')} 
+function cleanMathText(s){return String(s??'').replace(/3·(\d+)x/g,(_,n)=>String(3*Number(n))+'x').replace(/2·(\d+)x²/g,(_,n)=>String(2*Number(n))+'x²').replace(/x\s*[−-]\s*\(\s*[−-]\s*(\d+)\s*\)/g,(_,n)=>'x+'+n).replace(/x\s*[−-]\s*\(\s*0\s*\)/g,'x').replace(/\+\s*-/g,'−').replace(/·/g,' × ').replace(/\s*×\s*/g,' × ')}
+function cleanSymbolText(value){return cleanMathText(value)}
 function htmlEscape(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function matchingParen(s,start){let depth=0;for(let i=start;i<s.length;i++){if(s[i]==='(')depth++;else if(s[i]===')'){depth--;if(depth===0)return i}}return -1}
-function formatRich(value){const s=cleanMathText(value);let out='',i=0;while(i<s.length){if(s[i]==='('){const n=matchingParen(s,i);if(n>i&&s[n+1]==='/'&&s[n+2]==='('){const d=matchingParen(s,n+2);if(d>n+2){out+='<span class="math-frac"><span>'+htmlEscape(s.slice(i+1,n))+'</span><span>'+htmlEscape(s.slice(n+3,d))+'</span></span>';i=d+1;continue}}}out+=htmlEscape(s[i]);i++}return out}
+function isMathAtom(ch){return !!ch&&/[A-Za-zÀ-ỹΔΛΜΩαβγλμνπρΩω0-9₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼.,°·×_′]/u.test(ch)}
+function richMathChar(ch){const sup={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁺':'+','⁻':'−','⁼':'=','⁽':'(','⁾':')'};const sub={'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':'6','₇':'7','₈':'8','₉':'9'};if(Object.prototype.hasOwnProperty.call(sup,ch))return '<sup class="math-sup">'+sup[ch]+'</sup>';if(Object.prototype.hasOwnProperty.call(sub,ch))return '<sub class="math-sub">'+sub[ch]+'</sub>';return htmlEscape(ch)}
+function formatRich(value){const source=cleanSymbolText(value);function parse(s){let out='',i=0;while(i<s.length){let numStart=-1,numEnd=-1,denStart=-1,denEnd=-1,slash=-1,groupedDen=false;if(s[i]==='('){const close=matchingParen(s,i);if(close>i){let k=close+1;while(k<s.length&&/\s/.test(s[k]))k++;if(s[k]==='/'){numStart=i+1;numEnd=close;slash=k;denStart=slash+1;while(denStart<s.length&&/\s/.test(s[denStart]))denStart++;if(s[denStart]==='('){const dc=matchingParen(s,denStart);if(dc>denStart){denEnd=dc;groupedDen=true}}else{denEnd=denStart;while(denEnd<s.length&&isMathAtom(s[denEnd]))denEnd++}}}}
+if(slash<0&&isMathAtom(s[i])&&(i===0||!isMathAtom(s[i-1]))){let j=i;while(j<s.length&&isMathAtom(s[j]))j++;let k=j;while(k<s.length&&/\s/.test(s[k]))k++;if(s[k]==='/'){numStart=i;numEnd=j;slash=k;denStart=slash+1;while(denStart<s.length&&/\s/.test(s[denStart]))denStart++;if(s[denStart]==='('){const dc=matchingParen(s,denStart);if(dc>denStart){denEnd=dc;groupedDen=true}}else{denEnd=denStart;while(denEnd<s.length&&isMathAtom(s[denEnd]))denEnd++}}}
+if(slash>=0&&numEnd>numStart&&denEnd>denStart){const numerator=s.slice(numStart,numEnd),denominator=s.slice(groupedDen?denStart+1:denStart,groupedDen?denEnd:denEnd);out+='<span class="math-frac"><span>'+parse(numerator)+'</span><span>'+parse(denominator)+'</span></span>';i=groupedDen?denEnd+1:denEnd;continue}out+=richMathChar(s[i]);i++}return out}return parse(source)}
 function sectionInfo(i,totalQuestions=28){if(totalQuestions===22){if(i<12)return {label:'PHẦN I · TRẮC NGHIỆM NHIỀU LỰA CHỌN',no:i+1,sub:'Chọn một đáp án đúng · 0,25 điểm/câu'};if(i<16)return {label:'PHẦN II · TRẮC NGHIỆM ĐÚNG/SAI',no:i-11,sub:'Đánh giá đúng/sai cho cả 4 ý · tối đa 1 điểm/câu'};return {label:'PHẦN III · TRẢ LỜI NGẮN',no:i-15,sub:'Nhập kết quả số · 0,5 điểm/câu'}}if(i<18)return {label:'PHẦN I · TRẮC NGHIỆM NHIỀU LỰA CHỌN',no:i+1,sub:'Chọn một đáp án đúng · 0,25 điểm/câu'};if(i<22)return {label:'PHẦN II · TRẮC NGHIỆM ĐÚNG/SAI',no:i-17,sub:'Đánh giá đúng/sai cho cả 4 ý · tối đa 1 điểm/câu'};return {label:'PHẦN III · TRẢ LỜI NGẮN',no:i-21,sub:'Nhập kết quả số · 0,25 điểm/câu'}}
 function emptyAnswer(q){if(q.type==='tf')return [null,null,null,null];return null}
 function isComplete(i){let q=activeExam.questions[i],a=answers[i];if(q.type==='tf')return Array.isArray(a)&&a.every(x=>x===true||x===false);if(q.type==='short')return a!==null&&String(a).trim()!=='';return a!==null}
