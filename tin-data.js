@@ -470,3 +470,128 @@ window.TIN_EXAMS_DATA = {
     ]
   ]
 };
+/* Lời giải thích gắn vào từng câu để hiển thị khi học sinh trả lời sai/bỏ trống. */
+(function addTinExplanations(){
+ var bank=window.TIN_EXAMS_DATA;if(!bank)return;
+ function has(s,words){return words.some(function(w){return s.indexOf(w)>=0;});}
+ function mc(t,q){
+  var x=String(q[0]||"").toLowerCase(),a=String(q[1][q[2]]||""),s=x+" "+a;
+  if(t===0){
+   if(has(s,["alan turing","phép thử turing"]))return "Alan Turing đề xuất phép thử Turing năm 1950; phép thử bàn về cách đánh giá hành vi đối thoại thông minh của máy.";
+   if(s.indexOf("dartmouth")>=0)return "Hội thảo Dartmouth năm 1956 là dấu mốc quan trọng gắn với sự hình thành lĩnh vực trí tuệ nhân tạo.";
+   if(has(s,["mycin","luật suy diễn"]))return "MYCIN là hệ chuyên gia y học, sử dụng tri thức chuyên môn và luật suy diễn để hỗ trợ đánh giá bệnh.";
+   if(has(s,["asimo","honda"]))return "ASIMO là robot hình người do Honda phát triển; nhận dạng hình ảnh hoặc tiếng nói giúp robot tiếp nhận thông tin.";
+   if(has(s,["google dịch","dịch máy"]))return "Dịch máy xử lí ngôn ngữ tự nhiên để chuyển nội dung giữa các ngôn ngữ, nên là một ứng dụng AI.";
+   if(s.indexOf("ai tổng quát")>=0)return "AI tổng quát cần năng lực rộng và chuyển tri thức giữa lĩnh vực; đây vẫn là mục tiêu nghiên cứu, chưa hoàn thiện trong thực tế.";
+   if(has(s,["ai yếu","nhiệm vụ cụ thể","chơi cờ"]))return "AI yếu được thiết kế cho nhiệm vụ cụ thể; điều đó không có nghĩa hệ thống làm được mọi việc như con người.";
+   if(has(s,["tự động hóa","guồng nước","ấm tự ngắt"]))return "Một thiết bị chỉ lặp thao tác cố định có thể là tự động hóa nhưng không nhất thiết là AI.";
+   if(has(s,["khả năng học","học từ dữ liệu","lịch sử xem"]))return "Học là rút ra mẫu từ dữ liệu và điều chỉnh dự đoán hoặc hành vi; hệ thống gợi ý có thể học từ lịch sử sử dụng.";
+   if(has(s,["suy luận","logic","rút ra kết luận"]))return "Suy luận dùng dữ kiện, tri thức và logic để đưa ra kết luận, không chỉ lưu hoặc truyền dữ liệu.";
+   if(has(s,["nhận thức","camera","radar","cảm biến","vật cản"]))return "Nhận thức thu nhận và diễn giải thông tin môi trường; camera, radar và cảm biến cung cấp dữ liệu đầu vào.";
+   if(has(s,["hiểu ngôn ngữ","giọng nói","trợ lí ảo","siri","bixby"]))return "Hiểu ngôn ngữ giúp hệ thống xử lí câu chữ hoặc lời nói; trợ lí ảo dùng yêu cầu đó để tìm thông tin hoặc thực hiện tác vụ.";
+   if(has(s,["giải quyết vấn đề","dự báo thời tiết"]))return "Giải quyết vấn đề vận dụng thông tin và tri thức để xử lí tình huống hoặc đưa ra dự báo.";
+   if(has(s,["nhận dạng khuôn mặt","chữ viết tay"]))return "Nhận dạng phân tích hình ảnh để xác định khuôn mặt hoặc chuyển chữ viết thành dữ liệu có thể xử lí.";
+   return "Đáp án đúng là “"+a+"”. AI có thể kết hợp học, suy luận, nhận thức, hiểu ngôn ngữ và giải quyết vấn đề; không nên nhầm các năng lực này với thao tác cố định.";
+  }
+  if(t===1){
+   if(has(s,["hệ chuyên gia","tri thức chuyên gia"]))return "Hệ chuyên gia dùng tri thức lĩnh vực cùng luật suy diễn để đưa ra kết luận hoặc gợi ý.";
+   if(has(s,["watson","ung thư"]))return "IBM Watson for Oncology là ví dụ AI hỗ trợ điều trị ung thư bằng cách phân tích thông tin y khoa.";
+   if(has(s,["y học","y tế","chẩn đoán","sức khỏe"]))return "AI có thể hỗ trợ phân tích ảnh y tế và dữ liệu, nhưng kết quả cần chuyên gia giám sát vì sai sót có thể gây hại.";
+   if(has(s,["giao thông","phương tiện tự lái","định tuyến"]))return "AI phân tích dữ liệu giao thông để hỗ trợ định tuyến, quản lí giao thông và phương tiện tự lái.";
+   if(has(s,["tài chính","ngân hàng","gian lận","chứng từ","hóa đơn"]))return "AI có thể nhận ra mẫu giao dịch bất thường và tự động xử lí chứng từ, hỗ trợ giảm gian lận và công việc thủ công.";
+   if(has(s,["sản xuất","chất lượng","chuỗi cung ứng"]))return "AI hỗ trợ kiểm tra chất lượng, tối ưu quy trình và quản lí chuỗi cung ứng.";
+   if(has(s,["nông nghiệp","trang trại","cây trồng","vật nuôi","thu hoạch","đất đai"]))return "AI phân tích dữ liệu thời tiết, đất, cây trồng và chăm sóc để hỗ trợ dự báo và chọn thời điểm thu hoạch.";
+   if(has(s,["giáo dục","học tập","người học","trợ lí học tập"]))return "AI trong giáo dục theo dõi tiến độ, phản hồi và đề xuất nội dung phù hợp từng người học.";
+   if(has(s,["aiot","iot","biến đổi khí hậu"]))return "AIoT kết hợp AI với thiết bị IoT: thiết bị thu thập dữ liệu còn AI phân tích để hỗ trợ giám sát hoặc ra quyết định.";
+   if(has(s,["tạo sinh","văn bản, hình ảnh","âm thanh","nghệ thuật","quảng cáo","trò chơi"]))return "AI tạo sinh có thể tạo nội dung mới như văn bản, hình ảnh hoặc âm thanh.";
+   if(has(s,["chatgpt","openai"]))return "Theo bài học, ChatGPT là hệ thống AI tạo sinh do OpenAI phát triển, xử lí yêu cầu ngôn ngữ theo ngữ cảnh.";
+   if(has(s,["huấn luyện","lượng lớn dữ liệu","ngữ cảnh","câu trả lời đa dạng"]))return "Mô hình ngôn ngữ học quy luật từ lượng lớn dữ liệu và tạo câu trả lời theo yêu cầu/ngữ cảnh; kết quả vẫn cần kiểm chứng.";
+   if(has(s,["ai tổng quát","ai hẹp","ai yếu"]))return "Phần lớn ứng dụng hiện tại là AI hẹp cho nhiệm vụ nhất định; AI tổng quát cần năng lực rộng qua nhiều lĩnh vực.";
+   if(has(s,["thất nghiệp","việc làm","công việc"]))return "Tự động hóa có thể thay đổi một số nhiệm vụ và tạo áp lực việc làm, nên cần thích ứng và đào tạo lại.";
+   if(has(s,["quyền riêng tư","dữ liệu cá nhân"]))return "AI có thể thu thập nhiều dữ liệu cá nhân; sử dụng dữ liệu không phù hợp có thể xâm phạm quyền riêng tư.";
+   if(has(s,["hộp đen","minh bạch","trách nhiệm giải trình"]))return "Nếu khó hiểu căn cứ quyết định của AI, việc kiểm tra, giải thích và xác định trách nhiệm trở nên khó.";
+   if(has(s,["rủi ro","nguy cơ","vũ khí","an toàn","giám sát","quy định pháp lí","xâm nhập"]))return "AI cần giám sát và cơ chế an toàn/trách nhiệm để hạn chế sai sót và tác động tiêu cực đến con người.";
+   return "Đáp án đúng là “"+a+"”. AI hỗ trợ nhiều lĩnh vực bằng cách phân tích dữ liệu và tạo gợi ý, nhưng kết quả vẫn cần kiểm tra và quản lí rủi ro.";
+  }
+  if(t===2){
+   if(s.indexOf("hub")>=0)return "Hub phát tín hiệu ra các cổng còn lại, không chọn riêng cổng đích; nhiều máy truyền cùng lúc dễ gây xung đột.";
+   if(has(s,["switch","collision","xung đột"]))return "Switch chuyển khung đến cổng thích hợp theo địa chỉ MAC, hạn chế phát dữ liệu tràn lan như hub.";
+   if(has(s,["wi-fi","wifi","sóng vô tuyến","mạng không dây","mật khẩu"]))return "Wi‑Fi truyền dữ liệu không dây bằng sóng vô tuyến; mạng có khóa thường cần xác thực bằng mật khẩu.";
+   if(has(s,["wap","wireless access point"]))return "WAP cung cấp điểm truy cập không dây để thiết bị kết nối vào mạng LAN.";
+   if(has(s,["router","định tuyến","đường đi","wan","mạng bên ngoài","mạng nội bộ"]))return "Router chọn đường chuyển tiếp giữa các mạng; LAN hướng về mạng nội bộ còn WAN hướng tới mạng bên ngoài.";
+   if(has(s,["modem","tín hiệu số","tín hiệu tương tự","tín hiệu quang","gsm","3g","4g","5g","sim"]))return "Modem chuyển đổi tín hiệu phù hợp đường truyền; modem quang xử lí tín hiệu quang, còn modem di động thường dùng SIM.";
+   if(has(s,["utp","rj45","cáp mạng","đôi dây xoắn","cáp quang"]))return "Cáp UTP thường có bốn đôi dây xoắn và dùng giắc RJ45 trong LAN; cáp quang truyền dữ liệu bằng ánh sáng.";
+   if(has(s,["kết nối vật lí","cấu hình logic","cắm dây","internet ngay"]))return "Cắm cáp mới tạo kết nối vật lí; máy còn có thể cần địa chỉ IP, cấu hình logic và dịch vụ Internet hoạt động.";
+   if(has(s,["máy tính để bàn","bộ điều hợp","wifi sẵn"]))return "Không phải máy tính để bàn nào cũng có Wi‑Fi tích hợp; nếu thiếu có thể dùng card hoặc bộ điều hợp Wi‑Fi.";
+   return "Đáp án đúng là “"+a+"”. Hub, switch, router, modem và WAP có các chức năng khác nhau; cần phân biệt truyền tín hiệu, kết nối LAN và định tuyến giữa các mạng.";
+  }
+  if(t===3){
+   if(s.indexOf("smtp")>=0)return "SMTP dùng để gửi thư điện tử; POP3 và IMAP liên quan đến truy cập hoặc nhận thư.";
+   if(has(s,["pop3","imap"]))return "POP3 và IMAP dùng để truy cập/lấy hoặc đồng bộ thư điện tử; SMTP mới là giao thức gửi thư.";
+   if(s.indexOf("ethernet")>=0)return "Ethernet quy định cách truyền dữ liệu trong mạng cục bộ có dây.";
+   if(has(s,["mac","6 byte","4 byte"]))return "Địa chỉ MAC dài 6 byte theo bài học; IPv4 dài 4 byte. Hai địa chỉ có vai trò khác nhau.";
+   if(has(s,["ipv4","nhị phân","byte đầu tiên","192.168.1.3","10.25.0.255","131.214.23.16"]))return "IPv4 dài 32 bit (4 byte), viết thành bốn nhóm số thập phân; mỗi byte tương ứng 8 bit nhị phân.";
+   if(has(s,["tcp","cổng ứng dụng","đánh số các gói","xác nhận","gửi lại","thứ tự"]))return "TCP dùng cổng để phân biệt ứng dụng, đánh số/xác nhận và có thể gửi lại dữ liệu để hỗ trợ truyền tin đúng thứ tự.";
+   if(has(s,["dns","tên miền"]))return "DNS tra cứu tên miền thành địa chỉ IP để người dùng dùng tên dễ nhớ.";
+   if(s.indexOf("http")>=0)return "HTTP là giao thức trao đổi dữ liệu web giữa trình duyệt và máy chủ.";
+   if(has(s,["icmp","ping"]))return "Ping dùng ICMP để kiểm tra khả năng liên lạc với thiết bị mạng; kết quả còn phụ thuộc cấu hình chặn ICMP.";
+   if(has(s,["mã kiểm tra","lỗi truyền"]))return "Mã kiểm tra trong Ethernet giúp phát hiện lỗi truyền của khung dữ liệu.";
+   if(has(s,["chia thành các gói","xen kẽ","đường truyền quá lâu"]))return "Chia dữ liệu thành gói giúp nhiều luồng cùng chia sẻ đường truyền; các gói có thể đi qua tuyến hoặc thời gian xử lí khác nhau.";
+   if(has(s,["phí internet","trả phí"]))return "Cước phí là chính sách dịch vụ, không phải quy tắc kỹ thuật của giao thức truyền dữ liệu.";
+   if(has(s,["internet là gì","tcp/ip"]))return "Internet liên kết nhiều mạng và sử dụng bộ giao thức TCP/IP để trao đổi dữ liệu.";
+   return "Đáp án đúng là “"+a+"”. Giao thức quy định cách trao đổi dữ liệu; IP lo địa chỉ/định tuyến, TCP hỗ trợ truyền tin tin cậy, DNS tra tên miền và SMTP gửi thư.";
+  }
+  if(t===4){
+   if(has(s,["read/write","read cho phép","quyền read"]))return "Read cho phép xem/đọc; Read/Write cho phép đọc và sửa trong phạm vi được cấp.";
+   if(s.indexOf("everyone")>=0)return "Everyone là nhóm trong thiết lập chia sẻ, không có nghĩa mọi người trên Internet được toàn quyền.";
+   if(has(s,["tường lửa","firewall"]))return "Tường lửa kiểm soát lưu lượng để giảm truy cập không mong muốn; không nên tắt vĩnh viễn chỉ để chia sẻ.";
+   if(s.indexOf("network discovery")>=0)return "Network discovery giúp máy tính phát hiện nhau trong phạm vi mạng theo cấu hình, không tự mở truy cập ra toàn Internet.";
+   if(has(s,["private network","public network"]))return "Private phù hợp hơn với mạng đáng tin cậy; Public thận trọng hơn ở nơi công cộng để hạn chế chia sẻ ngoài ý muốn.";
+   if(has(s,["public","users/public"]))return "Thư mục Public không tự động được mọi máy khác truy cập; việc truy cập còn phụ thuộc cấu hình chia sẻ và quyền.";
+   if(has(s,["properties","sharing","advanced sharing","remove","share this folder"]))return "Properties/Sharing/Advanced Sharing là nơi cấu hình, giới hạn hoặc hủy chia sẻ thư mục.";
+   if(has(s,["máy in","print server","hàng đợi","printers & scanners"]))return "Máy chủ in nhận yêu cầu, xếp hàng và gửi lệnh in; máy khách thường cần thêm máy in mạng và thử in để kiểm tra.";
+   if(has(s,["chia sẻ toàn ổ","ổ đĩa","kiểm soát quyền","bảo mật"]))return "Chia sẻ quá rộng có thể làm lộ dữ liệu không cần thiết; cần giới hạn người truy cập và cấp quyền tối thiểu.";
+   return "Đáp án đúng là “"+a+"”. Chia sẻ LAN cho phép dùng dữ liệu, phần mềm hoặc thiết bị theo quyền được cấp; cần cấu hình đúng và giữ bảo mật.";
+  }
+  if(has(s,["không gian mạng"]))return "Không gian mạng được hình thành từ mạng máy tính và dịch vụ trực tuyến; Internet là mạng toàn cầu lớn.";
+  if(has(s,["thuận tiện","tiết kiệm","chi phí","đi lại","ở xa","hội nghị truyền hình"]))return "Giao tiếp trực tuyến giúp liên lạc từ xa và giảm thời gian/chi phí đi lại, nhưng phụ thuộc kết nối và thiết bị.";
+  if(has(s,["tín hiệu phi ngôn ngữ","nét mặt","ngôn ngữ cơ thể"]))return "Tin nhắn và email thiếu nét mặt, giọng điệu hoặc ngôn ngữ cơ thể nên dễ gây hiểu nhầm.";
+  if(has(s,["mật khẩu","dữ liệu riêng tư","quyền riêng tư","nhật kí","nội dung trao đổi riêng","ảnh riêng tư"]))return "Thông tin riêng chỉ nên được chia sẻ khi có sự cho phép; tự ý phát tán có thể xâm phạm quyền riêng tư và làm tổn thương.";
+  if(has(s,["giả mạo","lòng tin","thông tin không chân thật","tài khoản giả"]))return "Thông tin hoặc tài khoản giả mạo khiến khó xác minh danh tính và làm giảm lòng tin.";
+  if(has(s,["lịch sự","công kích","ngôn từ","phê bình","bất đồng","phân biệt","lăng mạ","châm chọc"]))return "Tranh luận nên tập trung vào vấn đề, nêu lí do và tôn trọng người nghe; công kích cá nhân dễ gây tổn thương.";
+  if(has(s,["kiểm tra","xác minh","độ tin cậy","danh tiếng","tin giả"]))return "Cần kiểm tra nguồn và độ chính xác trước khi chia sẻ, vì thông tin chưa xác minh có thể gây hiểu lầm hoặc hại danh tiếng.";
+  if(has(s,["thấu hiểu","hoàn cảnh","cảm xúc","khó khăn"]))return "Thấu hiểu là đặt mình vào hoàn cảnh người khác để cân nhắc cảm xúc và khó khăn của họ.";
+  if(has(s,["hỗ trợ","động viên","đánh nhau","video"]))return "Ứng xử nhân văn cần giảm tổn hại, không phát tán nội dung bạo lực/làm nhục và tìm người lớn phù hợp khi cần.";
+  if(has(s,["spam","thư rác","quảng cáo"]))return "Tránh gửi thư rác hoặc quảng cáo không liên quan để tôn trọng thời gian người nhận.";
+  if(has(s,["sự cố","mất kết nối","gián đoạn","không tương thích","ngắt mạng"]))return "Cuộc gọi trực tuyến phụ thuộc mạng, phần mềm và thiết bị nên có thể bị gián đoạn.";
+  if(has(s,["tôn trọng","lịch sự","thấu hiểu","hỗ trợ","nhân văn"]))return "Bài học nêu bốn yếu tố ứng xử nhân văn: tôn trọng, lịch sự, thấu hiểu và hỗ trợ.";
+  return "Đáp án đúng là “"+a+"”. Giao tiếp trực tuyến có trách nhiệm cần tôn trọng quyền riêng tư, kiểm tra thông tin, dùng ngôn từ lịch sự và cân nhắc tác động đến người khác.";
+ }
+ function tf(group,item){
+  var s=String(item[0]||"").toLowerCase(),ok=item[1],topic=String(group.topic||"");
+  if(has(s,["alan turing","phép thử turing"]))return ok?"Đúng: Alan Turing đề xuất phép thử Turing năm 1950.":"Sai: phép thử Turing được đề xuất năm 1950, không phải năm 1956; năm 1956 gắn với hội thảo Dartmouth.";
+  if(has(s,["mọi hệ thống tự động","guồng nước"]))return ok?"Tự động hóa có thể chỉ lặp thao tác cố định, nên không nhất thiết là AI.":"Sai: không phải mọi hệ thống tự động hóa đều là AI; máy móc chỉ lặp thao tác không nhất thiết biết học hay suy luận.";
+  if(s.indexOf("ai tổng quát")>=0)return ok?"Đúng: AI tổng quát vẫn là mục tiêu nghiên cứu dài hạn.":"Sai: AI tổng quát chưa hoàn thiện trong thực tế, không thể nói đã làm được mọi việc của con người.";
+  if(s.indexOf("hub")>=0)return ok?"Đúng: hub phát tín hiệu nhận được ra các cổng còn lại.":"Sai: hub phát ra các cổng; switch thường chuyển đến cổng phù hợp với thiết bị đích.";
+  if(s.indexOf("switch")>=0)return ok?"Đúng: switch chuyển dữ liệu đến cổng thích hợp theo địa chỉ đích.":"Sai: switch không luôn phát ra mọi cổng như hub.";
+  if(s.indexOf("modem")>=0)return ok?"Đúng: modem chuyển đổi tín hiệu phù hợp đường truyền mà không đổi dữ liệu được mang.":"Sai: modem có chức năng chuyển đổi tín hiệu, không phải chỉ chia sẻ thư mục.";
+  if(has(s,["ipv4","6 byte","4 byte"]))return ok?"Đúng: IPv4 dài 4 byte (32 bit).":"Sai: IPv4 dài 4 byte; MAC theo bài học dài 6 byte.";
+  if(s.indexOf("mac")>=0)return ok?"Đúng: địa chỉ MAC theo bài học dài 6 byte, dùng ở lớp liên kết.":"Sai: MAC theo bài học dài 6 byte, không phải 4 byte.";
+  if(s.indexOf("tcp")>=0)return ok?"Đúng: TCP có cơ chế cổng, đánh số, xác nhận và gửi lại dữ liệu khi cần.":"Sai: TCP hỗ trợ truyền tin tin cậy; không thể gán toàn bộ chức năng của TCP cho IP.";
+  if(s.indexOf("dns")>=0)return ok?"Đúng: DNS tra cứu tên miền thành địa chỉ IP.":"Sai: DNS ánh xạ tên miền với IP; nó không chia sẻ máy in hay đổi tín hiệu.";
+  if(s.indexOf("router")>=0)return ok?"Đúng: router chọn đường chuyển tiếp dữ liệu giữa các mạng.":"Sai: router chọn đường chuyển tiếp, không chỉ phát dữ liệu ra mọi cổng.";
+  if(s.indexOf("everyone")>=0)return ok?"Đúng: Everyone là nhóm trong quyền chia sẻ; quyền phụ thuộc cấu hình.":"Sai: Everyone không có nghĩa mọi người trên Internet được toàn quyền quản trị.";
+  if(has(s,["tường lửa","firewall"]))return ok?"Đúng: tường lửa kiểm soát truy cập và giảm nguy cơ xâm nhập.":"Sai: tắt tường lửa vĩnh viễn làm giảm bảo vệ; hãy cấu hình chia sẻ thay vì vô hiệu hóa bảo mật.";
+  if(has(s,["read/write","quyền read"]))return ok?"Đúng: Read chỉ xem; Read/Write cho phép đọc và sửa trong phạm vi được cấp.":"Sai: cần phân biệt quyền chỉ đọc với quyền sửa và cấp quyền tối thiểu cần thiết.";
+  if(has(s,["ảnh riêng tư","nhật kí","nội dung trao đổi","quyền riêng tư"]))return ok?"Đúng: tôn trọng riêng tư là không chia sẻ nội dung riêng khi chưa được phép.":"Sai: không nên phát tán nội dung riêng của người khác khi chưa được họ cho phép.";
+  if(has(s,["công kích","xúc phạm","phân biệt","lịch sự"]))return ok?"Đúng: giao tiếp văn minh cần tôn trọng và lịch sự.":"Sai: công kích cá nhân hoặc ngôn từ phân biệt có thể gây tổn thương; hãy nêu lí do bình tĩnh.";
+  if(has(s,["gián đoạn","mất kết nối","ngắt mạng","sự cố kỹ thuật"]))return ok?"Đúng: giao tiếp trực tuyến phụ thuộc mạng, thiết bị và phần mềm nên có thể gián đoạn.":"Sai: cuộc gọi trực tuyến có thể bị gián đoạn do lỗi mạng hoặc phần mềm.";
+  if(has(s,["chatgpt","openai","tạo sinh"]))return ok?"Đúng: ChatGPT là ví dụ AI tạo sinh; AI tạo sinh có thể tạo nhiều dạng nội dung.":"Sai: AI tạo sinh không chỉ định tuyến; nó có thể tạo văn bản, hình ảnh và âm thanh.";
+  if(has(s,["ngân hàng","gian lận","tài chính"]))return ok?"Đúng: AI có thể phân tích dữ liệu tài chính để phát hiện giao dịch bất thường.":"Sai: AI có thể hỗ trợ phân tích dữ liệu tài chính và phát hiện gian lận.";
+  if(s.indexOf("chỉ có ứng dụng trong y học")>=0)return ok?"Đúng: AI có ứng dụng ở nhiều lĩnh vực ngoài y học.":"Sai: AI còn được dùng trong giao thông, tài chính, sản xuất, giáo dục và nông nghiệp.";
+  if(ok)return "Đúng: phát biểu phù hợp với kiến thức bài học về "+topic+".";
+  return "Sai: phát biểu chưa phù hợp với kiến thức bài học về "+topic+". Hãy đối chiếu lại định nghĩa và chức năng của khái niệm trong câu.";
+ }
+ bank.topics.forEach(function(topic,t){topic.questions.forEach(function(q){if(!q[3])q[3]=mc(t,q);});});
+ (bank.trueFalse||[]).forEach(function(groups){groups.forEach(function(group){group.items.forEach(function(item){if(!item[2])item[2]=tf(group,item);});});});
+})();
