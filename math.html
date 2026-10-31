@@ -1694,6 +1694,41 @@ html[data-theme="dark"] .hero .btn[style]:hover{
 html[data-theme="dark"] .chapter-select,
 html[data-theme="dark"] #difficultyFilter,
 html[data-theme="dark"] #sortFilter{color-scheme:dark}
+
+/* Dark mode fix: keep chapter/exam-entry cards readable on the dark surface */
+html[data-theme="dark"] .chapter-heading h2,
+html[data-theme="dark"] .section-head h2{color:#e4edf8!important}
+html[data-theme="dark"] .chapter-card,
+html[data-theme="dark"] button.chapter-card{
+  background:linear-gradient(145deg,#142237,#101b2b)!important;
+  border-color:#2b4059!important;
+  color:#dbe7f5!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.22)!important;
+}
+html[data-theme="dark"] .chapter-card:hover{
+  background:linear-gradient(145deg,#182b42,#122334)!important;
+  border-color:#43827f!important;
+  box-shadow:0 11px 25px rgba(0,0,0,.3)!important;
+}
+html[data-theme="dark"] .chapter-card:focus-visible{outline-color:#49bfb3!important}
+html[data-theme="dark"] .chapter-kicker{color:#70e0d2!important}
+html[data-theme="dark"] .chapter-card strong{color:#eaf2fc!important}
+html[data-theme="dark"] .chapter-card p,
+html[data-theme="dark"] .chapter-note{color:#a8bacf!important}
+html[data-theme="dark"] .chapter-count{
+  background:#173939!important;border-color:#2d5c5a!important;color:#a0f0e4!important;
+}
+html[data-theme="dark"] .chapter-select,
+html[data-theme="dark"] #chapterFilter{
+  background:#0e1929!important;border-color:#35485f!important;color:#e1ebf7!important;color-scheme:dark;
+}
+html[data-theme="dark"] .subject-icon{background:#193c42!important;color:#9ceee2!important}
+html[data-theme="dark"] .cardbottom{border-color:#2a3c53!important}
+html[data-theme="dark"] .level.easy{color:#85e0b5!important}
+html[data-theme="dark"] .level.mid{color:#8ec5ff!important}
+html[data-theme="dark"] .level.hard{color:#ffc18c!important}
+html[data-theme="dark"] .level.super{color:#d6a6ff!important}
+
 </style>
 </head>
 <body>
