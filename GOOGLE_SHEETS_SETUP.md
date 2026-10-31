@@ -12,7 +12,9 @@ Website hiện đang chạy trên GitHub Pages. Mã nhận điểm đã được
 6. Nhấn **Deploy**, chấp thuận quyền truy cập nếu Google yêu cầu, rồi sao chép URL ứng dụng web kết thúc bằng `/exec`.
 7. Gửi URL `/exec` đó trong cuộc trò chuyện này. URL này cho phép gửi kết quả vào Sheet, vì vậy chỉ chia sẻ với người bạn tin cậy. Không cần đổi quyền chia sẻ của chính Google Sheet thành công khai.
 
-Sau khi nhận URL, cần đặt nó làm endpoint trong cả `physics.html` và `chem.html`, rồi kiểm tra một bài thử trước khi dùng thật.
+URL `/exec` hiện được dùng chung cho các môn trong website. Nếu endpoint đã được triển khai, không cần tạo hệ thống mới; chỉ cần kiểm tra URL trong mã nguồn vẫn đúng với Web App của bạn.
+
+Khi có thay đổi trong `google-sheets/Code.gs` (ví dụ thêm môn Tin học), việc cập nhật tệp trên GitHub **không tự cập nhật Apps Script đã triển khai**. Hãy sao chép lại toàn bộ `Code.gs` mới vào trình soạn thảo Apps Script, lưu, vào **Deploy → Manage deployments → Edit**, chọn **New version** rồi nhấn **Deploy**. Giữ nguyên URL `/exec` nếu cập nhật đúng deployment hiện có.
 
 ## Dữ liệu được ghi
 
@@ -20,7 +22,7 @@ Mỗi lần nộp bài sẽ tạo một hàng gồm thời gian nhận, thời g
 
 ## Lưu ý
 
-- Tên người làm sẽ được hỏi khi bắt đầu mỗi bài thi.
+- Tên người làm được hỏi lần đầu trên trình duyệt/thiết bị và lưu để dùng lại cho những lần sau; các môn dùng chung tên đã lưu.
 - Điểm vẫn được lưu cục bộ trên thiết bị như trước. Khi endpoint được cấu hình, website sẽ gửi thêm thông tin tổng kết điểm đến Google Sheets.
 - Endpoint nhận yêu cầu công khai chỉ nên được dùng cho bảng điểm cá nhân/thử nghiệm. Vì website tĩnh không có đăng nhập, người ngoài có thể thử gửi dữ liệu giả. Hãy giữ Google Sheet ở chế độ riêng tư và kiểm tra các hàng bất thường.
 - Nếu tài khoản trường học không cho chọn **Anyone / Bất kỳ ai**, đừng công khai Sheet; báo lại để chọn phương án khác.
