@@ -1395,16 +1395,16 @@ main{min-width:0}
 
 
 /* Công thức và ký hiệu: phân số rõ tử/mẫu, dấu phép tính thoáng hơn */
-.math-frac{display:inline-grid;grid-template-rows:auto auto;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .2em;white-space:nowrap;font-size:1.04em;min-width:1.05em;color:inherit}
-.math-frac>span:first-child{display:block;border-bottom:2px solid currentColor;padding:0 .22em .12em;min-width:100%;font-weight:500}
-.math-frac>span:last-child{display:block;padding:.12em .22em 0;font-weight:500}
+.math-frac{display:inline-grid;grid-template-rows:auto auto;align-items:center;vertical-align:middle;text-align:center;line-height:1.12;margin:0 .22em;white-space:nowrap;font-size:1.04em;min-width:1.05em;color:inherit;max-width:100%}
+.math-frac>span:first-child{display:block;border-bottom:2px solid currentColor;padding:0 .22em .08em;min-width:100%;font-weight:500}
+.math-frac>span:last-child{display:block;padding:.08em .22em 0;font-weight:500}
 .math-sup,.math-sub{font-size:.78em;line-height:0;font-weight:inherit}
 .math-sup{vertical-align:super}
 .math-sub{vertical-align:sub}
 .questiontext .math-frac,.answerline .math-frac,.reviewrow .math-frac{font-size:1.02em}
 
 
-/* Ký hiệu toán: số mũ rõ hơn, căn có gạch ngang và phân số giữ dạng dấu / */
+/* Ký hiệu toán: số mũ, căn thức và phân số xếp tầng rõ ràng */
 .math-sup,.math-sub{font-size:.86em;line-height:0;font-weight:750}
 .math-sup{vertical-align:super;margin-left:.015em}
 .math-sub{vertical-align:sub}
@@ -1600,6 +1600,83 @@ function filterCards(){let query=$('searchInput').value.toLowerCase(),level=$('d
 ['searchInput'].forEach(id=>$(id).addEventListener('input',filterCards));['difficultyFilter','sortFilter'].forEach(id=>$(id).addEventListener('change',filterCards));$('chapterFilter').addEventListener('change',renderBrowse);
 function cleanMathText(s){return String(s??'').replace(/x\s*[−-]\s*\(\s*[−-]\s*(\d+)\s*\)/g,(_,n)=>'x+'+n).replace(/x\s*[−-]\s*\(\s*0\s*\)/g,'x').replace(/\+\s*-/g,'−').replace(/·/g,' × ').replace(/\s*×\s*/g,' × ')}
 function cleanSymbolText(value){return cleanMathText(value)}
+function mathGroupStart(text,closeIndex){
+  const close=text[closeIndex], pair={')':'(',']':'[','}':'{'}, open=pair[close];
+  if(!open)return -1;
+  let depth=0;
+  for(let i=closeIndex;i>=0;i--){
+   if(text[i]===close)depth++;
+   else if(text[i]===open){depth--;if(depth===0)return i;}
+  }
+  return -1;
+ }
+ function mathGroupEnd(text,startIndex){
+  const pair={'(':')','[':']','{':'}'};
+  if(!pair[text[startIndex]])return -1;
+  const stack=[];
+  for(let i=startIndex;i<text.length;i++){
+   const c=text[i];
+   if(pair[c])stack.push(pair[c]);
+   else if(c===')'||c===']'||c==='}'){
+    if(stack.pop()!==c)return -1;
+    if(!stack.length)return i;
+   }
+  }
+  return -1;
+ }
+ function unwrapMathGroup(value){
+  const s=value.trim();
+  if(s.length<2)return s;
+  if(s[0]==='('&&matchingParen(s,0)===s.length-1)return s.slice(1,-1);
+  if(s[0]==='['&&mathGroupEnd(s,0)===s.length-1)return s.slice(1,-1);
+  if(s[0]==='{'&&mathGroupEnd(s,0)===s.length-1)return s.slice(1,-1);
+  return s;
+ }
+ function fractionBounds(text,slashIndex){
+  let p=slashIndex-1;
+  while(p>=0&&/\s/.test(text[p]))p--;
+  if(p<0)return null;
+  while(p>=0&&/[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼]/u.test(text[p]))p--;
+  let numeratorStart;
+  if(p>=0&&')]}'.includes(text[p])){
+   numeratorStart=mathGroupStart(text,p);
+   if(numeratorStart<0)return null;
+  }else{
+   while(p>=0&&isMathAtom(text[p]))p--;
+   numeratorStart=p+1;
+  }
+  if(numeratorStart>=slashIndex)return null;
+  if(numeratorStart>0&&/[−-]/.test(text[numeratorStart-1])&&(numeratorStart-1===0||/[=(:,;\[{+\-−\s]/.test(text[numeratorStart-2]||'')))numeratorStart--;
+  let q=slashIndex+1;
+  while(q<text.length&&/\s/.test(text[q]))q++;
+  if(q>=text.length)return null;
+  let denominatorEnd;
+  if('([{'.includes(text[q])){
+   const close=mathGroupEnd(text,q);
+   if(close<0)return null;
+   denominatorEnd=close+1;
+   while(denominatorEnd<text.length&&/[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼]/u.test(text[denominatorEnd]))denominatorEnd++;
+   if(text[denominatorEnd]==='^'){
+    let e=denominatorEnd+1;
+    while(e<text.length&&/\s/.test(text[e]))e++;
+    if(text[e]==='('){const ec=mathGroupEnd(text,e);if(ec>=0)denominatorEnd=ec+1;}
+    else {while(e<text.length&&isMathAtom(text[e]))e++;if(e>denominatorEnd+1)denominatorEnd=e;}
+   }
+  }else{
+   if(/[−-]/.test(text[q]))q++;
+   while(q<text.length&&isMathAtom(text[q]))q++;
+   if(text[q]==='^'){
+    let e=q+1;
+    while(e<text.length&&/\s/.test(text[e]))e++;
+    if(text[e]==='('){const ec=mathGroupEnd(text,e);if(ec>=0)q=ec+1;}
+    else {while(e<text.length&&isMathAtom(text[e]))e++;if(e>q+1)q=e;}
+   }
+   denominatorEnd=q;
+  }
+  if(denominatorEnd<=slashIndex+1)return null;
+  return {start:numeratorStart,end:denominatorEnd};
+ }
+ 
 function htmlEscape(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function matchingParen(s,start){let depth=0;for(let i=start;i<s.length;i++){if(s[i]==='(')depth++;else if(s[i]===')'){depth--;if(depth===0)return i}}return -1}
 function isMathAtom(ch){return !!ch&&/[A-Za-zÀ-ỹΔΛΜΩαβγλμνπρΩω0-9₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼.,°·×_′]/u.test(ch)}
@@ -1609,6 +1686,15 @@ function formatRich(value){
  function parse(text){
   let out='',i=0;
   while(i<text.length){
+   if(text[i]==='/'){
+    const bounds=fractionBounds(text,i);
+    if(bounds&&bounds.start<i&&bounds.end>i+1){
+     const numerator=unwrapMathGroup(text.slice(bounds.start,i));
+     const denominator=unwrapMathGroup(text.slice(i+1,bounds.end));
+     out+='<span class="math-frac" role="math"><span>'+parse(numerator)+'</span><span>'+parse(denominator)+'</span></span>';
+     i=bounds.end;continue;
+    }
+   }
    if(text[i]==='^'){
     let start=i+1;
     while(start<text.length&&/\s/.test(text[start]))start++;
