@@ -85,6 +85,8 @@ window.TIN_EXAMS_DATA = {
       ["Thông điệp tổng kết của bài về phát triển AI là gì?", ["Phát triển AI đi cùng giải quyết nguy cơ xã hội, đạo đức và an toàn", "Không cần quan tâm hậu quả", "AI chỉ dùng để giải trí", "Ngừng mọi nghiên cứu"], 0],
       ["Ứng dụng AI giám sát biến đổi khí hậu được hỗ trợ bởi sự kết hợp nào?", ["POP3 và IMAP", "TCP và SMTP", "IoT và AI", "Hub và switch"], 2],
       ["Trong giáo dục, trợ lí học tập ảo có thể làm gì?", ["Chỉ phát hiện gian lận ngân hàng", "Chỉ điều khiển xe", "Chỉ theo dõi khí hậu", "Trả lời câu hỏi, hướng dẫn và cung cấp tài liệu học tập"], 3]
+,
+      ["Một ứng dụng AI trong chăm sóc sức khỏe cần được triển khai ra sao?", ["Không cần kiểm tra kết quả", "Có giám sát phù hợp vì kết quả sai có thể gây hại", "Cho phép tự quyết định mọi trường hợp", "Công khai dữ liệu bệnh nhân"], 1]
     ]},
     { name: "Bài 3 · Một số thiết bị mạng thông dụng", questions: [
       ["Khi nhận dữ liệu qua một cổng của hub, tín hiệu thường được gửi đi đâu?", ["Đến tất cả cổng còn lại", "Chỉ đến một cổng đích", "Chỉ đến router xa nhất", "Chỉ đến modem"], 0],
@@ -168,6 +170,8 @@ window.TIN_EXAMS_DATA = {
       ["Vì sao nhiều cuộc gọi Internet có thể chia sẻ cùng đường truyền vật lí?", ["Dữ liệu được chia thành gói và các cuộc truyền có thể xen kẽ", "Mỗi cuộc gọi có đường cáp riêng toàn cầu", "TCP xóa mọi âm thanh", "Không có giao thức nào"], 0],
       ["Tên miền thuận tiện hơn dãy IP vì thường là gì?", ["Một địa chỉ MAC", "Một cổng WAN", "Tên bằng chữ dễ nhớ", "Một mã kiểm tra"], 2],
       ["Quy định về việc người dùng phải trả phí Internet có thuộc chức năng truyền dữ liệu của giao thức không?", ["Có, là chức năng cốt lõi của IP", "Không; đó là vấn đề sử dụng dịch vụ, không phải quy tắc truyền dữ liệu cốt lõi", "Có, là chức năng TCP bắt buộc", "Có, là chức năng Ethernet"], 1]
+,
+      ["Trong mô hình bài học, dữ liệu đi qua các router giữa hai LAN chủ yếu dùng địa chỉ nào để dẫn đường?", ["Địa chỉ email", "Tên tệp", "Địa chỉ IP", "Tên ứng dụng"], 2]
     ]},
     { name: "Bài 5 · Thực hành chia sẻ tài nguyên trên mạng", questions: [
       ["Tài nguyên máy tính có thể gồm những gì?", ["Dữ liệu, phần mềm hoặc thiết bị", "Chỉ màn hình", "Chỉ chuột", "Chỉ tài khoản mạng xã hội"], 0],
@@ -435,6 +439,33 @@ window.TIN_EXAMS_DATA = {
         ["Khi tức giận, nên gửi ngay lời xúc phạm để giải quyết bất đồng.", false],
         ["Lịch sự bao gồm tránh lăng mạ, châm chọc và phỉ báng.", true],
         ["Hỗ trợ người khác đôi khi chỉ cần lời động viên chân thành.", true]
+      ]}
+    ]
+    ,
+    [
+      { topic: "Bài 1", title: "Tổng hợp năng lực AI", items: [
+        ["Khả năng suy luận sử dụng logic và tri thức để đưa ra kết luận.", true],
+        ["Một guồng nước truyền thống nhất thiết là ứng dụng AI.", false],
+        ["Trợ lí ảo có thể xử lí yêu cầu bằng ngôn ngữ tự nhiên.", true],
+        ["AI yếu được định nghĩa là AI đã có năng lực tổng quát như con người.", false]
+      ]},
+      { topic: "Bài 2", title: "Lợi ích và cảnh báo", items: [
+        ["AI có thể hỗ trợ kiểm tra chất lượng trong sản xuất.", true],
+        ["Các ứng dụng AI không tạo ra bất cứ lo ngại nào về dữ liệu cá nhân.", false],
+        ["Cần giám sát và quản lí rủi ro khi phát triển AI.", true],
+        ["AI tạo sinh chỉ có thể tạo văn bản, không thể tạo hình ảnh hoặc âm thanh.", false]
+      ]},
+      { topic: "Bài 4", title: "Giao thức Internet", items: [
+        ["TCP có cơ chế xác nhận để hỗ trợ phát hiện gói thất lạc hoặc lỗi.", true],
+        ["DNS được dùng chủ yếu để chia sẻ máy in trên LAN.", false],
+        ["Địa chỉ IPv4 được viết thông dụng bằng bốn nhóm số thập phân ngăn cách bởi dấu chấm.", true],
+        ["IP và TCP có vai trò khác nhau trong bộ giao thức TCP/IP.", true]
+      ]},
+      { topic: "Bài 6", title: "Ứng xử có trách nhiệm", items: [
+        ["Có thể chia sẻ ảnh riêng tư của bạn mà không cần xin phép nếu ảnh khiến nhiều người thích.", false],
+        ["Khi bất đồng, nên bình tĩnh trình bày lí do và tránh công kích cá nhân.", true],
+        ["Kiểm tra tính chính xác trước khi chia sẻ giúp hạn chế lan truyền thông tin sai.", true],
+        ["Ứng xử nhân văn gồm cả tôn trọng, lịch sự, thấu hiểu và hỗ trợ.", true]
       ]}
     ]
   ]
