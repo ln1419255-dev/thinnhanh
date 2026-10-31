@@ -1673,8 +1673,38 @@ function mathGroupStart(text,closeIndex){
    }
    denominatorEnd=q;
   }
+  while(denominatorEnd>slashIndex+1&&/[.,;]/.test(text[denominatorEnd-1])&&(denominatorEnd===text.length||/\\s|[)\\]}]/.test(text[denominatorEnd])))denominatorEnd--;
   if(denominatorEnd<=slashIndex+1)return null;
   return {start:numeratorStart,end:denominatorEnd};
+ }
+ function fractionSlashAt(text,startIndex){
+  let p=startIndex;
+  if(/[−-]/.test(text[p]||''))p++;
+  if(p>=text.length)return -1;
+  if('([{'.includes(text[p])){
+   const close=mathGroupEnd(text,p);if(close<0)return -1;
+   p=close+1;
+   while(p<text.length&&/[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼]/u.test(text[p]))p++;
+   if(text[p]==='^'){
+    let e=p+1;while(e<text.length&&/\\s/.test(text[e]))e++;
+    if(text[e]==='('){const ec=mathGroupEnd(text,e);if(ec>=0)p=ec+1;}
+    else {while(e<text.length&&isMathAtom(text[e]))e++;if(e>p+1)p=e;}
+   }
+  }else{
+   if(!isMathAtom(text[p]))return -1;
+   while(p<text.length&&isMathAtom(text[p]))p++;
+   while(p<text.length&&text[p]==='('){
+    const close=mathGroupEnd(text,p);if(close<0)break;p=close+1;
+   }
+   while(p<text.length&&text[p]==='^'){
+    let e=p+1;while(e<text.length&&/\\s/.test(text[e]))e++;
+    if(text[e]==='('){const ec=mathGroupEnd(text,e);if(ec>=0)p=ec+1;else break;}
+    else {while(e<text.length&&isMathAtom(text[e]))e++;if(e>p+1)p=e;else break;}
+   }
+   while(p<text.length&&/[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼]/u.test(text[p]))p++;
+  }
+  while(p<text.length&&/\\s/.test(text[p]))p++;
+  return text[p]==='/'?p:-1;
  }
  
 function htmlEscape(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -1686,11 +1716,12 @@ function formatRich(value){
  function parse(text){
   let out='',i=0;
   while(i<text.length){
-   if(text[i]==='/'){
-    const bounds=fractionBounds(text,i);
-    if(bounds&&bounds.start<i&&bounds.end>i+1){
-     const numerator=unwrapMathGroup(text.slice(bounds.start,i));
-     const denominator=unwrapMathGroup(text.slice(i+1,bounds.end));
+   const slashAt=fractionSlashAt(text,i);
+   if(slashAt>=0){
+    const bounds=fractionBounds(text,slashAt);
+    if(bounds&&bounds.start===i&&bounds.end>slashAt+1){
+     const numerator=unwrapMathGroup(text.slice(bounds.start,slashAt));
+     const denominator=unwrapMathGroup(text.slice(slashAt+1,bounds.end));
      out+='<span class="math-frac" role="math"><span>'+parse(numerator)+'</span><span>'+parse(denominator)+'</span></span>';
      i=bounds.end;continue;
     }
