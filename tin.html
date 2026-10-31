@@ -195,7 +195,6 @@ button,input{font:inherit}button{cursor:pointer}.topbar{height:70px;position:sti
       button.addEventListener("click",function(){
         activeQuestion=Number(button.dataset.question);
         renderQuestions();updateProgress();
-        window.scrollTo({top:0,behavior:"smooth"});
       });
     });
   }
@@ -276,8 +275,8 @@ button,input{font:inherit}button{cursor:pointer}.topbar{height:70px;position:sti
     byId("submitHint").textContent="Bài đã được chấm. Xem các đáp án được đánh dấu để ôn lại kiến thức.";
     byId("resultPanel").scrollIntoView({behavior:"smooth",block:"start"});
   }
-  byId("prevQuestion").addEventListener("click",function(){if(activeQuestion>0){activeQuestion--;renderQuestions();updateProgress();window.scrollTo({top:0,behavior:"smooth"});}});
-  byId("nextQuestion").addEventListener("click",function(){activeQuestion=activeQuestion===33?0:activeQuestion+1;renderQuestions();updateProgress();window.scrollTo({top:0,behavior:"smooth"});});
+  byId("prevQuestion").addEventListener("click",function(){if(activeQuestion>0){activeQuestion--;renderQuestions();updateProgress();}});
+  byId("nextQuestion").addEventListener("click",function(){activeQuestion=activeQuestion===33?0:activeQuestion+1;renderQuestions();updateProgress();});
   byId("backToList").addEventListener("click",function(){byId("quizView").style.display="none";byId("examList").style.display="block";window.scrollTo({top:0,behavior:"smooth"});});
   byId("submitExam").addEventListener("click",submitExam);byId("retryExam").addEventListener("click",function(){startExam(examIndex);});
   buildExamCards();
