@@ -1393,6 +1393,16 @@ main{min-width:0}
  .copyright-separator{height:16px}
 }
 
+
+/* Công thức và ký hiệu: phân số rõ tử/mẫu, dấu phép tính thoáng hơn */
+.math-frac{display:inline-grid;grid-template-rows:auto auto;vertical-align:middle;text-align:center;line-height:1.2;margin:0 .2em;white-space:nowrap;font-size:1.04em;min-width:1.05em;color:inherit}
+.math-frac>span:first-child{display:block;border-bottom:2px solid currentColor;padding:0 .22em .12em;min-width:100%;font-weight:500}
+.math-frac>span:last-child{display:block;padding:.12em .22em 0;font-weight:500}
+.math-sup,.math-sub{font-size:.78em;line-height:0;font-weight:inherit}
+.math-sup{vertical-align:super}
+.math-sub{vertical-align:sub}
+.questiontext .math-frac,.answerline .math-frac,.reviewrow .math-frac{font-size:1.02em}
+
 </style>
 </head>
 <body>
@@ -1583,10 +1593,19 @@ function sectionInfo(i,totalQuestions=28){if(totalQuestions===22){if(i<12)return
 function emptyAnswer(q){if(q.type==='tf')return [null,null,null,null];return null}
 function isComplete(i){let q=activeExam.questions[i],a=answers[i];if(q.type==='tf')return Array.isArray(a)&&a.every(x=>x===true||x===false);if(q.type==='short')return a!==null&&String(a).trim()!=='';return a!==null}
 function answeredCount(){return answers.filter((a,i)=>isComplete(i)).length}
-function renderTake(){let q=activeExam.questions[activeQ],info=sectionInfo(activeQ,activeExam.questions.length);$('sectionLabel').textContent=info.label;$('questionTitle').textContent=`Câu ${info.no} · ${info.sub}`;$('questionText').textContent=q.q;
+function cleanSymbolText(value){return String(value??'').replace(/\s*×\s*/g,' × ').replace(/\s*·\s*/g,' · ').replace(/\s*\*\s*/g,' × ')}
+function htmlEscape(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function matchingParen(s,start){let depth=0;for(let i=start;i<s.length;i++){if(s[i]==='(')depth++;else if(s[i]===')'){depth--;if(depth===0)return i}}return -1}
+function isMathAtom(ch){return !!ch&&/[A-Za-zÀ-ỹΔΛΜΩαβγλμνπρΩω0-9₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼.,°·×_′]/u.test(ch)}
+function richMathChar(ch){const sup={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁺':'+','⁻':'−','⁼':'=','⁽':'(','⁾':')'};const sub={'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':'6','₇':'7','₈':'8','₉':'9'};if(Object.prototype.hasOwnProperty.call(sup,ch))return '<sup class="math-sup">'+sup[ch]+'</sup>';if(Object.prototype.hasOwnProperty.call(sub,ch))return '<sub class="math-sub">'+sub[ch]+'</sub>';return htmlEscape(ch)}
+function formatRich(value){const source=cleanSymbolText(value);function parse(s){let out='',i=0;while(i<s.length){let numStart=-1,numEnd=-1,denStart=-1,denEnd=-1,slash=-1,groupedDen=false;if(s[i]==='('){const close=matchingParen(s,i);if(close>i){let k=close+1;while(k<s.length&&/\s/.test(s[k]))k++;if(s[k]==='/'){numStart=i+1;numEnd=close;slash=k;denStart=slash+1;while(denStart<s.length&&/\s/.test(s[denStart]))denStart++;if(s[denStart]==='('){const dc=matchingParen(s,denStart);if(dc>denStart){denEnd=dc;groupedDen=true}}else{denEnd=denStart;while(denEnd<s.length&&isMathAtom(s[denEnd]))denEnd++}}}}
+if(slash<0&&isMathAtom(s[i])&&(i===0||!isMathAtom(s[i-1]))){let j=i;while(j<s.length&&isMathAtom(s[j]))j++;let k=j;while(k<s.length&&/\s/.test(s[k]))k++;if(s[k]==='/'){numStart=i;numEnd=j;slash=k;denStart=slash+1;while(denStart<s.length&&/\s/.test(s[denStart]))denStart++;if(s[denStart]==='('){const dc=matchingParen(s,denStart);if(dc>denStart){denEnd=dc;groupedDen=true}}else{denEnd=denStart;while(denEnd<s.length&&isMathAtom(s[denEnd]))denEnd++}}}
+if(slash>=0&&numEnd>numStart&&denEnd>denStart){const numerator=s.slice(numStart,numEnd),denominator=s.slice(groupedDen?denStart+1:denStart,groupedDen?denEnd:denEnd);out+='<span class="math-frac"><span>'+parse(numerator)+'</span><span>'+parse(denominator)+'</span></span>';i=groupedDen?denEnd+1:denEnd;continue}out+=richMathChar(s[i]);i++}return out}return parse(source)}
+
+function renderTake(){let q=activeExam.questions[activeQ],info=sectionInfo(activeQ,activeExam.questions.length);$('sectionLabel').textContent=info.label;$('questionTitle').textContent=`Câu ${info.no} · ${info.sub}`;$('questionText').innerHTML=formatRich(q.q);
  let area='';
- if(q.type==='mc'){area='<div class="answerlist">'+q.options.map((o,j)=>`<button class="takeanswer ${answers[activeQ]===j?'selected':''}" data-choice="${j}"><span class="letter">${String.fromCharCode(65+j)}</span><span>${esc(o)}</span></button>`).join('')+'</div>'}
- else if(q.type==='tf'){area='<div>'+q.statements.map((s,j)=>`<div class="tfrow"><div class="tfstatement"><p><b>${'abcd'[j]})</b> ${esc(s.text)}</p><div class="tfchoices"><button class="tfchoice ${answers[activeQ][j]===true?'on-true':''}" data-tf="${j}" data-val="true">Đúng</button><button class="tfchoice ${answers[activeQ][j]===false?'on-false':''}" data-tf="${j}" data-val="false">Sai</button></div></div></div>`).join('')+'</div>'}
+ if(q.type==='mc'){area='<div class="answerlist">'+q.options.map((o,j)=>`<button class="takeanswer ${answers[activeQ]===j?'selected':''}" data-choice="${j}"><span class="letter">${String.fromCharCode(65+j)}</span><span>${formatRich(o)}</span></button>`).join('')+'</div>'}
+ else if(q.type==='tf'){area='<div>'+q.statements.map((s,j)=>`<div class="tfrow"><div class="tfstatement"><p><b>${'abcd'[j]})</b> ${formatRich(s.text)}</p><div class="tfchoices"><button class="tfchoice ${answers[activeQ][j]===true?'on-true':''}" data-tf="${j}" data-val="true">Đúng</button><button class="tfchoice ${answers[activeQ][j]===false?'on-false':''}" data-tf="${j}" data-val="false">Sai</button></div></div></div>`).join('')+'</div>'}
  else {area=`<div><input class="shortinput" id="shortInput" inputmode="decimal" autocomplete="off" placeholder="Nhập đáp án bằng số" value="${answers[activeQ]===null?'':esc(answers[activeQ])}"><div class="shortnote">Nhập số, dùng dấu phẩy hoặc dấu chấm cho phần thập phân. Đơn vị đã ghi trong đề nếu cần.</div></div>`}
  $('responseArea').innerHTML=area;
  document.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>{answers[activeQ]=Number(b.dataset.choice);renderTake()});
@@ -1659,8 +1678,8 @@ function renderResult(h){const e= h.questions? h : null;const questions=h.questi
  </div>
  <div class="breakdown"><div class="breakitem"><strong>${fmt(h.mcPoints,2)} / ${isLegacy?'3,0':'4,5'}</strong><span>Phần I · Trắc nghiệm</span></div><div class="breakitem"><strong>${fmt(h.tfPoints,2)} / 4,0</strong><span>Phần II · Đúng/Sai</span></div><div class="breakitem"><strong>${fmt(h.shortPoints,2)} / ${isLegacy?'3,0':'1,5'}</strong><span>Phần III · Trả lời ngắn</span></div></div><div class="info-box"><b>Chấm đúng/sai theo từng câu:</b> số ý đúng 0 → 0 điểm; 1 → 0,1 điểm; 2 → 0,25 điểm; 3 → 0,5 điểm; 4 → 1 điểm. Câu trả lời ngắn chấp nhận sai số nhỏ như ghi trong phần hướng dẫn mỗi câu.</div><div class="section-head"><h2>Đáp án và giải thích</h2><span class="tiny">Xanh = đúng · Đỏ = chưa đúng</span></div>`;
  h.detail.forEach(d=>{let q=d.q;const num=d.index+1,section=sectionInfo(d.index,questions.length);body+=`<div class="reviewrow"><div class="eyebrow">${section.label} · CÂU ${section.no}</div>`;
- if(d.type==='mc'){body+=`<div class="${d.ok?'correct':'incorrect'}" style="margin:6px 0">${d.ok?'Đúng · +0,25 điểm':'Chưa đúng · +0 điểm'}</div><p><b>${esc(q.q)}</b></p>`;q.options.forEach((o,j)=>{const right=j===q.correct,chosen=d.answer===j;body+=`<div class="answerline" style="color:${right?'#16856d':chosen?'#cb5151':'#6c7d90'}">${String.fromCharCode(65+j)}. ${esc(o)} ${right?'✓ Đáp án đúng':chosen?'← Bạn đã chọn':''}</div>`});body+=`<p class="tiny">Giải thích: ${esc(q.why)}</p>`}
- else if(d.type==='tf'){body+=`<div class="${d.countCorrect===4?'correct':'incorrect'}" style="margin:6px 0">Đúng ${d.countCorrect}/4 ý · +${fmt(d.points,2)} điểm</div><p><b>${esc(q.q)}</b></p>`;q.statements.forEach((s,j)=>{const user=Array.isArray(d.answer)?d.answer[j]:null,ok=user===s.correct;body+=`<div class="answerline"><span class="${ok?'correct':'incorrect'}">${'abcd'[j]}) ${s.correct?'Đúng':'Sai'} là đáp án chuẩn · Bạn chọn: ${user===null||user===undefined?'Chưa chọn':user?'Đúng':'Sai'} ${ok?'✓':'✗'}</span><div class="tiny" style="margin:3px 0 7px">${esc(s.text)} — ${esc(s.why)}</div></div>`})}
+ if(d.type==='mc'){body+=`<div class="${d.ok?'correct':'incorrect'}" style="margin:6px 0">${d.ok?'Đúng · +0,25 điểm':'Chưa đúng · +0 điểm'}</div><p><b>${formatRich(q.q)}</b></p>`;q.options.forEach((o,j)=>{const right=j===q.correct,chosen=d.answer===j;body+=`<div class="answerline" style="color:${right?'#16856d':chosen?'#cb5151':'#6c7d90'}">${String.fromCharCode(65+j)}. ${formatRich(o)} ${right?'✓ Đáp án đúng':chosen?'← Bạn đã chọn':''}</div>`});body+=`<p class="tiny">Giải thích: ${formatRich(q.why)}</p>`}
+ else if(d.type==='tf'){body+=`<div class="${d.countCorrect===4?'correct':'incorrect'}" style="margin:6px 0">Đúng ${d.countCorrect}/4 ý · +${fmt(d.points,2)} điểm</div><p><b>${esc(q.q)}</b></p>`;q.statements.forEach((s,j)=>{const user=Array.isArray(d.answer)?d.answer[j]:null,ok=user===s.correct;body+=`<div class="answerline"><span class="${ok?'correct':'incorrect'}">${'abcd'[j]}) ${s.correct?'Đúng':'Sai'} là đáp án chuẩn · Bạn chọn: ${user===null||user===undefined?'Chưa chọn':user?'Đúng':'Sai'} ${ok?'✓':'✗'}</span><div class="tiny" style="margin:3px 0 7px">${formatRich(s.text)} — ${formatRich(s.why)}</div></div>`})}
  else {body+=`<div class="${d.ok?'correct':'incorrect'}" style="margin:6px 0">${d.ok?'Đúng · +0,25 điểm':'Chưa đúng · +0 điểm'}</div><p><b>${esc(q.q)}</b></p><div class="answerline">Bạn nhập: <b>${esc(d.answer===null||String(d.answer).trim()===''?'(bỏ trống)':d.answer)}</b></div><div class="answerline correct">Đáp án chuẩn: <b>${fmt(q.answer,5)}${q.unit?' '+esc(q.unit):''}</b></div><p class="tiny">Giải thích: ${esc(q.why)}</p>`}
  body+='</div>'});
  $('resultBody').innerHTML=body
