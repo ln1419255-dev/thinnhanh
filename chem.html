@@ -1693,7 +1693,7 @@ function chemEsterSuperB(s){
 function chemCarbHardA(s){
  const k=s-4,glucose=(0.12+0.01*k),y=.80-.02*k;
  return [
-  chemMCQ('Một hỗn hợp 36 g glucose và fructose làm mất màu vừa đủ '+(0.10+0.01*k).toFixed(2)+' mol Br₂ trong điều kiện chỉ glucose phản ứng. Khối lượng glucose là?',(180*(0.12+0.01*k)).toFixed(2)+' g',[(36-180*(0.12+0.01*k)).toFixed(2)+' g','36 g','18 g'],s,'Glucose phản ứng với Br₂ theo tỉ lệ mol 1:1; m glucose=180n(Br₂).'),
+  chemMCQ('Một hỗn hợp 36 g glucose và fructose làm mất màu vừa đủ '+(0.12+0.01*k).toFixed(2)+' mol Br₂ trong điều kiện chỉ glucose phản ứng. Khối lượng glucose là?',(180*(0.12+0.01*k)).toFixed(2)+' g',[(36-180*(0.12+0.01*k)).toFixed(2)+' g','36 g','18 g'],s,'Glucose phản ứng với Br₂ theo tỉ lệ mol 1:1; m glucose=180n(Br₂).'),
   chemMCQ('Thủy phân hoàn toàn 0,20 mol saccharose, sau đó cho toàn bộ monosaccharide tác dụng với Tollens dư. Khối lượng Ag lý thuyết thu được là?', '86,4 g',['43,2 g','21,6 g','108,0 g'],s+1,'0,20 mol saccharose tạo 0,20 mol glucose và 0,20 mol fructose; tổng 0,40 mol monosaccharide tạo 0,80 mol Ag, m=86,4 g.'),
   chemMCQ('Thủy phân hoàn toàn 32,4 g tinh bột (M mắt xích=162) thu được tối đa bao nhiêu gam glucose?', '36,0 g',['32,4 g','18,0 g','40,0 g'],s+2,'n mắt xích=32,4/162=0,20 mol; n glucose=0,20 mol, m=36,0 g.'),
   chemMCQ('Lên men '+(0.30+0.05*k).toFixed(2)+' mol glucose với hiệu suất '+(80-2*k)+'%. Khối lượng ethanol thực tế thu được là?',((0.30+0.05*k)*92*(0.80-0.02*k)).toFixed(2)+' g',[((0.30+0.05*k)*46*(0.80-0.02*k)).toFixed(2)+' g',((0.30+0.05*k)*92).toFixed(2)+' g',((0.30+0.05*k)*138*(0.80-0.02*k)).toFixed(2)+' g'],s+3,'1 mol glucose tạo tối đa 2 mol ethanol (92 g); nhân thêm hiệu suất phản ứng.'),
