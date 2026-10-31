@@ -1404,6 +1404,19 @@ main{min-width:0}
 .questiontext .math-frac,.answerline .math-frac,.reviewrow .math-frac{font-size:1.02em}
 
 </style>
+
+<style id="meme-lightbox-styles">
+.score-meme-visual img{cursor:zoom-in}
+.meme-lightbox{position:fixed;inset:0;z-index:999999;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:16px;background:rgba(7,13,26,.88);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.meme-lightbox[hidden]{display:none!important}
+.meme-lightbox-panel{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;box-sizing:border-box;max-width:100%;max-height:100%;padding:18px;border:1px solid rgba(255,255,255,.2);border-radius:18px;background:#111827;box-shadow:0 24px 80px rgba(0,0,0,.4);overflow:auto}
+.meme-lightbox-image{display:block;width:min(92vw,1000px);height:min(78vh,800px);max-width:100%;object-fit:contain;border-radius:10px;background:#fff}
+.meme-lightbox-caption{max-width:min(90vw,900px);margin:0;color:#fff;text-align:center;font-size:clamp(14px,2vw,18px);font-weight:800;line-height:1.5;overflow-wrap:anywhere}
+.meme-lightbox-hint{margin:0;color:#cbd5e1;text-align:center;font-size:12px;line-height:1.5}
+.meme-lightbox-close{position:absolute;top:7px;right:8px;z-index:1;display:grid;place-items:center;width:40px;height:40px;padding:0;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(15,23,42,.92);color:#fff;font-size:28px;line-height:1;cursor:pointer}
+.meme-lightbox-close:hover{background:#334155}
+@media(max-width:600px){.meme-lightbox{padding:8px}.meme-lightbox-panel{gap:10px;padding:12px;border-radius:14px}.meme-lightbox-image{width:92vw;height:76vh}.meme-lightbox-close{top:5px;right:5px;width:36px;height:36px}}
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -2076,5 +2089,72 @@ function renderHistory(){const el=$('historyContent');if(!historyItems.length){e
 window.viewHistory=id=>{let h=historyItems.find(x=>x.id===id);if(h){renderResult(h);currentView='result';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-result'));window.scrollTo(0,0)}}
 $('clearHistory').onclick=()=>{if(confirm('Bạn muốn xóa toàn bộ lịch sử làm bài trong trình duyệt này?')){historyItems=[];saveHistory();renderHistory();renderHome();toast('Đã xóa lịch sử làm bài.')}};
 renderHome();renderBrowse();
+</script>
+
+<script id="meme-lightbox-script">
+(function(){
+  if(document.getElementById('meme-lightbox-script')) return;
+  var modal=document.createElement('div');
+  modal.className='meme-lightbox';
+  modal.hidden=true;
+  modal.setAttribute('role','dialog');
+  modal.setAttribute('aria-modal','true');
+  modal.setAttribute('aria-label','Xem meme phóng to');
+  var panel=document.createElement('div');
+  panel.className='meme-lightbox-panel';
+  var close=document.createElement('button');
+  close.type='button';
+  close.className='meme-lightbox-close';
+  close.setAttribute('aria-label','Đóng ảnh phóng to');
+  close.textContent='×';
+  var image=document.createElement('img');
+  image.className='meme-lightbox-image';
+  image.alt='Meme được phóng to';
+  var caption=document.createElement('p');
+  caption.className='meme-lightbox-caption';
+  var hint=document.createElement('p');
+  hint.className='meme-lightbox-hint';
+  hint.textContent='Bấm ra ngoài ảnh hoặc nhấn Esc để đóng';
+  panel.appendChild(close);
+  panel.appendChild(image);
+  panel.appendChild(caption);
+  panel.appendChild(hint);
+  modal.appendChild(panel);
+  document.body.appendChild(modal);
+  var previousFocus=null;
+  function closeModal(){
+    modal.hidden=true;
+    document.body.style.overflow='';
+    image.removeAttribute('src');
+    if(previousFocus && typeof previousFocus.focus==='function') previousFocus.focus();
+  }
+  function openModal(source){
+    var src=source.currentSrc||source.src;
+    if(!src) return;
+    previousFocus=source;
+    image.src=src;
+    image.alt=source.alt||'Meme được phóng to';
+    var card=source.closest('.score-meme');
+    var text=card&&card.querySelector('.score-meme-caption');
+    caption.textContent=text?(text.textContent||'').trim():'';
+    caption.hidden=!caption.textContent;
+    modal.hidden=false;
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  document.addEventListener('click',function(event){
+    var target=event.target;
+    if(target && target.matches && target.matches('.score-meme-visual img') && target.offsetParent!==null){
+      openModal(target);
+      return;
+    }
+    if(target===modal || (target.closest && target.closest('.meme-lightbox-close'))){
+      closeModal();
+    }
+  });
+  document.addEventListener('keydown',function(event){
+    if(!modal.hidden && event.key==='Escape') closeModal();
+  });
+})();
 </script>
 </body></html>
