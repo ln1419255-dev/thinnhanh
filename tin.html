@@ -160,7 +160,7 @@ var levels=[
 {name:"Khó",cls:"hard",desc:"Tình huống tổng hợp và các khái niệm cần phân biệt."},
 {name:"Tổng ôn",cls:"review",desc:"Bao quát cả 6 bài, rà soát kiến thức giữa kì."}
 ];
-var HISTORY_KEY="thinnhanh_tin_history",CANDIDATE_NAME_KEY="thinanh_candidate_name_v1",LEGACY_CANDIDATE_KEY="thinnhanh_candidate_name",GOOGLE_SHEETS_ENDPOINT="https://script.google.com/macros/s/AKfycbyUd3AXctXM-9DRzY3KX0wYvDKSR3YUhyrWEN1t1S6O0rlmdiQjH4BcE8Dsi_dWIrQ/exec",EXAM_SECONDS=3000,currentCandidateName="";
+var HISTORY_KEY="thinnhanh_tin_history",CANDIDATE_NAME_KEY="thinhanh_candidate_name_v1",LEGACY_CANDIDATE_KEY="thinnhanh_candidate_name",GOOGLE_SHEETS_ENDPOINT="https://script.google.com/macros/s/AKfycbyUd3AXctXM-9DRzY3KX0wYvDKSR3YUhyrWEN1t1S6O0rlmdiQjH4BcE8Dsi_dWIrQ/exec",EXAM_SECONDS=3000,currentCandidateName="";
 var examIndex=0,activeQuestion=0,mcQuestions=[],tfQuestions=[],mcAnswers=[],tfAnswers=[],submitted=false,secondsLeft=EXAM_SECONDS,timerTick=null,currentView="home",activeResult=null,historyItems=loadHistory(),toastTimer=null;
 function byId(id){return document.getElementById(id);}
 function escapeHtml(value){return String(value===null||value===undefined?"":value).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];});}
