@@ -1614,10 +1614,224 @@ function c2short(s){
  sh('Thủy phân hoàn toàn '+starch.toFixed(1)+' g tinh bột. Tính khối lượng glucose lý thuyết thu được. Cho M(C₆H₁₀O₅) = 162 và M(C₆H₁₂O₆) = 180.',starch*180/162,'162 g mắt xích tinh bột nhận thêm nước tạo 180 g glucose.','g')
  ];
 }
+
+function chemMC(chapter,s){
+ const base=chapter===1?c1mc(s):c2mc(s);
+ const easy=chemMedium(chapter,s);
+ if(s<4) return [...base,...easy];
+ const hard=s<8;
+ const a=chapter===1?(hard?chemEsterHardA(s):chemEsterSuperA(s)):(hard?chemCarbHardA(s):chemCarbSuperA(s));
+ const b=chapter===1?(hard?chemEsterHardB(s):chemEsterSuperB(s)):(hard?chemCarbHardB(s):chemCarbSuperB(s));
+ return [...a,...base.slice(6),...b];
+}
+function chemMCQ(q,right,wrong,seed,why){
+ const all=[right,...wrong].slice(0,4),r=((seed%4)+4)%4;
+ return {type:'mc',q,options:all.slice(r).concat(all.slice(0,r)),correct:(4-r)%4,why};
+}
+function chemMedium(chapter,s){
+ const x=0.05+0.025*s, z=(0.10+0.02*s).toFixed(2), seed=s*7+chapter;
+ if(chapter===1)return [
+  chemMCQ('Ethyl acetate có công thức phân tử C₄H₈O₂. Phân tử khối của ethyl acetate là bao nhiêu?', '88 g/mol',['74 g/mol','60 g/mol','102 g/mol'],seed,'M=4×12+8×1+2×16=88 g/mol.'),
+  chemMCQ('Thủy phân hoàn toàn '+z+' mol ethyl acetate trong môi trường kiềm, lượng NaOH tối thiểu cần dùng là?',z+' mol',[''+(0.5*(0.10+0.02*s)).toFixed(2)+' mol',(2*(0.10+0.02*s)).toFixed(2)+' mol','0 mol'],seed+1,'Ester đơn chức tiêu thụ NaOH theo tỉ lệ mol 1:1.'),
+  chemMCQ('Xà phòng hóa 0,10 mol triglyceride hoàn toàn cần bao nhiêu mol NaOH?', '0,30 mol',['0,10 mol','0,20 mol','0,40 mol'],seed+2,'Một mol triglyceride có ba liên kết ester nên cần 3 mol NaOH.'),
+  chemMCQ('Một mol triolein cộng hoàn toàn hydrogen cần bao nhiêu mol H₂?', '3 mol',['1 mol','2 mol','6 mol'],seed+3,'Triolein có ba liên kết đôi C=C, mỗi liên kết cộng một mol H₂.'),
+  chemMCQ('Một mol triglyceride bị thủy phân hoàn toàn tạo ra bao nhiêu mol glycerol?', '1 mol',['2 mol','3 mol','0,5 mol'],seed+4,'Mỗi phân tử triglyceride chứa một gốc glycerol.'),
+  chemMCQ('Ester hóa 1 mol acid carboxylic đơn chức với 1 mol alcohol đơn chức theo tỉ lệ 1:1, tối đa theo phương trình tạo bao nhiêu mol ester?', '1 mol',['0,5 mol','2 mol','3 mol'],seed+5,'Tỉ lệ phản ứng giữa acid và alcohol là 1:1.')
+ ];
+ return [
+  chemMCQ('Phân tử khối của glucose C₆H₁₂O₆ là?', '180 g/mol',['162 g/mol','342 g/mol','198 g/mol'],seed,'M=6×12+12×1+6×16=180 g/mol.'),
+  chemMCQ('Cho '+z+' mol glucose phản ứng hoàn toàn với thuốc thử Tollens dư. Số mol Ag lý thuyết tạo thành là?',(2*(0.10+0.02*s)).toFixed(2)+' mol',[(0.10+0.02*s).toFixed(2)+' mol',(3*(0.10+0.02*s)).toFixed(2)+' mol',(4*(0.10+0.02*s)).toFixed(2)+' mol'],seed+1,'Một mol glucose khử được 2 mol Ag⁺ tạo 2 mol Ag.'),
+  chemMCQ('Thủy phân hoàn toàn 0,05 mol saccharose thu được tổng số mol monosaccharide là?', '0,10 mol',['0,05 mol','0,15 mol','0,20 mol'],seed+2,'Một mol saccharose tạo một mol glucose và một mol fructose.'),
+  chemMCQ('Thủy phân hoàn toàn 16,2 g tinh bột (mắt xích C₆H₁₀O₅, M=162) cho tối đa bao nhiêu gam glucose?', '18,0 g',['16,2 g','9,0 g','20,0 g'],seed+3,'162 g mắt xích tinh bột nhận thêm nước tạo 180 g glucose.'),
+  chemMCQ('Lên men hoàn toàn 0,10 mol glucose, khối lượng ethanol lý thuyết thu được là?', '9,2 g',['4,6 g','18,4 g','13,8 g'],seed+4,'1 mol glucose tạo 2 mol ethanol; m=0,2×46=9,2 g.'),
+  chemMCQ('Thủy phân hoàn toàn 0,20 mol maltose, tổng số mol glucose thu được là?', '0,40 mol',['0,20 mol','0,10 mol','0,60 mol'],seed+5,'Mỗi mol maltose tạo hai mol glucose.')
+ ];
+}
+function chemEsterHardA(s){
+ const k=s-4,n=(0.10+0.01*k),h2=0.30+0.03*k,tri=0.10+0.01*k, eq=0.60+0.02*k;
+ return [
+  chemMCQ('Xà phòng hóa '+n.toFixed(2)+' mol triglyceride bằng 0,50 mol NaOH. Sau phản ứng hoàn toàn, NaOH dư là bao nhiêu mol?',(0.50-3*n).toFixed(2)+' mol',[(3*n).toFixed(2)+' mol',(0.50-n).toFixed(2)+' mol',(0.50-2*n).toFixed(2)+' mol'],s,'1 mol triglyceride cần 3 mol NaOH; lượng dư =0,50−3n.'),
+  chemMCQ('Hỗn hợp 0,20 mol gồm triolein và tripalmitin hấp thụ '+h2.toFixed(2)+' mol H₂ khi hydrogen hóa hoàn toàn. Số mol triolein trong hỗn hợp là?',(h2/3).toFixed(2)+' mol',[''+(0.20-h2/3).toFixed(2)+' mol',''+(h2/6).toFixed(2)+' mol','0,20 mol'],s+1,'Chỉ triolein có liên kết đôi; mỗi mol triolein tiêu thụ 3 mol H₂ nên n(triolein)=n(H₂)/3.'),
+  chemMCQ('Ester hóa acid acetic và ethanol ban đầu mỗi chất 1,00 mol. Ở cân bằng có '+eq.toFixed(2)+' mol ester. Hiệu suất cân bằng tính theo acid ban đầu là?',(eq*100).toFixed(0)+'%',[(100-eq*100).toFixed(0)+'%',''+(eq*50).toFixed(0)+'%','100%'],s+2,'Hiệu suất cân bằng = lượng ester tạo thành/lượng acid ban đầu ×100%.'),
+  chemMCQ('Có '+tri.toFixed(2)+' mol triolein được hydrogen hóa hoàn toàn. Số mol H₂ cần dùng là?',(3*tri).toFixed(2)+' mol',[(2*tri).toFixed(2)+' mol',tri.toFixed(2)+' mol',(6*tri).toFixed(2)+' mol'],s+3,'Triolein có ba liên kết đôi C=C, tỉ lệ H₂:triolein=3:1.'),
+  chemMCQ('Xà phòng hóa '+(0.08+0.01*k).toFixed(2)+' mol tristearin, khối lượng sodium stearate (M=306 g/mol) thu được là?',(918*(0.08+0.01*k)).toFixed(2)+' g',[(306*(0.08+0.01*k)).toFixed(2)+' g',(612*(0.08+0.01*k)).toFixed(2)+' g',(92*(0.08+0.01*k)).toFixed(2)+' g'],s+4,'Mỗi mol triglyceride tạo ba mol muối; m=3n×306=918n gam.'),
+  chemMCQ('Cho 0,15 mol ethyl acetate phản ứng với 0,10 mol NaOH. Sau phản ứng hoàn toàn, ester còn dư bao nhiêu mol?', '0,05 mol',['0,10 mol','0,15 mol','0,25 mol'],s+5,'Phản ứng tỉ lệ 1:1; NaOH giới hạn nên còn 0,15−0,10=0,05 mol ester.')
+ ];
+}
+function chemEsterHardB(s){
+ const k=s-4,tri=0.10+0.01*k, h=0.30+0.03*k;
+ return [
+  chemMCQ('Hỗn hợp 0,20 mol gồm triolein và tripalmitin tiêu thụ '+h.toFixed(2)+' mol H₂ khi hydrogen hóa hoàn toàn. Số mol tripalmitin là?',(0.20-h/3).toFixed(2)+' mol',[(h/3).toFixed(2)+' mol',''+(0.20-h/6).toFixed(2)+' mol','0,20 mol'],s+6,'n(triolein)=n(H₂)/3; n(tripalmitin)=0,20−n(triolein).'),
+  chemMCQ('Thủy phân '+tri.toFixed(2)+' mol triglyceride hoàn toàn, khối lượng glycerol tối đa thu được là?',(92*tri).toFixed(2)+' g',[(46*tri).toFixed(2)+' g',(276*tri).toFixed(2)+' g',(18*tri).toFixed(2)+' g'],s+7,'Một mol triglyceride tạo một mol glycerol; m=92n.'),
+  chemMCQ('Hỗn hợp ban đầu có 0,50 mol acid acetic và 0,80 mol ethanol. Nếu cân bằng đã tạo 0,30 mol ester thì lượng acid acetic còn lại là?', '0,20 mol',['0,50 mol','0,30 mol','0,10 mol'],s+8,'Acid và ester theo tỉ lệ 1:1; acid còn 0,50−0,30=0,20 mol.'),
+  chemMCQ('Một mẫu triglyceride có 0,12 mol chất béo không no; mỗi mol chất béo có trung bình 2,5 liên kết C=C. Số mol H₂ cần để hydrogen hóa hoàn toàn là?', '0,30 mol',['0,12 mol','0,24 mol','0,60 mol'],s+9,'Mỗi liên kết đôi cộng một mol H₂: 0,12×2,5=0,30 mol.'),
+  chemMCQ('0,10 mol tristearin được xà phòng hóa hoàn toàn. Số mol sodium stearate thu được là?', '0,30 mol',['0,10 mol','0,20 mol','0,40 mol'],s+10,'Mỗi mol triglyceride giải phóng ba gốc acid béo, tạo ba mol muối.'),
+  chemMCQ('Trong phản ứng ester hóa thuận nghịch, tại cân bằng hỗn hợp có 0,60 mol ester tạo thành từ 1,00 mol acid và 1,00 mol alcohol ban đầu. Hằng số cân bằng Kc (bỏ qua nước ban đầu) là?', '2,25',['0,36','1,50','4,00'],s+11,'Ở cân bằng: ester=nước=0,60; acid=alcohol=0,40. Kc=(0,60²)/(0,40²)=2,25.')
+ ];
+}
+function chemEsterSuperA(s){
+ const k=s-8,n=0.15+0.01*k,x=0.10+0.02*k;
+ return [
+  chemMCQ('Xà phòng hóa '+n.toFixed(2)+' mol triglyceride bằng 0,50 mol NaOH. NaOH dư sau phản ứng hoàn toàn là?',(0.50-3*n).toFixed(2)+' mol',[(3*n).toFixed(2)+' mol',(0.50-n).toFixed(2)+' mol',(0.50-2*n).toFixed(2)+' mol'],s,'Tỉ lệ triglyceride:NaOH =1:3.'),
+  chemMCQ('Hỗn hợp 0,20 mol triolein và trilinolein tiêu thụ 0,90 mol H₂. Số mol trilinolein là?', '0,10 mol',['0,05 mol','0,15 mol','0,20 mol'],s+1,'Gọi x,y là số mol triolein và trilinolein: x+y=0,20; 3x+6y=0,90. Giải ra y=0,10 mol.'),
+  chemMCQ('Xà phòng hóa '+x.toFixed(2)+' mol tristearin hoàn toàn. Khối lượng sodium stearate (M=306 g/mol) thu được là?',(918*x).toFixed(2)+' g',[(306*x).toFixed(2)+' g',(612*x).toFixed(2)+' g',(92*x).toFixed(2)+' g'],s+2,'1 mol tristearin cho 3 mol sodium stearate.'),
+  chemMCQ('Ester hóa acid acetic và ethanol ban đầu mỗi chất 1,00 mol. Khi cân bằng có 0,60 mol ester; Kc (nước ban đầu bằng 0) bằng?', '2,25',['0,60','1,50','4,00'],s+3,'Kc=(0,60×0,60)/(0,40×0,40)=2,25.'),
+  chemMCQ('0,10 mol triolein được hydrogen hóa, chỉ 80% số liên kết C=C phản ứng. Số mol H₂ thực tế đã tiêu thụ là?', '0,24 mol',['0,08 mol','0,16 mol','0,30 mol'],s+4,'0,10 mol triolein có 0,30 mol liên kết đôi; 80% phản ứng tiêu thụ 0,24 mol H₂.'),
+  chemMCQ('Một hỗn hợp có 0,20 mol triglyceride, trong đó có x mol triolein và phần còn lại là tripalmitin; hỗn hợp tiêu thụ 0,45 mol H₂. Giá trị x bằng?', '0,15 mol',['0,05 mol','0,10 mol','0,20 mol'],s+5,'Chỉ triolein hấp thụ H₂, n(H₂)=3x ⇒x=0,45/3=0,15 mol.')
+ ];
+}
+function chemEsterSuperB(s){
+ return [
+  chemMCQ('Hỗn hợp 0,20 mol gồm triolein và trilinolein tiêu thụ 0,90 mol H₂. Số mol triolein là?', '0,10 mol',['0,05 mol','0,15 mol','0,20 mol'],s+6,'Gọi x,y: x+y=0,20; 3x+6y=0,90 nên x=y=0,10 mol.'),
+  chemMCQ('0,10 mol tristearin được xà phòng hóa hoàn toàn. Khối lượng sodium stearate (M=306 g/mol) là?', '91,8 g',['30,6 g','61,2 g','9,2 g'],s+7,'n(muối)=3×0,10=0,30 mol; m=0,30×306=91,8 g.'),
+  chemMCQ('Trong phản ứng thuận nghịch acid acetic + ethanol ⇌ ester + nước, ban đầu mỗi chất phản ứng 1 mol; cân bằng tạo 0,60 mol ester. Kc bằng?', '2,25',['0,36','1,50','4,00'],s+8,'Kc=(0,60×0,60)/(0,40×0,40)=2,25.'),
+  chemMCQ('Hỗn hợp 0,25 mol triolein được hydrogen hóa, 80% số liên kết đôi phản ứng. Lượng H₂ đã dùng là?', '0,60 mol',['0,20 mol','0,40 mol','0,75 mol'],s+9,'n(H₂)=0,25×3×0,80=0,60 mol.'),
+  chemMCQ('0,15 mol triglyceride phản ứng vừa đủ với NaOH. Số mol NaOH tối thiểu là?', '0,45 mol',['0,15 mol','0,30 mol','0,60 mol'],s+10,'Một mol triglyceride có ba liên kết ester, cần ba mol NaOH.'),
+  chemMCQ('Nếu 0,20 mol hỗn hợp triolein và tripalmitin tiêu thụ 0,36 mol H₂, số mol tripalmitin trong hỗn hợp là?', '0,08 mol',['0,12 mol','0,20 mol','0,04 mol'],s+11,'n(triolein)=0,36/3=0,12 mol; phần còn lại là 0,20−0,12=0,08 mol.')
+ ];
+}
+function chemCarbHardA(s){
+ const k=s-4,glucose=(0.10+0.01*k),y=.80-.02*k;
+ return [
+  chemMCQ('Một hỗn hợp 36 g glucose và fructose làm mất màu vừa đủ '+(0.10+0.01*k).toFixed(2)+' mol Br₂ trong điều kiện chỉ glucose phản ứng. Khối lượng glucose là?',(180*(0.10+0.01*k)).toFixed(2)+' g',[(36-180*(0.10+0.01*k)).toFixed(2)+' g','36 g','18 g'],s,'Glucose phản ứng với Br₂ theo tỉ lệ mol 1:1; m glucose=180n(Br₂).'),
+  chemMCQ('Thủy phân hoàn toàn 0,20 mol saccharose, sau đó cho toàn bộ monosaccharide tác dụng với Tollens dư. Khối lượng Ag lý thuyết thu được là?', '86,4 g',['43,2 g','21,6 g','108,0 g'],s+1,'0,20 mol saccharose tạo 0,20 mol glucose và 0,20 mol fructose; tổng 0,40 mol monosaccharide tạo 0,80 mol Ag, m=86,4 g.'),
+  chemMCQ('Thủy phân hoàn toàn 32,4 g tinh bột (M mắt xích=162) thu được tối đa bao nhiêu gam glucose?', '36,0 g',['32,4 g','18,0 g','40,0 g'],s+2,'n mắt xích=32,4/162=0,20 mol; n glucose=0,20 mol, m=36,0 g.'),
+  chemMCQ('Lên men '+(0.30+0.05*k).toFixed(2)+' mol glucose với hiệu suất '+(80-2*k)+'%. Khối lượng ethanol thực tế thu được là?',(0.30+0.05*k)*92*(0.80-0.02*k)+' g',[(0.30+0.05*k)*46*(0.80-0.02*k)+' g',(0.30+0.05*k)*92+' g',(0.30+0.05*k)*138*(0.80-0.02*k)+' g'],s+3,'1 mol glucose tạo tối đa 2 mol ethanol (92 g); nhân thêm hiệu suất phản ứng.'),
+  chemMCQ('Hỗn hợp chỉ gồm glucose và fructose có tổng khối lượng 18 g. Khối lượng Ag lý thuyết thu được khi tác dụng Tollens dư là?', '21,6 g',['10,8 g','43,2 g','18,0 g'],s+4,'Cả glucose và fructose đều khử Tollens; tổng n=18/180=0,10 mol, nAg=0,20 mol nên m=21,6 g.'),
+  chemMCQ('Thủy phân hoàn toàn 0,15 mol maltose rồi cho toàn bộ glucose thu được phản ứng Tollens dư. Khối lượng Ag lý thuyết là?', '64,8 g',['32,4 g','43,2 g','21,6 g'],s+5,'0,15 mol maltose tạo 0,30 mol glucose; nAg=0,60 mol, m=64,8 g.')
+ ];
+}
+function chemCarbHardB(s){
+ const k=s-4,starch=80+5*k;
+ return [
+  chemMCQ(starch+' g tinh bột được thủy phân với hiệu suất 80%. Khối lượng glucose thực tế thu được là?',(starch*180/162*0.80).toFixed(2)+' g',[(starch*180/162).toFixed(2)+' g',(starch*0.80).toFixed(2)+' g',(starch*162/180*0.80).toFixed(2)+' g'],s+6,'162 g mắt xích tạo 180 g glucose; nhân hệ số chuyển hóa 180/162 và hiệu suất 80%.'),
+  chemMCQ('Lên men '+(0.20+0.02*k).toFixed(2)+' mol glucose với hiệu suất 85%. Khối lượng ethanol thực tế là?',((0.20+0.02*k)*92*0.85).toFixed(2)+' g',[((0.20+0.02*k)*46*0.85).toFixed(2)+' g',((0.20+0.02*k)*92).toFixed(2)+' g',((0.20+0.02*k)*138*0.85).toFixed(2)+' g'],s+7,'m ethanol = n glucose×2×46×0,85.'),
+  chemMCQ('Có 0,20 mol saccharose bị thủy phân với hiệu suất 90%. Cho toàn bộ sản phẩm thu được phản ứng Tollens dư, số mol Ag tối đa là?', '0,36 mol',['0,18 mol','0,40 mol','0,72 mol'],s+8,'0,20×0,90=0,18 mol saccharose thủy phân; tạo 0,36 mol monosaccharide, tương ứng 0,72 mol Ag? Wait each monosaccharide gives 2 mol Ag, so 0,72 mol Ag.'),
+  chemMCQ('Hỗn hợp 36 g glucose và fructose làm mất màu vừa đủ 0,12 mol Br₂; chỉ glucose phản ứng với Br₂ trong điều kiện này. Khối lượng fructose là?', '14,4 g',['21,6 g','18,0 g','7,2 g'],s+9,'n glucose=n Br₂=0,12 mol ⇒m glucose=21,6 g; phần còn lại là 14,4 g fructose.'),
+  chemMCQ('0,25 mol glucose phản ứng Tollens, hiệu suất thu Ag là 80%. Khối lượng Ag thực tế là?', '43,2 g',['21,6 g','54,0 g','86,4 g'],s+10,'Ag lý thuyết=0,25×2×108=54 g; 80% là 43,2 g.'),
+  chemMCQ('Thủy phân 0,15 mol maltose với hiệu suất 90%, sau đó cho glucose phản ứng Tollens với hiệu suất tạo Ag 80%. Khối lượng Ag thu được là?', '46,656 g',['58,32 g','32,4 g','23,328 g'],s+11,'Maltose thủy phân tạo 2 glucose: 0,15×0,90×2=0,27 mol; Ag lý thuyết 0,54 mol=58,32 g; 80% là 46,656 g.')
+ ];
+}
+function chemCarbSuperA(s){
+ return [
+  chemMCQ('32,4 g tinh bột được thủy phân đạt 80% hiệu suất; glucose tạo thành lên men đạt 75% hiệu suất. Khối lượng ethanol thực tế là?', '11,04 g',['14,72 g','8,28 g','22,08 g'],s,'32,4 g tinh bột tương ứng 0,20 mol mắt xích; glucose thực tế 0,16 mol, ethanol =0,16×2×46×0,75=11,04 g.'),
+  chemMCQ('Hỗn hợp 36 g glucose và fructose làm mất màu 0,12 mol Br₂; chỉ glucose phản ứng với Br₂. Khối lượng Ag lý thuyết khi hỗn hợp phản ứng Tollens dư là?', '43,2 g',['21,6 g','25,92 g','36,0 g'],s+1,'Cả hai đường đều có M=180 và khử Tollens; tổng 0,20 mol đường tạo 0,40 mol Ag, m=43,2 g.'),
+  chemMCQ('0,15 mol saccharose thủy phân đạt 90% hiệu suất; monosaccharide tạo ra phản ứng Tollens với hiệu suất tạo Ag 80%. Khối lượng Ag thực tế là?', '51,84 g',['64,8 g','46,656 g','25,92 g'],s+2,'n saccharose thủy phân=0,135 mol, tạo 0,27 mol monosaccharide và 0,54 mol Ag lý thuyết; 80% là 0,432 mol Ag=46,656 g.'),
+  chemMCQ('Mẫu 50 g chứa 80% tinh bột được thủy phân hoàn toàn, glucose lên men với hiệu suất 75%. Khối lượng ethanol thực tế thu được gần bằng?', '16,67 g',['22,22 g','13,33 g','33,33 g'],s+3,'Tinh bột=40 g; glucose lý thuyết=40×180/162=44,44 g; ethanol lý thuyết=44,44×92/180=22,22 g; 75%=16,67 g.'),
+  chemMCQ('Hỗn hợp 36 g glucose/fructose làm mất màu 0,12 mol Br₂; sau đó phản ứng Tollens hoàn toàn. Khối lượng Ag lý thuyết thu được là?', '43,2 g',['21,6 g','25,92 g','36,0 g'],s+4,'Tổng số mol đường=36/180=0,20 mol; mỗi mol đường tạo 2 mol Ag ⇒43,2 g.'),
+  chemMCQ('0,10 mol maltose thủy phân hoàn toàn rồi phản ứng Tollens dư. Khối lượng Ag tối đa là?', '43,2 g',['21,6 g','32,4 g','86,4 g'],s+5,'0,10 mol maltose cho 0,20 mol glucose; tạo 0,40 mol Ag, m=43,2 g.')
+ ];
+}
+function chemCarbSuperB(s){
+ const k=s-8,starch=50+5*k;
+ return [
+  chemMCQ(starch+' g mẫu chứa 80% tinh bột được thủy phân với hiệu suất 90%, glucose sau đó lên men hiệu suất 75%. Khối lượng ethanol thực tế là?',(starch*0.80*180/162*92/180*0.90*0.75).toFixed(2)+' g',[(starch*0.80*180/162*92/180*0.90).toFixed(2)+' g',(starch*0.80*92/162).toFixed(2)+' g',(starch*0.80*92/180).toFixed(2)+' g'],s,'Tính lần lượt khối lượng tinh bột tinh khiết, glucose theo 180/162, rồi ethanol theo 92/180; nhân hai hiệu suất.'),
+  chemMCQ('Hỗn hợp 36 g glucose và fructose làm mất màu 0,10 mol Br₂. Khối lượng glucose trong hỗn hợp là?', '18,0 g',['9,0 g','27,0 g','36,0 g'],s+1,'n glucose=n Br₂=0,10 mol nên m=18 g.'),
+  chemMCQ('Hỗn hợp 36 g glucose/fructose gồm 0,10 mol glucose và 0,10 mol fructose. Khối lượng Ag lý thuyết thu được khi phản ứng Tollens dư là?', '43,2 g',['21,6 g','36,0 g','86,4 g'],s+2,'Tổng 0,20 mol monosaccharide tạo 0,40 mol Ag, m=43,2 g.'),
+  chemMCQ('0,20 mol saccharose thủy phân 90%, sau đó phản ứng Tollens với hiệu suất thu Ag 80%. Khối lượng Ag thực tế là?', '62,208 g',['77,76 g','43,2 g','31,104 g'],s+3,'Số mol saccharose thủy phân 0,18; tạo 0,36 mol monosaccharide và 0,72 mol Ag lý thuyết =77,76 g; 80%=62,208 g.'),
+  chemMCQ('Cho 0,30 mol glucose lên men hiệu suất 85%. Khối lượng ethanol thực tế thu được là?', '23,46 g',['19,55 g','27,6 g','46,92 g'],s+4,'m=0,30×2×46×0,85=23,46 g.'),
+  chemMCQ('Thủy phân 0,12 mol maltose đạt 90%, rồi phản ứng Tollens tạo Ag đạt 80%. Khối lượng Ag là?', '37,3248 g',['46,656 g','29,16 g','18,6624 g'],s+5,'n glucose=0,12×0,90×2=0,216 mol; Ag lý thuyết=0,432 mol=46,656 g; 80%=37,3248 g.')
+ ];
+}
+function chemTF(chapter,s){
+ if(s<4) return chapter===1?c1tf(s):c2tf(s);
+ const tfq=(q,a)=>tf(q,a);
+ if(chapter===1)return [
+  tfq('Suy luận stoichiometry trong phản ứng chất béo.',[
+   ['Một mol triglyceride cần ba mol NaOH để xà phòng hóa hoàn toàn.',true,'Mỗi phân tử triglyceride có ba liên kết ester.'],
+   ['Một mol triglyceride tạo ra ba mol glycerol khi thủy phân.',false,'Mỗi triglyceride chỉ chứa một gốc glycerol nên tạo một mol glycerol.'],
+   ['Một mol triolein cộng hoàn toàn ba mol H₂.',true,'Triolein có ba liên kết đôi C=C.'],
+   ['Hydrogen hóa hoàn toàn một mol triolein làm khối lượng tăng 6 g.',true,'Ba mol H₂ có khối lượng 6 g.']
+  ]),
+  tfq('Phân tích cân bằng ester hóa.',[
+   ['Thủy phân ester trong môi trường acid thường là phản ứng thuận nghịch.',true,'Phản ứng có thể đạt cân bằng.'],
+   ['Xà phòng hóa ester trong môi trường kiềm thường được xem là phản ứng một chiều.',true,'Muối carboxylate được tạo thành làm phản ứng thuận lợi theo chiều sản phẩm.'],
+   ['Ester hóa acid carboxylic với alcohol tạo ester và nước.',true,'Đây là phản ứng ester hóa.'],
+   ['Thêm nhiều nước vào cân bằng ester hóa sẽ làm cân bằng chuyển dịch theo chiều tạo thêm ester.',false,'Nước là sản phẩm; thêm nước thường làm cân bằng dịch chuyển về phía chất phản ứng.']
+  ]),
+  tfq('Nhận định về cấu tạo và phản ứng.',[
+   ['Ester đơn chức có nhóm chức –COO–.',true,'Đây là nhóm chức ester.'],
+   ['Ester luôn có nhóm –OH trong phân tử.',false,'Nhóm –OH không phải nhóm chức bắt buộc của ester.'],
+   ['Ester của acid formic có dạng HCOOR có thể tham gia phản ứng tráng bạc.',true,'Một số ester formate có tính khử tương tự formate.'],
+   ['Số mol NaOH xà phòng hóa triglyceride bằng số mol triglyceride.',false,'Tỉ lệ là 3 mol NaOH trên 1 mol triglyceride.']
+  ]),
+  tfq('Suy luận về acid béo không no.',[
+   ['Oleic acid có một liên kết đôi C=C trong mạch hydrocarbon.',true,'Oleic acid là acid béo không no đơn chức nối đôi.'],
+   ['Linoleic acid có hai liên kết đôi C=C.',true,'Linoleic acid là acid béo không no có hai nối đôi.'],
+   ['Một mol triolein tiêu thụ một mol H₂ khi hydrogen hóa hoàn toàn.',false,'Triolein có ba liên kết đôi, tiêu thụ ba mol H₂.'],
+   ['Hydrogen hóa nối đôi có thể làm chất béo lỏng trở nên rắn hơn.',true,'Mức độ không no giảm làm nhiệt độ nóng chảy thường tăng.']
+  ])
+ ];
+ return [
+  tfq('Suy luận về glucose và fructose.',[
+   ['Glucose và fructose có cùng công thức phân tử C₆H₁₂O₆.',true,'Hai chất là đồng phân cấu tạo.'],
+   ['Trong điều kiện dùng nước bromine để phân biệt, glucose phản ứng còn fructose không phản ứng tương tự.',true,'Glucose có nhóm aldehyde ở dạng mạch hở.'],
+   ['Một mol glucose phản ứng Tollens tạo hai mol Ag.',true,'Tỉ lệ stoichiometry là 1:2.'],
+   ['Fructose không thể phản ứng với thuốc thử Tollens trong mọi điều kiện.',false,'Fructose vẫn cho phản ứng Tollens do chuyển hóa trong môi trường kiềm.']
+  ]),
+  tfq('Thủy phân carbohydrate và hiệu suất.',[
+   ['Thủy phân hoàn toàn 162 g mắt xích tinh bột có thể tạo 180 g glucose.',true,'Mỗi mắt xích nhận thêm một phân tử nước.'],
+   ['Lên men một mol glucose tạo tối đa một mol ethanol.',false,'Phương trình cho hai mol ethanol trên một mol glucose.'],
+   ['Maltose thủy phân hoàn toàn tạo hai mol glucose trên mỗi mol maltose.',true,'Mỗi phân tử maltose gồm hai gốc glucose.'],
+   ['Khối lượng glucose lý thuyết thu được từ tinh bột có thể lớn hơn khối lượng tinh bột ban đầu.',true,'Nước được cộng vào khi thủy phân.']
+  ]),
+  tfq('Tính lượng chất qua phản ứng tráng bạc.',[
+   ['Một mol saccharose chưa thủy phân trực tiếp cho phản ứng tráng bạc như glucose.',false,'Saccharose là đường không khử.'],
+   ['Sau thủy phân, một mol saccharose tạo một mol glucose và một mol fructose.',true,'Đây là sản phẩm thủy phân saccharose.'],
+   ['Nếu toàn bộ monosaccharide sau thủy phân phản ứng Tollens hoàn toàn, cả glucose và fructose đều đóng góp lượng Ag.',true,'Fructose có thể chuyển hóa trong môi trường kiềm và khử Tollens.'],
+   ['Một mol maltose thủy phân rồi phản ứng Tollens hoàn toàn có thể tạo tối đa bốn mol Ag.',true,'Một mol maltose tạo hai mol glucose; mỗi mol glucose cho hai mol Ag.']
+  ]),
+  tfq('Lên men và polysaccharide.',[
+   ['Hiệu suất lên men phải được nhân vào lượng ethanol lý thuyết để tìm lượng thực tế.',true,'Hiệu suất thực tế bằng hiệu suất nhân giá trị lý thuyết.'],
+   ['162 g mắt xích tinh bột thủy phân hoàn toàn tạo 162 g glucose.',false,'Về lý thuyết tạo 180 g glucose do cộng nước.'],
+   ['Tinh bột tạo màu xanh tím với iodine.',true,'Đây là phản ứng nhận biết tinh bột.'],
+   ['Cellulose được cấu tạo từ các gốc β-glucose nối chủ yếu bằng liên kết β-1,4-glycoside.',true,'Đây là đặc điểm cấu trúc cellulose.']
+  ])
+ ];
+}
+function chemShort(chapter,s){
+ const short=(q,answer,why,unit='',tol=0.03)=>({type:'short',q,answer,tol,why,unit,fmt:null});
+ if(s<4)return chapter===1?c1short(s):c2short(s);
+ const k=s-4;
+ if(chapter===1){
+  if(s<8)return [
+   short('Cho '+(0.12+0.02*k).toFixed(2)+' mol triolein hydrogen hóa hoàn toàn. Tính số mol H₂ cần dùng.',3*(0.12+0.02*k),'Mỗi mol triolein cộng 3 mol H₂.','mol',0.02),
+   short('Xà phòng hóa '+(0.15+0.01*k).toFixed(2)+' mol triglyceride bằng 0,50 mol NaOH. Tính số mol NaOH dư.',0.50-3*(0.15+0.01*k),'n(NaOH dư)=0,50−3n(triglyceride).','mol',0.02),
+   short('Xà phòng hóa '+(0.08+0.01*k).toFixed(2)+' mol tristearin. Tính khối lượng sodium stearate (M=306 g/mol).',918*(0.08+0.01*k),'Một mol triglyceride tạo ba mol muối; m=3n×306.','g',0.05),
+   short('Trong phản ứng ester hóa, ban đầu có 1,00 mol acid và 1,00 mol alcohol; cân bằng tạo '+(0.60+0.02*k).toFixed(2)+' mol ester. Tính hiệu suất cân bằng theo acid ban đầu.',(0.60+0.02*k)*100,'Hiệu suất = n ester/n acid ban đầu×100%.','%',0.1),
+   short('Có 0,10 mol triolein, chỉ '+(75-5*k)+'% số liên kết C=C phản ứng. Tính số mol H₂ tiêu thụ.',0.10*3*(0.75-0.05*k),'n(H₂)=n(triolein)×3×hiệu suất hydrogen hóa.','mol',0.02),
+   short('Thủy phân hoàn toàn '+(0.10+0.02*k).toFixed(2)+' mol triglyceride. Tính khối lượng glycerol (M=92 g/mol).',92*(0.10+0.02*k),'Tỉ lệ triglyceride:glycerol=1:1.','g',0.05)
+  ];
+  return [
+   short('Hỗn hợp 0,20 mol triolein và tripalmitin tiêu thụ 0,90 mol H₂. Tính số mol trilinolein nếu giả sử hỗn hợp gồm triolein và trilinolein.',0.10,'x+y=0,20; 3x+6y=0,90 ⇒y=0,10 mol.','mol',0.02),
+   short('Xà phòng hóa hoàn toàn 0,15 mol tristearin. Tính khối lượng sodium stearate (M=306 g/mol).',137.7,'n(muối)=3×0,15=0,45 mol; m=0,45×306=137,7 g.','g',0.1),
+   short('Cân bằng acid acetic + ethanol ⇌ ester + nước: ban đầu mỗi chất phản ứng 1,00 mol, cân bằng có 0,60 mol ester. Tính Kc.',2.25,'Kc=(0,60×0,60)/(0,40×0,40)=2,25.','',0.03),
+   short('0,10 mol triolein được hydrogen hóa với 80% số liên kết đôi phản ứng. Tính số mol H₂ tiêu thụ.',0.24,'Có 0,30 mol nối đôi; 80% phản ứng ⇒0,24 mol H₂.','mol',0.02),
+   short('Xà phòng hóa 0,15 mol triglyceride bằng 0,50 mol NaOH. Tính số mol NaOH dư.',0.05,'NaOH dùng=3×0,15=0,45 mol; dư=0,50−0,45=0,05 mol.','mol',0.02),
+   short('Xà phòng hóa 0,10 mol tristearin. Tính khối lượng sodium stearate (M=306 g/mol).',91.8,'n(muối)=0,30 mol; m=0,30×306=91,8 g.','g',0.05)
+  ];
+ }
+ if(s<8)return [
+  short('Có '+(0.15+0.02*k).toFixed(2)+' mol glucose phản ứng hoàn toàn với Tollens dư. Tính khối lượng Ag (M=108 g/mol).',216*(0.15+0.02*k),'Một mol glucose tạo 2 mol Ag.','g',0.05),
+  short('Thủy phân hoàn toàn '+(32.4+3.24*k).toFixed(2)+' g tinh bột (M mắt xích 162). Tính khối lượng glucose tối đa.',(32.4+3.24*k)*180/162,'Khối lượng glucose =m tinh bột×180/162.','g',0.05),
+  short('Lên men '+(0.25+0.05*k).toFixed(2)+' mol glucose với hiệu suất 100%. Tính khối lượng ethanol.',92*(0.25+0.05*k),'1 mol glucose tạo 2 mol ethanol, m=92n.','g',0.05),
+  short('Thủy phân hoàn toàn '+(0.12+0.02*k).toFixed(2)+' mol saccharose. Tính tổng số mol monosaccharide thu được.',2*(0.12+0.02*k),'Một mol saccharose tạo hai mol monosaccharide.','mol',0.02),
+  short('Hỗn hợp 36 g glucose và fructose làm mất màu '+(0.10+0.01*k).toFixed(2)+' mol Br₂; chỉ glucose phản ứng với Br₂. Tính khối lượng glucose.',180*(0.10+0.01*k),'Tỉ lệ glucose:Br₂=1:1; m=180n.','g',0.05),
+  short('Thủy phân hoàn toàn '+(0.10+0.02*k).toFixed(2)+' mol maltose rồi phản ứng Tollens dư. Tính khối lượng Ag tối đa.',432*(0.10+0.02*k),'Một mol maltose tạo 2 mol glucose, rồi 4 mol Ag; m=4×108×n.','g',0.05)
+ ];
+ return [
+  short('32,4 g tinh bột thủy phân đạt 80%; glucose tạo thành lên men đạt 75%. Tính khối lượng ethanol thực tế.',11.04,'32,4 g tinh bột ứng với 0,20 mol mắt xích; glucose thực tế 0,16 mol; ethanol=0,16×2×46×0,75=11,04 g.','g',0.05),
+  short('Hỗn hợp 36 g glucose/fructose làm mất màu 0,12 mol Br₂, chỉ glucose phản ứng với Br₂. Tính khối lượng glucose.',21.6,'n glucose=0,12 mol ⇒m=0,12×180=21,6 g.','g',0.05),
+  short('Hỗn hợp 36 g glucose/fructose (cả hai đều khử Tollens) phản ứng hoàn toàn. Tính khối lượng Ag lý thuyết.',43.2,'Tổng n đường=36/180=0,20 mol; nAg=0,40 mol; m=43,2 g.','g',0.05),
+  short('0,15 mol saccharose thủy phân 90%, sản phẩm phản ứng Tollens với hiệu suất thu Ag 80%. Tính khối lượng Ag thực tế.',46.656,'n saccharose thủy phân=0,135 mol; nAg lý thuyết=0,54 mol; nhân 0,80 được 0,432 mol, tức 46,656 g.','g',0.1),
+  short('Mẫu 50 g chứa 80% tinh bột, thủy phân hoàn toàn rồi lên men hiệu suất 75%. Tính khối lượng ethanol thực tế.',16.6667,'Có 40 g tinh bột; glucose=40×180/162=44,44 g; ethanol lý thuyết=22,22 g; nhân 75%=16,67 g.','g',0.1),
+  short('Thủy phân hoàn toàn 0,10 mol maltose rồi phản ứng Tollens dư. Tính khối lượng Ag lý thuyết.',43.2,'0,10 mol maltose cho 0,20 mol glucose; tạo 0,40 mol Ag, tương ứng 43,2 g.','g',0.05)
+ ];
+}
 function buildChemBank(){
  const bank=[];
- for(let s=0;s<10;s++)bank.push({id:'h1e'+String(s+1).padStart(2,'0'),title:'Chương 1 · Ester – Lipid · Đề '+String(s+1).padStart(2,'0'),difficulty:LEVELS[s],desc:['Nhận biết cấu tạo, danh pháp và tính chất cơ bản của ester.','Luyện phản ứng thủy phân, ester hóa và lipid.','Vận dụng kiến thức ester – lipid ở mức thông hiểu.','Kết hợp cấu tạo, phản ứng và bài toán chất béo.','Bài tập vận dụng về ester và triglyceride.','Tính toán phản ứng và tính chất chất béo.','Tổng hợp nhiều dạng phản ứng ester – lipid.','Vận dụng cao về thủy phân và hydrogen hóa.','Thử thách tổng hợp chuyên sâu Ester – Lipid.','Đề tổng hợp mức cao về ester, chất béo và acid béo.'][s],subject:'Hóa học · Chương 1',chapter:'ch1',minutes:50,questions:[...c1mc(s),...c1tf(s),...c1short(s)]});
- for(let s=0;s<10;s++)bank.push({id:'h2e'+String(s+1).padStart(2,'0'),title:'Chương 2 · Carbohydrate · Đề '+String(s+1).padStart(2,'0'),difficulty:LEVELS[s],desc:['Nhận biết phân loại và cấu tạo carbohydrate.','Luyện tính chất glucose, fructose và disaccharide.','Vận dụng phản ứng đặc trưng của monosaccharide.','Tổng hợp saccharose, maltose và polysaccharide.','Bài tập tính toán phản ứng carbohydrate.','Vận dụng về thủy phân và lên men.','Tổng hợp cấu tạo và tính chất carbohydrate.','Bài tập nhiều bước về glucose và polysaccharide.','Thử thách tổng hợp chuyên sâu Carbohydrate.','Đề tổng hợp mức cao về mono-, di- và polysaccharide.'][s],subject:'Hóa học · Chương 2',chapter:'ch2',minutes:50,questions:[...c2mc(s),...c2tf(s),...c2short(s)]});
+ for(let s=0;s<10;s++)bank.push({id:'h1e'+String(s+1).padStart(2,'0'),title:'Chương 1 · Ester – Lipid · Đề '+String(s+1).padStart(2,'0'),difficulty:LEVELS[s],desc:['Nhận biết cấu tạo, danh pháp và tính chất cơ bản của ester.','Luyện phản ứng thủy phân, ester hóa và lipid.','Vận dụng kiến thức ester – lipid ở mức thông hiểu.','Kết hợp cấu tạo, phản ứng và bài toán chất béo.','Bài tập vận dụng về ester và triglyceride.','Tính toán phản ứng và tính chất chất béo.','Tổng hợp nhiều dạng phản ứng ester – lipid.','Vận dụng cao về thủy phân và hydrogen hóa.','Thử thách tổng hợp chuyên sâu Ester – Lipid.','Đề tổng hợp mức cao về ester, chất béo và acid béo.'][s],subject:'Hóa học · Chương 1',chapter:'ch1',minutes:50,questions:[...chemMC(1,s),...chemTF(1,s),...chemShort(1,s)]});
+ for(let s=0;s<10;s++)bank.push({id:'h2e'+String(s+1).padStart(2,'0'),title:'Chương 2 · Carbohydrate · Đề '+String(s+1).padStart(2,'0'),difficulty:LEVELS[s],desc:['Nhận biết phân loại và cấu tạo carbohydrate.','Luyện tính chất glucose, fructose và disaccharide.','Vận dụng phản ứng đặc trưng của monosaccharide.','Tổng hợp saccharose, maltose và polysaccharide.','Bài tập tính toán phản ứng carbohydrate.','Vận dụng về thủy phân và lên men.','Tổng hợp cấu tạo và tính chất carbohydrate.','Bài tập nhiều bước về glucose và polysaccharide.','Thử thách tổng hợp chuyên sâu Carbohydrate.','Đề tổng hợp mức cao về mono-, di- và polysaccharide.'][s],subject:'Hóa học · Chương 2',chapter:'ch2',minutes:50,questions:[...chemMC(2,s),...chemTF(2,s),...chemShort(2,s)]});
  return bank;
 }
 const BANK=buildChemBank();
