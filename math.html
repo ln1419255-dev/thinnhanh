@@ -1403,6 +1403,15 @@ main{min-width:0}
 .math-sub{vertical-align:sub}
 .questiontext .math-frac,.answerline .math-frac,.reviewrow .math-frac{font-size:1.02em}
 
+
+/* Ký hiệu toán: số mũ rõ hơn, căn có gạch ngang và phân số giữ dạng dấu / */
+.math-sup,.math-sub{font-size:.86em;line-height:0;font-weight:750}
+.math-sup{vertical-align:super;margin-left:.015em}
+.math-sub{vertical-align:sub}
+.math-explicit-sup{font-size:.82em;line-height:1;vertical-align:super;font-weight:700}
+.math-root{display:inline-flex;align-items:flex-end;vertical-align:middle;line-height:1.15;margin:0 .04em;white-space:nowrap}
+.math-root-sign{display:inline-block;font-size:1.24em;line-height:1;transform:translateY(.04em);font-weight:600}
+.math-radicand{display:inline-block;border-top:1.5px solid currentColor;padding:0 .06em 0 .02em;margin-left:-.035em;line-height:1.22;transform:translateY(.04em)}
 </style>
 </head>
 <body>
@@ -1595,14 +1604,101 @@ function htmlEscape(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;',
 function matchingParen(s,start){let depth=0;for(let i=start;i<s.length;i++){if(s[i]==='(')depth++;else if(s[i]===')'){depth--;if(depth===0)return i}}return -1}
 function isMathAtom(ch){return !!ch&&/[A-Za-zÀ-ỹΔΛΜΩαβγλμνπρΩω0-9₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼.,°·×_′]/u.test(ch)}
 function richMathChar(ch){const sup={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁺':'+','⁻':'−','⁼':'=','⁽':'(','⁾':')'};const sub={'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':'6','₇':'7','₈':'8','₉':'9'};if(Object.prototype.hasOwnProperty.call(sup,ch))return '<sup class="math-sup">'+sup[ch]+'</sup>';if(Object.prototype.hasOwnProperty.call(sub,ch))return '<sub class="math-sub">'+sub[ch]+'</sub>';return htmlEscape(ch)}
-function formatRich(value){const source=cleanSymbolText(value);function parse(s){let out='',i=0;while(i<s.length){let numStart=-1,numEnd=-1,denStart=-1,denEnd=-1,slash=-1,groupedDen=false;if(s[i]==='('){const close=matchingParen(s,i);if(close>i){let k=close+1;while(k<s.length&&/\s/.test(s[k]))k++;if(s[k]==='/'){numStart=i+1;numEnd=close;slash=k;denStart=slash+1;while(denStart<s.length&&/\s/.test(s[denStart]))denStart++;if(s[denStart]==='('){const dc=matchingParen(s,denStart);if(dc>denStart){denEnd=dc;groupedDen=true}}else{denEnd=denStart;while(denEnd<s.length&&isMathAtom(s[denEnd]))denEnd++}}}}
-if(slash<0&&isMathAtom(s[i])&&(i===0||!isMathAtom(s[i-1]))){let j=i;while(j<s.length&&isMathAtom(s[j]))j++;let k=j;while(k<s.length&&/\s/.test(s[k]))k++;if(s[k]==='/'){numStart=i;numEnd=j;slash=k;denStart=slash+1;while(denStart<s.length&&/\s/.test(s[denStart]))denStart++;if(s[denStart]==='('){const dc=matchingParen(s,denStart);if(dc>denStart){denEnd=dc;groupedDen=true}}else{denEnd=denStart;while(denEnd<s.length&&isMathAtom(s[denEnd]))denEnd++}}}
-if(slash>=0&&numEnd>numStart&&denEnd>denStart){const numerator=s.slice(numStart,numEnd),denominator=s.slice(groupedDen?denStart+1:denStart,groupedDen?denEnd:denEnd);out+='<span class="math-frac"><span>'+parse(numerator)+'</span><span>'+parse(denominator)+'</span></span>';i=groupedDen?denEnd+1:denEnd;continue}out+=richMathChar(s[i]);i++}return out}return parse(source)}
+function formatRich(value){
+ const source=cleanSymbolText(value);
+ function parse(text){
+  let out='',i=0;
+  while(i<text.length){
+   if(text[i]==='^'){
+    let start=i+1;
+    while(start<text.length&&/\s/.test(text[start]))start++;
+    if(text[start]==='('){
+     const close=matchingParen(text,start);
+     if(close>start){
+      out+='<sup class="math-sup math-explicit-sup">'+parse(text.slice(start+1,close))+'</sup>';
+      i=close+1;continue;
+     }
+    }else{
+     let end=start;
+     while(end<text.length&&isMathAtom(text[end]))end++;
+     if(end>start){
+      out+='<sup class="math-sup math-explicit-sup">'+parse(text.slice(start,end))+'</sup>';
+      i=end;continue;
+     }
+    }
+   }
+   if(text[i]==='√'){
+    let start=i+1;
+    while(start<text.length&&/\s/.test(text[start]))start++;
+    let end=start,radicand='';
+    if(text[start]==='('){
+     const close=matchingParen(text,start);
+     if(close>start){radicand=text.slice(start+1,close);end=close+1;}
+    }else{
+     while(end<text.length&&isMathAtom(text[end]))end++;
+     if(end>start)radicand=text.slice(start,end);
+    }
+    if(radicand){
+     out+='<span class="math-root"><span class="math-root-sign">√</span><span class="math-radicand">'+parse(radicand)+'</span></span>';
+     i=end;continue;
+    }
+   }
+   out+=richMathChar(text[i]);i++;
+  }
+  return out;
+ }
+ return parse(source);
+}
 function sectionInfo(i,totalQuestions=28){if(totalQuestions===22){if(i<12)return {label:'PHẦN I · TRẮC NGHIỆM NHIỀU LỰA CHỌN',no:i+1,sub:'Chọn một đáp án đúng · 0,25 điểm/câu'};if(i<16)return {label:'PHẦN II · TRẮC NGHIỆM ĐÚNG/SAI',no:i-11,sub:'Đánh giá đúng/sai cho cả 4 ý · tối đa 1 điểm/câu'};return {label:'PHẦN III · TRẢ LỜI NGẮN',no:i-15,sub:'Nhập kết quả số · 0,5 điểm/câu'}}if(i<18)return {label:'PHẦN I · TRẮC NGHIỆM NHIỀU LỰA CHỌN',no:i+1,sub:'Chọn một đáp án đúng · 0,25 điểm/câu'};if(i<22)return {label:'PHẦN II · TRẮC NGHIỆM ĐÚNG/SAI',no:i-17,sub:'Đánh giá đúng/sai cho cả 4 ý · tối đa 1 điểm/câu'};return {label:'PHẦN III · TRẢ LỜI NGẮN',no:i-21,sub:'Nhập kết quả số · 0,25 điểm/câu'}}
 function emptyAnswer(q){if(q.type==='tf')return [null,null,null,null];return null}
 function isComplete(i){let q=activeExam.questions[i],a=answers[i];if(q.type==='tf')return Array.isArray(a)&&a.every(x=>x===true||x===false);if(q.type==='short')return a!==null&&String(a).trim()!=='';return a!==null}
 function answeredCount(){return answers.filter((a,i)=>isComplete(i)).length}
-function visualHTML(q){if(!q||!q.visual)return '';const label=(q.visual.match(/aria-label="([^"]+)/)||[])[1]||'Hình minh họa câu hỏi';return '<div class="question-visual"><img alt="'+esc(label)+'" loading="lazy" src="data:image/svg+xml;charset=utf-8,'+encodeURIComponent(q.visual)+'"></div>'}
+function graphWithScaleLabels(svg){
+ if(!svg||!svg.includes('<svg')||!svg.includes('viewBox="0 0 640 360"'))return svg;
+ const title=(svg.match(/aria-label="([^"]*)"/)||[])[1]||'';
+ if(!/^ĐỒ THỊ y = f/.test(title)&&!/^ĐỒ THỊ HÀM PHÂN THỨC/.test(title))return svg;
+ const texts=[...svg.matchAll(/<text\b[^>]*>([^<]*)<\/text>/g)].map(m=>m[1].trim());
+ if(texts.some(t=>/^[−-]?\d+(?:[.,]\d+)?$/.test(t)))return svg;
+ const attr=(tag,name)=>{const marker=name+'="';const start=tag.indexOf(marker);if(start<0)return null;const from=start+marker.length;const end=tag.indexOf('"',from);return end<0?null:tag.slice(from,end)};
+ const gridStrokes=['#bdccd9','#d2dde8'];
+ const lineTags=[...svg.matchAll(/<line\b[^>]*>/g)].map(m=>m[0]);
+ const lines=lineTags.map(tag=>({tag,x1:Number(attr(tag,'x1')),y1:Number(attr(tag,'y1')),x2:Number(attr(tag,'x2')),y2:Number(attr(tag,'y2')),stroke:attr(tag,'stroke')}));
+ const grid=lines.filter(l=>gridStrokes.includes(l.stroke));
+ const xs=[...new Set(grid.filter(l=>Number.isFinite(l.x1)&&Math.abs(l.x1-l.x2)<0.05&&Math.abs(l.y1-l.y2)>150).map(l=>l.x1))].sort((a,b)=>a-b);
+ const ys=[...new Set(grid.filter(l=>Number.isFinite(l.y1)&&Math.abs(l.y1-l.y2)<0.05&&Math.abs(l.x1-l.x2)>400).map(l=>l.y1))].sort((a,b)=>a-b);
+ if(xs.length<3||ys.length<3)return svg;
+ const axisLines=[];
+ for(const g of svg.matchAll(/<g\b([^>]*)>([\s\S]*?)<\/g>/g)){
+  const head=g[0].slice(0,g[0].indexOf('>')+1);
+  const gs=attr(head,'stroke');
+  if(!gs||gridStrokes.includes(gs))continue;
+  for(const m of g[2].matchAll(/<line\b[^>]*>/g)){
+   const tag=m[0],x1=Number(attr(tag,'x1')),y1=Number(attr(tag,'y1')),x2=Number(attr(tag,'x2')),y2=Number(attr(tag,'y2'));
+   if(![x1,y1,x2,y2].every(Number.isFinite))continue;
+   if(Math.abs(y1-y2)<0.05&&Math.abs(x2-x1)>400)axisLines.push({kind:'h',x1,y1,x2,y2});
+   if(Math.abs(x1-x2)<0.05&&Math.abs(y2-y1)>200)axisLines.push({kind:'v',x1,y1,x2,y2});
+  }
+ }
+ const hAxis=axisLines.filter(l=>l.kind==='h').sort((a,b)=>Math.abs(b.x2-b.x1)-Math.abs(a.x2-a.x1))[0];
+ const vAxis=axisLines.filter(l=>l.kind==='v').sort((a,b)=>Math.abs(b.y2-b.y1)-Math.abs(a.y2-a.y1))[0];
+ if(!hAxis||!vAxis)return svg;
+ const step=(arr)=>{const ds=arr.slice(1).map((v,i)=>v-arr[i]).sort((a,b)=>a-b);return ds[Math.floor(ds.length/2)]};
+ const dx=step(xs),dy=step(ys);if(!(dx>0&&dy>0))return svg;
+ const snap=(origin,coords,unit)=>{let nearest=coords[0];for(const c of coords)if(Math.abs(c-origin)<Math.abs(nearest-origin))nearest=c;return Math.abs(nearest-origin)<=unit*.18?nearest:origin};
+ const x0=snap(vAxis.x1,xs,dx),y0=snap(hAxis.y1,ys,dy);
+ const fmt=(n)=>{let r=Math.round(n*10)/10;if(Math.abs(r)<0.05)r=0;let z=Math.abs(r).toFixed(1).replace(/\.0$/,'');return r<0?'−'+z:z};
+ let labels='<g class="graph-scale-labels" font-family="Arial, sans-serif" font-size="11.5" fill="#536779">';
+ for(const x of xs){const value=(x-x0)/dx;labels+='<text x="'+x.toFixed(2)+'" y="337" text-anchor="middle">'+fmt(value)+'</text>'}
+ for(const y of ys){const value=(y0-y)/dy;labels+='<text x="54" y="'+(y+4).toFixed(2)+'" text-anchor="end">'+fmt(value)+'</text>'}
+ labels+='</g>';
+ return svg.replace('</svg>',labels+'</svg>');
+}
+function visualHTML(q){
+ if(!q||!q.visual)return '';
+ const label=(q.visual.match(/aria-label="([^"]+)/)||[])[1]||'Hình minh họa câu hỏi';
+ const visual=graphWithScaleLabels(q.visual);
+ return '<div class="question-visual"><img alt="'+esc(label)+'" loading="lazy" src="data:image/svg+xml;charset=utf-8,'+encodeURIComponent(visual)+'"></div>';
+}
 function renderTake(){let q=activeExam.questions[activeQ],info=sectionInfo(activeQ,activeExam.questions.length);$('sectionLabel').textContent=info.label;$('questionTitle').textContent=`Câu ${info.no} · ${info.sub}`;$('questionText').innerHTML=formatRich(q.q);$('questionVisual').innerHTML=visualHTML(q);
  let area='';
  if(q.type==='mc'){area='<div class="answerlist">'+q.options.map((o,j)=>`<button class="takeanswer ${answers[activeQ]===j?'selected':''}" data-choice="${j}"><span class="letter">${String.fromCharCode(65+j)}</span><span>${formatRich(o)}</span></button>`).join('')+'</div>'}
