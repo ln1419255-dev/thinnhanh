@@ -67,7 +67,7 @@ button,input{font:inherit}button{cursor:pointer}.topbar{height:70px;position:sti
 .question-navigation .submit-panel p{margin:0 0 11px}
 .question-navigation .submit-actions{display:grid;grid-template-columns:1fr;gap:8px}
 .question-navigation .submit-actions .btn{width:100%}
-@media(max-width:900px){
+@media(max-width:760px){
  .quiz-layout{grid-template-columns:minmax(0,1fr);gap:10px}
  .question-navigation{position:static;order:-1;margin:14px 0 0}
  .question-nav-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
@@ -80,6 +80,14 @@ button,input{font:inherit}button{cursor:pointer}.topbar{height:70px;position:sti
  .question-nav-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
  .question-nav-grid button{min-height:36px;font-size:11px}
  .question-step-controls{margin:10px 0 17px;padding:0}
+}
+
+
+/* Bảo đảm bảng số câu nằm bên phải trên máy tính và laptop */
+@media(min-width:761px){
+ .quiz-layout{display:grid;grid-template-columns:minmax(0,1fr) 255px;gap:16px;align-items:start}
+ .quiz-main-column{grid-column:1;grid-row:1;min-width:0}
+ .question-navigation{grid-column:2;grid-row:1;position:sticky;top:84px;align-self:start;min-width:0}
 }
 
 </style></head>
