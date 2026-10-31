@@ -1673,7 +1673,7 @@ function mathGroupStart(text,closeIndex){
    }
    denominatorEnd=q;
   }
-  while(denominatorEnd>slashIndex+1&&/[.,;]/.test(text[denominatorEnd-1])&&(denominatorEnd===text.length||/\\s|[)\\]}]/.test(text[denominatorEnd])))denominatorEnd--;
+  while(denominatorEnd>slashIndex+1&&/[.,;]/.test(text[denominatorEnd-1])&&(denominatorEnd===text.length||/\s|[)\]}]/.test(text[denominatorEnd])))denominatorEnd--;
   if(denominatorEnd<=slashIndex+1)return null;
   return {start:numeratorStart,end:denominatorEnd};
  }
@@ -1686,7 +1686,7 @@ function mathGroupStart(text,closeIndex){
    p=close+1;
    while(p<text.length&&/[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼]/u.test(text[p]))p++;
    if(text[p]==='^'){
-    let e=p+1;while(e<text.length&&/\\s/.test(text[e]))e++;
+    let e=p+1;while(e<text.length&&/\s/.test(text[e]))e++;
     if(text[e]==='('){const ec=mathGroupEnd(text,e);if(ec>=0)p=ec+1;}
     else {while(e<text.length&&isMathAtom(text[e]))e++;if(e>p+1)p=e;}
    }
@@ -1697,13 +1697,13 @@ function mathGroupStart(text,closeIndex){
     const close=mathGroupEnd(text,p);if(close<0)break;p=close+1;
    }
    while(p<text.length&&text[p]==='^'){
-    let e=p+1;while(e<text.length&&/\\s/.test(text[e]))e++;
+    let e=p+1;while(e<text.length&&/\s/.test(text[e]))e++;
     if(text[e]==='('){const ec=mathGroupEnd(text,e);if(ec>=0)p=ec+1;else break;}
     else {while(e<text.length&&isMathAtom(text[e]))e++;if(e>p+1)p=e;else break;}
    }
    while(p<text.length&&/[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼]/u.test(text[p]))p++;
   }
-  while(p<text.length&&/\\s/.test(text[p]))p++;
+  while(p<text.length&&/\s/.test(text[p]))p++;
   return text[p]==='/'?p:-1;
  }
  
