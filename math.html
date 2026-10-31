@@ -1729,6 +1729,72 @@ html[data-theme="dark"] .level.mid{color:#8ec5ff!important}
 html[data-theme="dark"] .level.hard{color:#ffc18c!important}
 html[data-theme="dark"] .level.super{color:#d6a6ff!important}
 
+
+/* Dark mode: override legacy forced-light text colors in the exam-taking panel */
+html[data-theme="dark"] #view-take .takepanel,
+html[data-theme="dark"] #view-take .qnavpanel,
+html[data-theme="dark"] #view-take .result-hero,
+html[data-theme="dark"] #view-take .reviewrow{
+  background:#121e2f!important;
+  border-color:#2a3c53!important;
+  color:#dce8f6!important;
+}
+html[data-theme="dark"] #view-take .takepanel h2,
+html[data-theme="dark"] #view-take .questiontext,
+html[data-theme="dark"] #view-take .takeanswer,
+html[data-theme="dark"] #view-take .takeanswer span,
+html[data-theme="dark"] #view-take .takeanswer span:last-child,
+html[data-theme="dark"] #view-take .tfstatement p,
+html[data-theme="dark"] #view-take .qnavpanel>b,
+html[data-theme="dark"] #view-take .qnavpanel h3,
+html[data-theme="dark"] #view-take .shortnote{
+  color:#dce8f6!important;
+  opacity:1!important;
+  text-shadow:none!important;
+  filter:none!important;
+}
+html[data-theme="dark"] #view-take .takeanswer,
+html[data-theme="dark"] #view-take .tfrow{
+  background:#172538!important;
+  border-color:#30445e!important;
+}
+html[data-theme="dark"] #view-take .takeanswer.selected{
+  background:linear-gradient(110deg,#173b3b,#182c3d)!important;
+  border-color:#298b83!important;
+  color:#b9f6ea!important;
+}
+html[data-theme="dark"] #view-take .takeanswer.selected span,
+html[data-theme="dark"] #view-take .takeanswer.selected span:last-child{
+  color:#b9f6ea!important;
+}
+html[data-theme="dark"] #view-take .tfchoice{
+  background:#172538!important;
+  border-color:#354a63!important;
+  color:#d7e5f4!important;
+  text-shadow:none!important;
+}
+html[data-theme="dark"] #view-take .tfchoice.on-true{
+  background:#153528!important;
+  border-color:#2b7756!important;
+  color:#9ce6b6!important;
+}
+html[data-theme="dark"] #view-take .tfchoice.on-false{
+  background:#3a222c!important;
+  border-color:#7d3b4c!important;
+  color:#ffb5c1!important;
+}
+html[data-theme="dark"] #view-take .shortinput{
+  background:#0e1929!important;
+  border-color:#35485f!important;
+  color:#e1ebf7!important;
+  caret-color:#81e7d8;
+}
+html[data-theme="dark"] #view-take .takepanel p,
+html[data-theme="dark"] #view-take .takepanel label,
+html[data-theme="dark"] #view-take .takepanel small{
+  color:#b9c9db!important;
+}
+
 </style>
 </head>
 <body>
