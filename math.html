@@ -1641,9 +1641,11 @@ function mathGroupStart(text,closeIndex){
   if(p>=0&&')]}'.includes(text[p])){
    numeratorStart=mathGroupStart(text,p);
    if(numeratorStart<0)return null;
+   if(numeratorStart>0&&text[numeratorStart-1]==='√')numeratorStart--;
   }else{
    while(p>=0&&isMathAtom(text[p]))p--;
    numeratorStart=p+1;
+   if(numeratorStart>0&&text[numeratorStart-1]==='√')numeratorStart--;
   }
   if(numeratorStart>=slashIndex)return null;
   if(numeratorStart>0&&/[−-]/.test(text[numeratorStart-1])&&(numeratorStart-1===0||/[=(:,;\[{+\-−\s]/.test(text[numeratorStart-2]||'')))numeratorStart--;
@@ -1681,6 +1683,14 @@ function mathGroupStart(text,closeIndex){
   let p=startIndex;
   if(/[−-]/.test(text[p]||''))p++;
   if(p>=text.length)return -1;
+  if(text[p]==='√'){
+   p++;while(p<text.length&&/\s/.test(text[p]))p++;
+   if('([{'.includes(text[p])){const close=mathGroupEnd(text,p);if(close<0)return -1;p=close+1;}
+   else {while(p<text.length&&isMathAtom(text[p]))p++;}
+   while(p<text.length&&/[⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼]/u.test(text[p]))p++;
+   while(p<text.length&&/\s/.test(text[p]))p++;
+   return text[p]==='/'?p:-1;
+  }
   if('([{'.includes(text[p])){
    const close=mathGroupEnd(text,p);if(close<0)return -1;
    p=close+1;
