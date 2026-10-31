@@ -71,6 +71,10 @@ button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:no
 @media(max-width:680px){.result-hero{grid-template-columns:70px minmax(0,1fr) 100px;gap:8px;padding:13px 11px}.result-hero .score-circle{width:66px;height:66px;flex-basis:66px;font-size:17px;border-width:5px}.result-hero h2{font-size:15px}.result-hero p{font-size:10px;line-height:1.5}.result-hero .eyebrow{font-size:8px;letter-spacing:.7px}.result-details{gap:5px;margin-top:7px}.result-chip{font-size:9px;padding:5px 6px}.score-meme-visual{width:96px;height:96px;flex-basis:96px}.score-meme-caption{font-size:9px}.result-counts{gap:7px}.count-tile{padding:10px}.count-tile b{font-size:11px}.count-tile span{font-size:10px}}
 @media(max-width:390px){.result-hero{grid-template-columns:56px minmax(0,1fr) 78px;gap:5px;padding:11px 8px}.result-hero .score-circle{width:53px;height:53px;flex-basis:53px;font-size:14px;border-width:4px}.result-hero h2{font-size:13px}.result-hero p{font-size:9px}.result-chip{font-size:8px;padding:4px}.score-meme-visual{width:74px;height:74px;flex-basis:74px}.score-meme-caption{font-size:8px}.result-counts{grid-template-columns:1fr}}
 
+
+.review-explanation{margin-top:10px;padding:10px 12px;border:1px solid #f3dfb1;border-left:4px solid #d9a441;border-radius:10px;background:#fffaf0;color:#65512c;font-size:12px;line-height:1.8}
+.review-explanation b{display:block;margin-bottom:3px;color:#966b14;font-size:12px}
+@media(max-width:560px){.review-explanation{font-size:11px;padding:9px 10px;line-height:1.75}}
 </style>
 </head>
 <body>
@@ -176,7 +180,7 @@ function sendScoreToSheets(record){if(!GOOGLE_SHEETS_ENDPOINT)return;var payload
 function buildQuestions(index){
 var mc=[],tf=[];
 if(!data||!Array.isArray(data.topics)||data.topics.length!==6)return null;
-for(var j=0;j<5;j++){for(var t=0;t<data.topics.length;t++){var item=data.topics[t].questions[index*5+j];if(item)mc.push({q:item[0],options:item[1].slice(),answer:item[2],topic:data.topics[t].name});}}
+for(var j=0;j<5;j++){for(var t=0;t<data.topics.length;t++){var item=data.topics[t].questions[index*5+j];if(item)mc.push({q:item[0],options:item[1].slice(),answer:item[2],explanation:item[3]||"",topic:data.topics[t].name});}}
 tf=data.trueFalse&&data.trueFalse[index]?JSON.parse(JSON.stringify(data.trueFalse[index])):[];
 if(mc.length!==30||tf.length!==4)return null;
 return {mc:mc,tf:tf};
@@ -335,17 +339,20 @@ var html='<div class="result-hero"><div class="score-circle">'+fmt(score,2)+'</d
 if(!hasSnapshot){
 html+='<div class="legacy-note"><b>Lượt làm bài cũ chỉ lưu điểm tổng.</b> Lượt này được tạo trước khi bổ sung chức năng lưu câu trả lời chi tiết, nên chưa có dữ liệu về phương án đã chọn để đối chiếu. Các lượt làm mới sẽ lưu đầy đủ câu hỏi, đáp án đã chọn và đáp án đúng.</div>';
 }else{
+record.mcQuestions.forEach(function(savedQ){if(savedQ.explanation)return;for(var ti=0;ti<data.topics.length;ti++){var found=data.topics[ti].questions.find(function(sourceQ){return sourceQ[0]===savedQ.q;});if(found){savedQ.explanation=found[3]||"";break;}}});
+record.tfQuestions.forEach(function(group){(group.items||[]).forEach(function(savedItem){if(savedItem[2])return;for(var ei=0;ei<data.trueFalse.length;ei++){for(var gi=0;gi<data.trueFalse[ei].length;gi++){var sourceGroup=data.trueFalse[ei][gi];var found=sourceGroup.items.find(function(sourceItem){return sourceItem[0]===savedItem[0]&&sourceItem[1]===savedItem[1];});if(found){savedItem[2]=found[2]||"";return;}}}});});
+saveHistory();
 html+='<section class="review-section"><h2>Phần I · Trắc nghiệm</h2><p class="review-intro">Mỗi câu đúng được 0,2 điểm. Đáp án đúng có nền xanh; câu bạn chọn sai được đánh dấu màu đỏ.</p>';
 record.mcQuestions.forEach(function(q,i){
 var selected=record.mcAnswers[i],isCorrect=selected===q.answer;
 html+='<article class="review-card"><div class="review-card-head"><b>Câu '+(i+1)+'</b><span>'+escapeHtml(q.topic||"Tin học")+' · '+(isCorrect?"0,2 điểm":"0 điểm")+'</span></div><div class="review-question">'+escapeHtml(q.q)+'</div>';
 q.options.forEach(function(option,j){var classes=["review-option"];if(j===q.answer)classes.push("right");else if(selected===j)classes.push("chosen-wrong");html+='<div class="'+classes.join(" ")+'"><span class="review-letter">'+ "ABCD"[j]+'.</span><span>'+escapeHtml(option)+'</span>'+(j===q.answer?'<strong> ✓ Đáp án đúng</strong>':selected===j?'<strong> ← Bạn chọn</strong>':'')+'</div>';});
-html+='<div class="review-note '+(isCorrect?"ok":"bad")+'">'+(selected===null||selected===undefined?"Bạn chưa trả lời câu này.":isCorrect?"✓ Bạn đã chọn đúng.":"✗ Bạn đã chọn "+ "ABCD"[selected]+". Đáp án đúng: "+ "ABCD"[q.answer]+".")+'</div></article>';
+html+='<div class="review-note '+(isCorrect?"ok":"bad")+'">'+(selected===null||selected===undefined?"Bạn chưa trả lời câu này.":isCorrect?"✓ Bạn đã chọn đúng.":"✗ Bạn đã chọn "+ "ABCD"[selected]+". Đáp án đúng: "+ "ABCD"[q.answer]+".")+'</div>'+(!isCorrect&&q.explanation?'<div class="review-explanation"><b>Giải thích:</b> '+escapeHtml(q.explanation)+'</div>':'')+'</article>';
 });
 html+='</section><section class="review-section"><h2>Phần II · Đúng/Sai</h2><p class="review-intro">Mỗi ý đúng được 0,25 điểm. Hãy đối chiếu lựa chọn của bạn với đáp án chuẩn cho từng nhận định.</p>';
 record.tfQuestions.forEach(function(group,gi){
 html+='<article class="review-card"><div class="review-card-head"><b>Câu Đúng/Sai '+(gi+1)+'</b><span>'+escapeHtml(group.topic||"Tin học")+' · '+escapeHtml(group.title||"")+'</span></div>';
-group.items.forEach(function(item,si){var selected=record.tfAnswers[gi]&&record.tfAnswers[gi][si],expected=item[1]?"true":"false",ok=selected===expected;html+='<div class="tf-statement"><div class="tf-text"><strong>'+"abcd"[si]+')</strong> '+escapeHtml(item[0])+'<div class="review-note '+(ok?"ok":"bad")+'">'+(selected===null||selected===undefined?"Chưa trả lời.":ok?"✓ Bạn đã chọn "+(selected==="true"?"Đúng":"Sai")+".":"✗ Bạn chọn "+(selected==="true"?"Đúng":"Sai")+".")+' Đáp án chuẩn: <b>'+(item[1]?"Đúng":"Sai")+'</b>.</div></div><div class="tf-options"><span class="tf-option '+(selected==="true"?(expected==="true"?"correct":"wrong"):"")+'">Đúng</span><span class="tf-option '+(selected==="false"?(expected==="false"?"correct":"wrong"):"")+'">Sai</span></div></div>';});
+group.items.forEach(function(item,si){var selected=record.tfAnswers[gi]&&record.tfAnswers[gi][si],expected=item[1]?"true":"false",ok=selected===expected;html+='<div class="tf-statement"><div class="tf-text"><strong>'+"abcd"[si]+')</strong> '+escapeHtml(item[0])+'<div class="review-note '+(ok?"ok":"bad")+'">'+(selected===null||selected===undefined?"Chưa trả lời.":ok?"✓ Bạn đã chọn "+(selected==="true"?"Đúng":"Sai")+".":"✗ Bạn chọn "+(selected==="true"?"Đúng":"Sai")+".")+' Đáp án chuẩn: <b>'+(item[1]?"Đúng":"Sai")+'</b>.</div>'+(!ok?'<div class="review-explanation"><b>Giải thích:</b> '+escapeHtml(item[2]||"Hãy ôn lại khái niệm của nhận định này.")+'</div>':'')+'</div><div class="tf-options"><span class="tf-option '+(selected==="true"?(expected==="true"?"correct":"wrong"):"")+'">Đúng</span><span class="tf-option '+(selected==="false"?(expected==="false"?"correct":"wrong"):"")+'">Sai</span></div></div>';});
 html+='</article>';
 });
 html+='</section>';
