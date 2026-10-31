@@ -51,6 +51,37 @@ button,input{font:inherit}button{cursor:pointer}.topbar{height:70px;position:sti
  .question-nav-grid button{min-height:38px;font-size:11px}
  .question-nav-legend{gap:10px;font-size:10px}
 }
+
+/* Desktop: câu hỏi bên trái, danh sách điều hướng bên phải như trang Toán */
+.quiz-layout{display:grid;grid-template-columns:minmax(0,1fr) 255px;gap:16px;align-items:start}
+.quiz-main-column{min-width:0}
+.quiz-main-column .question-section{margin:16px 0 0}
+.question-step-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0 20px;padding:13px 0}
+.question-step-controls .btn{min-width:118px}
+.question-step-controls .question-position{flex:1}
+.question-navigation{position:sticky;top:84px;min-width:0;margin:16px 0 20px;padding:15px}
+.question-nav-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.question-nav-grid button{min-height:39px}
+.question-navigation .question-nav-heading{align-items:flex-start;flex-direction:column;gap:3px}
+.question-navigation .submit-panel{display:block;margin:15px 0 0;padding:14px;border-radius:13px}
+.question-navigation .submit-panel p{margin:0 0 11px}
+.question-navigation .submit-actions{display:grid;grid-template-columns:1fr;gap:8px}
+.question-navigation .submit-actions .btn{width:100%}
+@media(max-width:900px){
+ .quiz-layout{grid-template-columns:minmax(0,1fr);gap:10px}
+ .question-navigation{position:static;order:-1;margin:14px 0 0}
+ .question-nav-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+ .question-step-controls{gap:7px}
+ .question-step-controls .btn{min-width:0;padding:10px 11px;font-size:12px}
+ .question-step-controls .question-position{font-size:11px;line-height:1.5}
+}
+@media(max-width:700px){
+ .question-navigation{padding:13px}
+ .question-nav-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+ .question-nav-grid button{min-height:36px;font-size:11px}
+ .question-step-controls{margin:10px 0 17px;padding:0}
+}
+
 </style></head>
 <body>
 <header class="topbar"><a class="brand" href="./index.html" style="text-decoration:none;color:inherit"><img src="./assets/thinnhanh-logo.svg?v=3" alt=""><span>Thi<span>Nhanh</span></span></a><div class="nav-actions"><a class="btn secondary" href="./index.html" style="text-decoration:none">← Trang chủ</a></div></header>
@@ -60,9 +91,15 @@ button,input{font:inherit}button{cursor:pointer}.topbar{height:70px;position:sti
 <section id="quizView">
  <div class="quiz-head"><div class="quiz-head-row"><div><h2 id="quizTitle">Đề giữa kì 1</h2><p id="quizSubtitle">30 câu trắc nghiệm · 4 câu Đúng/Sai</p></div><button class="btn secondary" id="backToList">← Chọn đề khác</button></div><div class="progress-wrap"><div class="progress-label"><span>Tiến độ làm bài</span><span id="progressText">0/46 ý đã trả lời</span></div><div class="progress-track"><div class="progress-bar" id="progressBar"></div></div></div></div>
  <div id="resultPanel" class="result-panel" aria-live="polite"></div>
- <section class="question-section" aria-live="polite"><h3 class="section-title" id="currentSectionTitle">Phần I · Trắc nghiệm <span class="section-count">Câu 1/30</span></h3><div id="questionContainer"></div></section>
- <div class="question-navigation" aria-label="Điều hướng câu hỏi"><div class="question-nav-buttons"><button type="button" class="btn secondary" id="prevQuestion">← Câu trước</button><span class="question-position" id="questionPosition">Câu 1/34 · Trắc nghiệm 1/30</span><button type="button" class="btn" id="nextQuestion">Câu tiếp →</button></div><div class="question-nav-heading"><b>Danh sách câu hỏi</b><span>Chọn số câu để chuyển nhanh</span></div><div class="question-nav-grid" id="questionNavGrid"></div><div class="question-nav-legend"><span><i class="legend-dot current"></i>Đang xem</span><span><i class="legend-dot done"></i>Đã trả lời</span><span><i class="legend-dot partial"></i>Đang làm</span></div></div>
- <div class="submit-panel"><p id="submitHint">Hãy kiểm tra các câu đã chọn rồi nộp bài để xem điểm và đáp án.</p><div class="submit-actions"><button class="btn" id="submitExam">Nộp bài</button><button class="btn secondary" id="retryExam" style="display:none">Làm lại đề này</button></div></div>
+ <div class="quiz-layout">
+  <div class="quiz-main-column">
+   <section class="question-section" aria-live="polite"><h3 class="section-title" id="currentSectionTitle">Phần I · Trắc nghiệm <span class="section-count">Câu 1/30</span></h3><div id="questionContainer"></div></section>
+   <div class="question-nav-buttons question-step-controls"><button type="button" class="btn secondary" id="prevQuestion">← Câu trước</button><span class="question-position" id="questionPosition">Câu 1/34 · Trắc nghiệm 1/30</span><button type="button" class="btn" id="nextQuestion">Câu tiếp →</button></div>
+  </div>
+  <aside class="question-navigation" aria-label="Điều hướng câu hỏi"><div class="question-nav-heading"><b>Danh sách câu hỏi</b><span>Chọn số câu để chuyển nhanh</span></div><div class="question-nav-grid" id="questionNavGrid"></div><div class="question-nav-legend"><span><i class="legend-dot current"></i>Đang xem</span><span><i class="legend-dot done"></i>Đã trả lời</span><span><i class="legend-dot partial"></i>Đang làm</span></div>
+   <div class="submit-panel"><p id="submitHint">Hãy kiểm tra các câu đã chọn rồi nộp bài để xem điểm và đáp án.</p><div class="submit-actions"><button class="btn" id="submitExam">Nộp bài</button><button class="btn secondary" id="retryExam" style="display:none">Làm lại đề này</button></div></div>
+  </aside>
+ </div>
 </section>
 <footer class="copyright">© 2026 Nguyễn Khánh Lâm · Bản quyền được bảo lưu.</footer>
 </main>
