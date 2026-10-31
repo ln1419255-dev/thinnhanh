@@ -500,5 +500,16 @@ renderExamCards();renderHome();renderHistory();renderStatistics();
   });
 })();
 </script>
+<script id="tn-study-visit">
+(function(){try{
+ var lastKey="thinnhanh_last_study_v1",daysKey="thinnhanh_study_days_v1";
+ var now=Date.now(),d=new Date(now),today=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+ localStorage.setItem(lastKey,JSON.stringify({name:"Tin học",href:"./tin.html",at:now}));
+ var days=JSON.parse(localStorage.getItem(daysKey)||"[]");if(!Array.isArray(days))days=[];
+ if(days.indexOf(today)<0)days.push(today);
+ days=days.filter(function(x){return typeof x==="string"&&x.length===10&&x.charAt(4)==="-"&&x.charAt(7)==="-";}).sort().slice(-400);
+ localStorage.setItem(daysKey,JSON.stringify(days));
+}catch(e){}})();
+</script>
 </body>
 </html>

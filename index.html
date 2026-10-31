@@ -502,11 +502,109 @@ body{
 .motivation-banner p{margin:0;color:#27435f;font-size:clamp(13px,1.5vw,17px);font-weight:850;line-height:1.6;letter-spacing:.05px}
 .motivation-dash{color:#0a9998;padding:0 3px}
 @media(max-width:760px){.motivation-banner{gap:8px;margin-bottom:12px;padding:11px 12px;border-radius:13px}.motivation-mark{font-size:16px}.motivation-banner p{font-size:13px;line-height:1.55}}
-</style></head><body><header class="topbar"><div class="brand"><img class="brand-logo" src="./assets/thinnhanh-logo.svg?v=3" alt=""><span class="brand-name">Thi<span>Nhanh</span></span></div><span class="menu-link">CHỌN MÔN HỌC</span></header>
-<main id="landing" class="page">
+
+/* ThiNhanh: learning sidebar, goal tracker and continue-studying card */
+.tn-home-layout{display:grid;grid-template-columns:226px minmax(0,1fr);gap:25px;max-width:1480px;margin:0 auto;padding:25px clamp(16px,2vw,30px) 0;align-items:start}
+.tn-home-sidebar{position:sticky;top:90px;min-width:0;background:rgba(255,255,255,.95);border:1px solid #dfe8f1;border-radius:22px;padding:17px 13px;box-shadow:0 10px 30px rgba(24,48,77,.055)}
+.tn-sidebar-label{padding:3px 10px 12px;color:#8c9bb0;font-size:10px;font-weight:950;letter-spacing:1.15px}
+.tn-side-nav{display:grid;gap:5px}
+.tn-side-nav a{display:flex;align-items:center;gap:10px;min-width:0;padding:11px 12px;border-radius:12px;text-decoration:none;color:#667891;font-size:12px;font-weight:850;transition:background .18s,color .18s,transform .18s}
+.tn-side-nav a:hover{background:#f3f7fb;color:#172e4d;transform:translateX(2px)}
+.tn-side-nav a.active{background:#e8faf6;color:#107d72}
+.tn-nav-icon{width:22px;flex:0 0 22px;display:grid;place-items:center;font-size:17px;line-height:1}
+.tn-goal-card{margin-top:18px;padding:15px;border:1px solid #d5e9e8;border-radius:17px;background:linear-gradient(145deg,#f0fffb,#f6f7ff)}
+.tn-goal-head{display:flex;align-items:center;gap:9px;margin-bottom:13px}
+.tn-goal-head-icon{width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:11px;background:#fff;font-size:17px;box-shadow:0 3px 9px rgba(30,70,90,.06)}
+.tn-goal-head strong{display:block;color:#1b3853;font-size:12px;font-weight:950}
+.tn-goal-head small{display:block;color:#7d8ca1;font-size:10px;margin-top:2px}
+.tn-goal-countrow{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px}
+.tn-goal-countrow strong{color:#183653;font-size:19px;font-weight:950;letter-spacing:-.5px}
+.tn-goal-countrow span{color:#118778;font-size:11px;font-weight:950}
+.tn-goal-progress{height:7px;overflow:hidden;border-radius:99px;background:#dceae9}
+.tn-goal-progress span{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#10a99d,#52d6bd);transition:width .25s ease}
+.tn-goal-card label{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;color:#667891;font-size:10px;font-weight:800}
+.tn-goal-card select{max-width:90px;padding:6px 7px;border:1px solid #d8e4eb;border-radius:9px;background:#fff;color:#29445e;font-size:11px;font-weight:850}
+.tn-goal-note{display:block;margin-top:10px;color:#7f8da1;font-size:9px;line-height:1.55}
+.tn-sidebar-footer{display:flex;align-items:flex-start;gap:8px;margin:15px 8px 0;color:#8291a5;font-size:10px;line-height:1.6}
+.tn-sidebar-footer span:first-child{color:#118b80;font-weight:950}
+.tn-main-column{min-width:0;width:100%}
+#landing.page{width:100%;max-width:none;margin:0;padding:0}
+#landing .hero{scroll-margin-top:88px}
+#subjects,#continue-study,#site-guide,#study-goal{scroll-margin-top:90px}
+#landing .subjects{margin-top:21px}
+.tn-continue-card{display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:14px;margin:17px 0 4px;padding:16px 18px;border:1px solid #dce7ef;border-radius:18px;background:linear-gradient(110deg,#fff 0%,#f0fbf9 62%,#f4f2ff 100%);box-shadow:0 8px 23px rgba(25,55,85,.045)}
+.tn-continue-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:#dff8f2;color:#147e73;font-size:23px}
+.tn-continue-kicker{display:block;color:#148c81;font-size:9px;font-weight:950;letter-spacing:1.1px}
+.tn-continue-copy h2{margin:3px 0;color:#183451;font-size:16px;line-height:1.35;letter-spacing:-.3px}
+.tn-continue-copy p{margin:0;color:#75849a;font-size:11px;line-height:1.6}
+.tn-continue-action{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:10px 13px;border-radius:11px;background:#15324d;color:#fff;text-decoration:none;font-size:11px;font-weight:900;transition:transform .18s,box-shadow .18s}
+.tn-continue-action:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(20,45,70,.15)}
+.topbar .menu-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#087f83;font-size:11px;font-weight:950;letter-spacing:.7px;padding:10px 13px;border:1px solid #cceae6;border-radius:11px;background:#f0fbf8}
+@media(min-width:1100px){#landing .subjects{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(min-width:761px) and (max-width:1099px){.tn-home-layout{grid-template-columns:205px minmax(0,1fr);gap:18px;padding-inline:16px}.tn-home-sidebar{padding:13px 10px}.tn-side-nav a{padding:10px 9px;font-size:11px}.tn-continue-card{grid-template-columns:44px minmax(0,1fr) auto;padding:14px;gap:10px}.tn-continue-icon{width:42px;height:42px}.tn-continue-action{padding:9px 10px}}
+@media(max-width:760px){
+ .tn-home-layout{display:flex;flex-direction:column;gap:14px;padding:13px 13px 0}
+ .tn-home-sidebar{position:static;width:100%;padding:10px;border-radius:16px}
+ .tn-sidebar-label{display:none}
+ .tn-side-nav{display:flex;gap:6px;overflow-x:auto;overscroll-behavior-x:contain;padding:0 0 2px;scrollbar-width:thin}
+ .tn-side-nav a{flex:0 0 auto;gap:7px;padding:10px 11px;font-size:11px;border:1px solid #edf1f6;background:#fff}
+ .tn-side-nav a.active{border-color:#ccefe7;background:#e8faf6}
+ .tn-nav-icon{width:17px;flex-basis:17px;font-size:15px}
+ .tn-goal-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;margin-top:10px;padding:12px;border-radius:14px}
+ .tn-goal-head{grid-column:1/-1;margin:0}
+ .tn-goal-head-icon{width:30px;height:30px;flex-basis:30px}
+ .tn-goal-countrow{grid-column:1;grid-row:2;margin:0;align-self:end}
+ .tn-goal-countrow strong{font-size:17px}
+ .tn-goal-progress{grid-column:1/-1;grid-row:3}
+ .tn-goal-card label{grid-column:2;grid-row:2;margin:0;justify-content:flex-end;white-space:nowrap}
+ .tn-goal-card select{max-width:74px;padding:5px}
+ .tn-goal-note{grid-column:1/-1;margin:0}
+ .tn-sidebar-footer{display:none}
+ .tn-main-column{width:100%}
+ #landing.page{margin:0;padding:0}
+ #landing .motivation-banner{margin-bottom:12px}
+ #landing .hero{padding:24px 20px}
+ .tn-continue-card{grid-template-columns:42px minmax(0,1fr);gap:10px;padding:13px;border-radius:15px;margin-top:13px}
+ .tn-continue-icon{width:40px;height:40px;border-radius:12px;font-size:20px}
+ .tn-continue-copy h2{font-size:14px}
+ .tn-continue-copy p{font-size:10px}
+ .tn-continue-action{grid-column:1/-1;width:100%;padding:10px}
+ #landing .subjects{margin-top:16px}
+ .topbar .menu-link{padding:8px 9px;font-size:9px}
+}
+@media(max-width:390px){.tn-home-layout{padding-inline:9px}.tn-side-nav a{font-size:10px;padding:9px}.tn-goal-card{padding:10px}.tn-continue-card{padding:11px}.topbar .menu-link{font-size:8px;letter-spacing:.3px}}
+
+</style></head><body><header class="topbar"><div class="brand"><img class="brand-logo" src="./assets/thinnhanh-logo.svg?v=3" alt=""><span class="brand-name">Thi<span>Nhanh</span></span></div><a class="menu-link" href="#subjects">CHỌN MÔN HỌC</a></header>
+<div class="tn-home-layout">
+<aside class="tn-home-sidebar" aria-label="Điều hướng học tập">
+ <div class="tn-sidebar-label">KHÔNG GIAN HỌC TẬP</div>
+ <nav class="tn-side-nav" aria-label="Điều hướng trang chủ">
+  <a class="active" href="#landing"><span class="tn-nav-icon" aria-hidden="true">⌂</span><span>Trang chủ</span></a>
+  <a href="#subjects"><span class="tn-nav-icon" aria-hidden="true">▦</span><span>Chọn môn học</span></a>
+  <a href="#continue-study"><span class="tn-nav-icon" aria-hidden="true">↗</span><span>Tiếp tục ôn tập</span></a>
+  <a href="#study-goal"><span class="tn-nav-icon" aria-hidden="true">◎</span><span>Mục tiêu học tập</span></a>
+  <a href="#site-guide"><span class="tn-nav-icon" aria-hidden="true">ⓘ</span><span>Cấu trúc đề &amp; điểm</span></a>
+ </nav>
+ <section class="tn-goal-card" id="study-goal" aria-label="Mục tiêu học tập trong tuần">
+  <div class="tn-goal-head"><span class="tn-goal-head-icon" aria-hidden="true">🎯</span><div><strong>Mục tiêu học tập</strong><small>Thói quen mỗi tuần</small></div></div>
+  <div class="tn-goal-countrow"><strong id="tn-goal-count">0/5 ngày</strong><span id="tn-goal-percent">0%</span></div>
+  <div class="tn-goal-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Tiến độ mục tiêu tuần"><span id="tn-goal-progress-fill"></span></div>
+  <label for="tn-weekly-goal">Mục tiêu / tuần
+   <select id="tn-weekly-goal"><option value="3">3 ngày</option><option value="5" selected>5 ngày</option><option value="7">7 ngày</option></select>
+  </label>
+  <small class="tn-goal-note">Tính theo ngày bạn mở môn học hoặc có bài làm được lưu trên trình duyệt này. Không gửi dữ liệu riêng tư đi nơi khác.</small>
+ </section>
+ <div class="tn-sidebar-footer"><span aria-hidden="true">✓</span><span>Lịch sử và mục tiêu được lưu trên thiết bị này.</span></div>
+</aside>
+<div class="tn-main-column"><main id="landing" class="page">
 <div class="motivation-banner" role="note" aria-label="Thông điệp truyền cảm hứng"><span class="motivation-mark" aria-hidden="true">🚀</span><p>Tương lai của bạn, chỉ bạn mới biết <span class="motivation-dash">—</span> Thứ bạn muốn, chỉ có thể tự giành lấy.</p></div>
-<section class="hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Toán Chương 1, Vật lí, Hóa học và Tin học với các bộ đề tương tác. Tiếng Anh và Lịch sử đang chờ bổ sung dữ liệu.</p></div><div class="hero-art">🎯</div></section>
-<div class="subjects">
+<section class="hero" id="home-hero"><div><span class="badge">NỀN TẢNG LUYỆN THI 12</span><h1>Một nơi ôn tập.<br>Nhiều môn học.</h1><p>Hiện có Toán Chương 1, Vật lí, Hóa học và Tin học với các bộ đề tương tác. Tiếng Anh và Lịch sử đang chờ bổ sung dữ liệu.</p></div><div class="hero-art">🎯</div></section>
+<section class="tn-continue-card" id="continue-study" aria-live="polite" aria-label="Tiếp tục ôn tập">
+ <div class="tn-continue-icon" id="tn-continue-icon" aria-hidden="true">🧭</div>
+ <div class="tn-continue-copy"><span class="tn-continue-kicker">LẦN ÔN TẬP GẦN NHẤT</span><h2 id="tn-continue-title">Bắt đầu buổi ôn tập đầu tiên</h2><p id="tn-continue-desc">Chọn môn học để luyện đề và lưu tiến độ trên trình duyệt này.</p></div>
+ <a class="tn-continue-action" id="tn-continue-link" href="#subjects">Chọn môn học →</a>
+</section>
+<div class="subjects" id="subjects">
 <article class="subject"><div class="icon">📐</div><h2>Toán</h2><p>10 đề Toán 12 Chương 1, đa dạng đồ thị, khảo sát hàm số và bài toán thực tế bằng đạo hàm.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn" href="./math.html" style="text-decoration:none">Vào môn Toán →</a></article>
 <article class="subject"><div class="icon">⚛️</div><h2>Vật lí</h2><p>10 đề Vật lí nhiệt theo tài liệu 134 trang, gồm cấu trúc chất, chuyển thể, nội năng, nhiệt dung riêng, nhiệt nóng chảy và nhiệt hóa hơi.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn" href="./physics.html" style="text-decoration:none">Vào môn Vật lí →</a></article>
 <article class="subject"><div class="icon">🧪</div><h2>Hóa học</h2><p>20 đề chia riêng theo chương: 10 đề Ester – Lipid và 10 đề Carbohydrate.</p><div class="meta"><span class="tag">2 Dễ</span><span class="tag">2 Khá</span><span class="tag">4 Khó</span><span class="tag">2 Siêu khó</span></div><a class="btn chem" href="./chem.html" style="text-decoration:none">Vào môn Hóa học →</a></article>
@@ -514,7 +612,7 @@ body{
 <article class="subject pending"><div class="icon">🌐</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Tiếng Anh</h2><p>Đã tạo khu vực môn Tiếng Anh. Chưa có đề cho đến khi bạn gửi tài liệu, cấu trúc ôn tập hoặc nguồn câu hỏi.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
 <article class="subject pending"><div class="icon">📜</div><div class="pending-status">CHƯA CÓ DỮ LIỆU</div><h2>Lịch sử</h2><p>Đã tạo khu vực môn Lịch sử. Khi bạn gửi tài liệu, mình sẽ xây dựng bộ câu hỏi và đề thi theo đúng nội dung đó.</p><div class="meta"><span class="tag pending-tag">Đang chờ tài liệu</span></div></article>
 </div>
-<div class="foot">
+<div class="foot" id="site-guide">
  <div class="foot-icon" aria-hidden="true">📘</div>
  <div class="foot-body">
   <div class="foot-heading">CẤU TRÚC ĐỀ &amp; LƯU KẾT QUẢ</div>
@@ -523,6 +621,8 @@ body{
  </div>
 </div>
 </main>
+</div>
+</div>
 <footer class="copyright">
  <span class="copyright-badge" aria-hidden="true">©</span>
  <span class="copyright-year">2026</span>
@@ -530,4 +630,60 @@ body{
  <strong>Nguyễn Khánh Lâm</strong>
  <span class="copyright-text">Bản quyền được bảo lưu.</span>
 </footer>
+<script id="tn-home-study-widgets">
+(function(){
+ "use strict";
+ var LAST_KEY="thinnhanh_last_study_v1",DAYS_KEY="thinnhanh_study_days_v1",GOAL_KEY="thinnhanh_weekly_goal_v1";
+ var configs=[
+  {name:"Toán",href:"./math.html",key:"thinhanh_math_chapter1_exam_history_v1"},
+  {name:"Vật lí",href:"./physics.html",key:"thinhanh_heat_exam_history_v2"},
+  {name:"Hóa học",href:"./chem.html",key:"thinhanh_chemistry_exam_history_v1"},
+  {name:"Tin học",href:"./tin.html",key:"thinnhanh_tin_history"}
+ ];
+ function readJson(key,fallback){try{var v=JSON.parse(localStorage.getItem(key)||"null");return v===null?fallback:v;}catch(e){return fallback;}}
+ function writeJson(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch(e){}}
+ function localKey(date){return date.getFullYear()+"-"+String(date.getMonth()+1).padStart(2,"0")+"-"+String(date.getDate()).padStart(2,"0");}
+ function parseDate(raw){if(raw===undefined||raw===null||raw==="")return null;var d=new Date(raw);return isNaN(d.getTime())?null:d;}
+ function weekStartKey(){var d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return localKey(d);}
+ function collectHistory(){
+  var days=readJson(DAYS_KEY,[]);if(!Array.isArray(days))days=[];
+  var valid=new Set(days.filter(function(x){return typeof x==="string"&&x.length===10&&x.charAt(4)==="-"&&x.charAt(7)==="-";}));
+  var storedLast=readJson(LAST_KEY,null),last=storedLast&&storedLast.name&&storedLast.href?storedLast:null,lastTime=last?Number(last.at)||0:0;
+  configs.forEach(function(cfg){
+   var arr=readJson(cfg.key,[]);if(!Array.isArray(arr))return;
+   arr.forEach(function(item){
+    if(!item||typeof item!=="object")return;
+    var d=parseDate(item.date||item.submittedAt||item.finishedAt||item.createdAt||item.timestamp);
+    if(!d)return;
+    valid.add(localKey(d));
+    if(d.getTime()>lastTime){lastTime=d.getTime();last={name:cfg.name,href:cfg.href,at:lastTime};}
+   });
+  });
+  var sorted=Array.from(valid).sort().slice(-400);writeJson(DAYS_KEY,sorted);if(last)writeJson(LAST_KEY,last);
+  return {days:sorted,last:last};
+ }
+ function updateGoal(days){
+  var sel=document.getElementById("tn-weekly-goal"),count=document.getElementById("tn-goal-count"),percent=document.getElementById("tn-goal-percent"),fill=document.getElementById("tn-goal-progress-fill");
+  if(!sel||!count||!percent||!fill)return;
+  var goal=Number(readJson(GOAL_KEY,5));if([3,5,7].indexOf(goal)<0)goal=5;sel.value=String(goal);
+  var monday=weekStartKey(),today=localKey(new Date()),n=days.filter(function(day){return day>=monday&&day<=today;}).length,p=Math.min(100,Math.round(n/goal*100));
+  count.textContent=n+"/"+goal+" ngày";percent.textContent=p+"%";fill.style.width=p+"%";fill.parentElement.setAttribute("aria-valuenow",String(p));
+ }
+ function updateContinue(last){
+  var title=document.getElementById("tn-continue-title"),desc=document.getElementById("tn-continue-desc"),link=document.getElementById("tn-continue-link"),icon=document.getElementById("tn-continue-icon");
+  if(!title||!desc||!link)return;
+  if(last){title.textContent="Tiếp tục ôn tập "+last.name;desc.textContent="Mở lại khu vực môn học bạn học gần đây.";link.href=last.href;link.textContent="Tiếp tục "+last.name+" →";if(icon)icon.textContent=last.name==="Toán"?"∑":last.name==="Vật lí"?"ϟ":last.name==="Hóa học"?"⚗":"⌘";}
+  else{title.textContent="Bắt đầu buổi ôn tập đầu tiên";desc.textContent="Chọn môn học để luyện đề và lưu tiến độ trên trình duyệt này.";link.href="#subjects";link.textContent="Chọn môn học →";if(icon)icon.textContent="🧭";}
+ }
+ function setActive(link){document.querySelectorAll(".tn-side-nav a").forEach(function(a){a.classList.toggle("active",a===link);});}
+ document.querySelectorAll(".tn-side-nav a").forEach(function(a){a.addEventListener("click",function(){setActive(a);});});
+ var data=collectHistory();updateGoal(data.days);updateContinue(data.last);
+ var sel=document.getElementById("tn-weekly-goal");if(sel)sel.addEventListener("change",function(){writeJson(GOAL_KEY,Number(sel.value));updateGoal(data.days);});
+ var anchors=document.querySelectorAll(".tn-side-nav a[href^='#']");
+ if("IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){var match=Array.prototype.find.call(anchors,function(a){return a.getAttribute("href")==="#"+entry.target.id;});if(match)setActive(match);}});},{rootMargin:"-22% 0px -66% 0px"});
+  ["landing","subjects","continue-study","study-goal","site-guide"].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});
+ }
+})();
+</script>
 </body></html>
