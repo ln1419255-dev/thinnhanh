@@ -2936,4 +2936,58 @@ window.addEventListener("beforeunload",store);
 setInterval(store,1000);
 })();
 </script>
+
+<script id="tn-screen-state-memory">
+(function(){
+ "use strict";
+ var file=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+ var KEY="tn_screen_state_v1_"+file;
+ var isIndex=file==="index.html"||file==="";
+ function activeView(){
+  var el=document.querySelector(".view.active");
+  return el?el.id:"";
+ }
+ function store(){
+  try{
+   var view=activeView();
+   var state={viewId:view,scrollY:window.scrollY||window.pageYOffset||0,hash:location.hash||"",savedAt:Date.now()};
+   var nav=document.querySelector(".navbtn.active[data-view]");
+   if(nav)state.navView=nav.getAttribute("data-view");
+   if(isIndex){
+    var activeLink=document.querySelector(".tn-side-nav a.active");
+    if(activeLink)state.activeSection=activeLink.getAttribute("href");
+   }
+   localStorage.setItem(KEY,JSON.stringify(state));
+  }catch(e){}
+ }
+ function restore(){
+  try{
+   var raw=localStorage.getItem(KEY),st=raw?JSON.parse(raw):null;
+   if(!st)return;
+   if(!isIndex&&st.viewId&&st.viewId!=="view-take"&&st.viewId!=="view-result"){
+    var target=document.getElementById(st.viewId);
+    if(target&&target.classList.contains("view")){
+     document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("active",v===target);});
+     if(typeof currentView!=="undefined")currentView=st.viewId.replace(/^view-/,"");
+     document.querySelectorAll(".navbtn[data-view]").forEach(function(b){
+      b.classList.toggle("active",b.getAttribute("data-view")===st.navView||b.getAttribute("data-view")===st.viewId.replace(/^view-/,""));
+     });
+    }
+   }
+   var y=Math.max(0,Number(st.scrollY)||0);
+   requestAnimationFrame(function(){window.scrollTo(0,y);setTimeout(function(){window.scrollTo(0,y);},180);});
+  }catch(e){}
+ }
+ document.addEventListener("click",function(){setTimeout(store,100);},true);
+ document.addEventListener("input",function(){setTimeout(store,80);},true);
+ document.addEventListener("change",function(){setTimeout(store,80);},true);
+ window.addEventListener("scroll",function(){if(window.__tnScreenSaveTimer)return;window.__tnScreenSaveTimer=setTimeout(function(){window.__tnScreenSaveTimer=0;store();},180);},{passive:true});
+ window.addEventListener("hashchange",function(){setTimeout(store,100);});
+ window.addEventListener("pagehide",store);
+ window.addEventListener("beforeunload",store);
+ restore();
+ setTimeout(store,700);
+})();
+</script>
+
 </body></html>
