@@ -895,6 +895,31 @@ html[data-theme="dark"] .tn-continue-card{background:linear-gradient(120deg,#183
 }
 html[data-theme="dark"] .tn-side-nav a .tn-nav-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 4px 12px rgba(0,0,0,.18)}
 @media(max-width:760px){.tn-side-nav a .tn-nav-icon{border-radius:9px}}
+
+/* Dark-mode refinement for the landing hero only; light mode stays unchanged */
+html[data-theme="dark"] #landing .hero{
+ background:linear-gradient(118deg,#151b31 0%,#242246 36%,#19334d 70%,#123b3c 100%)!important;
+ border:1px solid rgba(153,177,211,.19)!important;
+ box-shadow:0 18px 42px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+html[data-theme="dark"] #landing .hero:before{
+ background:radial-gradient(circle at 35% 40%,rgba(91,157,174,.16),rgba(70,106,157,.045) 34%,rgba(255,255,255,0) 70%)!important;
+}
+html[data-theme="dark"] #landing .hero:after{
+ border-color:rgba(151,174,208,.09)!important;
+ box-shadow:0 0 0 28px rgba(151,174,208,.018),0 0 0 58px rgba(151,174,208,.014),0 0 0 92px rgba(151,174,208,.01)!important;
+}
+html[data-theme="dark"] #landing .badge{
+ background:rgba(13,23,39,.53)!important;
+ border-color:rgba(155,181,215,.23)!important;
+ color:#c8eee8!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.045)!important;
+}
+html[data-theme="dark"] #landing .hero-art{
+ background:linear-gradient(145deg,rgba(118,151,190,.12),rgba(22,35,57,.32))!important;
+ border-color:rgba(155,181,215,.22)!important;
+ box-shadow:0 14px 32px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
 </style>
 </head><body><header class="topbar"><div class="brand"><img class="brand-logo" src="./assets/thinnhanh-logo.svg?v=3" alt=""><span class="brand-name">Thi<span>Nhanh</span></span></div><div class="tn-header-actions"><button class="tn-theme-toggle" type="button" data-theme-toggle aria-label="Chuyển sang chế độ tối" aria-pressed="false" title="Chuyển sang chế độ tối"><span class="tn-theme-icon" aria-hidden="true">🌙</span><span class="tn-theme-label">Chế độ tối</span></button><a class="menu-link" href="#subjects">CHỌN MÔN HỌC</a></div></header>
 <div class="tn-home-layout">
