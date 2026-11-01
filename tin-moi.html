@@ -401,7 +401,7 @@ html[data-theme="dark"] td div[style*="background:#edf2f7"]>div{
 <header class="topbar">
  <a class="brand" href="./index.html"><img src="./assets/thinnhanh-logo.svg?v=3" alt=""><span>Thi<span>Nhanh</span></span></a>
  <button class="tn-theme-toggle" type="button" data-theme-toggle aria-label="Chuyển sang chế độ tối" aria-pressed="false" title="Chuyển sang chế độ tối"><span class="tn-theme-icon" aria-hidden="true">🌙</span><span class="tn-theme-label">Chế độ tối</span></button><span class="top-pill">TIN HỌC · 8 ĐỀ MỚI · THANG ĐIỂM 10</span>
- <a class="btn secondary" href="./tin.html">← Bộ đề hiện có</a>
+ <a class="btn secondary" href="./tin.html#tin-sets">← Các bộ đề</a>
 </header>
 <div class="workspace">
  <aside class="sidebar" aria-label="Không gian luyện thi">
@@ -417,7 +417,7 @@ html[data-theme="dark"] td div[style*="background:#edf2f7"]>div{
   <section class="view active" id="view-home">
    <div class="pagehead"><div><div class="eyebrow">ĐỀ ÔN TẬP GIỮA KÌ · TIN HỌC</div><h1>Bộ 8 đề Tin học mới.</h1><p>Luyện đề tổng hợp mới được trộn từ ngân hàng câu hỏi nâng cao của cả 6 bài Tin học.</p></div><button class="btn" data-goto="exams">Vào kho đề →</button></div>
    <div class="hero"><div><div class="eyebrow">50 PHÚT · 34 CÂU LỚN · THANG 10</div><h2>Trộn 6 bài. Phân biệt kiến thức.</h2><p>Mỗi đề mới gồm 30 câu trắc nghiệm (6 điểm) và 4 nhóm Đúng/Sai với 16 ý (4 điểm). Câu hỏi được trộn từ cả 6 bài; khi nộp, bạn xem lại đáp án và điểm thành phần.</p><button class="btn secondary" data-goto="exams" style="margin-top:15px">Chọn đề mới →</button></div><div class="hero-art" aria-hidden="true">💻</div></div>
-   <div class="info-box" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px"><div><b>📚 BẠN ĐANG Ở BỘ 8 ĐỀ MỚI</b><br><span>Bộ đề này được trộn từ ngân hàng câu hỏi của cả 6 bài Tin học.</span></div><a class="btn small purple" href="./tin.html">← Bộ đề hiện có</a></div>
+   <div class="info-box" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px"><div><b>📚 BẠN ĐANG Ở BỘ 8 ĐỀ MỚI</b><br><span>Bộ đề này được trộn từ ngân hàng câu hỏi của cả 6 bài Tin học.</span></div><a class="btn small purple" href="./tin.html#tin-sets">← Các bộ đề</a></div>
    <div class="stats-grid">
     <div class="stat-card"><div class="stat-icon">▤</div><div><strong id="stat-exams">8</strong><span>8 đề mới</span></div></div>
     <div class="stat-card"><div class="stat-icon">✓</div><div><strong id="stat-attempts">0</strong><span>Lượt đã hoàn thành</span></div></div>
@@ -429,7 +429,7 @@ html[data-theme="dark"] td div[style*="background:#edf2f7"]>div{
   </section>
   <section class="view" id="view-exams">
    <div class="pagehead"><div><div class="eyebrow">THƯ VIỆN BÀI THI</div><h1>Chọn một trong 8 đề mới</h1><p>Chọn một đề trộn từ 6 bài. Mỗi đề có 30 câu trắc nghiệm và 4 nhóm Đúng/Sai; dùng bảng số câu để chuyển nhanh.</p></div></div>
-   <div class="info-box" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><b>Bạn đang ở thư mục 8 đề mới, trộn từ 6 bài Tin học.</b><a class="btn small purple" href="./tin.html">← Quay về bộ đề hiện có</a></div>
+   <div class="info-box" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><b>Bạn đang ở thư mục 8 đề mới, trộn từ 6 bài Tin học.</b><a class="btn small purple" href="./tin.html#tin-sets">← Các bộ đề</a></div>
    <div class="toolbar"><div class="search"><input id="examSearch" type="search" placeholder="Tìm theo số đề…"></div><select id="examLevelFilter" aria-label="Lọc cấp độ"><option value="">Tất cả cấp độ</option><option>Đề trộn</option></select></div>
    <div class="exam-grid" id="examGrid"></div>
    <div class="info-box"><b>Lưu ý:</b> Nộp bài để chấm điểm. Sau khi nộp, mở mục <b>Lịch sử làm bài</b> để xem lại kết quả bất cứ lúc nào trên cùng trình duyệt.</div>
