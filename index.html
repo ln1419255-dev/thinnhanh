@@ -981,6 +981,56 @@ html[data-theme="dark"] .tn-continue-card:before{
  background:linear-gradient(105deg,transparent,rgba(111,158,183,.12),rgba(73,176,170,.07),transparent)!important;
 }
 </style>
+
+<style id="tn-hero-blue-gradient">
+/* Banner-only refresh: blue in light mode, deep navy in dark mode.
+   Keeps existing layout, animation, navigation and study logic unchanged. */
+html:not([data-theme="dark"]) #landing .hero{
+  background:linear-gradient(118deg,#12366c 0%,#1767b1 56%,#1a9cc8 100%)!important;
+  border-color:rgba(255,255,255,.40)!important;
+  box-shadow:0 22px 52px rgba(24,96,164,.22),inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+html[data-theme="dark"] #landing .hero{
+  background:linear-gradient(122deg,#081426 0%,#0d2341 58%,#12334b 100%)!important;
+  border-color:rgba(110,167,223,.22)!important;
+  box-shadow:0 20px 48px rgba(0,0,0,.36),inset 0 1px 0 rgba(162,206,255,.07)!important;
+}
+#landing .hero h1{
+  color:#fff!important;
+  text-shadow:0 2px 18px rgba(5,23,54,.16);
+}
+html:not([data-theme="dark"]) #landing .hero p{color:#eaf5ff!important}
+html[data-theme="dark"] #landing .hero p{color:#d9e8fb!important}
+html:not([data-theme="dark"]) #landing .hero .badge{
+  color:#f2f9ff!important;
+  background:rgba(255,255,255,.13)!important;
+  border-color:rgba(255,255,255,.30)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 0 22px rgba(125,200,255,.08)!important;
+}
+html[data-theme="dark"] #landing .hero .badge{
+  color:#dbeafe!important;
+  background:rgba(74,129,190,.14)!important;
+  border-color:rgba(143,183,230,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(180,211,255,.07)!important;
+}
+html:not([data-theme="dark"]) #landing .hero .hero-art{
+  background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.07))!important;
+  border-color:rgba(255,255,255,.34)!important;
+  box-shadow:0 18px 42px rgba(9,41,86,.20),inset 0 1px 0 rgba(255,255,255,.28)!important;
+}
+html[data-theme="dark"] #landing .hero .hero-art{
+  background:linear-gradient(145deg,rgba(126,177,235,.16),rgba(65,111,171,.06))!important;
+  border-color:rgba(143,183,230,.25)!important;
+  box-shadow:0 18px 42px rgba(0,0,0,.22),inset 0 1px 0 rgba(194,220,255,.10)!important;
+}
+#landing .hero:before{
+  background:radial-gradient(circle at 35% 40%,rgba(143,211,255,.24),rgba(54,137,226,.08) 38%,rgba(54,137,226,0) 70%)!important;
+}
+html[data-theme="dark"] #landing .hero:before{
+  background:radial-gradient(circle at 35% 40%,rgba(77,160,255,.17),rgba(54,117,194,.06) 40%,rgba(54,117,194,0) 70%)!important;
+}
+</style>
+
 </head><body><header class="topbar"><div class="brand"><img class="brand-logo" src="./assets/thinnhanh-logo.svg?v=3" alt=""><span class="brand-name">Thi<span>Nhanh</span></span></div><div class="tn-header-actions"><button class="tn-theme-toggle" type="button" data-theme-toggle aria-label="Chuyển sang chế độ tối" aria-pressed="false" title="Chuyển sang chế độ tối"><span class="tn-theme-icon" aria-hidden="true">🌙</span><span class="tn-theme-label">Chế độ tối</span></button><a class="menu-link" href="#subjects">CHỌN MÔN HỌC</a></div></header>
 <div class="tn-home-layout">
 <aside class="tn-home-sidebar" aria-label="Điều hướng học tập">
