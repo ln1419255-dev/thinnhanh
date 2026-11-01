@@ -874,52 +874,36 @@ html[data-theme="dark"] #landing .subject:nth-child(5){background:linear-gradien
 html[data-theme="dark"] .tn-goal-card{background:linear-gradient(140deg,#342e20,#352536,#29243c)!important;border-color:#55435f!important}
 html[data-theme="dark"] .tn-continue-card{background:linear-gradient(120deg,#183b36,#202c49,#382536)!important;border-color:#3d4b68!important}
 
-/* Colorful, compact desktop navigation icons; keep the study-goal card visible */
-@media (min-width:761px){
- .tn-side-nav a{gap:10px;padding:6px 10px;border:1px solid transparent}
- .tn-side-nav a .tn-nav-icon{
-  width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;
-  border-radius:10px;font-size:18px;line-height:1;
-  background:linear-gradient(145deg,#e1fff7,#dff0ff);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.85),0 4px 10px rgba(44,72,125,.09);
-  transition:transform .2s ease,box-shadow .2s ease;
- }
- .tn-side-nav a:nth-child(2) .tn-nav-icon{background:linear-gradient(145deg,#e3dcff,#f3e7ff);box-shadow:inset 0 0 0 1px #fff,0 4px 10px rgba(117,88,232,.12)}
- .tn-side-nav a:nth-child(3) .tn-nav-icon{background:linear-gradient(145deg,#ffe4ef,#ffe8d8);box-shadow:inset 0 0 0 1px #fff,0 4px 10px rgba(236,106,168,.12)}
- .tn-side-nav a:nth-child(4) .tn-nav-icon{background:linear-gradient(145deg,#fff0c9,#ffe2a7);box-shadow:inset 0 0 0 1px #fff,0 4px 10px rgba(245,163,77,.15)}
- .tn-side-nav a:nth-child(5) .tn-nav-icon{background:linear-gradient(145deg,#d9eaff,#e3f5ff);box-shadow:inset 0 0 0 1px #fff,0 4px 10px rgba(77,141,245,.12)}
- .tn-side-nav a:hover .tn-nav-icon{transform:translateY(-1px) scale(1.04)}
- .tn-side-nav a.active{border-color:#ccefe7}
- .tn-side-nav a.active .tn-nav-icon{box-shadow:inset 0 0 0 1px #fff,0 0 0 2px rgba(19,198,173,.12),0 5px 12px rgba(19,140,146,.12)}
- .tn-goal-card{display:block;visibility:visible}
+/* Consistent colorful learning-space navigation on desktop and mobile */
+.tn-side-nav a .tn-nav-icon{
+ width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;
+ border-radius:10px;font-size:18px;line-height:1;
+ background:linear-gradient(145deg,#d6fff4,#dff2ff)!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.86),0 4px 10px rgba(35,59,100,.10)!important;
+ transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
 }
-html[data-theme="dark"] .tn-side-nav a .tn-nav-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 4px 12px rgba(0,0,0,.18)}
-@media(max-width:760px){.tn-side-nav a .tn-nav-icon{border-radius:9px}}
-
-/* Dark-mode refinement for the landing hero only; light mode stays unchanged */
-html[data-theme="dark"] #landing .hero{
- background:linear-gradient(118deg,#151b31 0%,#242246 36%,#19334d 70%,#123b3c 100%)!important;
- border:1px solid rgba(153,177,211,.19)!important;
- box-shadow:0 18px 42px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.035)!important;
+.tn-side-nav a:nth-child(2) .tn-nav-icon{background:linear-gradient(145deg,#e5defe,#f2e9ff)!important}
+.tn-side-nav a:nth-child(3) .tn-nav-icon{background:linear-gradient(145deg,#ffe0ec,#ffe9dc)!important}
+.tn-side-nav a:nth-child(4) .tn-nav-icon{background:linear-gradient(145deg,#fff0c9,#ffe3a8)!important}
+.tn-side-nav a:nth-child(5) .tn-nav-icon{background:linear-gradient(145deg,#dcecff,#dff7ff)!important}
+.tn-side-nav a:hover .tn-nav-icon{transform:translateY(-1px) scale(1.04)}
+.tn-side-nav a.active .tn-nav-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 0 0 2px rgba(19,198,173,.14),0 5px 12px rgba(19,140,146,.12)!important}
+@media(min-width:761px){.tn-goal-card{display:block;visibility:visible}}
+@media(max-width:760px){
+ .tn-side-nav a .tn-nav-icon{width:27px;height:27px;flex-basis:27px;font-size:16px;border-radius:9px}
+ .tn-side-nav a:hover .tn-nav-icon{transform:none}
+ .tn-side-nav a.active .tn-nav-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 0 0 2px rgba(19,198,173,.14),0 4px 9px rgba(19,140,146,.10)!important}
 }
-html[data-theme="dark"] #landing .hero:before{
- background:radial-gradient(circle at 35% 40%,rgba(91,157,174,.16),rgba(70,106,157,.045) 34%,rgba(255,255,255,0) 70%)!important;
+html[data-theme="dark"] .tn-side-nav a .tn-nav-icon{
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),0 4px 10px rgba(0,0,0,.22)!important;
+ filter:saturate(.84) brightness(.96);
 }
-html[data-theme="dark"] #landing .hero:after{
- border-color:rgba(151,174,208,.09)!important;
- box-shadow:0 0 0 28px rgba(151,174,208,.018),0 0 0 58px rgba(151,174,208,.014),0 0 0 92px rgba(151,174,208,.01)!important;
-}
-html[data-theme="dark"] #landing .badge{
- background:rgba(13,23,39,.53)!important;
- border-color:rgba(155,181,215,.23)!important;
- color:#c8eee8!important;
- box-shadow:inset 0 1px 0 rgba(255,255,255,.045)!important;
-}
-html[data-theme="dark"] #landing .hero-art{
- background:linear-gradient(145deg,rgba(118,151,190,.12),rgba(22,35,57,.32))!important;
- border-color:rgba(155,181,215,.22)!important;
- box-shadow:0 14px 32px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.08)!important;
-}
+html[data-theme="dark"] .tn-side-nav a:nth-child(1) .tn-nav-icon{background:linear-gradient(145deg,#17423e,#1b3448)!important}
+html[data-theme="dark"] .tn-side-nav a:nth-child(2) .tn-nav-icon{background:linear-gradient(145deg,#352c55,#2b3048)!important}
+html[data-theme="dark"] .tn-side-nav a:nth-child(3) .tn-nav-icon{background:linear-gradient(145deg,#492d42,#3c2e3b)!important}
+html[data-theme="dark"] .tn-side-nav a:nth-child(4) .tn-nav-icon{background:linear-gradient(145deg,#49391f,#3a3325)!important}
+html[data-theme="dark"] .tn-side-nav a:nth-child(5) .tn-nav-icon{background:linear-gradient(145deg,#203855,#1c3e49)!important}
+html[data-theme="dark"] .tn-side-nav a.active .tn-nav-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 0 0 2px rgba(90,209,194,.14),0 4px 12px rgba(0,0,0,.22)!important}
 </style>
 </head><body><header class="topbar"><div class="brand"><img class="brand-logo" src="./assets/thinnhanh-logo.svg?v=3" alt=""><span class="brand-name">Thi<span>Nhanh</span></span></div><div class="tn-header-actions"><button class="tn-theme-toggle" type="button" data-theme-toggle aria-label="Chuyển sang chế độ tối" aria-pressed="false" title="Chuyển sang chế độ tối"><span class="tn-theme-icon" aria-hidden="true">🌙</span><span class="tn-theme-label">Chế độ tối</span></button><a class="menu-link" href="#subjects">CHỌN MÔN HỌC</a></div></header>
 <div class="tn-home-layout">
