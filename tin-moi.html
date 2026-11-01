@@ -395,6 +395,55 @@ html[data-theme="dark"] td div[style*="background:#edf2f7"]>div{
   background:linear-gradient(90deg,#20c6b8,#9b8cff)!important;
 }
 
+
+/* Dark mode fix: clearly show answered/active/unanswered question numbers */
+html[data-theme="dark"] .question-nav-grid button{
+  background:#172538!important;
+  border-color:#30445e!important;
+  color:#d3e1f1!important;
+  box-shadow:none;
+}
+html[data-theme="dark"] .question-nav-grid button.done:not(.current){
+  background:#153b30!important;
+  border-color:#2d8968!important;
+  color:#aaf0c5!important;
+  box-shadow:inset 0 0 0 1px rgba(85,213,156,.12)!important;
+}
+html[data-theme="dark"] .question-nav-grid button.partial:not(.current),
+html[data-theme="dark"] .question-nav-grid button.unanswered:not(.current){
+  background:#3b321e!important;
+  border-color:#8b7138!important;
+  color:#ffe2a0!important;
+}
+html[data-theme="dark"] .question-nav-grid button.wrong:not(.current){
+  background:#40232c!important;
+  border-color:#a74d5d!important;
+  color:#ffc0ca!important;
+}
+html[data-theme="dark"] .question-nav-grid button.current,
+html[data-theme="dark"] .question-nav-grid button.current.done,
+html[data-theme="dark"] .question-nav-grid button.current.partial,
+html[data-theme="dark"] .question-nav-grid button.current.wrong,
+html[data-theme="dark"] .question-nav-grid button.current.unanswered{
+  background:linear-gradient(135deg,#087f83,#126b83)!important;
+  border-color:#55ded0!important;
+  color:#fff!important;
+  box-shadow:0 0 0 2px rgba(69,215,200,.19),0 5px 13px rgba(0,0,0,.2)!important;
+}
+html[data-theme="dark"] .question-nav-grid button:hover{
+  filter:brightness(1.12);
+}
+html[data-theme="dark"] .question-nav-legend .legend-dot.current{
+  background:#45cfc4!important;
+  box-shadow:0 0 0 2px rgba(69,207,196,.15);
+}
+html[data-theme="dark"] .question-nav-legend .legend-dot.done{
+  background:#5bce91!important;
+}
+html[data-theme="dark"] .question-nav-legend .legend-dot.partial{
+  background:#e5b957!important;
+}
+
 </style>
 </head>
 <body>
