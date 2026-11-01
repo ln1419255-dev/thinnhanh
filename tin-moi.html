@@ -493,9 +493,10 @@ html[data-theme="dark"] .question-nav-legend .legend-dot.partial{
    <div class="quiz-layout">
     <div class="quiz-main-column">
      <section class="question-section" aria-live="polite"><h2 class="section-title" id="currentSectionTitle">Phần I · Trắc nghiệm <span class="section-count">Câu 1/30</span></h2><div id="questionContainer"></div></section>
+     <div class="flag-controls"><button type="button" class="btn secondary small uncertain-toggle" id="toggleUncertainBtn" aria-pressed="false">⚑ Đánh dấu phân vân</button><span class="uncertain-status" id="uncertainStatus">Đánh dấu câu bạn muốn xem lại sau.</span></div>
      <div class="step-controls"><button type="button" class="btn secondary" id="prevQuestion">← Câu trước</button><span class="question-position" id="questionPosition">Câu 1/34</span><button type="button" class="btn" id="nextQuestion">Câu tiếp →</button></div>
     </div>
-    <aside class="question-navigation" aria-label="Danh sách câu hỏi"><div class="question-nav-heading"><b>Danh sách câu hỏi</b><span>Chọn số câu để chuyển nhanh</span></div><div class="question-nav-grid" id="questionNavGrid"></div><div class="question-nav-legend"><span><i class="legend-dot current"></i>Đang xem</span><span><i class="legend-dot done"></i>Đã trả lời</span><span><i class="legend-dot partial"></i>Đang làm</span></div><div class="submit-box"><p id="submitHint">Câu bỏ trống sẽ không có điểm. Bạn có thể kiểm tra tiến độ ở bảng số câu.</p><button type="button" class="btn" id="submitExam">Nộp bài & xem kết quả</button><button type="button" class="btn secondary" id="retryExam" style="display:none">Làm lại đề này</button></div></aside>
+    <aside class="question-navigation" aria-label="Danh sách câu hỏi"><div class="question-nav-heading"><b>Danh sách câu hỏi</b><span>Chọn số câu để chuyển nhanh</span></div><div class="question-nav-grid" id="questionNavGrid"></div><div class="uncertain-panel" id="uncertainPanel"><div class="uncertain-panel-title"><b>⚑ Câu hỏi phân vân</b><span class="uncertain-count" id="uncertainCount">0 câu</span></div><div class="uncertain-list" id="uncertainList"><span class="uncertain-empty">Bạn chưa đánh dấu câu hỏi phân vân nào.</span></div></div><div class="question-nav-legend"><span><i class="legend-dot current"></i>Đang xem</span><span><i class="legend-dot done"></i>Đã trả lời</span><span><i class="legend-dot partial"></i>Đang làm</span></div><div class="submit-box"><p id="submitHint">Câu bỏ trống sẽ không có điểm. Bạn có thể kiểm tra tiến độ ở bảng số câu.</p><button type="button" class="btn" id="submitExam">Nộp bài & xem kết quả</button><button type="button" class="btn secondary" id="retryExam" style="display:none">Làm lại đề này</button></div></aside>
    </div>
   </section>
   <section class="view" id="view-result">
@@ -506,13 +507,14 @@ html[data-theme="dark"] .question-nav-legend .legend-dot.partial{
  </main>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="flag-submit-modal" id="flagSubmitModal" role="dialog" aria-modal="true" aria-labelledby="flagSubmitTitle" hidden><div class="flag-submit-card"><div class="flag-submit-icon" aria-hidden="true">⚑</div><h2 id="flagSubmitTitle">Bạn còn câu hỏi phân vân</h2><p id="flagSubmitMessage"></p><div class="flag-submit-list" id="flagSubmitList"></div><div class="flag-submit-actions"><button type="button" class="btn secondary" id="flagReviewBtn">Quay lại kiểm tra</button><button type="button" class="btn" id="flagSubmitBtn">Vẫn nộp bài</button></div></div></div>
 <script>
 (function(){
 "use strict";
 var data=window.TIN_EXAMS_DATA;
 var levels=[{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."}];
 var HISTORY_KEY="thinnhanh_tin_new_history",CANDIDATE_NAME_KEY="thinhanh_candidate_name_v1",LEGACY_CANDIDATE_KEY="thinnhanh_candidate_name",GOOGLE_SHEETS_ENDPOINT="https://script.google.com/macros/s/AKfycbyUd3AXctXM-9DRzY3KX0wYvDKSR3YUhyrWEN1t1S6O0rlmdiQjH4BcE8Dsi_dWIrQ/exec",EXAM_SECONDS=3000,currentCandidateName="";
-var examIndex=0,activeQuestion=0,mcQuestions=[],tfQuestions=[],mcAnswers=[],tfAnswers=[],submitted=false,secondsLeft=EXAM_SECONDS,timerTick=null,currentView="exams",activeResult=null,historyItems=loadHistory(),toastTimer=null;
+var examIndex=0,activeQuestion=0,mcQuestions=[],tfQuestions=[],mcAnswers=[],tfAnswers=[],submitted=false,secondsLeft=EXAM_SECONDS,timerTick=null,currentView="exams",activeResult=null,historyItems=loadHistory(),toastTimer=null,uncertainQuestions=new Set();
 function byId(id){return document.getElementById(id);}
 function escapeHtml(value){return String(value===null||value===undefined?"":value).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];});}
 function fmt(value,digits){var n=Number(value);return Number.isFinite(n)?n.toFixed(digits===undefined?2:digits).replace(".",","):"—";}
@@ -564,7 +566,7 @@ function startExam(index){
 var built=buildQuestions(index);
 if(!built){alert("Chưa tải được ngân hàng câu hỏi Tin học. Hãy tải lại trang.");return;}
 var studentName=askCandidateName();if(!studentName)return;currentCandidateName=studentName;
-examIndex=index;activeQuestion=0;mcQuestions=built.mc;tfQuestions=built.tf;mcAnswers=Array(30).fill(null);tfAnswers=tfQuestions.map(function(group){return group.items.map(function(){return null;});});submitted=false;activeResult=null;secondsLeft=EXAM_SECONDS;clearInterval(timerTick);
+examIndex=index;activeQuestion=0;mcQuestions=built.mc;tfQuestions=built.tf;mcAnswers=Array(30).fill(null);tfAnswers=tfQuestions.map(function(group){return group.items.map(function(){return null;});});submitted=false;activeResult=null;uncertainQuestions=new Set();secondsLeft=EXAM_SECONDS;clearInterval(timerTick);
 byId("takeMeta").textContent="ĐỀ NÂNG CAO "+pad(index+1)+" · "+levels[index].name.toUpperCase();
 byId("takeTitle").textContent="Đề nâng cao "+(index+1)+" · "+levels[index].name;
 byId("takeInstructions").textContent="30 câu trắc nghiệm (6 điểm) · 4 câu Đúng/Sai (4 điểm) · 50 phút";
@@ -580,17 +582,48 @@ function isQuestionComplete(index){if(index<30)return mcAnswers[index]!==null&&m
 function isQuestionPartial(index){if(index<30)return false;var row=tfAnswers[index-30];return Array.isArray(row)&&row.some(function(value){return value!==null;})&&!isQuestionComplete(index);}
 function questionHasAnyAnswer(index){if(index<30)return mcAnswers[index]!==null&&mcAnswers[index]!==undefined;var row=tfAnswers[index-30];return Array.isArray(row)&&row.some(function(value){return value!==null;});}
 function isQuestionCorrect(index){if(index<30)return mcAnswers[index]===mcQuestions[index].answer;var group=tfQuestions[index-30];return !!group&&group.items.every(function(item,si){return tfAnswers[index-30][si]===(item[1]?"true":"false");});}
+function uncertainLabel(index){return index<30?"Câu "+(index+1):"Câu Đ/S "+(index-29);}
+function renderUncertainUI(){
+var toggle=byId("toggleUncertainBtn"),status=byId("uncertainStatus"),list=byId("uncertainList"),count=byId("uncertainCount");
+if(!toggle||!list||!count)return;
+var indexes=Array.from(uncertainQuestions).filter(function(i){return Number.isInteger(i)&&i>=0&&i<34;}).sort(function(a,b){return a-b;});
+var live=mcQuestions.length===30&&tfQuestions.length===4&&!submitted;
+toggle.disabled=!live;
+var marked=live&&uncertainQuestions.has(activeQuestion);
+toggle.classList.toggle("is-marked",marked);toggle.setAttribute("aria-pressed",marked?"true":"false");
+toggle.textContent=marked?"⚑ Đã đánh dấu · Bỏ đánh dấu":"⚑ Đánh dấu phân vân";
+if(status)status.textContent=marked?"Câu này sẽ được nhắc lại trước khi nộp bài.":"Đánh dấu câu bạn muốn quay lại xem xét.";
+count.textContent=indexes.length+" câu";
+list.innerHTML=indexes.length?indexes.map(function(i){return '<button type="button" class="uncertain-chip" data-uncertain-index="'+i+'">⚑ '+escapeHtml(uncertainLabel(i))+'</button>';}).join(""):'<span class="uncertain-empty">Bạn chưa đánh dấu câu hỏi phân vân nào.</span>';
+list.querySelectorAll("[data-uncertain-index]").forEach(function(button){button.addEventListener("click",function(){jumpToUncertain(Number(button.dataset.uncertainIndex));});});
+}
+function toggleUncertain(){if(submitted||!mcQuestions.length)return;if(uncertainQuestions.has(activeQuestion))uncertainQuestions.delete(activeQuestion);else uncertainQuestions.add(activeQuestion);updateProgress();}
+function jumpToUncertain(index){if(submitted||!mcQuestions.length||index<0||index>=34)return;activeQuestion=index;renderCurrentQuestion();updateProgress();window.scrollTo({top:0,behavior:"smooth"});}
+function openFlagSubmitModal(){
+var indexes=Array.from(uncertainQuestions).sort(function(a,b){return a-b;}),modal=byId("flagSubmitModal");
+if(!indexes.length){submitExam(false);return;}
+byId("flagSubmitMessage").textContent="Bạn còn "+indexes.length+" câu hỏi đang phân vân. Bạn có muốn quay lại kiểm tra những câu này trước khi nộp bài không?";
+byId("flagSubmitList").innerHTML=indexes.map(function(i){return '<span>'+escapeHtml(uncertainLabel(i))+'</span>';}).join("");
+modal.hidden=false;byId("flagReviewBtn").focus();
+}
+function requestSubmitExam(autoSubmit){if(autoSubmit){submitExam(true);return;}if(uncertainQuestions.size){openFlagSubmitModal();return;}submitExam(false);}
+byId("toggleUncertainBtn").addEventListener("click",toggleUncertain);
+byId("flagReviewBtn").addEventListener("click",function(){var first=Array.from(uncertainQuestions).sort(function(a,b){return a-b;})[0];byId("flagSubmitModal").hidden=true;if(first!==undefined)jumpToUncertain(first);});
+byId("flagSubmitBtn").addEventListener("click",function(){byId("flagSubmitModal").hidden=true;submitExam(false);});
+
 function renderQuestionNav(){
 var html="";
 for(var i=0;i<34;i++){
 var label=i<30?String(i+1):"Đ"+(i-29),classes=[];
 if(i===activeQuestion)classes.push("current");
+if(uncertainQuestions.has(i))classes.push("uncertain");
 if(submitted){if(isQuestionCorrect(i))classes.push("done");else if(questionHasAnyAnswer(i))classes.push("wrong");else classes.push("unanswered");}
 else if(isQuestionComplete(i))classes.push("done");else if(isQuestionPartial(i))classes.push("partial");
 html+='<button type="button" class="'+classes.join(" ")+'" data-question="'+i+'" aria-label="'+(i<30?"Câu trắc nghiệm "+(i+1):"Câu Đúng/Sai "+(i-29))+'">'+label+'</button>';
 }
 byId("questionNavGrid").innerHTML=html;
 byId("questionNavGrid").querySelectorAll("[data-question]").forEach(function(button){button.addEventListener("click",function(){activeQuestion=Number(button.dataset.question);renderCurrentQuestion();updateProgress();});});
+renderUncertainUI();
 }
 function renderCurrentQuestion(){
 var rendered="";
@@ -638,7 +671,7 @@ submitted=true;clearInterval(timerTick);timerTick=null;
 var mcCorrect=mcQuestions.reduce(function(sum,q,i){return sum+(mcAnswers[i]===q.answer?1:0);},0);
 var tfCorrect=tfQuestions.reduce(function(sum,g,gi){return sum+g.items.reduce(function(v,item,si){return v+(tfAnswers[gi][si]===(item[1]?"true":"false")?1:0);},0);},0);
 var mcPoints=mcCorrect*.2,tfPoints=tfCorrect*.25,score=Math.round((mcPoints+tfPoints)*100)/100,now=new Date().toISOString();
-var record={id:"tin-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),examIndex:examIndex,exam:examIndex+1,title:"Đề nâng cao "+(examIndex+1)+" · "+levels[examIndex].name,difficulty:levels[examIndex].name,score:score,mcCorrect:mcCorrect,tfCorrect:tfCorrect,mcPoints:Math.round(mcPoints*100)/100,tfPoints:Math.round(tfPoints*100)/100,candidateName:currentCandidateName||getStudentName()||"Học sinh",submittedAt:now,elapsedSeconds:EXAM_SECONDS-Math.max(0,secondsLeft),autoSubmitted:!!autoSubmit,mcQuestions:mcQuestions,mcAnswers:mcAnswers,tfQuestions:tfQuestions,tfAnswers:tfAnswers,meme:chooseScoreMeme(score)};
+var record={id:"tin-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),examIndex:examIndex,exam:examIndex+1,title:"Đề nâng cao "+(examIndex+1)+" · "+levels[examIndex].name,difficulty:levels[examIndex].name,score:score,mcCorrect:mcCorrect,tfCorrect:tfCorrect,mcPoints:Math.round(mcPoints*100)/100,tfPoints:Math.round(tfPoints*100)/100,candidateName:currentCandidateName||getStudentName()||"Học sinh",submittedAt:now,elapsedSeconds:EXAM_SECONDS-Math.max(0,secondsLeft),autoSubmitted:!!autoSubmit,mcQuestions:mcQuestions,mcAnswers:mcAnswers,tfQuestions:tfQuestions,tfAnswers:tfAnswers,uncertainQuestions:Array.from(uncertainQuestions).sort(function(a,b){return a-b;}),meme:chooseScoreMeme(score)};
 historyItems.unshift(record);historyItems=historyItems.slice(0,50);saveHistory();sendScoreToSheets(record);activeResult=record;
 renderCurrentQuestion();updateProgress();renderResult(record);setView("result");
 }
@@ -735,7 +768,7 @@ byId("examGrid").querySelectorAll(".exam-card").forEach(function(card){var text=
 byId("examSearch").addEventListener("input",filterExams);byId("examLevelFilter").addEventListener("change",filterExams);
 byId("prevQuestion").addEventListener("click",function(){if(activeQuestion>0){activeQuestion--;renderCurrentQuestion();updateProgress();}});
 byId("nextQuestion").addEventListener("click",function(){activeQuestion=activeQuestion===33?0:activeQuestion+1;renderCurrentQuestion();updateProgress();});
-byId("submitExam").addEventListener("click",function(){submitExam(false);});
+byId("submitExam").addEventListener("click",function(){requestSubmitExam(false);});
 byId("retryExam").addEventListener("click",function(){startExam(examIndex);});
 byId("leaveExam").addEventListener("click",function(){if(confirm("Bạn chắc chắn muốn rời bài thi? Bài chưa nộp sẽ bị hủy.")){activeExamCleanup();setView("exams");}});
 byId("clearHistory").addEventListener("click",function(){if(!historyItems.length){notify("Chưa có lịch sử để xóa.");return;}if(confirm("Xóa toàn bộ lịch sử làm bài Tin học đã lưu trên trình duyệt này?")){historyItems=[];saveHistory();renderHistory();renderStatistics();notify("Đã xóa lịch sử làm bài.");}});
@@ -869,5 +902,48 @@ renderExamCards();renderHistory();renderStatistics();
 })();
 </script>
 <script>document.querySelectorAll("[data-goto=\"exams\"]").forEach(function(n){if(n.tagName==="BUTTON")n.textContent=n.textContent.replace("Vào kho đề","Vào đề nâng cao");});</script>
+<style id="tin-uncertain-question-styles">
+.flag-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:15px 0 2px;padding:11px 12px;border:1px solid #e6d19a;border-radius:12px;background:#fffaf0}
+.uncertain-toggle{min-height:38px;padding:9px 12px!important;border:1px solid #d6a02b!important;border-radius:10px!important;background:#fff2c9!important;color:#765009!important;font-weight:900!important;cursor:pointer}
+.uncertain-toggle.is-marked{background:#ffe19a!important;border-color:#bc8010!important;color:#5d3d00!important;box-shadow:0 0 0 2px rgba(214,160,43,.18)!important}
+.uncertain-toggle:focus-visible,.uncertain-chip:focus-visible{outline:3px solid rgba(18,167,161,.4);outline-offset:2px}
+.uncertain-status{font-size:11px;color:#82704c;line-height:1.55}
+.uncertain-panel{margin:13px 0 4px;padding:12px;border:1px solid #efdb9e;border-radius:12px;background:#fffbef;color:#6b5419}
+.uncertain-panel-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;color:#835d0b;font-size:12px;font-weight:900}
+.uncertain-count{white-space:nowrap;padding:3px 7px;background:#ffefc4;border-radius:999px;font-size:10px}
+.uncertain-list{display:flex;flex-wrap:wrap;gap:6px}
+.uncertain-chip{border:1px solid #e4bd59!important;border-radius:8px!important;background:#fff1c9!important;color:#79520a!important;padding:7px 9px!important;font-size:10px!important;font-weight:900!important;cursor:pointer}
+.uncertain-empty{color:#8b7a52;font-size:10px;line-height:1.65}
+.question-nav-grid button{position:relative}
+.question-nav-grid button.uncertain:not(.current){border-color:#d99c22!important;box-shadow:inset 0 0 0 2px #eab84f!important}
+.question-nav-grid button.uncertain:after{content:"⚑";position:absolute;right:-4px;top:-7px;font-size:10px;color:#a86c00;line-height:1;background:#fff5d8;border-radius:4px;padding:0 1px}
+.question-nav-grid button.current.uncertain{outline:2px solid #dda82e;outline-offset:1px}
+.flag-submit-modal{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,22,38,.62);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.flag-submit-modal[hidden]{display:none!important}
+.flag-submit-card{box-sizing:border-box;width:min(100%,460px);padding:22px;border:1px solid #ead8a7;border-radius:18px;background:#fffdf6;color:#263f58;box-shadow:0 24px 70px rgba(0,0,0,.25)}
+.flag-submit-icon{font-size:28px;margin-bottom:5px}
+.flag-submit-card h2{margin:0 0 8px;font-size:20px;line-height:1.35;color:#654908}
+.flag-submit-card p{margin:0;color:#6e644d;font-size:13px;line-height:1.75}
+.flag-submit-list{display:flex;flex-wrap:wrap;gap:6px;margin:13px 0 17px}
+.flag-submit-list span{padding:5px 8px;border:1px solid #e9ca72;border-radius:8px;background:#fff2c9;color:#785407;font-size:11px;font-weight:900}
+.flag-submit-actions{display:flex;gap:9px;flex-wrap:wrap}
+.flag-submit-actions button{flex:1;min-width:135px}
+html[data-theme="dark"] .flag-controls{background:#262316!important;border-color:#665328!important}
+html[data-theme="dark"] .uncertain-toggle{background:#49391b!important;border-color:#b58b2b!important;color:#ffdfa0!important}
+html[data-theme="dark"] .uncertain-toggle.is-marked{background:#654918!important;border-color:#f1bc45!important;color:#fff0c4!important}
+html[data-theme="dark"] .uncertain-status{color:#c8b98d!important}
+html[data-theme="dark"] .uncertain-panel{background:#2b271a!important;border-color:#62522a!important;color:#f0dfad!important}
+html[data-theme="dark"] .uncertain-panel-title{color:#ffdfa0!important}
+html[data-theme="dark"] .uncertain-count{background:#403719!important;color:#ffe4a0!important}
+html[data-theme="dark"] .uncertain-chip{background:#47391b!important;border-color:#977524!important;color:#ffe6a5!important}
+html[data-theme="dark"] .uncertain-empty{color:#c9b982!important}
+html[data-theme="dark"] .question-nav-grid button.uncertain:not(.current){border-color:#e4b33f!important;box-shadow:inset 0 0 0 2px #9b7421!important}
+html[data-theme="dark"] .question-nav-grid button.uncertain:after{background:#493817;color:#ffdfa0}
+html[data-theme="dark"] .flag-submit-card{background:#172538!important;border-color:#5e4a24!important;color:#e4edf8!important}
+html[data-theme="dark"] .flag-submit-card h2{color:#ffe1a0!important}
+html[data-theme="dark"] .flag-submit-card p{color:#cfdae8!important}
+html[data-theme="dark"] .flag-submit-list span{background:#47391b!important;border-color:#977524!important;color:#ffe6a5!important}
+@media(max-width:560px){.flag-controls{gap:7px;padding:9px}.uncertain-toggle{width:100%;min-height:42px}.uncertain-status{font-size:10px}.uncertain-panel{padding:10px}.question-nav-grid button.uncertain:after{font-size:9px;right:-2px;top:-6px}.flag-submit-card{padding:17px;border-radius:15px}.flag-submit-card h2{font-size:18px}.flag-submit-actions{flex-direction:column}.flag-submit-actions button{width:100%;min-height:42px}}
+</style>
 </body>
 </html>
