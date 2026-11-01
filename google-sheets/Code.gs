@@ -1,5 +1,7 @@
 /**
- * ThiNhanh — nhận điểm từ website tĩnh và ghi vào Google Sheets.
+ * ThiNhanh — nhận điểm từ tất cả môn và ghi vào Google Sheets.
+ * Mọi điểm mới (Toán, Vật lí, Hóa học, Tin học và bộ Tin học mới)
+ * được chèn ngay dưới tiêu đề để kết quả mới nhất luôn nằm đầu bảng.
  * Gắn script này với một Google Sheet bằng Extensions > Apps Script.
  * Chỉ nhận POST, không đọc hay chia sẻ dữ liệu trong bảng qua endpoint.
  */
