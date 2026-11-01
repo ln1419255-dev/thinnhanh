@@ -2089,6 +2089,12 @@ html[data-theme="dark"] .tag.mid{
 html[data-theme="dark"] .tag.hard{
  background:#3b252b!important;border-color:#70404c!important;color:#ffb8c0!important;
 }
+
+/* Dark mode: soften the decorative light sweep so it never reads as a white patch */
+html[data-theme="dark"] .tn-goal-card:before,
+html[data-theme="dark"] .tn-continue-card:before{
+ background:linear-gradient(105deg,transparent,rgba(111,158,183,.12),rgba(73,176,170,.07),transparent)!important;
+}
 </style>
 </head>
 <body>
