@@ -12,7 +12,7 @@ Website hiện đang chạy trên GitHub Pages. Mã nhận điểm đã được
 6. Nhấn **Deploy**, chấp thuận quyền truy cập nếu Google yêu cầu, rồi sao chép URL ứng dụng web kết thúc bằng `/exec`.
 7. Gửi URL `/exec` đó trong cuộc trò chuyện này. URL này cho phép gửi kết quả vào Sheet, vì vậy chỉ chia sẻ với người bạn tin cậy. Không cần đổi quyền chia sẻ của chính Google Sheet thành công khai.
 
-URL `/exec` hiện được dùng chung cho các môn trong website. Nếu endpoint đã được triển khai, không cần tạo hệ thống mới; chỉ cần kiểm tra URL trong mã nguồn vẫn đúng với Web App của bạn. Script hiện ghi điểm mới ngay dưới hàng tiêu đề, nên lần gửi mới nhất sẽ hiển thị ở trên cùng. Script cũng chấp nhận cả bộ Tin học cũ (`Tin học`) và bộ mới (`Tin học - 8 đề mới`).
+URL `/exec` hiện được dùng chung cho các môn trong website. Nếu endpoint đã được triển khai, không cần tạo hệ thống mới; chỉ cần kiểm tra URL trong mã nguồn vẫn đúng với Web App của bạn. Script dùng chung cho Toán, Vật lí, Hóa học, Tin học và bộ 8 đề Tin học mới. Mọi lượt nộp bài ở bất kỳ môn nào đều được chèn ngay dưới hàng tiêu đề trong cùng bảng `DiemThi`, nên kết quả gửi gần nhất sẽ luôn ở trên cùng, không phân biệt môn học. Script cũng chấp nhận cả bộ Tin học cũ (`Tin học`) và bộ mới (`Tin học - 8 đề mới`).
 
 Khi có thay đổi trong `google-sheets/Code.gs` (ví dụ thêm môn Tin học), việc cập nhật tệp trên GitHub **không tự cập nhật Apps Script đã triển khai**. Hãy sao chép lại toàn bộ `Code.gs` mới vào trình soạn thảo Apps Script, lưu, vào **Deploy → Manage deployments → Edit**, chọn **New version** rồi nhấn **Deploy**. Giữ nguyên URL `/exec` nếu cập nhật đúng deployment hiện có.
 
