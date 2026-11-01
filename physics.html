@@ -2486,4 +2486,49 @@ renderHome();renderBrowse();
  paint();
 })();
 </script>
+
+<script id="tn-exam-autosave">
+(function(){
+"use strict";
+var KEY="tn_exam_resume_v1_"+(typeof SUBJECT_NAME!=="undefined"?SUBJECT_NAME:"subject");
+function store(){
+ try{
+  if(typeof activeExam!=="undefined"&&activeExam&&currentView==="take"){
+   localStorage.setItem(KEY,JSON.stringify({examId:activeExam.id,answers:answers,activeQ:activeQ,seconds:seconds,uncertain:Array.from(uncertainQuestions||[]),name:currentCandidateName||"",scrollY:window.scrollY,savedAt:Date.now()}));
+  }else if(typeof activeExam!=="undefined"&&!activeExam){localStorage.removeItem(KEY);}
+ }catch(e){}
+}
+try{
+ var raw=localStorage.getItem(KEY),st=raw?JSON.parse(raw):null;
+ if(st&&st.examId&&Array.isArray(st.answers)&&typeof BANK!=="undefined"){
+  var e=BANK.find(function(x){return x.id===st.examId;});
+  if(e&&st.answers.length===e.questions.length&&Number(st.seconds)>0){
+   activeExam=e;answers=st.answers;activeQ=Math.max(0,Math.min(e.questions.length-1,Number(st.activeQ)||0));seconds=Math.max(1,Number(st.seconds)||1);
+   uncertainQuestions=new Set(Array.isArray(st.uncertain)?st.uncertain:[]);currentCandidateName=st.name||"";currentView="take";
+   document.querySelectorAll(".view").forEach(function(x){x.classList.toggle("active",x.id==="view-take");});
+   document.querySelectorAll(".navbtn[data-view]").forEach(function(x){x.classList.remove("active");});
+   if(typeof getChapterGroup==="function"){
+    var g=getChapterGroup(e.id),n=g.ids.indexOf(e.id)+1;$("takeMeta").textContent=e.difficulty.toUpperCase()+" · "+g.title.toUpperCase()+" · ĐỀ "+n+"/"+g.ids.length;
+   }else if(typeof getChapterGroup==="function"){}
+   else if(typeof getChapter==="function"){
+    var c=getChapter(e.id),cn=c.ids.indexOf(e.id)+1;$("takeMeta").textContent=e.difficulty.toUpperCase()+" · "+c.kicker+" · ĐỀ "+String(cn).padStart(2,"0")+"/10";
+   }else{$("takeMeta").textContent=e.difficulty.toUpperCase()+" · VẬT LÍ NHIỆT · ĐỀ "+(BANK.indexOf(e)+1)+"/10";}
+   $("takeTitle").textContent=e.title;
+   if(typeof renderTake==="function")renderTake();
+   if(typeof renderUncertainUI==="function")renderUncertainUI();
+   if(typeof updateTimer==="function")updateTimer();
+   timerTick=setInterval(function(){seconds--;updateTimer();store();if(seconds<=0){clearInterval(timerTick);finishExam(true);}},1000);
+   window.scrollTo(0,Number(st.scrollY)||0);
+   if(typeof toast==="function")toast("Đã khôi phục bài làm trước đó.");
+  }
+ }
+}catch(e){}
+document.addEventListener("click",function(){setTimeout(store,0);},true);
+document.addEventListener("input",function(){setTimeout(store,0);},true);
+document.addEventListener("change",function(){setTimeout(store,0);},true);
+window.addEventListener("pagehide",store);
+window.addEventListener("beforeunload",store);
+setInterval(store,1000);
+})();
+</script>
 </body></html>
