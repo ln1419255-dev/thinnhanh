@@ -395,19 +395,48 @@ html[data-theme="dark"] td div[style*="background:#edf2f7"]>div{
   background:linear-gradient(90deg,#20c6b8,#9b8cff)!important;
 }
 
+
+/* Tin Hoc: menu chọn bộ đề kiểu thẻ chương của môn Hóa */
+.tin-sets{margin:24px 0 22px;scroll-margin-top:82px}
+.tin-sets-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:0 0 14px}
+.tin-sets-head h2{margin:9px 0 4px;font-size:22px;letter-spacing:-.6px;color:var(--ink)}
+.tin-sets-head p{margin:0;color:var(--muted);font-size:13px;line-height:1.75}
+.tin-sets-total{flex:0 0 auto;padding:7px 11px;border-radius:999px;background:#e5faf6;border:1px solid #d2f0e9;color:#087f83;font-size:11px;font-weight:900}
+.tin-set-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.tin-set-card{appearance:none;display:flex;align-items:flex-start;gap:15px;min-width:0;width:100%;padding:21px;text-align:left;text-decoration:none;color:inherit;background:linear-gradient(145deg,#fff 0%,#f8fbff 100%);border:1px solid #dce8f2;border-radius:19px;box-shadow:0 8px 23px rgba(24,51,81,.045);cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;font:inherit}
+.tin-set-card:hover{transform:translateY(-3px);border-color:#9bd8d0;box-shadow:0 15px 30px rgba(24,51,81,.085)}
+.tin-set-card:focus-visible{outline:3px solid rgba(15,174,169,.32);outline-offset:3px}
+.tin-set-icon{display:grid;place-items:center;flex:0 0 52px;width:52px;height:52px;border-radius:16px;background:linear-gradient(145deg,#ddfaf3,#e4f0ff);font-size:25px}
+.tin-set-new .tin-set-icon{background:linear-gradient(145deg,#eee8ff,#e1f7ff)}
+.tin-set-content{display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:0}
+.tin-set-kicker{font-size:9px;font-weight:950;letter-spacing:1.15px;color:#078e8e}
+.tin-set-content strong{font-size:21px;line-height:1.3;letter-spacing:-.5px;color:var(--ink)}
+.tin-set-desc{font-size:12px;line-height:1.75;color:var(--muted)}
+.tin-set-action{display:flex;align-items:center;gap:8px;margin-top:7px;padding:7px 10px;border:1px solid #d4eee8;border-radius:10px;background:#eaf9f6;color:#087f83;font-size:11px;font-weight:900}
+.tin-set-new .tin-set-action{background:#f0edff;border-color:#e0d9ff;color:#6355bf}
+.tin-current-set{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+html[data-theme="dark"] .tin-set-card{background:linear-gradient(145deg,#17263a,#1b2f43);border-color:#344a60;color:#e1ebf7}
+html[data-theme="dark"] .tin-set-content strong,html[data-theme="dark"] .tin-sets-head h2{color:#e7f0fa}
+html[data-theme="dark"] .tin-set-desc,html[data-theme="dark"] .tin-sets-head p{color:#a7b9cc}
+html[data-theme="dark"] .tin-set-icon{background:linear-gradient(145deg,#234449,#293a5a)}
+html[data-theme="dark"] .tin-set-new .tin-set-icon{background:linear-gradient(145deg,#393253,#234650)}
+html[data-theme="dark"] .tin-set-action{background:#173c3a;border-color:#2e625e;color:#91eee0}
+html[data-theme="dark"] .tin-set-new .tin-set-action{background:#2b2850;border-color:#49427e;color:#c6bbff}
+html[data-theme="dark"] .tin-sets-total{background:#173c3a;border-color:#2e625e;color:#91eee0}
+@media(max-width:680px){.tin-sets{margin:17px 0}.tin-sets-head h2{font-size:18px}.tin-sets-head p{font-size:11px}.tin-sets-total{font-size:9px;padding:6px 8px}.tin-set-grid{grid-template-columns:1fr;gap:9px}.tin-set-card{padding:15px;border-radius:14px;gap:12px}.tin-set-icon{width:43px;height:43px;flex-basis:43px;border-radius:12px;font-size:21px}.tin-set-content strong{font-size:17px}.tin-set-desc{font-size:11px}.tin-set-action{font-size:10px}}
 </style>
 </head>
 <body>
 <header class="topbar">
  <a class="brand" href="./index.html"><img src="./assets/thinnhanh-logo.svg?v=3" alt=""><span>Thi<span>Nhanh</span></span></a>
- <button class="tn-theme-toggle" type="button" data-theme-toggle aria-label="Chuyển sang chế độ tối" aria-pressed="false" title="Chuyển sang chế độ tối"><span class="tn-theme-icon" aria-hidden="true">🌙</span><span class="tn-theme-label">Chế độ tối</span></button><span class="top-pill">TIN HỌC · 8 ĐỀ · THANG ĐIỂM 10</span>
+ <button class="tn-theme-toggle" type="button" data-theme-toggle aria-label="Chuyển sang chế độ tối" aria-pressed="false" title="Chuyển sang chế độ tối"><span class="tn-theme-icon" aria-hidden="true">🌙</span><span class="tn-theme-label">Chế độ tối</span></button><span class="top-pill">TIN HỌC · 2 BỘ ĐỀ · 16 ĐỀ</span>
  <a class="btn secondary" href="./index.html">← Trang chủ</a>
 </header>
 <div class="workspace">
  <aside class="sidebar" aria-label="Không gian luyện thi">
   <div class="side-label">KHÔNG GIAN LUYỆN THI</div>
   <button type="button" class="navbtn active" data-view="home"><span class="ico">⌂</span>Tổng quan</button>
-  <button type="button" class="navbtn" data-view="exams"><span class="ico">▦</span>Kho đề</button>
+  <button type="button" class="navbtn" data-view="exams"><span class="ico">▦</span>8 đề cũ</button>
   <button type="button" class="navbtn" data-view="history"><span class="ico">◷</span>Lịch sử làm bài</button>
   <button type="button" class="navbtn" data-view="statistics"><span class="ico">▥</span>Thống kê điểm</button>
   <button type="button" class="navbtn" data-view="tips"><span class="ico">💡</span>Mẹo ôn tập</button>
@@ -415,11 +444,21 @@ html[data-theme="dark"] td div[style*="background:#edf2f7"]>div{
  </aside>
  <main class="main-content">
   <section class="view active" id="view-home">
-   <div class="pagehead"><div><div class="eyebrow">ĐỀ ÔN TẬP GIỮA KÌ · TIN HỌC</div><h1>Không gian luyện thi Tin học.</h1><p>Ôn tập đề giữa kì, làm bài theo từng câu, nhận kết quả ngay và xem lại từng đáp án sau khi nộp bài.</p></div><button class="btn" data-goto="exams">Vào kho đề →</button></div>
-   <div class="hero"><div><div class="eyebrow">50 PHÚT · 34 CÂU LỚN · THANG 10</div><h2>Ôn kiến thức. Theo dõi tiến bộ.</h2><p>Mỗi đề gồm 30 câu trắc nghiệm (6 điểm) và 4 câu Đúng/Sai với 16 ý (4 điểm). Khi nộp bài, kết quả được lưu vào lịch sử để bạn xem lại câu đã chọn, đáp án đúng và điểm thành phần.</p><button class="btn secondary" data-goto="exams" style="margin-top:15px">Chọn đề luyện tập →</button></div><div class="hero-art" aria-hidden="true">💻</div></div>
-   <div class="info-box" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px"><div><b>✨ THƯ MỤC MỚI · 8 ĐỀ TIN HỌC</b><br><span>Đề trộn từ ngân hàng câu hỏi của cả 6 bài, với phương án nhiễu gần nhau hơn.</span></div><a class="btn small purple" href="./tin-moi.html">Mở thư mục 8 đề mới →</a></div>
+   <div class="pagehead"><div><div class="eyebrow">ĐỀ ÔN TẬP GIỮA KÌ · TIN HỌC</div><h1>Không gian luyện thi Tin học.</h1><p>Chọn một trong hai bộ đề: 8 đề cũ để ôn tập hoặc 8 đề mới được trộn từ toàn bộ 6 bài.</p></div><a class="btn" href="#tin-sets">Chọn bộ đề ↓</a></div>
+   <div class="hero"><div><div class="eyebrow">50 PHÚT · 34 CÂU LỚN · THANG 10</div><h2>Ôn kiến thức. Theo dõi tiến bộ.</h2><p>Mỗi đề gồm 30 câu trắc nghiệm (6 điểm) và 4 câu Đúng/Sai với 16 ý (4 điểm). Khi nộp bài, kết quả được lưu vào lịch sử để bạn xem lại câu đã chọn, đáp án đúng và điểm thành phần.</p><a class="btn secondary" href="#tin-sets" style="display:inline-flex;margin-top:15px">Chọn bộ đề ↓</a></div><div class="hero-art" aria-hidden="true">💻</div></div>
+   <section class="tin-sets" id="tin-sets" aria-labelledby="tin-sets-title">
+    <div class="tin-sets-head"><div><div class="eyebrow">THƯ VIỆN TIN HỌC</div><h2 id="tin-sets-title">Chọn bộ đề ôn tập</h2><p>Hai mục riêng biệt như các chương của môn Hóa. Bấm vào một mục để xem 8 đề bên trong.</p></div><span class="tin-sets-total">16 đề tất cả</span></div>
+    <div class="tin-set-grid">
+     <button type="button" class="tin-set-card tin-set-old" data-goto="exams">
+      <span class="tin-set-icon" aria-hidden="true">📘</span><span class="tin-set-content"><span class="tin-set-kicker">BỘ ĐỀ 01</span><strong>8 đề cũ</strong><span class="tin-set-desc">Bộ đề Tin học đang có trên ThiNhanh, giữ nguyên như trước.</span><span class="tin-set-action">Xem 8 đề cũ <span aria-hidden="true">→</span></span></span>
+     </button>
+     <a class="tin-set-card tin-set-new" href="./tin-moi.html">
+      <span class="tin-set-icon" aria-hidden="true">✨</span><span class="tin-set-content"><span class="tin-set-kicker">BỘ ĐỀ 02 · MỚI</span><strong>8 đề mới</strong><span class="tin-set-desc">Đề trộn từ 6 bài, phương án nhiễu gần nhau hơn để bạn phải phân vân và hiểu bài.</span><span class="tin-set-action">Xem 8 đề mới <span aria-hidden="true">→</span></span></span>
+     </a>
+    </div>
+   </section>
    <div class="stats-grid">
-    <div class="stat-card"><div class="stat-icon">▤</div><div><strong id="stat-exams">8</strong><span>Đề luyện tập</span></div></div>
+    <div class="stat-card"><div class="stat-icon">▤</div><div><strong id="stat-exams">8</strong><span>Đề trong bộ cũ</span></div></div>
     <div class="stat-card"><div class="stat-icon">✓</div><div><strong id="stat-attempts">0</strong><span>Lượt đã hoàn thành</span></div></div>
     <div class="stat-card"><div class="stat-icon">↗</div><div><strong id="stat-average">—</strong><span>Điểm trung bình</span></div></div>
    </div>
@@ -429,7 +468,7 @@ html[data-theme="dark"] td div[style*="background:#edf2f7"]>div{
   </section>
   <section class="view" id="view-exams">
    <div class="pagehead"><div><div class="eyebrow">THƯ VIỆN BÀI THI</div><h1>Chọn đề luyện tập</h1><p>Chọn một trong 8 đề. Trong lúc làm bài, bạn có thể chuyển câu bằng nút Câu trước/Câu tiếp hoặc bảng số câu ở bên phải.</p></div></div>
-   <div class="info-box" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><b>Muốn thử bộ câu hỏi mới được trộn từ 6 bài?</b><a class="btn small purple" href="./tin-moi.html">Mở thư mục 8 đề mới →</a></div>
+   <div class="info-box tin-current-set"><b>📘 Bạn đang xem bộ 8 đề cũ.</b><button type="button" class="btn secondary small" data-goto="home">← Quay lại chọn bộ đề</button></div>
    <div class="toolbar"><div class="search"><input id="examSearch" type="search" placeholder="Tìm theo số đề hoặc cấp độ…"></div><select id="examLevelFilter" aria-label="Lọc cấp độ"><option value="">Tất cả cấp độ</option><option>Cơ bản</option><option>Trung bình</option><option>Khá</option><option>Khó</option><option>Tổng ôn</option></select></div>
    <div class="exam-grid" id="examGrid"></div>
    <div class="info-box"><b>Lưu ý:</b> Nộp bài để chấm điểm. Sau khi nộp, mở mục <b>Lịch sử làm bài</b> để xem lại kết quả bất cứ lúc nào trên cùng trình duyệt.</div>
