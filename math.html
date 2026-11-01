@@ -1959,6 +1959,77 @@ html[data-theme="dark"] .flag-submit-list span{background:#49391b!important;bord
 @media(max-width:560px){.flag-controls{align-items:flex-start}.uncertain-toggle{min-height:40px}.uncertain-status{align-self:center}.uncertain-panel{padding:10px}.flag-submit-card{padding:19px}.flag-submit-actions{flex-direction:column}.flag-submit-actions button{width:100%}}
 
 </style>
+<style id="tn-question-contrast-audit">
+/* Contrast audit: question text must always contrast with its own surface. */
+#view-take .takepanel .questiontext{
+  color:#243a52!important;
+  -webkit-text-fill-color:#243a52!important;
+  background:linear-gradient(135deg,#f3f7fa 0%,#f8fbfd 100%)!important;
+  border-color:#dfe8f0!important;
+  border-left-color:#15a5a1!important;
+  opacity:1!important;text-shadow:none!important;filter:none!important;
+}
+#view-take .takepanel .questiontext *{
+  color:inherit!important;-webkit-text-fill-color:currentColor!important;
+  opacity:1!important;text-shadow:none!important;filter:none!important;
+}
+html[data-theme="dark"] #view-take .takepanel .questiontext{
+  color:#e6eef8!important;
+  -webkit-text-fill-color:#e6eef8!important;
+  background:linear-gradient(135deg,#192a3e 0%,#172538 100%)!important;
+  border-color:#30465e!important;
+  border-left-color:#24b8b0!important;
+}
+html[data-theme="dark"] #view-take .takepanel .questiontext *{
+  color:inherit!important;-webkit-text-fill-color:currentColor!important;
+}
+/* Tin hoc uses a question-card/question-text pair instead of questiontext. */
+#view-take .question-card{
+  background:#fff!important;border-color:#dfe8f0!important;color:#243a52!important;
+}
+#view-take .question-card .question-text{
+  color:#243a52!important;-webkit-text-fill-color:#243a52!important;
+  opacity:1!important;text-shadow:none!important;filter:none!important;
+}
+#view-take .question-card .question-text *{
+  color:inherit!important;-webkit-text-fill-color:currentColor!important;
+}
+html[data-theme="dark"] #view-take .question-card{
+  background:#172538!important;border-color:#30465e!important;color:#e2ecf7!important;
+}
+html[data-theme="dark"] #view-take .question-card .question-text,
+html[data-theme="dark"] #view-take .question-card .question-text *{
+  color:#e2ecf7!important;-webkit-text-fill-color:#e2ecf7!important;
+  opacity:1!important;text-shadow:none!important;filter:none!important;
+}
+/* Replace the large yellow uncertain-questions panel with neutral theme-aware colors. */
+#view-take .uncertain-panel{
+  background:#f1f7fa!important;border-color:#d9e6ee!important;color:#344e66!important;
+}
+#view-take .uncertain-panel-title{color:#24616b!important}
+#view-take .uncertain-count{background:#e2f1f4!important;color:#245764!important}
+#view-take .uncertain-chip{
+  background:#fff!important;border-color:#c9dde6!important;color:#28576b!important;
+}
+#view-take .uncertain-empty{color:#61788e!important}
+html[data-theme="dark"] #view-take .uncertain-panel{
+  background:#152438!important;border-color:#30465d!important;color:#dce8f6!important;
+}
+html[data-theme="dark"] #view-take .uncertain-panel-title{color:#bfe6e2!important}
+html[data-theme="dark"] #view-take .uncertain-count{
+  background:#223a50!important;color:#bfe6e2!important;
+}
+html[data-theme="dark"] #view-take .uncertain-chip{
+  background:#1c3045!important;border-color:#3b5e73!important;color:#d3eafa!important;
+}
+html[data-theme="dark"] #view-take .uncertain-empty{color:#a6bbcf!important}
+@media(max-width:680px){
+  #view-take .flag-controls{gap:8px}
+  #view-take .uncertain-panel{padding:10px!important}
+  #view-take .uncertain-chip{min-height:34px;padding:7px 9px!important}
+}
+</style>
+
 </head>
 <body>
 <header class="topbar">
