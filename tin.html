@@ -968,7 +968,7 @@ document.addEventListener('change',function(){setTimeout(tnSaveDraft,0)},true);
 setInterval(tnSaveDraft,1000);window.addEventListener('beforeunload',tnSaveDraft);
 document.addEventListener('click',function(ev){if(ev.target.closest('#leaveExam'))setTimeout(function(){if(currentView!=='take')tnClearDraft()},150)},true);
 var tnOriginalSubmitExam=submitExam;
-submitExam=function(autoSubmit){tnClearDraft();return tnOriginalSubmitExam(autoSubmit)};
+submitExam=function(autoSubmit){var result=tnOriginalSubmitExam(autoSubmit);if(submitted)tnClearDraft();return result};
 try{
  var tnDraft=JSON.parse(localStorage.getItem(TN_DRAFT_KEY)||'null');
  if(tnDraft&&Number.isInteger(tnDraft.examIndex)&&Array.isArray(tnDraft.mcAnswers)&&Date.now()-(tnDraft.savedAt||0)<86400000){
