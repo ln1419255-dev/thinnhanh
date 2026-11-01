@@ -983,5 +983,45 @@ html[data-theme="dark"] .flag-submit-list span{background:#47391b!important;bord
 html[data-theme="dark"] .question-nav-grid button.current{background:linear-gradient(135deg,#087f83,#1598a1)!important;border-color:#55d8cf!important;color:#fff!important}
 .question-nav-legend .legend-dot.current{background:#0db5aa!important}
 </style>
+
+<script id="tn-exam-autosave">
+(function(){
+"use strict";
+var KEY="tn_exam_resume_v1_"+location.pathname.split("/").pop();
+function store(){
+ try{
+  if(typeof currentView!=="undefined"&&currentView==="take"&&!submitted){
+   localStorage.setItem(KEY,JSON.stringify({examIndex:examIndex,activeQuestion:activeQuestion,mcAnswers:mcAnswers,tfAnswers:tfAnswers,secondsLeft:secondsLeft,uncertain:Array.from(uncertainQuestions||[]),name:currentCandidateName||"",scrollY:window.scrollY,savedAt:Date.now()}));
+  }else if(typeof submitted!=="undefined"&&submitted){localStorage.removeItem(KEY);}
+  else if(typeof currentView!=="undefined"&&currentView!=="take"){localStorage.removeItem(KEY);}
+ }catch(e){}
+}
+try{
+ var raw=localStorage.getItem(KEY),st=raw?JSON.parse(raw):null;
+ if(st&&Number.isInteger(st.examIndex)&&Array.isArray(st.mcAnswers)&&Array.isArray(st.tfAnswers)&&Number(st.secondsLeft)>0){
+  var built=buildQuestions(st.examIndex);
+  if(built){
+   examIndex=st.examIndex;mcQuestions=built.mc;tfQuestions=built.tf;mcAnswers=st.mcAnswers;tfAnswers=st.tfAnswers;
+   activeQuestion=Math.max(0,Math.min(33,Number(st.activeQuestion)||0));secondsLeft=Math.max(1,Number(st.secondsLeft)||1);
+   currentCandidateName=st.name||"";submitted=false;activeResult=null;uncertainQuestions=new Set(Array.isArray(st.uncertain)?st.uncertain:[]);
+   byId("takeMeta").textContent=(location.pathname.indexOf("tin-moi")>=0?"ĐỀ NÂNG CAO ":"ĐỀ ")+pad(examIndex+1)+" · "+levels[examIndex].name.toUpperCase();
+   byId("takeTitle").textContent=(location.pathname.indexOf("tin-moi")>=0?"Đề nâng cao ":"Đề ")+(examIndex+1)+" · "+levels[examIndex].name;
+   byId("takeInstructions").textContent="30 câu trắc nghiệm (6 điểm) · 4 câu Đúng/Sai (4 điểm) · 50 phút";
+   byId("retryExam").style.display="none";byId("submitExam").style.display="inline-flex";
+   setView("take");renderCurrentQuestion();updateProgress();updateTimer();
+   timerTick=setInterval(function(){secondsLeft--;updateTimer();store();if(secondsLeft<=0){clearInterval(timerTick);timerTick=null;submitExam(true);}},1000);
+   window.scrollTo(0,Number(st.scrollY)||0);
+   notify("Đã khôi phục bài làm trước đó.");
+  }
+ }
+}catch(e){}
+document.addEventListener("click",function(){setTimeout(store,0);},true);
+document.addEventListener("input",function(){setTimeout(store,0);},true);
+document.addEventListener("change",function(){setTimeout(store,0);},true);
+window.addEventListener("pagehide",store);
+window.addEventListener("beforeunload",store);
+setInterval(store,1000);
+})();
+</script>
 </body>
 </html>
