@@ -2033,9 +2033,62 @@ html[data-theme="dark"] #view-take .uncertain-empty{color:#a6bbcf!important}
 }
 
 
-/* Dịch cụm chữ hero sang trái nhẹ, không làm trượt khỏi khung */
-@media (min-width: 761px) {
-  #view-home .hero > div:first-child { transform: translateX(-18px); }
+
+/* Khắc phục tràn chữ và khung bị cắt trên các màn hình hẹp */
+#view-take,
+#view-take .examtop,
+#view-take .examtop > div:first-child,
+#view-take .takegrid,
+#view-take .takepanel,
+#view-take .qnavpanel {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+#view-take .examtop h1,
+#view-take .examtop .tiny,
+#view-take .takepanel h2,
+#view-take .questiontext,
+#view-take .takeanswer,
+#view-take .uncertain-status {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+@media (max-width: 760px) {
+  #view-take .examtop {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  #view-take .examtop > div:first-child {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+  #view-take .examtop h1 {
+    white-space: normal;
+    line-height: 1.25;
+  }
+  #view-take .timer {
+    margin-top: 2px;
+  }
+  #view-take .takegrid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  #view-take .takepanel,
+  #view-take .qnavpanel {
+    width: 100%;
+    min-width: 0;
+    padding-left: clamp(12px, 3vw, 20px);
+    padding-right: clamp(12px, 3vw, 20px);
+  }
+  #view-take .takepanel * {
+    box-sizing: border-box;
+  }
 }
 </style>
 
