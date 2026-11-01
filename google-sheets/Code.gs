@@ -36,7 +36,8 @@ function doPost(e) {
 
     var p = JSON.parse(raw);
     var subject = safeText(p.subject, 30);
-    var isTinHoc = subject === 'Tin học';
+    // Hỗ trợ cả bộ Tin học cũ và bộ Tin học mới.
+    var isTinHoc = subject === 'Tin học' || subject === 'Tin học - 8 đề mới';
     if (subject !== 'Toán' && subject !== 'Vật lí' && subject !== 'Hóa học' && !isTinHoc) {
       return jsonOutput({ ok: false, error: 'Môn học không hợp lệ.' });
     }
@@ -78,7 +79,7 @@ function doPost(e) {
     }
 
     var submittedAt = safeDate(p.submittedAt);
-    sheet.appendRow([
+    var rowValues = [[
       new Date(),
       submittedAt || '',
       name,
@@ -91,8 +92,12 @@ function doPost(e) {
       total,
       p.submittedAutomatically === true,
       safeText(p.attemptId, 80)
-    ]);
-    var row = sheet.getLastRow();
+    ]];
+
+    // Chèn bản ghi mới ngay dưới hàng tiêu đề để kết quả mới nhất luôn nằm trên cùng.
+    sheet.insertRowBefore(2);
+    sheet.getRange(2, 1, 1, HEADERS.length).setValues(rowValues);
+    var row = 2;
     sheet.getRange(row, 1, 1, 2).setNumberFormat('dd/MM/yyyy HH:mm:ss');
     sheet.getRange(row, 7, 1, 4).setNumberFormat('0.00');
     return jsonOutput({ ok: true });
