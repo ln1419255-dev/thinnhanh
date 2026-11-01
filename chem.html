@@ -1965,6 +1965,41 @@ html[data-theme="dark"] #view-take .uncertain-empty{color:#a6bbcf!important}
   #view-take .uncertain-panel{padding:0!important}
   #view-take .uncertain-chip{min-height:34px;padding:7px 9px!important}
 }
+
+/* Đồng bộ màu chữ/nền câu hỏi theo chế độ sáng và tối; không thay đổi kích thước khung. */
+#view-take .takepanel .questiontext,
+#view-take .question-card {
+  color: #243a52 !important;
+  -webkit-text-fill-color: #243a52 !important;
+  background-color: #f7fafc !important;
+  border-color: #d7e2ec !important;
+}
+#view-take .takepanel .questiontext *,
+#view-take .question-card .question-text,
+#view-take .question-card .question-text * {
+  color: #243a52 !important;
+  -webkit-text-fill-color: #243a52 !important;
+}
+#view-take .takeanswer {
+  color: #243a52 !important;
+  -webkit-text-fill-color: #243a52 !important;
+  background-color: #f7fafc !important;
+  border-color: #d7e2ec !important;
+}
+html[data-theme="dark"] #view-take .takepanel .questiontext,
+html[data-theme="dark"] #view-take .question-card,
+html[data-theme="dark"] #view-take .takeanswer {
+  color: #e6eef8 !important;
+  -webkit-text-fill-color: #e6eef8 !important;
+  background-color: #192a3e !important;
+  border-color: #38516b !important;
+}
+html[data-theme="dark"] #view-take .takepanel .questiontext *,
+html[data-theme="dark"] #view-take .question-card .question-text,
+html[data-theme="dark"] #view-take .question-card .question-text * {
+  color: #e6eef8 !important;
+  -webkit-text-fill-color: #e6eef8 !important;
+}
 </style>
 
 </head>
