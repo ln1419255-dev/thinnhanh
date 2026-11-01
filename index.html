@@ -904,6 +904,76 @@ html[data-theme="dark"] .tn-side-nav a:nth-child(3) .tn-nav-icon{background:line
 html[data-theme="dark"] .tn-side-nav a:nth-child(4) .tn-nav-icon{background:linear-gradient(145deg,#49391f,#3a3325)!important}
 html[data-theme="dark"] .tn-side-nav a:nth-child(5) .tn-nav-icon{background:linear-gradient(145deg,#203855,#1c3e49)!important}
 html[data-theme="dark"] .tn-side-nav a.active .tn-nav-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 0 0 2px rgba(90,209,194,.14),0 4px 12px rgba(0,0,0,.22)!important}
+
+/* Final dark-mode surface audit: keep chips, badges and status markers in the night palette */
+html[data-theme="dark"] .takepanel .eyebrow,
+html[data-theme="dark"] .qnavpanel .eyebrow,
+html[data-theme="dark"] #view-take .question-card .eyebrow{
+ background:#17363a!important;
+ border-color:#2b5d5c!important;
+ color:#83e6d9!important;
+ box-shadow:none!important;
+}
+html[data-theme="dark"] .tfstatement p>b{
+ background:#193b3b!important;
+ border:1px solid #2d5e5b!important;
+ color:#9be8dd!important;
+}
+html[data-theme="dark"] .topright .pill,
+html[data-theme="dark"] .cardtop .tag{
+ background:#1b293a!important;
+ border-color:#354b63!important;
+ color:#c7d7e7!important;
+ box-shadow:none!important;
+}
+html[data-theme="dark"] .qnav.done:not(.on){
+ background:#17312f!important;
+ border-color:#2b5b54!important;
+ color:#a5ead8!important;
+}
+html[data-theme="dark"] .stat:nth-child(3) .stat-icon{
+ background:#3a2c24!important;
+ border-color:#664937!important;
+ color:#ffd3b2!important;
+}
+html[data-theme="dark"] .score-meme-visual img{
+ background:#0e1928!important;
+ border-color:#35485f!important;
+}
+html[data-theme="dark"] .score-meme-visual .meme-fallback{
+ background:linear-gradient(145deg,#172538,#20233a)!important;
+ border-color:#30445e!important;
+ color:#dbe8f6!important;
+}
+html[data-theme="dark"] .score-meme-visual .meme-fallback b{
+ color:#e2ecf8!important;
+}
+html[data-theme="dark"] .tag.easy{
+ background:#173528!important;border-color:#2d674b!important;color:#9ce6b6!important;
+}
+html[data-theme="dark"] .tag.mid{
+ background:#3a2e1b!important;border-color:#6e552d!important;color:#ffdc99!important;
+}
+html[data-theme="dark"] .tag.hard{
+ background:#3b252b!important;border-color:#70404c!important;color:#ffb8c0!important;
+}
+
+/* Dark-mode audit: mobile learning-space links must not retain white pills */
+html[data-theme="dark"] .tn-side-nav a:not(.active){
+ background:transparent!important;
+ border-color:transparent!important;
+ color:#b8c9dc!important;
+}
+html[data-theme="dark"] .tn-side-nav a:not(.active):hover{
+ background:linear-gradient(100deg,#1c2a42,#163937)!important;
+ border-color:#2b4657!important;
+ color:#f2f7ff!important;
+}
+@media(max-width:760px){
+ html[data-theme="dark"] .tn-side-nav a:not(.active){
+  background:#152337!important;border-color:#2a3d55!important;color:#b8c9dc!important;
+ }
+}
 </style>
 </head><body><header class="topbar"><div class="brand"><img class="brand-logo" src="./assets/thinnhanh-logo.svg?v=3" alt=""><span class="brand-name">Thi<span>Nhanh</span></span></div><div class="tn-header-actions"><button class="tn-theme-toggle" type="button" data-theme-toggle aria-label="Chuyển sang chế độ tối" aria-pressed="false" title="Chuyển sang chế độ tối"><span class="tn-theme-icon" aria-hidden="true">🌙</span><span class="tn-theme-label">Chế độ tối</span></button><a class="menu-link" href="#subjects">CHỌN MÔN HỌC</a></div></header>
 <div class="tn-home-layout">
