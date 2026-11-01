@@ -1965,6 +1965,41 @@ html[data-theme="dark"] #view-take .uncertain-empty{color:#a6bbcf!important}
   #view-take .uncertain-panel{padding:0!important}
   #view-take .uncertain-chip{min-height:34px;padding:7px 9px!important}
 }
+
+/* Consistent colorful navigation icons for every exam-practice space */
+.sidebar .navbtn{border-radius:13px;transition:background .2s ease,color .2s ease,transform .2s ease,border-color .2s ease}
+.sidebar .navbtn .ico{
+ width:31px;height:31px;flex:0 0 31px;display:inline-grid;place-items:center;
+ border-radius:10px;font-size:17px;line-height:1;
+ background:linear-gradient(145deg,#d6fff4,#dff2ff)!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.86),0 4px 10px rgba(35,59,100,.10)!important;
+ transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.sidebar .navbtn[data-view="chapters"] .ico,
+.sidebar .navbtn[data-view="exams"] .ico{background:linear-gradient(145deg,#e5defe,#f2e9ff)!important}
+.sidebar .navbtn[data-view="history"] .ico{background:linear-gradient(145deg,#ffe0ec,#ffe9dc)!important}
+.sidebar .navbtn[data-view="statistics"] .ico{background:linear-gradient(145deg,#fff0c9,#ffe3a8)!important}
+.sidebar .navbtn[data-view="tips"] .ico{background:linear-gradient(145deg,#dcecff,#dff7ff)!important}
+.sidebar .navbtn:hover .ico{transform:translateY(-1px) scale(1.04)}
+.sidebar .navbtn.active .ico{box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 0 0 2px rgba(19,198,173,.14),0 5px 12px rgba(19,140,146,.12)!important}
+.sidebar .navbtn:focus-visible{outline:2px solid #40bdb0;outline-offset:2px}
+html[data-theme="dark"] .sidebar .navbtn .ico{
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),0 4px 10px rgba(0,0,0,.22)!important;
+ filter:saturate(.84) brightness(.96);
+}
+html[data-theme="dark"] .sidebar .navbtn[data-view="home"] .ico{background:linear-gradient(145deg,#17423e,#1b3448)!important}
+html[data-theme="dark"] .sidebar .navbtn[data-view="chapters"] .ico,
+html[data-theme="dark"] .sidebar .navbtn[data-view="exams"] .ico{background:linear-gradient(145deg,#352c55,#2b3048)!important}
+html[data-theme="dark"] .sidebar .navbtn[data-view="history"] .ico{background:linear-gradient(145deg,#492d42,#3c2e3b)!important}
+html[data-theme="dark"] .sidebar .navbtn[data-view="statistics"] .ico{background:linear-gradient(145deg,#49391f,#3a3325)!important}
+html[data-theme="dark"] .sidebar .navbtn[data-view="tips"] .ico{background:linear-gradient(145deg,#203855,#1c3e49)!important}
+html[data-theme="dark"] .sidebar .navbtn.active .ico{box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 0 0 2px rgba(90,209,194,.14),0 4px 12px rgba(0,0,0,.22)!important}
+html[data-theme="dark"] .sidebar .navbtn.active{border-color:#285a59!important}
+@media(max-width:820px){
+ .sidebar .navbtn .ico{width:27px;height:27px;flex-basis:27px;font-size:16px;border-radius:9px}
+ .sidebar .navbtn:hover .ico{transform:none}
+ .sidebar .navbtn.active .ico{box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 0 0 2px rgba(19,198,173,.14),0 4px 9px rgba(19,140,146,.10)!important}
+}
 </style>
 </head>
 <body>
@@ -1975,10 +2010,10 @@ html[data-theme="dark"] #view-take .uncertain-empty{color:#a6bbcf!important}
 <div class="layout">
 <aside class="sidebar">
  <div class="side-label">KHÔNG GIAN LUYỆN THI</div>
- <button class="navbtn active" data-view="home"><span class="ico">⌂</span> Tổng quan</button>
- <button class="navbtn" data-view="chapters"><span class="ico">▦</span> Chương học</button>
- <button class="navbtn" data-view="history"><span class="ico">◷</span> Lịch sử làm bài</button>
- <button class="navbtn" data-view="statistics"><span class="ico">▥</span> Thống kê điểm</button>
+ <button class="navbtn active" data-view="home"><span class="ico">🏠</span> Tổng quan</button>
+ <button class="navbtn" data-view="chapters"><span class="ico">📚</span> Chương học</button>
+ <button class="navbtn" data-view="history"><span class="ico">🕘</span> Lịch sử làm bài</button>
+ <button class="navbtn" data-view="statistics"><span class="ico">📊</span> Thống kê điểm</button>
  <button class="navbtn" data-view="tips"><span class="ico">💡</span> Mẹo ôn tập</button>
 </aside>
 <main>
