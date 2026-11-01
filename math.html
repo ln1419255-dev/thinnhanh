@@ -2032,19 +2032,26 @@ html[data-theme="dark"] #view-take .uncertain-empty{color:#a6bbcf!important}
   #view-take .uncertain-chip{min-height:34px;padding:7px 9px!important}
 }
 
-/* Can chinh cum noi dung hero trang chu tren may tinh */
+/* Sua vi tri cum noi dung hero trang chu: can sat trai, giu hinh ben phai */
 @media (min-width: 761px) {
   #view-home .hero {
-    padding-left: 24px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-left: 26px !important;
     padding-right: 34px !important;
     gap: 20px !important;
   }
   #view-home .hero > div:first-child {
-    flex: 1 1 auto;
-    min-width: 0;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    text-align: left !important;
   }
   #view-home .hero .hero-art {
-    flex: 0 0 auto;
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
   }
 }
 </style>
