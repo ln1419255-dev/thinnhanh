@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Bộ 8 đề Tin học mới trên ThiNhanh, trộn câu hỏi từ 6 bài, có chấm điểm và xem lại đáp án.">
-<title>ThiNhanh — Bộ 8 đề Tin học mới</title>
+<meta name="description" content="8 đề Tin học nâng cao, vận dụng cao và vận dụng rất cao, có chấm điểm và xem lại đáp án.">
+<title>ThiNhanh — Đề nâng cao Tin học</title>
 <link rel="icon" type="image/svg+xml" href="./assets/thinnhanh-logo.svg?v=3">
-<script src="./tin-data-moi.js"></script>
+<script src="./tin-data-moi.js?rev=advanced-20261101"></script>
 <script id="tn-theme-bootstrap">(function(){try{var saved=localStorage.getItem("thinnhanh_color_theme_v1");var dark=saved==="dark"||(saved!=="light"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.setAttribute("data-theme",dark?"dark":"light");}catch(e){document.documentElement.setAttribute("data-theme","light");}})();</script>
 <style>
 :root{--ink:#172c46;--muted:#718299;--line:#e0e8f1;--teal:#079b9b;--teal-dark:#087f8c;--navy:#1b3554;--green:#19815d;--red:#be4551;--canvas:#f3f7fc;--card:#fff;--purple:#7567df;--shadow:0 8px 24px rgba(27,53,84,.055)}
@@ -449,13 +449,13 @@ html[data-theme="dark"] .question-nav-legend .legend-dot.partial{
 <body>
 <header class="topbar">
  <a class="brand" href="./index.html"><img src="./assets/thinnhanh-logo.svg?v=3" alt=""><span>Thi<span>Nhanh</span></span></a>
- <button class="tn-theme-toggle" type="button" data-theme-toggle aria-label="Chuyển sang chế độ tối" aria-pressed="false" title="Chuyển sang chế độ tối"><span class="tn-theme-icon" aria-hidden="true">🌙</span><span class="tn-theme-label">Chế độ tối</span></button><span class="top-pill">TIN HỌC · 8 ĐỀ MỚI · THANG ĐIỂM 10</span>
+ <button class="tn-theme-toggle" type="button" data-theme-toggle aria-label="Chuyển sang chế độ tối" aria-pressed="false" title="Chuyển sang chế độ tối"><span class="tn-theme-icon" aria-hidden="true">🌙</span><span class="tn-theme-label">Chế độ tối</span></button><span class="top-pill">TIN HỌC · ĐỀ NÂNG CAO · THANG ĐIỂM 10</span>
  <a class="btn secondary" href="./tin.html#tin-sets">← Các bộ đề</a>
 </header>
 <div class="workspace">
  <aside class="sidebar" aria-label="Không gian luyện thi">
   <div class="side-label">KHÔNG GIAN LUYỆN THI</div>
-  <button type="button" class="navbtn active" data-view="exams"><span class="ico">▦</span>8 đề mới</button>
+  <button type="button" class="navbtn active" data-view="exams"><span class="ico">▦</span>Đề nâng cao</button>
   <button type="button" class="navbtn" data-view="history"><span class="ico">◷</span>Lịch sử làm bài</button>
   <button type="button" class="navbtn" data-view="statistics"><span class="ico">▥</span>Thống kê điểm</button>
   <button type="button" class="navbtn" data-view="tips"><span class="ico">💡</span>Mẹo ôn tập</button>
@@ -463,7 +463,7 @@ html[data-theme="dark"] .question-nav-legend .legend-dot.partial{
  </aside>
  <main class="main-content">
   <section class="view active" id="view-exams">
-   <div class="pagehead"><div><div class="eyebrow">THƯ VIỆN BÀI THI</div><h1>Chọn một trong 8 đề mới</h1><p>Chọn một đề trộn từ 6 bài. Mỗi đề có 30 câu trắc nghiệm và 4 nhóm Đúng/Sai; dùng bảng số câu để chuyển nhanh.</p></div></div>
+   <div class="pagehead"><div><div class="eyebrow">THƯ VIỆN BÀI THI</div><h1>Đề nâng cao · Chọn đề thi</h1><p>8 đề vận dụng rất cao, mỗi đề gồm 30 câu trắc nghiệm và 4 câu Đúng/Sai. Không có bài tính toán.</p></div></div>
    <div class="toolbar"><div class="search"><input id="examSearch" type="search" placeholder="Tìm theo số đề…"></div><select id="examLevelFilter" aria-label="Lọc cấp độ"><option value="">Tất cả cấp độ</option><option>Đề trộn</option></select></div>
    <div class="exam-grid" id="examGrid"></div>
    <div class="info-box"><b>Lưu ý:</b> Nộp bài để chấm điểm. Sau khi nộp, mở mục <b>Lịch sử làm bài</b> để xem lại kết quả bất cứ lúc nào trên cùng trình duyệt.</div>
@@ -510,7 +510,7 @@ html[data-theme="dark"] .question-nav-legend .legend-dot.partial{
 (function(){
 "use strict";
 var data=window.TIN_EXAMS_DATA;
-var levels=[{name:"Đề trộn",cls:"mid",desc:"30 câu trắc nghiệm và 4 nhóm Đúng/Sai được trộn từ cả 6 bài."},{name:"Đề trộn",cls:"mid",desc:"30 câu trắc nghiệm và 4 nhóm Đúng/Sai được trộn từ cả 6 bài."},{name:"Đề trộn",cls:"mid",desc:"30 câu trắc nghiệm và 4 nhóm Đúng/Sai được trộn từ cả 6 bài."},{name:"Đề trộn",cls:"mid",desc:"30 câu trắc nghiệm và 4 nhóm Đúng/Sai được trộn từ cả 6 bài."},{name:"Đề trộn",cls:"mid",desc:"30 câu trắc nghiệm và 4 nhóm Đúng/Sai được trộn từ cả 6 bài."},{name:"Đề trộn",cls:"mid",desc:"30 câu trắc nghiệm và 4 nhóm Đúng/Sai được trộn từ cả 6 bài."},{name:"Đề trộn",cls:"mid",desc:"30 câu trắc nghiệm và 4 nhóm Đúng/Sai được trộn từ cả 6 bài."},{name:"Đề trộn",cls:"mid",desc:"30 câu trắc nghiệm và 4 nhóm Đúng/Sai được trộn từ cả 6 bài."}];
+var levels=[{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."}];
 var HISTORY_KEY="thinnhanh_tin_new_history",CANDIDATE_NAME_KEY="thinhanh_candidate_name_v1",LEGACY_CANDIDATE_KEY="thinnhanh_candidate_name",GOOGLE_SHEETS_ENDPOINT="https://script.google.com/macros/s/AKfycbyUd3AXctXM-9DRzY3KX0wYvDKSR3YUhyrWEN1t1S6O0rlmdiQjH4BcE8Dsi_dWIrQ/exec",EXAM_SECONDS=3000,currentCandidateName="";
 var examIndex=0,activeQuestion=0,mcQuestions=[],tfQuestions=[],mcAnswers=[],tfAnswers=[],submitted=false,secondsLeft=EXAM_SECONDS,timerTick=null,currentView="exams",activeResult=null,historyItems=loadHistory(),toastTimer=null;
 function byId(id){return document.getElementById(id);}
@@ -525,17 +525,17 @@ function getStudentName(){try{var saved=(localStorage.getItem(CANDIDATE_NAME_KEY
 function askCandidateName(){var saved=getStudentName();if(saved)return saved;var entered=window.prompt("Nhập tên học sinh để lưu kết quả (chỉ cần nhập một lần trên thiết bị này):");if(entered===null)return null;var cleaned=entered.trim().replace(/\s+/g," ").slice(0,60);if(!cleaned){notify("Bạn cần nhập tên học sinh trước khi làm bài.");return null;}try{localStorage.setItem(CANDIDATE_NAME_KEY,cleaned);}catch(e){}currentCandidateName=cleaned;return cleaned;}
 function sendScoreToSheets(record){if(!GOOGLE_SHEETS_ENDPOINT)return;var payload={candidateName:record.candidateName,subject:"Tin học - 8 đề mới",examId:"moi-"+String((record.examIndex||0)+1),examTitle:record.title,difficulty:record.difficulty,submittedAt:record.submittedAt,submittedAutomatically:!!record.autoSubmitted,mcPoints:record.mcPoints,tfPoints:record.tfPoints,shortPoints:0,totalScore:record.score,attemptId:record.id};try{fetch(GOOGLE_SHEETS_ENDPOINT,{method:"POST",mode:"no-cors",body:new URLSearchParams({payload:JSON.stringify(payload)})}).then(function(){notify("Đã gửi yêu cầu lưu điểm lên Google Sheets.");}).catch(function(){notify("Không gửi được điểm lên bảng chung; kết quả vẫn lưu trên thiết bị.");});}catch(e){notify("Không gửi được điểm lên bảng chung; kết quả vẫn lưu trên thiết bị.");}}
 function buildQuestions(index){
-var mc=[],tf=[];
-if(!data||!Array.isArray(data.topics)||data.topics.length!==6)return null;
-for(var j=0;j<5;j++){for(var t=0;t<data.topics.length;t++){var item=data.topics[t].questions[index*5+j];if(item)mc.push({q:item[0],options:item[1].slice(),answer:item[2],explanation:item[3]||"",topic:data.topics[t].name});}}
-tf=data.trueFalse&&data.trueFalse[index]?JSON.parse(JSON.stringify(data.trueFalse[index])):[];
-if(mc.length!==30||tf.length!==4)return null;
+if(!data||!Array.isArray(data.exams)||!data.exams[index])return null;
+var source=data.exams[index];
+var mc=(source.questions||[]).map(function(q){return {q:q.q,options:q.options.slice(),answer:q.answer,explanation:q.explanation||"",topic:q.topic||"Vận dụng tổng hợp 6 bài"};});
+var tf=source.trueFalse?JSON.parse(JSON.stringify(source.trueFalse)):[];
+if(mc.length!==30||tf.length!==4||tf.some(function(group){return !Array.isArray(group.items)||group.items.length!==4;}))return null;
 return {mc:mc,tf:tf};
 }
 function renderExamCards(){
 var html="";
 levels.forEach(function(lev,i){
-html+='<article class="exam-card"><div class="exam-num">'+pad(i+1)+'</div><div class="exam-card-body"><h3>Đề mới '+(i+1)+' · '+escapeHtml(lev.name)+'</h3><p>'+escapeHtml(lev.desc)+'</p><div class="exam-meta"><span class="tag '+lev.cls+'">'+escapeHtml(lev.name)+'</span><span class="tag">30 trắc nghiệm</span><span class="tag">4 Đúng/Sai</span><span class="tag">50 phút</span></div><button type="button" class="btn small '+(i===7?"purple":"")+'" data-start="'+i+'">Vào làm đề →</button></div></article>';
+html+='<article class="exam-card"><div class="exam-num">'+pad(i+1)+'</div><div class="exam-card-body"><h3>Đề nâng cao '+(i+1)+' · '+escapeHtml(lev.name)+'</h3><p>'+escapeHtml(lev.desc)+'</p><div class="exam-meta"><span class="tag '+lev.cls+'">'+escapeHtml(lev.name)+'</span><span class="tag">30 trắc nghiệm</span><span class="tag">4 Đúng/Sai</span><span class="tag">50 phút</span></div><button type="button" class="btn small '+(i===7?"purple":"")+'" data-start="'+i+'">Vào làm đề →</button></div></article>';
 });
 byId("examGrid").innerHTML=html;
 byId("examGrid").querySelectorAll("[data-start]").forEach(function(button){button.addEventListener("click",function(){startExam(Number(button.dataset.start));});});
@@ -565,8 +565,8 @@ var built=buildQuestions(index);
 if(!built){alert("Chưa tải được ngân hàng câu hỏi Tin học. Hãy tải lại trang.");return;}
 var studentName=askCandidateName();if(!studentName)return;currentCandidateName=studentName;
 examIndex=index;activeQuestion=0;mcQuestions=built.mc;tfQuestions=built.tf;mcAnswers=Array(30).fill(null);tfAnswers=tfQuestions.map(function(group){return group.items.map(function(){return null;});});submitted=false;activeResult=null;secondsLeft=EXAM_SECONDS;clearInterval(timerTick);
-byId("takeMeta").textContent="ĐỀ MỚI "+pad(index+1)+" · "+levels[index].name.toUpperCase();
-byId("takeTitle").textContent="Đề mới "+(index+1)+" · "+levels[index].name;
+byId("takeMeta").textContent="ĐỀ NÂNG CAO "+pad(index+1)+" · "+levels[index].name.toUpperCase();
+byId("takeTitle").textContent="Đề nâng cao "+(index+1)+" · "+levels[index].name;
 byId("takeInstructions").textContent="30 câu trắc nghiệm (6 điểm) · 4 câu Đúng/Sai (4 điểm) · 50 phút";
 byId("retryExam").style.display="none";byId("submitExam").style.display="inline-flex";byId("submitHint").textContent="Câu bỏ trống sẽ không có điểm. Bạn có thể kiểm tra tiến độ ở bảng số câu.";
 setView("take");renderCurrentQuestion();updateProgress();updateTimer();
@@ -637,7 +637,7 @@ submitted=true;clearInterval(timerTick);timerTick=null;
 var mcCorrect=mcQuestions.reduce(function(sum,q,i){return sum+(mcAnswers[i]===q.answer?1:0);},0);
 var tfCorrect=tfQuestions.reduce(function(sum,g,gi){return sum+g.items.reduce(function(v,item,si){return v+(tfAnswers[gi][si]===(item[1]?"true":"false")?1:0);},0);},0);
 var mcPoints=mcCorrect*.2,tfPoints=tfCorrect*.25,score=Math.round((mcPoints+tfPoints)*100)/100,now=new Date().toISOString();
-var record={id:"tin-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),examIndex:examIndex,exam:examIndex+1,title:"Đề mới "+(examIndex+1)+" · "+levels[examIndex].name,difficulty:levels[examIndex].name,score:score,mcCorrect:mcCorrect,tfCorrect:tfCorrect,mcPoints:Math.round(mcPoints*100)/100,tfPoints:Math.round(tfPoints*100)/100,candidateName:currentCandidateName||getStudentName()||"Học sinh",submittedAt:now,elapsedSeconds:EXAM_SECONDS-Math.max(0,secondsLeft),autoSubmitted:!!autoSubmit,mcQuestions:mcQuestions,mcAnswers:mcAnswers,tfQuestions:tfQuestions,tfAnswers:tfAnswers,meme:chooseScoreMeme(score)};
+var record={id:"tin-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),examIndex:examIndex,exam:examIndex+1,title:"Đề nâng cao "+(examIndex+1)+" · "+levels[examIndex].name,difficulty:levels[examIndex].name,score:score,mcCorrect:mcCorrect,tfCorrect:tfCorrect,mcPoints:Math.round(mcPoints*100)/100,tfPoints:Math.round(tfPoints*100)/100,candidateName:currentCandidateName||getStudentName()||"Học sinh",submittedAt:now,elapsedSeconds:EXAM_SECONDS-Math.max(0,secondsLeft),autoSubmitted:!!autoSubmit,mcQuestions:mcQuestions,mcAnswers:mcAnswers,tfQuestions:tfQuestions,tfAnswers:tfAnswers,meme:chooseScoreMeme(score)};
 historyItems.unshift(record);historyItems=historyItems.slice(0,50);saveHistory();sendScoreToSheets(record);activeResult=record;
 renderCurrentQuestion();updateProgress();renderResult(record);setView("result");
 }
@@ -685,7 +685,7 @@ var html='<div class="result-hero"><div class="score-circle">'+fmt(score,2)+'</d
 if(!hasSnapshot){
 html+='<div class="legacy-note"><b>Lượt làm bài cũ chỉ lưu điểm tổng.</b> Lượt này được tạo trước khi bổ sung chức năng lưu câu trả lời chi tiết, nên chưa có dữ liệu về phương án đã chọn để đối chiếu. Các lượt làm mới sẽ lưu đầy đủ câu hỏi, đáp án đã chọn và đáp án đúng.</div>';
 }else{
-record.mcQuestions.forEach(function(savedQ){if(savedQ.explanation)return;for(var ti=0;ti<data.topics.length;ti++){var found=data.topics[ti].questions.find(function(sourceQ){return sourceQ[0]===savedQ.q;});if(found){savedQ.explanation=found[3]||"";break;}}});
+record.mcQuestions.forEach(function(savedQ){if(savedQ.explanation)return;if(Array.isArray(data.topics)){for(var ti=0;ti<data.topics.length;ti++){var oldFound=data.topics[ti].questions.find(function(sourceQ){return sourceQ[0]===savedQ.q;});if(oldFound){savedQ.explanation=oldFound[3]||"";return;}}}if(Array.isArray(data.exams)){for(var ei=0;ei<data.exams.length;ei++){var newFound=data.exams[ei].questions.find(function(sourceQ){return sourceQ.q===savedQ.q;});if(newFound){savedQ.explanation=newFound.explanation||"";break;}}}});
 record.tfQuestions.forEach(function(group){(group.items||[]).forEach(function(savedItem){if(savedItem[2])return;for(var ei=0;ei<data.trueFalse.length;ei++){for(var gi=0;gi<data.trueFalse[ei].length;gi++){var sourceGroup=data.trueFalse[ei][gi];var found=sourceGroup.items.find(function(sourceItem){return sourceItem[0]===savedItem[0]&&sourceItem[1]===savedItem[1];});if(found){savedItem[2]=found[2]||"";return;}}}});});
 saveHistory();
 html+='<section class="review-section"><h2>Phần I · Trắc nghiệm</h2><p class="review-intro">Mỗi câu đúng được 0,2 điểm. Đáp án đúng có nền xanh; câu bạn chọn sai được đánh dấu màu đỏ.</p>';
@@ -867,6 +867,6 @@ renderExamCards();renderHistory();renderStatistics();
  paint();
 })();
 </script>
-<script>document.querySelectorAll("[data-goto=\"exams\"]").forEach(function(n){if(n.tagName==="BUTTON")n.textContent=n.textContent.replace("Vào kho đề","Vào 8 đề mới");});</script>
+<script>document.querySelectorAll("[data-goto=\"exams\"]").forEach(function(n){if(n.tagName==="BUTTON")n.textContent=n.textContent.replace("Vào kho đề","Vào đề nâng cao");});</script>
 </body>
 </html>
