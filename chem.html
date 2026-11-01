@@ -1846,6 +1846,48 @@ html[data-theme="dark"] .copyright strong{
   color:#f1f6ff!important;
 }
 
+
+/* ThiNhanh: mark uncertain questions */
+.flag-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:13px 0 4px}
+.uncertain-toggle{border:1px solid #dfb44e!important;background:#fff8e5!important;color:#855d0a!important;font-weight:900!important;box-shadow:none!important}
+.uncertain-toggle.is-marked{background:#ffe7ac!important;border-color:#d99518!important;color:#684500!important}
+.uncertain-status{font-size:11px;color:var(--muted,#718299);line-height:1.5}
+.uncertain-panel{margin:13px 0 4px;padding:12px;border:1px solid #f0d899;border-radius:12px;background:#fffbef}
+.uncertain-panel-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;color:#835d0b;font-size:12px;font-weight:900}
+.uncertain-count{white-space:nowrap;padding:3px 7px;background:#ffefc4;border-radius:999px;font-size:10px}
+.uncertain-list{display:flex;flex-wrap:wrap;gap:6px}
+.uncertain-chip{border:1px solid #e4bd59!important;border-radius:8px!important;background:#fff1c9!important;color:#79520a!important;padding:6px 8px!important;font-size:10px!important;font-weight:900!important}
+.uncertain-empty{color:#8b7a52;font-size:10px;line-height:1.65}
+.qnav{position:relative}
+.qnav.uncertain:not(.on){background:#fff1c9!important;border-color:#dda82e!important;color:#79520a!important;box-shadow:inset 0 0 0 1px #f4d77e}
+.qnav.uncertain:after{content:"⚑";position:absolute;right:-3px;top:-7px;font-size:10px;color:#a86c00;line-height:1;background:#fff5d8;border-radius:4px}
+.qnav.on.uncertain{outline:2px solid #e3ad2c;outline-offset:1px}
+.flag-submit-modal{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(10,22,38,.58);backdrop-filter:blur(5px)}
+.flag-submit-modal[hidden]{display:none!important}
+.flag-submit-card{width:min(100%,450px);padding:23px;border:1px solid #ead8a7;border-radius:19px;background:#fffdf6;color:#263f58;box-shadow:0 24px 70px rgba(0,0,0,.25)}
+.flag-submit-icon{font-size:28px;margin-bottom:5px}
+.flag-submit-card h2{margin:0 0 8px;font-size:20px;line-height:1.35;color:#654908}
+.flag-submit-card p{margin:0;color:#6e644d;font-size:13px;line-height:1.75}
+.flag-submit-list{display:flex;flex-wrap:wrap;gap:6px;margin:13px 0 17px}
+.flag-submit-list span{padding:5px 8px;border:1px solid #e9ca72;border-radius:8px;background:#fff2c9;color:#785407;font-size:11px;font-weight:900}
+.flag-submit-actions{display:flex;gap:9px;flex-wrap:wrap}
+.flag-submit-actions button{flex:1;min-width:145px}
+html[data-theme="dark"] .uncertain-toggle{background:#49391b!important;border-color:#b58b2b!important;color:#ffdfa0!important}
+html[data-theme="dark"] .uncertain-toggle.is-marked{background:#604515!important;border-color:#e0b248!important;color:#fff0c2!important}
+html[data-theme="dark"] .uncertain-status{color:#acbdd0!important}
+html[data-theme="dark"] .uncertain-panel{background:#302918!important;border-color:#80662e!important}
+html[data-theme="dark"] .uncertain-panel-title{color:#ffe0a0!important}
+html[data-theme="dark"] .uncertain-count{background:#584519!important;color:#ffdda0!important}
+html[data-theme="dark"] .uncertain-chip{background:#584519!important;border-color:#a47d29!important;color:#ffe3a5!important}
+html[data-theme="dark"] .uncertain-empty{color:#d4c08e!important}
+html[data-theme="dark"] .qnav.uncertain:not(.on){background:#584519!important;border-color:#c29532!important;color:#ffdda0!important}
+html[data-theme="dark"] .qnav.uncertain:after{background:#584519;color:#ffe7aa}
+html[data-theme="dark"] .flag-submit-card{background:#192536!important;border-color:#66552e!important;color:#e2eaf4!important}
+html[data-theme="dark"] .flag-submit-card h2{color:#ffe2a2!important}
+html[data-theme="dark"] .flag-submit-card p{color:#c5d0dd!important}
+html[data-theme="dark"] .flag-submit-list span{background:#49391b!important;border-color:#a17b2b!important;color:#ffe0a0!important}
+@media(max-width:560px){.flag-controls{align-items:flex-start}.uncertain-toggle{min-height:40px}.uncertain-status{align-self:center}.uncertain-panel{padding:10px}.flag-submit-card{padding:19px}.flag-submit-actions{flex-direction:column}.flag-submit-actions button{width:100%}}
+
 </style>
 </head>
 <body>
@@ -1905,7 +1947,7 @@ html[data-theme="dark"] .copyright strong{
 <section class="view" id="view-take">
  <div class="examtop"><div><button class="btn outline small" id="leaveExam">← Thoát bài thi</button><div class="eyebrow" id="takeMeta" style="margin-top:12px">ĐỀ THI</div><h1 id="takeTitle" style="margin:3px 0 0;font-size:25px">Tên đề</h1><div class="tiny" id="takeInstructions" style="margin-top:5px">18 trắc nghiệm · 4 đúng/sai · 6 trả lời ngắn</div></div><div class="timer" id="timer">50:00</div></div>
  <div class="examprogress"><div id="takeProgress"></div></div>
- <div class="takegrid"><section class="takepanel"><div class="eyebrow" id="sectionLabel">PHẦN I · TRẮC NGHIỆM</div><h2 id="questionTitle">Câu hỏi</h2><div class="questiontext" id="questionText"></div><div id="responseArea"></div><div class="takenav"><button class="btn outline" id="takePrev">← Câu trước</button><div class="spacer"></div><button class="btn primary" id="takeNext">Câu tiếp →</button></div></section><aside class="qnavpanel"><b>Danh sách câu hỏi</b><div class="qnavgrid" id="qnavgrid"></div><div class="qnavlegend"><span><i class="legenddot" style="background:var(--teal)"></i>Đã xong</span><span><i class="legenddot" style="background:var(--navy)"></i>Đang xem</span></div><hr style="border:0;border-top:1px solid var(--line);margin:16px 0"><div class="tiny">Đã hoàn thành: <b id="answeredCount">0</b>/28 câu lớn</div><div class="tiny" style="margin-top:7px">Chưa làm hết vẫn có thể nộp bài; câu bỏ trống không có điểm.</div><button class="btn primary" style="width:100%;margin-top:14px" id="submitExam">Nộp bài</button></aside></div>
+ <div class="takegrid"><section class="takepanel"><div class="eyebrow" id="sectionLabel">PHẦN I · TRẮC NGHIỆM</div><h2 id="questionTitle">Câu hỏi</h2><div class="questiontext" id="questionText"></div><div id="responseArea"></div><div class="flag-controls"><button type="button" class="btn outline small uncertain-toggle" id="toggleUncertainBtn" aria-pressed="false">⚑ Đánh dấu phân vân</button><span class="uncertain-status" id="uncertainStatus">Đánh dấu câu bạn muốn xem lại sau.</span></div><div class="takenav"><button class="btn outline" id="takePrev">← Câu trước</button><div class="spacer"></div><button class="btn primary" id="takeNext">Câu tiếp →</button></div></section><aside class="qnavpanel"><b>Danh sách câu hỏi</b><div class="qnavgrid" id="qnavgrid"></div><div class="uncertain-panel" id="uncertainPanel"><div class="uncertain-panel-title"><b>⚑ Câu hỏi phân vân</b><span class="uncertain-count" id="uncertainCount">0 câu</span></div><div class="uncertain-list" id="uncertainList"><span class="uncertain-empty">Bạn chưa đánh dấu câu hỏi phân vân nào.</span></div></div><div class="qnavlegend"><span><i class="legenddot" style="background:var(--teal)"></i>Đã xong</span><span><i class="legenddot" style="background:var(--navy)"></i>Đang xem</span></div><hr style="border:0;border-top:1px solid var(--line);margin:16px 0"><div class="tiny">Đã hoàn thành: <b id="answeredCount">0</b>/28 câu lớn</div><div class="tiny" style="margin-top:7px">Chưa làm hết vẫn có thể nộp bài; câu bỏ trống không có điểm.</div><button class="btn primary" style="width:100%;margin-top:14px" id="submitExam">Nộp bài</button></aside></div>
 </section>
 <section class="view" id="view-result">
  <div class="pagehead"><div><div class="eyebrow">TỔNG KẾT BÀI THI</div><h1>Kết quả của bạn</h1><p>Xem điểm từng phần, đáp án chuẩn và lời giải.</p></div><button class="btn primary" data-goto="chapters">Làm đề khác →</button></div>
@@ -1919,7 +1961,7 @@ html[data-theme="dark"] .copyright strong{
  <strong>Nguyễn Khánh Lâm</strong>
  <span class="copyright-text">Bản quyền được bảo lưu.</span>
 </footer>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast"></div><div class="flag-submit-modal" id="flagSubmitModal" role="dialog" aria-modal="true" aria-labelledby="flagSubmitTitle" hidden><div class="flag-submit-card"><div class="flag-submit-icon" aria-hidden="true">⚑</div><h2 id="flagSubmitTitle">Bạn còn câu hỏi phân vân</h2><p id="flagSubmitMessage"></p><div class="flag-submit-list" id="flagSubmitList"></div><div class="flag-submit-actions"><button type="button" class="btn outline" id="flagReviewBtn">Quay lại kiểm tra</button><button type="button" class="btn primary" id="flagSubmitBtn">Vẫn nộp bài</button></div></div></div>
 <script>
 
 const LEVELS=['Dễ','Dễ','Khá','Khá','Khó','Khó','Khó','Khó','Siêu khó','Siêu khó'];
@@ -2342,7 +2384,7 @@ function sendScoreToSheets(item) {
 }
 
 const HISTORY_KEY='thinhanh_chemistry_exam_history_v1';
-let historyItems=loadHistory(), currentView='home', activeExam=null, answers=[], activeQ=0, seconds=3000, timerTick=null;
+let historyItems=loadHistory(), currentView='home', activeExam=null, answers=[], activeQ=0, seconds=3000, timerTick=null, uncertainQuestions=new Set();
 const $=id=>document.getElementById(id);
 function loadHistory(){try{let x=JSON.parse(localStorage.getItem(HISTORY_KEY));return Array.isArray(x)?x:[]}catch(e){return []}}
 function saveHistory(){try{localStorage.setItem(HISTORY_KEY,JSON.stringify(historyItems))}catch(e){toast('Trình duyệt không cho lưu lịch sử; điểm hiện tại vẫn hiển thị.')}} 
@@ -2406,6 +2448,62 @@ function sectionInfo(i,totalQuestions=28){if(totalQuestions===22){if(i<12)return
 function emptyAnswer(q){if(q.type==='tf')return [null,null,null,null];return null}
 function isComplete(i){let q=activeExam.questions[i],a=answers[i];if(q.type==='tf')return Array.isArray(a)&&a.every(x=>x===true||x===false);if(q.type==='short')return a!==null&&String(a).trim()!=='';return a!==null}
 function answeredCount(){return answers.filter((a,i)=>isComplete(i)).length}
+
+function uncertainLabel(index){
+ const info=sectionInfo(index,activeExam.questions.length),label=String(info.label||"").toUpperCase();
+ if(label.includes("ĐÚNG/SAI"))return "Câu Đ/S "+info.no;
+ if(label.includes("TRẢ LỜI NGẮN"))return "Câu trả lời ngắn "+info.no;
+ return "Câu "+info.no;
+}
+function renderUncertainUI(){
+ const toggle=$("toggleUncertainBtn"),status=$("uncertainStatus"),list=$("uncertainList"),count=$("uncertainCount");
+ if(!toggle||!list||!count)return;
+ if(!activeExam){
+  toggle.disabled=true;toggle.classList.remove("is-marked");toggle.setAttribute("aria-pressed","false");
+  count.textContent="0 câu";list.innerHTML='<span class="uncertain-empty">Bạn chưa đánh dấu câu hỏi phân vân nào.</span>';
+  if(status)status.textContent="Đánh dấu câu bạn muốn quay lại xem xét.";
+  return;
+ }
+ const marked=uncertainQuestions.has(activeQ),indexes=Array.from(uncertainQuestions).sort((a,b)=>a-b);
+ toggle.disabled=false;toggle.classList.toggle("is-marked",marked);toggle.setAttribute("aria-pressed",marked?"true":"false");
+ toggle.textContent=marked?"⚑ Đã đánh dấu · Bỏ đánh dấu":"⚑ Đánh dấu phân vân";
+ if(status)status.textContent=marked?"Câu này sẽ được nhắc lại trước khi nộp bài.":"Đánh dấu câu bạn muốn xem lại sau.";
+ count.textContent=indexes.length+" câu";
+ list.innerHTML=indexes.length?indexes.map(function(i){return '<button type="button" class="uncertain-chip" data-uncertain-index="'+i+'">⚑ '+esc(uncertainLabel(i))+'</button>';}).join(""):'<span class="uncertain-empty">Bạn chưa đánh dấu câu hỏi phân vân nào.</span>';
+ list.querySelectorAll("[data-uncertain-index]").forEach(function(button){button.addEventListener("click",function(){jumpToUncertain(Number(button.dataset.uncertainIndex));});});
+ document.querySelectorAll(".qnav").forEach(function(button,i){button.classList.toggle("uncertain",uncertainQuestions.has(i));});
+}
+function toggleUncertain(){
+ if(!activeExam)return;
+ if(uncertainQuestions.has(activeQ))uncertainQuestions.delete(activeQ);else uncertainQuestions.add(activeQ);
+ refreshProgressOnly();
+}
+function jumpToUncertain(index){
+ if(!activeExam||index<0||index>=activeExam.questions.length)return;
+ activeQ=index;renderTake();window.scrollTo({top:0,behavior:"smooth"});
+}
+function openFlagSubmitModal(){
+ const indexes=Array.from(uncertainQuestions).sort((a,b)=>a-b),modal=$("flagSubmitModal");
+ if(!indexes.length){finishExam(false);return;}
+ $("flagSubmitMessage").textContent="Bạn còn "+indexes.length+" câu hỏi đang phân vân. Bạn có muốn quay lại kiểm tra những câu này trước khi nộp bài không?";
+ $("flagSubmitList").innerHTML=indexes.map(function(i){return '<span>'+esc(uncertainLabel(i))+'</span>';}).join("");
+ modal.hidden=false;$("flagReviewBtn").focus();
+}
+function requestFinishExam(autoSubmit){
+ if(autoSubmit){finishExam(true);return;}
+ if(uncertainQuestions.size){openFlagSubmitModal();return;}
+ finishExam(false);
+}
+$("toggleUncertainBtn").addEventListener("click",toggleUncertain);
+$("flagReviewBtn").addEventListener("click",function(){
+ const first=Array.from(uncertainQuestions).sort((a,b)=>a-b)[0];
+ $("flagSubmitModal").hidden=true;
+ if(first!==undefined)jumpToUncertain(first);
+});
+$("flagSubmitBtn").addEventListener("click",function(){
+ $("flagSubmitModal").hidden=true;finishExam(false);
+});
+
 function cleanSymbolText(value){return String(value??'').replace(/\s*×\s*/g,' × ').replace(/\s*·\s*/g,' · ').replace(/\s*\*\s*/g,' × ')}
 function htmlEscape(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function matchingParen(s,start){let depth=0;for(let i=start;i<s.length;i++){if(s[i]==='(')depth++;else if(s[i]===')'){depth--;if(depth===0)return i}}return -1}
@@ -2428,9 +2526,9 @@ function renderTake(){let q=activeExam.questions[activeQ],info=sectionInfo(activ
  $('qnavgrid').innerHTML=activeExam.questions.map((_,i)=>`<button class="qnav ${i===activeQ?'on':''} ${isComplete(i)?'done':''}" onclick="jumpQuestion(${i})">${i+1}</button>`).join('');
  refreshProgressOnly();
 }
-function refreshProgressOnly(){$('answeredCount').textContent=answeredCount();$('takeProgress').style.width=(answeredCount()/activeExam.questions.length*100)+'%';document.querySelectorAll('.qnav').forEach((b,i)=>{if(b){b.classList.toggle('done',isComplete(i));b.classList.toggle('on',i===activeQ)}})}
+function refreshProgressOnly(){if(!activeExam)return;$('answeredCount').textContent=answeredCount();$('takeProgress').style.width=(answeredCount()/activeExam.questions.length*100)+'%';document.querySelectorAll('.qnav').forEach((b,i)=>{if(b){b.classList.toggle('done',isComplete(i));b.classList.toggle('on',i===activeQ);b.classList.toggle('uncertain',uncertainQuestions.has(i));}});renderUncertainUI();}
 window.jumpQuestion=i=>{if(activeExam){activeQ=i;renderTake();window.scrollTo({top:0,behavior:'smooth'})}}
-function startExam(id){const e=BANK.find(x=>x.id===id);if(!e)return;const candidateName=askCandidateName();if(!candidateName)return;currentCandidateName=candidateName;activeExam=e;answers=e.questions.map(emptyAnswer);activeQ=0;seconds=e.minutes*60;clearInterval(timerTick);currentView='take';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-take'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));const chapter=getChapterGroup(e.id),chapterNo=chapter.ids.indexOf(e.id)+1;$('takeMeta').textContent=`${e.difficulty.toUpperCase()} · ${chapter.kicker} · ĐỀ ${String(chapterNo).padStart(2,'0')}/10`;$('takeTitle').textContent=e.title;$('timer').style.background='#fff1e9';renderTake();updateTimer();timerTick=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){clearInterval(timerTick);finishExam(true)}},1000);window.scrollTo(0,0)}
+function startExam(id){const e=BANK.find(x=>x.id===id);if(!e)return;const candidateName=askCandidateName();if(!candidateName)return;currentCandidateName=candidateName;activeExam=e;answers=e.questions.map(emptyAnswer);activeQ=0;uncertainQuestions=new Set();seconds=e.minutes*60;clearInterval(timerTick);currentView='take';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-take'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));const chapter=getChapterGroup(e.id),chapterNo=chapter.ids.indexOf(e.id)+1;$('takeMeta').textContent=`${e.difficulty.toUpperCase()} · ${chapter.kicker} · ĐỀ ${String(chapterNo).padStart(2,'0')}/10`;$('takeTitle').textContent=e.title;$('timer').style.background='#fff1e9';renderTake();updateTimer();timerTick=setInterval(()=>{seconds--;updateTimer();if(seconds<=0){clearInterval(timerTick);finishExam(true)}},1000);window.scrollTo(0,0)}
 function updateTimer(){let m=Math.floor(Math.max(0,seconds)/60),s=Math.max(0,seconds)%60;$('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(seconds<300)$('timer').style.background='#ffe5e5'}
 $('takePrev').onclick=()=>{if(activeQ>0){activeQ--;renderTake()}};
 $('takeNext').onclick=()=>{if(activeQ===activeExam.questions.length-1)activeQ=0;else activeQ++;renderTake()};
@@ -2446,8 +2544,8 @@ function scoreExam(e,ans){let mcPoints=0,tfPoints=0,shortPoints=0,detail=[];
  return {mcPoints:+mcPoints.toFixed(2),tfPoints:+tfPoints.toFixed(2),shortPoints:+shortPoints.toFixed(2),totalScore:+(mcPoints+tfPoints+shortPoints).toFixed(2),detail}
 }
 function missingCount(){let missing=0;activeExam.questions.forEach((q,i)=>{const a=answers[i];if(q.type==='tf'){q.statements.forEach((_,j)=>{if(!Array.isArray(a)||!(a[j]===true||a[j]===false))missing++})}else if(q.type==='short'){if(a===null||String(a).trim()==='')missing++}else if(a===null)missing++});return missing}
-$('submitExam').onclick=()=>finishExam(false);
-function finishExam(auto){if(!activeExam)return;clearInterval(timerTick);const e=activeExam,result=scoreExam(e,answers);const item={id:'hist-'+Date.now(),candidateName:currentCandidateName,subject:SUBJECT_NAME,examId:e.id,title:e.title,difficulty:e.difficulty,date:Date.now(),auto,answers:JSON.parse(JSON.stringify(answers)),totalScore:result.totalScore,mcPoints:result.mcPoints,tfPoints:result.tfPoints,shortPoints:result.shortPoints,detail:result.detail,questions:e.questions,meme:chooseScoreMeme(result.totalScore)};historyItems.unshift(item);saveHistory();sendScoreToSheets(item);activeExam=null;renderResult(item);currentView='result';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-result'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));window.scrollTo(0,0)}
+$('submitExam').onclick=()=>requestFinishExam(false);
+function finishExam(auto){if(!activeExam)return;clearInterval(timerTick);const e=activeExam,result=scoreExam(e,answers);const item={id:'hist-'+Date.now(),candidateName:currentCandidateName,subject:SUBJECT_NAME,examId:e.id,title:e.title,difficulty:e.difficulty,date:Date.now(),auto,answers:JSON.parse(JSON.stringify(answers)),totalScore:result.totalScore,mcPoints:result.mcPoints,tfPoints:result.tfPoints,shortPoints:result.shortPoints,detail:result.detail,questions:e.questions,uncertainQuestions:Array.from(uncertainQuestions).sort((a,b)=>a-b),meme:chooseScoreMeme(result.totalScore)};historyItems.unshift(item);saveHistory();sendScoreToSheets(item);activeExam=null;renderResult(item);currentView='result';document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-result'));document.querySelectorAll('.navbtn[data-view]').forEach(x=>x.classList.remove('active'));window.scrollTo(0,0)}
 function displayAnswer(q,a){if(q.type==='mc')return a===null||a===undefined?'Chưa trả lời':String.fromCharCode(65+a)+'. '+q.options[a];if(q.type==='short')return a===null||String(a).trim()===''?'Chưa trả lời':String(a);return Array.isArray(a)?a.map((v,i)=>`${'abcd'[i]}) ${v===null?'Chưa chọn':v?'Đúng':'Sai'}`).join(' · '):'Chưa trả lời'}
 const SCORE_MEME_POOLS = {"high":[{"image":"https://www.vjol.info/wp-content/uploads/2025/12/meme-10-diem.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/meme-10d.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/meme-muoi-diem.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/anh-10-diem-meme.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-meme-gif.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-meme-ba-gia.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-khong-co-nhung-meme.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-thanh-lich-0-diem-tinh-tao.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-binh-tinh-trong-long-bao-to.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"},{"image":"https://www.vjol.info/wp-content/uploads/2025/12/10-diem-cho-do-tinh-bo-khi-bi-boc.jpg","source":"VJOL","sourceUrl":"https://www.vjol.info/meme-10-diem"}],"good":[{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-1.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-2.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-5.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-6.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-8.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-14.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-15.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-16.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-17.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-18.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"}],"pass":[{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-13.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-20.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-21.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-22.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-23.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-24.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-30.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-31.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-33.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-34.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"}],"low":[{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-9.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-11.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-12.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-25.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-27.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-28.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-29.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-32.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://cdn-media.sforum.vn/storage/app/media/giangnguyen/meme%20ch%C3%BAc%20thi%20t%E1%BB%91t/meme-chuc-thi-tot-35.jpg","source":"Sforum","sourceUrl":"https://cellphones.com.vn/sforum/meme-chuc-thi-tot"},{"image":"https://photo.znews.vn/w660/Uploaded/bpivptvx/2019_07_14/1.jpg","source":"Znews","sourceUrl":"https://znews.vn/biet-diem-thi-xong-lam-gi-duoi-goc-nhin-hai-huoc-cua-dan-mang-post966784.html"}]};
 const SCORE_MEME_QUOTES = {"high":["Điểm này mà khiêm tốn thì hơi phí 😎","Không phải ăn may, là có học bài nha 📚","Phòng thi hôm nay là sân khấu của tui ✨","Đề khó? Chắc khó với người khác thôi 😌","Điểm cao đâu tự nhiên mà có!","Flex nhẹ một cái rồi về 😏","Bản lĩnh được đổi bằng từng trang vở 🏆","Thành quả của những đêm ôn bài đây rồi!","Không cần nói nhiều, bảng điểm lên tiếng.","9+ là câu trả lời cho mọi nghi ngờ 🔥"],"good":["Ổn áp, còn một chút nữa là bùng nổ 🔥","Không hoàn hảo nhưng rất có triển vọng!","Điểm này tự thưởng trà sữa được rồi 🧋","Biết bài, có chiến thuật, có tương lai!","Qua đề bằng thực lực, không bằng niềm tin 😎","Lần sau nhích thêm chút nữa là đẹp!","Điểm số nói rằng: đang đi đúng hướng 📈","Chưa phải đỉnh, nhưng đáng tự hào!","Không cần max điểm, miễn là tiến bộ.","Vững vàng nha, còn cửa bứt phá!"],"pass":["Đi qua cơn bão rồi, nghỉ lấy sức 😮‍💨","Qua môn thôi cũng là một chiến thắng!","Điểm danh dự đang mỉm cười với bạn 😅","Không cao nhưng còn nguyên cơ hội comeback.","Chúc mừng, bạn đã vượt qua cửa ải!","Một bước nhỏ, một lần học thêm!","Lần sau mình tiến lên nấc nữa nhé 💪","Hồi hộp chút thôi, vẫn hạ cánh an toàn!","Thở đi, điểm đã ra rồi 😭➡️😮‍💨","Đạt mục tiêu tối thiểu, giờ hướng tới cao hơn!"],"low":["Điểm số hôm nay không định nghĩa bạn 💙","Buồn chút thôi, rồi mình gỡ lại 💪","Đề này thắng một ván, không thắng cả mùa.","Một lần sai là dữ liệu để tiến bộ 📈","Đóng tab buồn, mở sách ôn nào!","Không sao, comeback mới là phần hay 😤","Điểm dưới 5, ý chí không được dưới 5!","Học từ câu sai, chiến đề kế tiếp!","Thua keo này, mình ôn keo khác!","Hôm nay là điểm bắt đầu, không phải kết thúc."]};
