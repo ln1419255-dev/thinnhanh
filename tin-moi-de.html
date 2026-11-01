@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="8 đề Tin học nâng cao, vận dụng cao và vận dụng rất cao, có chấm điểm và xem lại đáp án.">
+<meta name="description" content="8 đề Tin học nâng cao, câu hỏi vận dụng, có chấm điểm và xem lại đáp án.">
 <title>ThiNhanh — Đề nâng cao Tin học</title>
 <link rel="icon" type="image/svg+xml" href="./assets/thinnhanh-logo.svg?v=3">
 <script src="./tin-data-moi.js?rev=advanced-20261101"></script>
@@ -463,7 +463,7 @@ html[data-theme="dark"] .question-nav-legend .legend-dot.partial{
  </aside>
  <main class="main-content">
   <section class="view active" id="view-exams">
-   <div class="pagehead"><div><div class="eyebrow">THƯ VIỆN BÀI THI</div><h1>Đề nâng cao · Chọn đề thi</h1><p>8 đề vận dụng rất cao, mỗi đề gồm 30 câu trắc nghiệm và 4 câu Đúng/Sai. Không có bài tính toán.</p></div></div>
+   <div class="pagehead"><div><div class="eyebrow">THƯ VIỆN BÀI THI</div><h1>Đề nâng cao · Chọn đề thi</h1><p>8 đề vận dụng, mỗi đề gồm 30 câu trắc nghiệm và 4 câu Đúng/Sai. Không có bài tính toán.</p></div></div>
    <div class="toolbar"><div class="search"><input id="examSearch" type="search" placeholder="Tìm theo số đề…"></div><select id="examLevelFilter" aria-label="Lọc cấp độ"><option value="">Tất cả cấp độ</option><option>Đề trộn</option></select></div>
    <div class="exam-grid" id="examGrid"></div>
    <div class="info-box"><b>Lưu ý:</b> Nộp bài để chấm điểm. Sau khi nộp, mở mục <b>Lịch sử làm bài</b> để xem lại kết quả bất cứ lúc nào trên cùng trình duyệt.</div>
@@ -510,7 +510,7 @@ html[data-theme="dark"] .question-nav-legend .legend-dot.partial{
 (function(){
 "use strict";
 var data=window.TIN_EXAMS_DATA;
-var levels=[{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng rất cao",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."}];
+var levels=[{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."},{name:"Vận dụng",cls:"hard",desc:"30 câu trắc nghiệm vận dụng và 4 câu Đúng/Sai tích hợp kiến thức 6 bài; không có câu tính toán."}];
 var HISTORY_KEY="thinnhanh_tin_new_history",CANDIDATE_NAME_KEY="thinhanh_candidate_name_v1",LEGACY_CANDIDATE_KEY="thinnhanh_candidate_name",GOOGLE_SHEETS_ENDPOINT="https://script.google.com/macros/s/AKfycbyUd3AXctXM-9DRzY3KX0wYvDKSR3YUhyrWEN1t1S6O0rlmdiQjH4BcE8Dsi_dWIrQ/exec",EXAM_SECONDS=3000,currentCandidateName="";
 var examIndex=0,activeQuestion=0,mcQuestions=[],tfQuestions=[],mcAnswers=[],tfAnswers=[],submitted=false,secondsLeft=EXAM_SECONDS,timerTick=null,currentView="exams",activeResult=null,historyItems=loadHistory(),toastTimer=null;
 function byId(id){return document.getElementById(id);}
