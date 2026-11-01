@@ -953,6 +953,41 @@ byId("retryExam").addEventListener("click",function(){startExam(examIndex);});
 byId("leaveExam").addEventListener("click",function(){if(confirm("Bạn chắc chắn muốn rời bài thi? Bài chưa nộp sẽ bị hủy.")){activeExamCleanup();setView("exams");}});
 byId("clearHistory").addEventListener("click",function(){if(!historyItems.length){notify("Chưa có lịch sử để xóa.");return;}if(confirm("Xóa toàn bộ lịch sử làm bài Tin học đã lưu trên trình duyệt này?")){historyItems=[];saveHistory();renderHistory();renderHome();renderStatistics();notify("Đã xóa lịch sử làm bài.");}});
 renderExamCards();renderHome();renderHistory();renderStatistics();
+
+/* Tự lưu và khôi phục bài thi Tin học khi vô tình tải lại trang. */
+var TN_DRAFT_KEY='thinnhanh_draft_tin_v1';
+function tnSaveDraft(){
+ try{if(currentView!=='take'||submitted)return;
+ localStorage.setItem(TN_DRAFT_KEY,JSON.stringify({examIndex:examIndex,activeQuestion:activeQuestion,mcAnswers:mcAnswers,tfAnswers:tfAnswers,secondsLeft:secondsLeft,candidateName:currentCandidateName,uncertain:Array.from(uncertainQuestions||[]),savedAt:Date.now()}));
+ }catch(e){}
+}
+function tnClearDraft(){try{localStorage.removeItem(TN_DRAFT_KEY)}catch(e){}}
+document.addEventListener('click',function(){setTimeout(tnSaveDraft,0)},true);
+document.addEventListener('input',function(){setTimeout(tnSaveDraft,0)},true);
+document.addEventListener('change',function(){setTimeout(tnSaveDraft,0)},true);
+setInterval(tnSaveDraft,1000);window.addEventListener('beforeunload',tnSaveDraft);
+document.addEventListener('click',function(ev){if(ev.target.closest('#leaveExam'))setTimeout(function(){if(currentView!=='take')tnClearDraft()},150)},true);
+var tnOriginalSubmitExam=submitExam;
+submitExam=function(autoSubmit){tnClearDraft();return tnOriginalSubmitExam(autoSubmit)};
+try{
+ var tnDraft=JSON.parse(localStorage.getItem(TN_DRAFT_KEY)||'null');
+ if(tnDraft&&Number.isInteger(tnDraft.examIndex)&&Array.isArray(tnDraft.mcAnswers)&&Date.now()-(tnDraft.savedAt||0)<86400000){
+  var tnBuilt=buildQuestions(tnDraft.examIndex);
+  if(tnBuilt){
+   examIndex=tnDraft.examIndex;activeQuestion=Math.max(0,Math.min(33,Number(tnDraft.activeQuestion)||0));mcQuestions=tnBuilt.mc;tfQuestions=tnBuilt.tf;
+   mcAnswers=tnDraft.mcAnswers;while(mcAnswers.length<30)mcAnswers.push(null);mcAnswers=mcAnswers.slice(0,30);
+   tfAnswers=Array.isArray(tnDraft.tfAnswers)?tnDraft.tfAnswers:tfQuestions.map(function(group){return group.items.map(function(){return null})});
+   tfAnswers=tfQuestions.map(function(group,i){var row=Array.isArray(tnDraft.tfAnswers&&tnDraft.tfAnswers[i])?tnDraft.tfAnswers[i]:[];return group.items.map(function(_,j){return row[j]===true||row[j]==='true'?'true':row[j]===false||row[j]==='false'?'false':null})});
+   secondsLeft=Math.max(0,Math.min(EXAM_SECONDS,Number(tnDraft.secondsLeft)||0));currentCandidateName=tnDraft.candidateName||'';uncertainQuestions=new Set(Array.isArray(tnDraft.uncertain)?tnDraft.uncertain:[]);submitted=false;activeResult=null;
+   byId('takeMeta').textContent='ĐỀ '+pad(examIndex+1)+' · '+levels[examIndex].name.toUpperCase();byId('takeTitle').textContent='Đề '+(examIndex+1)+' · '+levels[examIndex].name;
+   byId('retryExam').style.display='none';byId('submitExam').style.display='inline-flex';byId('submitHint').textContent='Bài làm đã được khôi phục.';
+   setView('take');renderCurrentQuestion();updateProgress();updateTimer();
+   timerTick=setInterval(function(){secondsLeft--;updateTimer();tnSaveDraft();if(secondsLeft<=0){clearInterval(timerTick);timerTick=null;submitExam(true)}},1000);
+   setTimeout(function(){window.scrollTo(0,0);notify('Đã khôi phục bài làm đang dang dở.')},100);
+  }else tnClearDraft();
+ }else if(tnDraft)tnClearDraft();
+}catch(e){tnClearDraft()}
+
 })();
 </script>
 
