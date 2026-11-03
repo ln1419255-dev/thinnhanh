@@ -426,39 +426,41 @@ $("quizTitle").textContent="Lượt luyện tập "+currentSession.number;
 $("quizSubTitle").textContent="40 trắc nghiệm · 4 câu Đúng/Sai · Học sinh: "+currentStudent;
 renderQuestion();renderNav();updateQuizProgress();updateTimer();
 }
-function normalizeAnswer(value,type){
-var s=String(value===undefined||value===null?"":value).trim();
-if(type==="ip")return s.replace(/\s+/g,"");
-if(/^[01]{8}$/.test(String(value||"").trim()))return String(value).trim();
-s=s.replace(/\s+/g,"").replace(",",".");
-var n=Number(s);return Number.isFinite(n)?String(n):s.toLowerCase();
-}
-function isShortCorrect(question,response){return normalizeAnswer(response,question.answerType)===normalizeAnswer(question.answer,question.answerType);}
 function tfPoint(correct){return TF_POINTS[correct]||0;}
 function submitQuiz(autoSubmit){
 if(!currentSession)return;
 var missing=totalUnits()-answeredUnits();
 if(missing>0&&!autoSubmit&&!window.confirm("Bạn còn "+missing+" ý chưa trả lời. Nộp bài ngay? Ý bỏ trống sẽ không có điểm."))return;
 clearInterval(timerHandle);timerHandle=null;
-var items=quizItems(),a=currentSession.answers,mcCorrect=0,tfCorrect=0,tfPoints=0,saCorrect=0,mastered=new Set(currentProgress.mastered),wrongCounts=currentProgress.wrong||{},seen=currentProgress.seen||{};
-items.mc.forEach(function(q,i){seen[q.id]=(seen[q.id]||0)+1;if(a.mc[i]===q.answer){mcCorrect++;mastered.add(q.id);}else wrongCounts[q.id]=(wrongCounts[q.id]||0)+1;});
+var items=quizItems(),a=currentSession.answers,mcCorrect=0,tfCorrect=0,tfPoints=0;
+var mastered=new Set(currentProgress.mastered),wrongCounts=currentProgress.wrong||{},seen=currentProgress.seen||{};
+items.mc.forEach(function(q,i){
+seen[q.id]=(seen[q.id]||0)+1;
+if(a.mc[i]===q.answer){mcCorrect++;mastered.add(q.id);}else{wrongCounts[q.id]=(wrongCounts[q.id]||0)+1;}
+});
 var tfBreakdown=[];
 items.tf.forEach(function(g,gi){
-var c=0;g.items.forEach(function(item,si){if(a.tf[gi][si]===(item.answer?"true":"false"))c++;});
-tfCorrect+=c;var points=tfPoint(c);tfPoints+=points;seen[g.id]=(seen[g.id]||0)+1;
-if(c===4)mastered.add(g.id);else wrongCounts[g.id]=(wrongCounts[g.id]||0)+1;
+var c=0;
+g.items.forEach(function(item,si){if(a.tf[gi][si]===(item.answer?"true":"false"))c++;});
+tfCorrect+=c;
+var points=tfPoint(c);tfPoints+=points;seen[g.id]=(seen[g.id]||0)+1;
+if(c===4)mastered.add(g.id);else{wrongCounts[g.id]=(wrongCounts[g.id]||0)+1;}
 tfBreakdown.push({correct:c,points:points});
 });
-items.sa.forEach(function(q,i){seen[q.id]=(seen[q.id]||0)+1;if(isShortCorrect(q,a.sa[i])){saCorrect++;mastered.add(q.id);}else wrongCounts[q.id]=(wrongCounts[q.id]||0)+1;});
-var mcPoints=mcCorrect*.25,shortPoints=saCorrect*.25,score=Math.round((mcPoints+tfPoints+shortPoints)*100)/100;
+var mcPoints=mcCorrect*.15;
+var score=Math.round((mcPoints+tfPoints)*100)/100;
 var submittedAt=new Date().toISOString(),number=currentSession.number;
 var record={
-id:"tin-pool-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),examIndex:number-1,exam:number,title:"Lượt ngẫu nhiên "+number,difficulty:"Ngân hàng câu hỏi",score:score,
-mcCorrect:mcCorrect,tfCorrect:tfCorrect,shortCorrect:saCorrect,mcPoints:Math.round(mcPoints*100)/100,tfPoints:Math.round(tfPoints*100)/100,shortPoints:Math.round(shortPoints*100)/100,
+id:"tin-pool-"+Date.now()+"-"+Math.random().toString(36).slice(2,7),
+examIndex:number-1,exam:number,title:"Lượt ngẫu nhiên "+number,difficulty:"Ngân hàng câu hỏi",score:score,
+mcCorrect:mcCorrect,tfCorrect:tfCorrect,mcPoints:Math.round(mcPoints*100)/100,tfPoints:Math.round(tfPoints*100)/100,
 candidateName:currentStudent,submittedAt:submittedAt,elapsedSeconds:Math.max(0,EXAM_SECONDS-secondsLeft),autoSubmitted:!!autoSubmit,isRandomBank:true,
-mcQuestions:items.mc,mcAnswers:a.mc,tfQuestions:items.tf,tfAnswers:a.tf,shortQuestions:items.sa,shortAnswers:a.sa,tfBreakdown:tfBreakdown
+mcQuestions:items.mc,mcAnswers:a.mc,tfQuestions:items.tf,tfAnswers:a.tf,tfBreakdown:tfBreakdown
 };
-currentProgress.mastered=Array.from(mastered);currentProgress.wrong=wrongCounts;currentProgress.seen=seen;currentProgress.attempts=(currentProgress.attempts||0)+1;currentProgress.records.unshift({id:record.id,score:score,submittedAt:submittedAt,title:record.title});currentProgress.records=currentProgress.records.slice(0,40);saveProgress();
+currentProgress.mastered=Array.from(mastered);currentProgress.wrong=wrongCounts;currentProgress.seen=seen;
+currentProgress.attempts=(currentProgress.attempts||0)+1;
+currentProgress.records.unshift({id:record.id,score:score,submittedAt:submittedAt,title:record.title});
+currentProgress.records=currentProgress.records.slice(0,40);saveProgress();
 saveHistory(record);sendScoreToSheets(record);
 removeSession();currentSession=null;renderResult(record);setView("result");
 }
@@ -467,18 +469,18 @@ try{var h=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");if(!Array.isArray(
 }
 function sendScoreToSheets(record){
 if(!GOOGLE_SHEETS_ENDPOINT)return;
-var payload={candidateName:record.candidateName,subject:"Tin học",examId:"NG-"+record.exam,examTitle:record.title,difficulty:"Ngân hàng ngẫu nhiên",submittedAt:record.submittedAt,submittedAutomatically:!!record.autoSubmitted,mcPoints:record.mcPoints,tfPoints:record.tfPoints,shortPoints:record.shortPoints,totalScore:record.score,attemptId:record.id};
+var payload={candidateName:record.candidateName,subject:"Tin học",examId:"NG-"+record.exam,examTitle:record.title,difficulty:"Ngân hàng ngẫu nhiên",submittedAt:record.submittedAt,submittedAutomatically:!!record.autoSubmitted,mcPoints:record.mcPoints,tfPoints:record.tfPoints,totalScore:record.score,attemptId:record.id};
 try{fetch(GOOGLE_SHEETS_ENDPOINT,{method:"POST",mode:"no-cors",body:new URLSearchParams({payload:JSON.stringify(payload)})}).catch(function(){});}catch(e){}
 }
 function renderResult(record){
-var remainingMC=bank.mc.length-countMastered(bank.mc,currentProgress),remainingTF=bank.tf.length-countMastered(bank.tf,currentProgress),remainingSA=bank.sa.length-countMastered(bank.sa,currentProgress);
-var html='<div class="result-hero"><div><span class="kicker" style="color:#c9fff5">KẾT QUẢ LUYỆN TẬP</span><h1>'+escapeHtml(record.title)+'</h1><p>'+escapeHtml(record.candidateName)+' · '+new Date(record.submittedAt).toLocaleString("vi-VN")+'</p></div><div class="score-circle">'+record.score.toFixed(2)+'/10</div></div>';
-html+='<div class="score-grid"><div class="score-stat"><b>'+record.mcPoints.toFixed(2)+'/4,5</b><span>Trắc nghiệm · '+record.mcCorrect+'/18 đúng</span></div><div class="score-stat"><b>'+record.tfPoints.toFixed(2)+'/4</b><span>Đúng/Sai · '+record.tfCorrect+'/16 ý đúng</span></div><div class="score-stat"><b>'+record.shortPoints.toFixed(2)+'/1,5</b><span>Trả lời ngắn · '+record.shortCorrect+'/6 đúng</span></div><div class="score-stat"><b>'+record.elapsedSeconds+' giây</b><span>Thời gian đã làm</span></div></div>';
-html+='<div class="hero-note"><b>Cơ chế chống lặp:</b> câu trả lời đúng đã được khóa khỏi các lượt sau. Câu sai hoặc bỏ trống vẫn nằm trong ngân hàng để có thể được chọn lại. Hiện còn '+remainingMC+' câu trắc nghiệm, '+remainingTF+' nhóm Đúng/Sai và '+remainingSA+' câu TLN chưa được làm đúng.</div>';
+var remainingMC=bank.mc.length-countMastered(bank.mc,currentProgress);
+var remainingTF=bank.tf.length-countMastered(bank.tf,currentProgress);
+var html='<div class="result-hero"><div><span class="kicker" style="color:#c9fff5">KẾT QUẢ LUYỆN TẬP</span><h1>'+escapeHtml(record.title)+'</h1><p>'+escapeHtml(record.candidateName)+' · '+new Date(record.submittedAt).toLocaleString('vi-VN')+'</p></div><div class="score-circle">'+record.score.toFixed(2)+'/10</div></div>';
+html+='<div class="score-grid"><div class="score-stat"><b>'+record.mcPoints.toFixed(2)+'/6</b><span>Trắc nghiệm · '+record.mcCorrect+'/40 đúng</span></div><div class="score-stat"><b>'+record.tfPoints.toFixed(2)+'/4</b><span>Đúng/Sai · '+record.tfCorrect+'/16 ý đúng</span></div><div class="score-stat"><b>'+record.elapsedSeconds+' giây</b><span>Thời gian đã làm</span></div></div>';
+html+='<div class="hero-note"><b>Cơ chế chống lặp:</b> câu trả lời đúng đã được khóa khỏi các lượt sau. Câu sai hoặc bỏ trống vẫn nằm trong ngân hàng để có thể được chọn lại. Hiện còn '+remainingMC+' câu trắc nghiệm và '+remainingTF+' nhóm Đúng/Sai chưa được làm đúng.</div>';
 html+='<h2 style="margin:22px 0 8px;font-size:18px">Xem lại câu trả lời</h2><div class="review-list">';
 record.mcQuestions.forEach(function(q,i){var ok=record.mcAnswers[i]===q.answer;html+='<article class="review-card"><span class="review-status '+(ok?"ok":"bad")+'">'+(ok?"✓ Đúng":"✗ Chưa đúng")+'</span><h3>Câu '+(i+1)+'. '+escapeHtml(q.q)+'</h3><p>Bạn chọn: '+escapeHtml(record.mcAnswers[i]===null?"Chưa trả lời":q.options[record.mcAnswers[i]])+' · Đáp án: '+escapeHtml(q.options[q.answer])+'</p><p>'+escapeHtml(q.explanation)+'</p></article>';});
-record.tfQuestions.forEach(function(g,gi){var details=record.tfBreakdown[gi];var ok=details.correct===4;html+='<article class="review-card"><span class="review-status '+(ok?"ok":"bad")+'">'+(ok?"✓ Đúng cả 4 ý":"✗ Đúng "+details.correct+"/4 ý · "+details.points.toFixed(2)+" điểm")+'</span><h3>Câu Đúng/Sai '+(gi+1)+'. '+escapeHtml(g.title)+'</h3>';if(g.prompt)html+='<p>'+escapeHtml(g.prompt)+'</p>';g.items.forEach(function(item,si){var chosen=record.tfAnswers[gi][si],correct=chosen===(item.answer?"true":"false");html+='<p><b>'+"abcd"[si]+')</b> '+escapeHtml(item.text)+' — Bạn chọn: '+(chosen===null?"Chưa trả lời":chosen==="true"?"Đúng":"Sai")+'; đáp án: '+(item.answer?"Đúng":"Sai")+'. '+escapeHtml(item.explanation)+'</p>';});html+='</article>';});
-record.shortQuestions.forEach(function(q,i){var ok=isShortCorrect(q,record.shortAnswers[i]);html+='<article class="review-card"><span class="review-status '+(ok?"ok":"bad")+'">'+(ok?"✓ Đúng":"✗ Chưa đúng")+'</span><h3>TLN '+(i+1)+'. '+escapeHtml(q.q)+'</h3><p>Bạn nhập: '+escapeHtml(String(record.shortAnswers[i]||"").trim()||"Chưa trả lời")+' · Đáp án: '+escapeHtml(q.answer)+'</p><p>'+escapeHtml(q.explanation)+'</p></article>';});
+record.tfQuestions.forEach(function(g,gi){var details=record.tfBreakdown[gi],ok=details.correct===4;html+='<article class="review-card"><span class="review-status '+(ok?"ok":"bad")+'">'+(ok?"✓ Đúng cả 4 ý":"✗ Đúng "+details.correct+"/4 ý · "+details.points.toFixed(2)+" điểm")+'</span><h3>Câu Đúng/Sai '+(gi+1)+'. '+escapeHtml(g.title)+'</h3>';if(g.prompt)html+='<p>'+escapeHtml(g.prompt)+'</p>';g.items.forEach(function(item,si){var chosen=record.tfAnswers[gi][si];html+='<p><b>'+"abcd"[si]+')</b> '+escapeHtml(item.text)+' — Bạn chọn: '+(chosen===null?"Chưa trả lời":chosen==="true"?"Đúng":"Sai")+'; đáp án: '+(item.answer?"Đúng":"Sai")+'. '+escapeHtml(item.explanation)+'</p>';});html+='</article>';});
 html+='</div><div class="result-actions"><button class="btn" type="button" id="nextRoundBtn">Tạo lượt ngẫu nhiên tiếp theo →</button><button class="btn secondary" type="button" id="changeStudentBtn">Đổi học sinh</button><a class="btn secondary" href="./index.html">Về trang chủ</a></div>';
 $("resultContent").innerHTML=html;
 $("nextRoundBtn").addEventListener("click",startQuiz);
