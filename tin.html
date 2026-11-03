@@ -34,7 +34,7 @@ button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;curs
 .lead{max-width:780px;color:var(--muted);font-size:14px;line-height:1.85;margin:0}
 .hero-note{margin:22px 0 0;padding:15px 17px;border:1px solid color-mix(in srgb,var(--teal) 25%,var(--line));border-left:4px solid var(--teal);border-radius:13px;background:color-mix(in srgb,var(--teal) 7%,var(--surface));color:var(--muted);font-size:12px;line-height:1.8}
 .hero-note b{color:var(--ink)}
-.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:20px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:20px 0}
 .stat{padding:14px 15px;border:1px solid var(--line);border-radius:14px;background:var(--surface2)}
 .stat strong{display:block;font-size:23px;line-height:1.2;letter-spacing:-.6px}
 .stat span{display:block;margin-top:5px;color:var(--muted);font-size:10px;font-weight:850;line-height:1.5}
@@ -257,7 +257,6 @@ if(!key||tfSeen.has(key))return;tfSeen.add(key);
 addTrueFalse(group,"tf-advanced-"+si+"-"+gi,"Tin học");
 });
 });
-shortItems.forEach(function(item){register(Object.assign({type:"sa"},item),"sa");});
 }
 function notify(message){var el=$("toast");el.textContent=message;el.classList.add("show");clearTimeout(toastHandle);toastHandle=setTimeout(function(){el.classList.remove("show");},2600);}
 function studentStorageKey(prefix,name){return prefix+encodeURIComponent(String(name||"").toLowerCase().trim().replace(/\s+/g," "));}
