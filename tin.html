@@ -340,7 +340,7 @@ function restoreQuiz(s){
 var all=s.ids.mc.concat(s.ids.tf,s.ids.sa);
 if(all.some(function(id){return !bank.byId[id];}))return false;
 currentSession=s;currentProgress=loadProgress(currentStudent);
-secondsLeft=Math.max(0,Math.ceil((Number(s.endAt)||0-Date.now())/1000));
+secondsLeft=Math.max(0,Math.ceil(((Number(s.endAt)||0)-Date.now())/1000));
 if(!Number.isFinite(secondsLeft)||secondsLeft<0)secondsLeft=0;
 if(secondsLeft===0){submitQuiz(true);return true;}
 beginTimer();renderQuiz();setView("quiz");return true;
