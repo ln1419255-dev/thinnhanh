@@ -299,15 +299,22 @@ function sessionKey(name){return studentStorageKey("tn_tin_bank_session_v1_",nam
 function saveSession(){if(!currentSession||!currentStudent)return;try{localStorage.setItem(sessionKey(currentStudent),JSON.stringify(currentSession));}catch(e){}}
 function removeSession(){try{localStorage.removeItem(sessionKey(currentStudent));}catch(e){}}
 function loadSession(name){
-try{var raw=localStorage.getItem(sessionKey(name));if(!raw)return null;var s=JSON.parse(raw);if(!s||!s.ids||!Array.isArray(s.ids.mc)||!Array.isArray(s.ids.tf)||!Array.isArray(s.ids.sa))return null;return s;}catch(e){return null;}
+try{
+var raw=localStorage.getItem(sessionKey(name));if(!raw)return null;
+var s=JSON.parse(raw);
+if(!s||!s.ids||!Array.isArray(s.ids.mc)||!Array.isArray(s.ids.tf)||s.ids.mc.length!==40||s.ids.tf.length!==4)return null;
+if(!s.answers||!Array.isArray(s.answers.mc)||s.answers.mc.length!==40||!Array.isArray(s.answers.tf)||s.answers.tf.length!==4)return null;
+return s;
+}catch(e){return null;}
 }
 function countMastered(pool,progress){var set=new Set(progress.mastered);return pool.filter(function(q){return set.has(q.id);}).length;}
 function updateSetupStats(){
-$("poolMcCount").textContent=bank.mc.length;$("poolTfCount").textContent=bank.tf.length;$("poolSaCount").textContent=bank.sa.length;
+$("poolMcCount").textContent=bank.mc.length;
+$("poolTfCount").textContent=bank.tf.length;
 if(currentStudent){
- currentProgress=loadProgress(currentStudent);
- var m=countMastered(bank.mc,currentProgress),t=countMastered(bank.tf,currentProgress),s=countMastered(bank.sa,currentProgress);
- $("setupMessage").textContent="Hồ sơ "+currentStudent+": đã làm đúng "+m+"/"+bank.mc.length+" câu trắc nghiệm, "+t+"/"+bank.tf.length+" nhóm Đúng/Sai và "+s+"/"+bank.sa.length+" câu TLN. Tổng số lượt đã nộp: "+currentProgress.attempts+".";
+currentProgress=loadProgress(currentStudent);
+var m=countMastered(bank.mc,currentProgress),t=countMastered(bank.tf,currentProgress);
+$("setupMessage").textContent="Hồ sơ "+currentStudent+": đã làm đúng "+m+"/"+bank.mc.length+" câu trắc nghiệm và "+t+"/"+bank.tf.length+" nhóm Đúng/Sai. Tổng số lượt đã nộp: "+currentProgress.attempts+".";
 }
 }
 function setView(name){$("setupView").classList.toggle("hidden",name!=="setup");$("quizView").classList.toggle("hidden",name!=="quiz");$("resultView").classList.toggle("hidden",name!=="result");window.scrollTo({top:0,behavior:"smooth"});}
@@ -317,14 +324,12 @@ var set=new Set(mastered);return choose(pool.filter(function(item){return !set.h
 function startQuiz(){
 if(!currentStudent){setView("setup");return;}
 currentProgress=loadProgress(currentStudent);
-var mc=pickAvailable(bank.mc,18,currentProgress.mastered);
+var mc=pickAvailable(bank.mc,40,currentProgress.mastered);
 var tf=pickAvailable(bank.tf,4,currentProgress.mastered);
-var sa=pickAvailable(bank.sa,6,currentProgress.mastered);
-if(mc.length!==18||tf.length!==4||sa.length!==6){
+if(mc.length!==40||tf.length!==4){
 var missing=[];
-if(mc.length<18)missing.push((18-mc.length)+" câu trắc nghiệm");
+if(mc.length<40)missing.push((40-mc.length)+" câu trắc nghiệm");
 if(tf.length<4)missing.push((4-tf.length)+" nhóm Đúng/Sai");
-if(sa.length<6)missing.push((6-sa.length)+" câu TLN");
 $("setupMessage").textContent="Ngân hàng hiện không còn đủ câu chưa làm đúng để tạo một lượt đầy đủ. Còn thiếu: "+missing.join(", ")+". Các câu đã làm đúng sẽ không bị đưa trở lại.";
 setView("setup");updateSetupStats();return;
 }
@@ -332,14 +337,16 @@ currentSession={
 number:currentProgress.attempts+1,
 startedAt:Date.now(),
 endAt:Date.now()+EXAM_SECONDS*1000,
-ids:{mc:mc.map(function(q){return q.id;}),tf:tf.map(function(q){return q.id;}),sa:sa.map(function(q){return q.id;})},
-answers:{mc:Array(18).fill(null),tf:Array.from({length:4},function(){return Array(4).fill(null);}),sa:Array(6).fill("")},
+ids:{mc:mc.map(function(q){return q.id;}),tf:tf.map(function(q){return q.id;})},
+answers:{mc:Array(40).fill(null),tf:Array.from({length:4},function(){return Array(4).fill(null);})},
 active:0,flagged:[]
 };
 secondsLeft=EXAM_SECONDS;saveSession();beginTimer();renderQuiz();setView("quiz");
 }
 function restoreQuiz(s){
-var all=s.ids.mc.concat(s.ids.tf,s.ids.sa);
+if(!s||!s.ids||!Array.isArray(s.ids.mc)||!Array.isArray(s.ids.tf)||s.ids.mc.length!==40||s.ids.tf.length!==4)return false;
+if(!s.answers||!Array.isArray(s.answers.mc)||s.answers.mc.length!==40||!Array.isArray(s.answers.tf)||s.answers.tf.length!==4)return false;
+var all=s.ids.mc.concat(s.ids.tf);
 if(all.some(function(id){return !bank.byId[id];}))return false;
 currentSession=s;currentProgress=loadProgress(currentStudent);
 secondsLeft=Math.max(0,Math.ceil(((Number(s.endAt)||0)-Date.now())/1000));
