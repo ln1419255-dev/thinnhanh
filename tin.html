@@ -178,7 +178,7 @@ html[data-theme="dark"] .flag-btn.active{background:#57431d;color:#ffe8b6}
     <div class="quiz-foot"><button class="btn secondary" type="button" id="prevBtn">← Câu trước</button><span class="muted-small" id="questionPosition">Câu 1/44</span><button class="btn" type="button" id="nextBtn">Câu tiếp →</button></div>
    </div>
    <aside class="quiz-sidebar">
-    <div class="side-head"><b>Danh sách câu hỏi</b><span id="answeredCount">0/40 ý</span></div>
+    <div class="side-head"><b>Danh sách câu hỏi</b><span id="answeredCount">0/56 ý</span></div>
     <div class="nav-grid" id="questionNav"></div>
     <div class="legend"><span><i class="lg-now"></i>Đang xem</span><span><i class="lg-done"></i>Đã trả lời</span><span>⚑ Phân vân</span></div>
     <button class="flag-btn" id="flagBtn" type="button">⚑ Đánh dấu phân vân</button>
@@ -257,33 +257,6 @@ if(!key||tfSeen.has(key))return;tfSeen.add(key);
 addTrueFalse(group,"tf-advanced-"+si+"-"+gi,"Tin học");
 });
 });
-/* Các câu TLN số được biên soạn từ những dữ kiện và ví dụ số trong 6 bài Tin học. */
-var shortItems=[
-{id:"sa-turing-year",q:"Alan Turing đề xuất phép thử Turing vào năm nào?",answer:"1950",topic:"AI cơ bản",explanation:"Phép thử Turing được đề xuất năm 1950."},
-{id:"sa-dartmouth-year",q:"Hội thảo Dartmouth, dấu mốc gắn với sự ra đời của thuật ngữ trí tuệ nhân tạo, diễn ra vào năm nào?",answer:"1956",topic:"AI cơ bản",explanation:"Hội thảo Dartmouth diễn ra năm 1956."},
-{id:"sa-mycin-rules",q:"Theo nội dung bài học, hệ chuyên gia MYCIN có khoảng bao nhiêu luật suy diễn?",answer:"600",topic:"AI trong đời sống",explanation:"Tài liệu nêu MYCIN có khoảng 600 luật suy diễn."},
-{id:"sa-google-translate",q:"Google Dịch được giới thiệu vào tháng 4 năm nào?",answer:"2006",topic:"AI trong đời sống",explanation:"Google Dịch được giới thiệu vào tháng 4 năm 2006."},
-{id:"sa-ipv4-bits",q:"Địa chỉ IPv4 có độ dài bao nhiêu bit?",answer:"32",topic:"Địa chỉ mạng",explanation:"IPv4 có độ dài 32 bit."},
-{id:"sa-ipv4-bytes",q:"Địa chỉ IPv4 có độ dài bao nhiêu byte?",answer:"4",topic:"Địa chỉ mạng",explanation:"32 bit tương ứng 4 byte."},
-{id:"sa-mac-bits",q:"Địa chỉ MAC theo nội dung bài học có độ dài bao nhiêu bit?",answer:"48",topic:"Địa chỉ mạng",explanation:"Địa chỉ MAC có độ dài 48 bit, tương ứng 6 byte."},
-{id:"sa-mac-bytes",q:"Địa chỉ MAC có độ dài bao nhiêu byte?",answer:"6",topic:"Địa chỉ mạng",explanation:"48 bit tương ứng 6 byte."},
-{id:"sa-byte-bits",q:"Một byte gồm bao nhiêu bit?",answer:"8",topic:"Biểu diễn dữ liệu",explanation:"Một byte gồm 8 bit."},
-{id:"sa-ipv4-octets",q:"Một địa chỉ IPv4 dạng thập phân có bao nhiêu nhóm số được ngăn cách bằng dấu chấm?",answer:"4",topic:"Địa chỉ mạng",explanation:"IPv4 gồm 4 octet, mỗi octet biểu diễn bằng một nhóm số."},
-{id:"sa-bin-11000000",q:"Đổi dãy nhị phân 11000000 sang số thập phân.",answer:"192",topic:"Địa chỉ mạng",explanation:"11000000₂ = 192₁₀."},
-{id:"sa-bin-10101000",q:"Đổi dãy nhị phân 10101000 sang số thập phân.",answer:"168",topic:"Địa chỉ mạng",explanation:"10101000₂ = 168₁₀."},
-{id:"sa-bin-00000001",q:"Đổi dãy nhị phân 00000001 sang số thập phân.",answer:"1",topic:"Địa chỉ mạng",explanation:"00000001₂ = 1₁₀."},
-{id:"sa-bin-00000011",q:"Đổi dãy nhị phân 00000011 sang số thập phân.",answer:"3",topic:"Địa chỉ mạng",explanation:"00000011₂ = 3₁₀."},
-{id:"sa-bin-00001010",q:"Đổi dãy nhị phân 00001010 sang số thập phân.",answer:"10",topic:"Địa chỉ mạng",explanation:"00001010₂ = 10₁₀."},
-{id:"sa-bin-00011001",q:"Đổi dãy nhị phân 00011001 sang số thập phân.",answer:"25",topic:"Địa chỉ mạng",explanation:"00011001₂ = 25₁₀."},
-{id:"sa-bin-11111111",q:"Đổi dãy nhị phân 11111111 sang số thập phân.",answer:"255",topic:"Địa chỉ mạng",explanation:"11111111₂ = 255₁₀."},
-{id:"sa-bin-10000011",q:"Đổi dãy nhị phân 10000011 sang số thập phân.",answer:"131",topic:"Địa chỉ mạng",explanation:"10000011₂ = 131₁₀."},
-{id:"sa-bin-11010110",q:"Đổi dãy nhị phân 11010110 sang số thập phân.",answer:"214",topic:"Địa chỉ mạng",explanation:"11010110₂ = 214₁₀."},
-{id:"sa-bin-00010111",q:"Đổi dãy nhị phân 00010111 sang số thập phân.",answer:"23",topic:"Địa chỉ mạng",explanation:"00010111₂ = 23₁₀."},
-{id:"sa-bin-00010000",q:"Đổi dãy nhị phân 00010000 sang số thập phân.",answer:"16",topic:"Địa chỉ mạng",explanation:"00010000₂ = 16₁₀."},
-{id:"sa-ip-10-first",q:"Địa chỉ IP 10.25.0.255 có octet đầu tiên là số thập phân nào?",answer:"10",topic:"Địa chỉ mạng",explanation:"Octet đầu tiên của địa chỉ 10.25.0.255 là 10."},
-{id:"sa-ip-131-first",q:"Địa chỉ IP 131.214.23.16 có octet đầu tiên là số thập phân nào?",answer:"131",topic:"Địa chỉ mạng",explanation:"Octet đầu tiên của địa chỉ 131.214.23.16 là 131."},
-{id:"sa-bin-ip",q:"Dãy nhị phân 11000000 10101000 00000001 00000011 tương ứng với địa chỉ IPv4 nào? Nhập đủ 4 nhóm số, ngăn cách bằng dấu chấm.",answer:"192.168.1.3",answerType:"ip",topic:"Địa chỉ mạng",explanation:"Từng octet lần lượt đổi sang thập phân được 192, 168, 1 và 3; địa chỉ là 192.168.1.3."}
-];
 shortItems.forEach(function(item){register(Object.assign({type:"sa"},item),"sa");});
 }
 function notify(message){var el=$("toast");el.textContent=message;el.classList.add("show");clearTimeout(toastHandle);toastHandle=setTimeout(function(){el.classList.remove("show");},2600);}
@@ -502,13 +475,13 @@ var key="thinnhanh_study_days_v1",days=JSON.parse(localStorage.getItem(key)||"[]
 }
 function init(){
 buildBank();
-$("poolMcCount").textContent=bank.mc.length;$("poolTfCount").textContent=bank.tf.length;$("poolSaCount").textContent=bank.sa.length;
+$("poolMcCount").textContent=bank.mc.length;$("poolTfCount").textContent=bank.tf.length;
 var themeBtn=$("themeToggle");
 function paintTheme(){var dark=document.documentElement.getAttribute("data-theme")==="dark";themeBtn.textContent=dark?"☀️ Chế độ sáng":"🌙 Chế độ tối";themeBtn.setAttribute("aria-pressed",dark?"true":"false");}
 themeBtn.addEventListener("click",function(){var dark=document.documentElement.getAttribute("data-theme")==="dark";document.documentElement.setAttribute("data-theme",dark?"light":"dark");try{localStorage.setItem("thinnhanh_color_theme_v1",dark?"light":"dark");}catch(e){}paintTheme();});paintTheme();
 $("nameForm").addEventListener("submit",function(event){event.preventDefault();var name=$("studentName").value.trim().replace(/\s+/g," ");if(!name){$("setupMessage").textContent="Bạn hãy nhập tên học sinh trước khi bắt đầu.";return;}saveName(name);currentProgress=loadProgress(currentStudent);updateAllHistoryVisit();startQuiz();});
 $("prevBtn").addEventListener("click",function(){if(!currentSession)return;currentSession.active=Math.max(0,currentSession.active-1);renderQuiz();saveSession();});
-$("nextBtn").addEventListener("click",function(){if(!currentSession)return;currentSession.active=(currentSession.active+1)%28;renderQuiz();saveSession();});
+$("nextBtn").addEventListener("click",function(){if(!currentSession)return;currentSession.active=(currentSession.active+1)%44;renderQuiz();saveSession();});
 $("flagBtn").addEventListener("click",function(){if(!currentSession)return;var index=currentSession.active,flags=currentSession.flagged||[],at=flags.indexOf(index);if(at>=0)flags.splice(at,1);else flags.push(index);currentSession.flagged=flags;renderQuiz();saveSession();});
 $("submitBtn").addEventListener("click",function(){submitQuiz(false);});
 updateAllHistoryVisit();
