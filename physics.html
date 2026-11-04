@@ -2580,22 +2580,19 @@ function chooseScoreMeme(score) {
 }
 
 function repairPhysicsWhy(q,why){
- const raw=String(why??'');
- if(!/[#$!]{2,}|(?:[#$!].{0,3}[=×])|(?:[=×].{0,3}[#$!])|(?:\\\\\\$)|(?:\\\\\\#)/u.test(raw))return raw;
+ const raw=String(why??'').trim();
  const prompt=String(q?.q||'');
- if(/nội năng.*đơn nguyên tử|đơn nguyên tử.*nội năng/i.test(prompt)&&/2p.?1|2V.?1/i.test(prompt)){
-  return 'Với khí lí tưởng đơn nguyên tử, nội năng U = 3/2 nRT = 3/2 pV. Khi áp suất và thể tích đều tăng gấp đôi, tích pV tăng 4 lần nên U₂ = 4U₁ = 400 kJ. Do đó ΔU = U₂ − U₁ = 400 − 100 = 300 kJ.';
- }
- if(/Helium/i.test(prompt)&&/Methane/i.test(prompt)&&/nhiệt dung đẳng tích/i.test(prompt)){
-  return 'Helium là khí đơn nguyên tử nên nhiệt dung mol đẳng tích Cᵥ = 3R/2. Methane có nhiệt dung mol đẳng tích xấp xỉ 3R theo mô hình dùng trong bài. Cân bằng nhiệt dung: 2 × 3R/2 = n × 3R, suy ra n = 1,0 mol.';
- }
- if(/Charles|thể tích.*mol|một mol khí/i.test(prompt)&&/60\s*°?C|60°C/i.test(prompt)){
-  return 'Áp dụng định luật Charles ở áp suất không đổi: V₁/T₁ = V₂/T₂. Với T₁ = 25 + 273 = 298 K, T₂ = 60 + 273 = 333 K và V₁ = 24,79 lít, suy ra V₂ = 24,79 × 333/298 ≈ 27,70 lít.';
- }
- if(/Boyle/i.test(prompt)||/đẳng nhiệt/i.test(prompt))return 'Quá trình đẳng nhiệt tuân theo định luật Boyle: p₁V₁ = p₂V₂. Thay các dữ kiện của đề vào hệ thức này để xác định đại lượng cần tìm.';
- if(/Charles|đẳng áp/i.test(prompt))return 'Quá trình đẳng áp tuân theo định luật Charles: V₁/T₁ = V₂/T₂, trong đó nhiệt độ phải đổi sang kelvin trước khi tính.';
- if(/nội năng/i.test(prompt))return 'Với khí lí tưởng, nội năng phụ thuộc vào nhiệt độ tuyệt đối. Dùng phương trình trạng thái pV = nRT để liên hệ trạng thái đầu và cuối, sau đó tính ΔU = U₂ − U₁.';
- return 'Lời giải gốc bị lỗi ký tự công thức khi trích xuất. Nội dung câu hỏi và đáp án được giữ nguyên; cần đối chiếu tài liệu nguồn để khôi phục chính xác phép biến đổi.';
+ const malformed=raw.includes(']]]')||/(?:#{2,}|!{2,}|10A[C4]|10AC|10C|10A4|10A5|[#$!].{0,4}[=×]|[=×].{0,4}[#$!])/iu.test(raw);
+ if(!malformed&&raw.length>=18)return raw;
+ if(/nội năng.*đơn nguyên tử|đơn nguyên tử.*nội năng/i.test(prompt)&&/2p.?1|2V.?1/i.test(prompt))return 'Với khí lí tưởng đơn nguyên tử, nội năng U = 3/2 pV. Khi p₂ = 2p₁ và V₂ = 2V₁ thì p₂V₂ = 4p₁V₁, do đó U₂ = 4U₁ = 400 kJ. Độ biến thiên nội năng: ΔU = U₂ − U₁ = 400 − 100 = 300 kJ.';
+ if(/Helium/i.test(prompt)&&/Methane/i.test(prompt)&&/nhiệt dung đẳng tích/i.test(prompt))return 'Helium là khí đơn nguyên tử nên Cᵥ,m = 3R/2. Theo mô hình nhiệt dung dùng trong bài, methane có Cᵥ,m = 3R. Gọi số mol methane là n. Ta có 2 × 3R/2 = n × 3R, suy ra n = 1,0 mol.';
+ if(/Charles|thể tích.*mol|một mol khí/i.test(prompt)&&/60\\s*°?C|60°C/i.test(prompt))return 'Ở áp suất không đổi, định luật Charles cho V₁/T₁ = V₂/T₂. Đổi nhiệt độ sang kelvin: T₁ = 25 + 273 = 298 K; T₂ = 60 + 273 = 333 K. Suy ra V₂ = 24,79 × 333/298 ≈ 27,70 lít.';
+ if(/Boyle|đẳng nhiệt/i.test(prompt))return 'Đây là quá trình đẳng nhiệt nên áp dụng định luật Boyle: p₁V₁ = p₂V₂. Thay số liệu của đề vào hệ thức để giải đại lượng cần tìm.';
+ if(/Charles|đẳng áp/i.test(prompt))return 'Đây là quá trình đẳng áp nên áp dụng định luật Charles: V₁/T₁ = V₂/T₂. Đổi nhiệt độ sang kelvin theo T(K) = t(°C) + 273 trước khi thay số.';
+ if(/nội năng/i.test(prompt))return 'Với khí lí tưởng, nội năng phụ thuộc vào nhiệt độ tuyệt đối. Dùng phương trình trạng thái pV = nRT để liên hệ hai trạng thái, sau đó tính ΔU = U₂ − U₁.';
+ if(/áp suất.*phân tử|động năng.*phân tử|mật độ phân tử/i.test(prompt))return 'Theo thuyết động học phân tử, áp suất liên hệ với mật độ phân tử và động năng tịnh tiến trung bình bởi p = 2/3 · n₀ · W̄đ. Đổi các đại lượng về đơn vị SI trước khi thay số.';
+ if(/mol|khối lượng mol|số phân tử/i.test(prompt))return 'Dùng n = m/M hoặc n = N/Nₐ, trong đó M là khối lượng mol và Nₐ = 6,02 × 10²³ mol⁻¹. Sau đó thay số để tính đại lượng đề bài yêu cầu.';
+ return 'Lời giải gốc bị lỗi ký hiệu khi trích xuất nên không thể khôi phục phép biến đổi chính xác chỉ từ đoạn văn này. Không nên dùng đoạn lời giải lỗi để học thuộc; cần đối chiếu dữ kiện và đáp án của câu hỏi.';
 }
 function renderResult(h){const e= h.questions? h : null;const questions=h.questions||[];const isLegacy=questions.length===22;const meme=h.meme||chooseScoreMeme(h.totalScore);const quotes=SCORE_MEME_QUOTES[meme.band]||SCORE_MEME_QUOTES.low;if(!quotes.includes(meme.caption))meme.caption=quotes[Math.floor(Math.random()*quotes.length)];let body=`<div class="result-hero"><div class="scorecircle">${fmt(h.totalScore,2)}</div><div><div class="eyebrow">${h.auto?'HẾT GIỜ · ĐÃ TỰ ĐỘNG NỘP':'ĐÃ NỘP BÀI'} · ${esc(h.difficulty)}</div><h2>${h.totalScore>=8?'Làm tốt lắm!':h.totalScore>=5?'Bạn đang tiến bộ!':'Hãy xem kĩ lời giải và thử lại nhé!'}</h2><p class="tiny">${esc(h.title)} · ${new Date(h.date).toLocaleString('vi-VN')}</p><p>Điểm quy đổi theo cấu trúc THPT: <b>${fmt(h.totalScore,2)}/10</b>.</p><button class="btn outline small" onclick="${h.examType==='random'?`startSavedRandomExam('${h.id}')`:`startExam('${h.examId}')`}">Làm lại đề này ↻</button></div>
  <section class="score-meme">
@@ -2611,7 +2608,7 @@ function renderResult(h){const e= h.questions? h : null;const questions=h.questi
  <div class="breakdown"><div class="breakitem"><strong>${fmt(h.mcPoints,2)} / ${isLegacy?'3,0':'4,5'}</strong><span>Phần I · Trắc nghiệm</span></div><div class="breakitem"><strong>${fmt(h.tfPoints,2)} / 4,0</strong><span>Phần II · Đúng/Sai</span></div><div class="breakitem"><strong>${fmt(h.shortPoints,2)} / ${isLegacy?'3,0':'1,5'}</strong><span>Phần III · Trả lời ngắn</span></div></div><div class="info-box"><b>Chấm đúng/sai theo từng câu:</b> số ý đúng 0 → 0 điểm; 1 → 0,1 điểm; 2 → 0,25 điểm; 3 → 0,5 điểm; 4 → 1 điểm. Câu trả lời ngắn chấp nhận sai số nhỏ như ghi trong phần hướng dẫn mỗi câu.</div><div class="section-head"><h2>Đáp án và giải thích</h2><span class="tiny">Xanh = đúng · Đỏ = chưa đúng</span></div>`;
  h.detail.forEach(d=>{let q=d.q;const num=d.index+1,section=sectionInfo(d.index,questions.length);body+=`<div class="reviewrow"><div class="eyebrow">${section.label} · CÂU ${section.no}</div>`;
  if(d.type==='mc'){body+=`<div class="${d.ok?'correct':'incorrect'}" style="margin:6px 0">${d.ok?'Đúng · +0,25 điểm':'Chưa đúng · +0 điểm'}</div><p><b>${formatRich(q.q)}</b></p>`;q.options.forEach((o,j)=>{const right=j===q.correct,chosen=d.answer===j;body+=`<div class="answerline" style="color:${right?'#16856d':chosen?'#cb5151':'#6c7d90'}">${String.fromCharCode(65+j)}. ${formatRich(o)} ${right?'✓ Đáp án đúng':chosen?'← Bạn đã chọn':''}</div>`});body+=`<p class="tiny">Giải thích: ${formatRich(repairPhysicsWhy(q,q.why))}</p>`}
- else if(d.type==='tf'){body+=`<div class="${d.countCorrect===4?'correct':'incorrect'}" style="margin:6px 0">Đúng ${d.countCorrect}/4 ý · +${fmt(d.points,2)} điểm</div><p><b>${esc(q.q)}</b></p>`;q.statements.forEach((s,j)=>{const user=Array.isArray(d.answer)?d.answer[j]:null,ok=user===s.correct;body+=`<div class="answerline"><span class="${ok?'correct':'incorrect'}">${'abcd'[j]}) ${s.correct?'Đúng':'Sai'} là đáp án chuẩn · Bạn chọn: ${user===null||user===undefined?'Chưa chọn':user?'Đúng':'Sai'} ${ok?'✓':'✗'}</span><div class="tiny" style="margin:3px 0 7px">${formatRich(s.text)} — ${formatRich(repairPhysicsWhy({q:s.text},s.why))}</div></div>`})}
+ else if(d.type==='tf'){body+=`<div class="${d.countCorrect===4?'correct':'incorrect'}" style="margin:6px 0">Đúng ${d.countCorrect}/4 ý · +${fmt(d.points,2)} điểm</div><p><b>${esc(q.q)}</b></p>`;q.statements.forEach((s,j)=>{const user=Array.isArray(d.answer)?d.answer[j]:null,ok=user===s.correct;body+=`<div class="answerline"><span class="${ok?'correct':'incorrect'}">${'abcd'[j]}) ${s.correct?'Đúng':'Sai'} là đáp án chuẩn · Bạn chọn: ${user===null||user===undefined?'Chưa chọn':user?'Đúng':'Sai'} ${ok?'✓':'✗'}</span><div class="tiny" style="margin:3px 0 7px">${formatRich(s.text)} — ${formatRich(repairPhysicsWhy({...q,q:s.text},s.why))}</div></div>`})}
  else {body+=`<div class="${d.ok?'correct':'incorrect'}" style="margin:6px 0">${d.ok?'Đúng · +0,25 điểm':'Chưa đúng · +0 điểm'}</div><p><b>${esc(q.q)}</b></p><div class="answerline">Bạn nhập: <b>${esc(d.answer===null||String(d.answer).trim()===''?'(bỏ trống)':d.answer)}</b></div><div class="answerline correct">Đáp án chuẩn: <b>${fmt(q.answer,5)}${q.unit?' '+esc(q.unit):''}</b></div><p class="tiny">Giải thích: ${formatRich(repairPhysicsWhy(q,q.why))}</p>`}
  body+='</div>'});
  $('resultBody').innerHTML=body
