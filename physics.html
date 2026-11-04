@@ -2621,6 +2621,26 @@ window.viewHistory=id=>{let h=historyItems.find(x=>x.id===id);if(h){renderResult
 $('clearHistory').onclick=()=>{if(confirm('Bạn muốn xóa toàn bộ lịch sử làm bài trong trình duyệt này?')){historyItems=[];saveHistory();renderHistory();renderHome();toast('Đã xóa lịch sử làm bài.')}};
 renderHome();renderBrowse();
 window.CH2_READY.then(function(){
+ // Remove accidental carry-over where a following source passage was appended to the
+ // previous question/answer during PDF extraction. Keep the question's own text intact.
+ window.CH2_TEXT_REPAIRS=[];
+ function cleanCh2Field(value,examId,qid,field){
+  if(typeof value!=='string')return value;
+  const marker=/(?:\\s+\\d{1,3}\\s+|\\s+)(?:Sử dụng|Dùng)\\s+(?:thông tin|dữ kiện)\\s+sau\\s+(?:cho|để làm)\\s+câu\\s+\\d+/iu;
+  const match=marker.exec(value);
+  if(!match)return value;
+  const cleaned=value.slice(0,match.index).trim();
+  window.CH2_TEXT_REPAIRS.push({examId:examId,qid:qid,field:field,removed:value.slice(match.index).slice(0,180)});
+  return cleaned;
+ }
+ (window.CH2_EXAMS||[]).forEach(function(e){
+  (e.questions||[]).forEach(function(q){
+   q.q=cleanCh2Field(q.q,e.id,q.qid,'question');
+   if(Array.isArray(q.options))q.options=q.options.map(function(v,i){return cleanCh2Field(v,e.id,q.qid,'option-'+i);});
+   if(Array.isArray(q.statements))q.statements.forEach(function(s,i){if(s)s.text=cleanCh2Field(s.text,e.id,q.qid,'statement-'+i);});
+   if(typeof q.why==='string')q.why=cleanCh2Field(q.why,e.id,q.qid,'explanation');
+  });
+ });
  const added=new Set(BANK.map(e=>e.id));
  (window.CH2_EXAMS||[]).forEach(function(e){if(!added.has(e.id)){BANK.push(e);added.add(e.id);}});
  window.CH2_AUDIT=auditCh2Exams();
