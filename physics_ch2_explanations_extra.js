@@ -102,7 +102,9 @@
    'ĐÚNG: ở trạng thái nổ, T₂=T₁(p₂V₂)/(p₁V₁)=300×(27640×39,5)/(105000×15,8)≈197,5 K. Đổi sang Celsius: t₂≈−75,5°C.'
   ]
  };
- const TF_REVIEW={ 't09-tf-08-44609':[2,3], 't10-tf-05-41944':[1] };\n const MC_REVIEW=new Set(['t09-mc-25-recovered']);\n const SHORT={
+ const TF_REVIEW={ 't09-tf-08-44609':[2,3], 't10-tf-05-41944':[1] };
+ const MC_REVIEW=new Set(['t09-mc-25-recovered']);
+ const SHORT={
   't10-short-02-81925':'Dữ kiện chung của Câu 2 và Câu 3: khối khí giãn nở đẳng áp từ 37°C lên 117°C, thể tích tăng 1,2 lít. Đổi nhiệt độ: T₁=310 K, T₂=390 K. Theo Charles: V₁/T₁=(V₁+1,2)/T₂. Suy ra 390V₁=310V₁+372, nên V₁=4,65 lít.',
   't10-short-03-82426':'Dữ kiện chung: khối khí có m=12 g, V₁=4,65 lít và tăng thể tích 1,2 lít khi giãn nở đẳng áp. Thể tích cuối V₂=4,65+1,2=5,85 lít. Khối lượng riêng ρ₂=m/V₂=12/5,85≈2,05 g/lít. Vì 1 g/lít=1 kg/m³, kết quả là 2,05 kg/m³.'
  };
