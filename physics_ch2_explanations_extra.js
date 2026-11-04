@@ -82,9 +82,27 @@
    'ĐÚNG: V₁=nVₘ=0,5×24,8=12,4 lít.',
    'ĐÚNG: nhiệt độ tăng từ 298 K lên 398 K nên động năng tịnh tiến trung bình và tốc độ đặc trưng của phân tử tăng.',
    'SAI: V₂=V₁T₂/T₁=12,4×398/298≈16,6 lít, không phải 33,1 lít.'
+  ],
+  't10-tf-02-37556':[
+   'SAI: trên hệ p–T, đẳng áp có p không đổi nên là đường thẳng song song với trục OT, không phải một nhánh hyperbol.',
+   'SAI: trên hệ p–V, p không đổi nên đường biểu diễn là đường ngang song song trục OV; không phải đường thẳng đứng vuông góc trục OV.',
+   'ĐÚNG: trên hệ p–T, áp suất p không đổi nên đồ thị là đường thẳng song song trục OT.',
+   'ĐÚNG: trên hệ V–T(K), đẳng áp thỏa V/T=hằng số nên đồ thị là đường thẳng đi qua gốc O.'
+  ],
+  't13-tf-11-63383':[
+   'ĐÚNG: đề đã cho khí CO₂ được xem là khí lí tưởng và lượng khí trong bình kín cố định, nên có thể áp dụng pV=nRT.',
+   'SAI: ở 0°C các phân tử CO₂ vẫn chuyển động nhiệt; 0°C không phải độ không tuyệt đối (0 K).',
+   'SAI: khối lượng riêng ở điều kiện tiêu chuẩn là 1,98 kg/m³ nên V=m/ρ=3,96/1,98=2,0 m³, không phải 2 lít.',
+   'ĐÚNG: khối lượng riêng trong bình là ρ=3,96/0,040=99 kg/m³. Ở 0°C, cùng khí có p₁/p₀=ρ/ρ₀=99/1,98=50, nên p₁=50 atm. Bình nổ ở 60 atm; thể tích không đổi nên T₂=273×60/50=327,6 K=54,6°C.'
+  ],
+  't11-tf-06-55088':[
+   'ĐÚNG: quy đổi về điều kiện tiêu chuẩn theo pV/T không đổi: V₀=15,8×(105000/101300)×(273/300)≈14,9 m³.',
+   'SAI: dùng khối lượng riêng ở điều kiện tiêu chuẩn: m=ρ₀V₀=0,09×14,9≈1,34 kg, không phải 1,42 kg.',
+   'SAI: ở 7°C, T₂=280 K; V₂=15,8×(105000/67000)×(280/300)≈23,1 m³, không phải 24,5 m³.',
+   'ĐÚNG: ở trạng thái nổ, T₂=T₁(p₂V₂)/(p₁V₁)=300×(27640×39,5)/(105000×15,8)≈197,5 K. Đổi sang Celsius: t₂≈−75,5°C.'
   ]
  };
- const SHORT={
+ const TF_REVIEW={ 't09-tf-08-44609':[2,3], 't10-tf-05-41944':[1] };\n const MC_REVIEW=new Set(['t09-mc-25-recovered']);\n const SHORT={
   't10-short-02-81925':'Dữ kiện chung của Câu 2 và Câu 3: khối khí giãn nở đẳng áp từ 37°C lên 117°C, thể tích tăng 1,2 lít. Đổi nhiệt độ: T₁=310 K, T₂=390 K. Theo Charles: V₁/T₁=(V₁+1,2)/T₂. Suy ra 390V₁=310V₁+372, nên V₁=4,65 lít.',
   't10-short-03-82426':'Dữ kiện chung: khối khí có m=12 g, V₁=4,65 lít và tăng thể tích 1,2 lít khi giãn nở đẳng áp. Thể tích cuối V₂=4,65+1,2=5,85 lít. Khối lượng riêng ρ₂=m/V₂=12/5,85≈2,05 g/lít. Vì 1 g/lít=1 kg/m³, kết quả là 2,05 kg/m³.'
  };
@@ -99,12 +117,14 @@
      q.explanation=MC[q.qid]||reviewMarker;
      q.explanationStatus=MC[q.qid]?'authored':'needs_review';
     }
+    if(q.type==='mc'&&MC_REVIEW.has(q.qid))q.explanationStatus='needs_review';
     if(q.type==='short'&&Object.prototype.hasOwnProperty.call(SHORT,q.qid)){
      q.explanation=SHORT[q.qid];q.explanationStatus='authored';
     }
     if(q.type==='tf'&&Object.prototype.hasOwnProperty.call(TF,q.qid)){
      (q.statements||[]).forEach(function(st,i){st.explanation=TF[q.qid][i]||null;st.explanationStatus=st.explanation?'authored':'needs_review';});
     }
+    if(q.type==='tf'&&TF_REVIEW[q.qid])TF_REVIEW[q.qid].forEach(function(i){const st=q.statements&&q.statements[i];if(st){st.explanation=(st.explanation?st.explanation+' ':'')+'⚠️ Cần đối chiếu hình hoặc dữ kiện gốc trước khi chốt.';st.explanationStatus='needs_review';}});
     if(q.qid==='t09-mc-19-17941'&&q.correct!==0){
      audit.answerCorrections.push({qid:q.qid,from:q.correct,to:0,reason:'12 L nén còn 3 L đẳng nhiệt nên áp suất tăng 4 lần.'});q.correct=0;
     }
@@ -125,7 +145,7 @@
      audit.tfGroups++;
      (q.statements||[]).forEach(function(s,i){
       audit.tfStatements++;
-      const flagged=/CẦN KIỂM TRA|CẦN ĐỐI CHIẾU|CHƯA ĐỦ DỮ KIỆN|⚠️|SAI nếu|ĐÚNG\/SAI phải/iu.test(String(s.explanation||''));
+      const flagged=/CẦN KIỂM TRA|CẦN ĐỐI CHIẾU|CHƯA ĐỦ DỮ KIỆN|⚠️|SAI nếu|ĐÚNG nếu|cần xem hình|ĐÚNG\/SAI phải/iu.test(String(s.explanation||''));
       if(s.explanation&&s.explanationStatus!=='needs_review'&&!flagged)audit.tfExplained++;
       else audit.needsReview.push({qid:q.qid,type:'tf',statement:i});
      });
