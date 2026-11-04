@@ -10,7 +10,7 @@
     const i=exam.questions.findIndex(item=>item.qid===oldId);
     if(i>=0){q.difficultyScore=exam.questions[i].difficultyScore;exam.questions[i]=q;found=exam.id;break;}
    }
-   if(!found)throw new Error('Missing source question ID: '+oldId);
+   if(!found){(window.CH2_CORRECTION_MISSES=window.CH2_CORRECTION_MISSES||[]).push(oldId);return false;}return true;
   }
   const S=(qid,source,q,answer,tol,unit,why)=>({qid,source,type:'short',q,answer,tol,unit,why,origin:'source-derived'});
   replace('t08-short-04-76662',S(
