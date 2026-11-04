@@ -2594,7 +2594,7 @@ function repairPhysicsWhy(q,why){
  const bankQuestions=(window.CH2_EXAMS||[]).flatMap(ex=>ex.questions||[]);
  const bankQuestion=q?.qid?bankQuestions.find(item=>item.qid===q.qid):null;
  const statementReason=Number.isInteger(q?.statementIndex)?bankQuestion?.statements?.[q.statementIndex]?.explanation:null;
- const authored=String(q?.explanation||statementReason||bankQuestion?.explanation||'').trim();
+ const authored=String(statementReason||bankQuestion?.explanation||q?.explanation||'').trim();
  if(authored)return normalizePhysicsNotation(authored);
  const prompt=String(q?.q||'');
  const original=String(why??'').trim();
