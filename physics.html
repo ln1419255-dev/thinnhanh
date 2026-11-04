@@ -2460,10 +2460,12 @@ function buildCh2RandomExam(){
  if(!bank)return null;
  const recent=ch2Recent();
  function pick(type,count){
-  const pool=Array.isArray(bank[type])?bank[type]:[];
-  const fresh=pool.filter(q=>q.qid&&!recent[type].includes(q.qid));
-  const selected=ch2Shuffle(fresh.length>=count?fresh:pool).slice(0,count);
-  return selected;
+  const raw=Array.isArray(bank[type])?bank[type]:[];
+  const byId=new Map();
+  raw.forEach(q=>{if(q&&q.qid&&!byId.has(q.qid))byId.set(q.qid,q);});
+  const pool=Array.from(byId.values());
+  const fresh=pool.filter(q=>!recent[type].includes(q.qid));
+  return ch2Shuffle(fresh.length>=count?fresh:pool).slice(0,count);
  }
  const mc=pick('mc',18),tf=pick('tf',4),short=pick('short',6);
  if(mc.length!==18||tf.length!==4||short.length!==6)return null;
@@ -2477,11 +2479,42 @@ function buildCh2RandomExam(){
  for(const q of questions){if(!q.qid||seen.has(q.qid))return null;seen.add(q.qid);}
  return {id:'ch2-random-'+Date.now(),title:'Đề ngẫu nhiên · Khí lí tưởng',difficulty:'Tổng hợp',desc:'Đề được tạo ngẫu nhiên từ ngân hàng câu hỏi Chương 2 – Khí lí tưởng.',subject:SUBJECT_NAME,chapterId:'ideal-gas',examType:'random',minutes:50,questions};
 }
+function auditCh2Exams(){
+ const exams=window.CH2_EXAMS||[];
+ const expected={Dễ:2,'Khá':2,'Khó':4,'Siêu khó':2};
+ const levels={},issues=[],seen=new Map();let mc=0,tf=0,short=0;
+ exams.forEach(exam=>{
+  levels[exam.difficulty]=(levels[exam.difficulty]||0)+1;
+  const qs=Array.isArray(exam.questions)?exam.questions:[];
+  const counts={mc:0,tf:0,short:0},local=new Set();
+  if(exam.minutes!==50)issues.push(exam.title+': thời gian không phải 50 phút');
+  qs.forEach(q=>{
+   if(counts[q.type]!==undefined)counts[q.type]++;
+   if(!q.qid)issues.push(exam.title+': thiếu ID câu hỏi');
+   else{
+    if(local.has(q.qid))issues.push(exam.title+': ID trùng trong đề ('+q.qid+')');
+    local.add(q.qid);
+    if(seen.has(q.qid))issues.push('ID lặp giữa '+seen.get(q.qid)+' và '+exam.title+' ('+q.qid+')');
+    else seen.set(q.qid,exam.title);
+   }
+   if(q.type==='mc'&&(!Array.isArray(q.options)||q.options.length!==4||!Number.isInteger(q.correct)||q.correct<0||q.correct>3))issues.push(exam.title+': MC lỗi cấu trúc');
+   if(q.type==='tf'&&(!Array.isArray(q.statements)||q.statements.length!==4||q.statements.some(s=>typeof s.correct!=='boolean')))issues.push(exam.title+': Đ/S lỗi cấu trúc');
+   if(q.type==='short'&&(!Number.isFinite(Number(q.answer))||!Number.isFinite(Number(q.tol))))issues.push(exam.title+': TLN thiếu đáp án số/độ sai số');
+  });
+  mc+=counts.mc;tf+=counts.tf;short+=counts.short;
+  if(qs.length!==28||counts.mc!==18||counts.tf!==4||counts.short!==6)issues.push(exam.title+': cấu trúc '+qs.length+' câu ('+counts.mc+' MC, '+counts.tf+' Đ/S, '+counts.short+' TLN)');
+ });
+ if(exams.length!==10)issues.push('Có '+exams.length+' đề cố định, yêu cầu là 10');
+ Object.keys(expected).forEach(level=>{if((levels[level]||0)!==expected[level])issues.push('Mức '+level+' có '+(levels[level]||0)+' đề, yêu cầu '+expected[level]);});
+ return {count:exams.length,levels,issues,mc,tf,short,uniqueQuestions:seen.size};
+}
 function updateCh2RandomStatus(){
  const el=$('ch2-random-status');if(!el)return;
- const bank=window.CH2_RANDOM_BANK;
- if(!bank){el.textContent='Đang tải ngân hàng câu hỏi Chương 2…';return;}
- el.textContent='Ngân hàng hiện có '+bank.mc.length+' câu trắc nghiệm, '+bank.tf.length+' câu đúng/sai và '+bank.short.length+' câu trả lời ngắn. Đề mới ưu tiên câu chưa xuất hiện trong các đề ngẫu nhiên gần đây.';
+ const bank=window.CH2_RANDOM_BANK;if(!bank){el.textContent='Đang tải ngân hàng câu hỏi Chương 2…';return;}
+ const unique=type=>new Set((bank[type]||[]).map(q=>q.qid).filter(Boolean)).size;
+ const audit=window.CH2_AUDIT||auditCh2Exams();
+ const summary='Có '+audit.count+' đề cố định; '+audit.mc+' MC, '+audit.tf+' câu Đ/S và '+audit.short+' TLN. Ngân hàng ngẫu nhiên sau lọc ID trùng: '+unique('mc')+' MC, '+unique('tf')+' Đ/S, '+unique('short')+' TLN.';
+ el.textContent=audit.issues.length?summary+' Cần rà soát: '+audit.issues.slice(0,3).join('; ')+(audit.issues.length>3?'…':''):summary+' Cấu trúc và ID đã qua kiểm tra.';
 }
 window.startCh2RandomExam=function(){
  const exam=buildCh2RandomExam();
@@ -2579,6 +2612,7 @@ renderHome();renderBrowse();
 window.CH2_READY.then(function(){
  const added=new Set(BANK.map(e=>e.id));
  (window.CH2_EXAMS||[]).forEach(function(e){if(!added.has(e.id)){BANK.push(e);added.add(e.id);}});
+ window.CH2_AUDIT=auditCh2Exams();
  renderHome();
  renderBrowse();
  updateCh2RandomStatus();
