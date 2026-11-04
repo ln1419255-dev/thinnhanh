@@ -37,18 +37,6 @@
    502,1,'phút',
    'Theo lời giải nguồn, bình chứa khoảng 50 mol oxygen; thời gian cung cấp t=nNₐ/(6,0×10²²)≈502 phút.'
   ));
-  replace('t12-short-03-53205-verified',S(
-   't13-essay-04-safety-valve-temp-short','t13',
-   'Một nồi áp suất có van an toàn với lỗ diện tích 1 cm². Lò xo có độ cứng 10³ N/m và bị nén 1 cm. Ban đầu khí trong nồi ở áp suất 10⁵ Pa và nhiệt độ 20°C. Coi thể tích khí không đổi. Van bắt đầu mở khi nhiệt độ khí tối thiểu bằng bao nhiêu °C?',
-   313,0.5,'°C',
-   'Lực lò xo tạo áp suất 10⁵ Pa; áp suất mở van là 2×10⁵ Pa. Với V không đổi, T₂/T₁=p₂/p₁=2 nên T₂=586 K=313°C.'
-  ));
-  replace('mock-short-04-8.28-verified',S(
-   'mock-essay-02-piston-left-force-short','mock',
-   'Một lượng khí có thể tích ban đầu 240 cm³ trong xi lanh có piston diện tích 24 cm². Áp suất ban đầu bằng áp suất khí quyển 100 kPa, nhiệt độ không đổi. Để dịch chuyển piston sang trái 2 cm, cần tác dụng lực có độ lớn bao nhiêu N?',
-   60,0.5,'N',
-   'V₂=240−24×2=192 cm³; Boyle cho p₂=100×240/192=125 kPa. Lực cần thêm là (125−100)×10³×24×10⁻⁴=60 N.'
-  ));
   replace('t10-short-01-81288',S(
    't10-essay-05-initial-temp-short','t10',
    'Một khối khí có thể tích ban đầu V và nhiệt độ tuyệt đối T. Khi đun nóng đẳng áp đến 450 K, thể tích tăng 3 cm³; khi làm lạnh đến 300 K, thể tích giảm 2 cm³. Nhiệt độ ban đầu T bằng bao nhiêu K?',
@@ -100,5 +88,6 @@
    short:exams.flatMap(e=>e.questions.filter(q=>q.type==='short'))
   };
   window.CH2_CORRECTIONS_READY=true;
+  window.CH2_CORRECTION_MISSES=window.CH2_CORRECTION_MISSES||[];
  }).catch(function(error){console.error('Chapter 2 correction failed:',error);});
 })();
