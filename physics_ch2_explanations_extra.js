@@ -70,6 +70,20 @@
  't11-essay-01a-to-mc':'Bình kín có V và n không đổi nên p₁/T₁=p₂/T₂. T₁=100+273=373 K; T₂=20+273=293 K. p₂=1,0×10⁵×293/373≈0,785×10⁵ Pa, chọn C.',
  't11-essay-04b-flow-to-mc':'Số mol oxygen ở trạng thái bình: n=pV/(RT), với p=1,1×101325 Pa, V=5 m³, T=24+273=297 K. m=nM≈7,2 kg. Nạp trong 30 phút=1800 s nên lưu lượng khối lượng ≈7200/1800=4,0 g/s, chọn C.'
  };
+ const TF={
+  't11-tf-theory-state-equation':[
+   'ĐÚNG: với một lượng khí xác định, n và R không đổi nên pV/T=nR là hằng số.',
+   'ĐÚNG: phương trình Clapeyron của khí lí tưởng là pV=nRT.',
+   'SAI: nhiệt độ trong phương trình khí lí tưởng phải là nhiệt độ tuyệt đối tính bằng kelvin, không phải Celsius.',
+   'ĐÚNG: trong hệ SI, R≈8,31 J/(mol·K).'
+  ],
+  't13-tf-08-58135':[
+   'SAI: áp suất không đổi và được nung nóng nên V tăng theo định luật Charles; đây là giãn nở đẳng áp, không phải nén.',
+   'ĐÚNG: V₁=nVₘ=0,5×24,8=12,4 lít.',
+   'ĐÚNG: nhiệt độ tăng từ 298 K lên 398 K nên động năng tịnh tiến trung bình và tốc độ đặc trưng của phân tử tăng.',
+   'SAI: V₂=V₁T₂/T₁=12,4×398/298≈16,6 lít, không phải 33,1 lít.'
+  ]
+ };
  const SHORT={
   't10-short-02-81925':'Dữ kiện chung của Câu 2 và Câu 3: khối khí giãn nở đẳng áp từ 37°C lên 117°C, thể tích tăng 1,2 lít. Đổi nhiệt độ: T₁=310 K, T₂=390 K. Theo Charles: V₁/T₁=(V₁+1,2)/T₂. Suy ra 390V₁=310V₁+372, nên V₁=4,65 lít.',
   't10-short-03-82426':'Dữ kiện chung: khối khí có m=12 g, V₁=4,65 lít và tăng thể tích 1,2 lít khi giãn nở đẳng áp. Thể tích cuối V₂=4,65+1,2=5,85 lít. Khối lượng riêng ρ₂=m/V₂=12/5,85≈2,05 g/lít. Vì 1 g/lít=1 kg/m³, kết quả là 2,05 kg/m³.'
@@ -87,6 +101,9 @@
     }
     if(q.type==='short'&&Object.prototype.hasOwnProperty.call(SHORT,q.qid)){
      q.explanation=SHORT[q.qid];q.explanationStatus='authored';
+    }
+    if(q.type==='tf'&&Object.prototype.hasOwnProperty.call(TF,q.qid)){
+     (q.statements||[]).forEach(function(st,i){st.explanation=TF[q.qid][i]||null;st.explanationStatus=st.explanation?'authored':'needs_review';});
     }
     if(q.qid==='t09-mc-19-17941'&&q.correct!==0){
      audit.answerCorrections.push({qid:q.qid,from:q.correct,to:0,reason:'12 L nén còn 3 L đẳng nhiệt nên áp suất tăng 4 lần.'});q.correct=0;
