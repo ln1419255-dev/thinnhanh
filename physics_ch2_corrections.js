@@ -73,13 +73,13 @@
    ]
   ));
   replace('t13-tf-07-56567',TF(
-   't13-tf-02-three-gas-cylinders','t13',
-   'Ba bình có cùng dung tích, ở cùng nhiệt độ, lần lượt chứa 4 g H₂ (M=2 g/mol), 22 g CO₂ (M=44 g/mol) và 7 g N₂ (M=28 g/mol). Xác định đúng/sai.',
+   't13-tf-02-mercury-tube-boyle','t13',
+   'Một ống thủy tinh tiết diện đều, một đầu kín một đầu hở, chứa cột không khí được ngăn bởi cột thủy ngân dài 20 cm. Khi đặt ống thẳng đứng miệng ở dưới, chiều dài cột khí là 48 cm; khi miệng ở trên, chiều dài cột khí là 28 cm. Xác định đúng/sai.',
    [
-    ['Số mol khí trong bình (1) chứa hydrogen là 2 mol.',true],
-    ['Số mol khí trong bình (2) chứa carbon dioxide là 0,05 mol.',false],
-    ['Số mol khí trong bình (3) chứa nitrogen là 0,25 mol.',true],
-    ['Bình (1) có áp suất nhỏ nhất, bình (2) có áp suất lớn nhất.',false]
+    ['Áp suất khí quyển tính theo lời giải nguồn bằng 76 cmHg.',true],
+    ['Khi miệng ống ở trên, áp suất khối khí bằng áp suất khí quyển cộng 20 cmHg.',true],
+    ['Khi miệng ống ở dưới, áp suất khối khí bằng áp suất khí quyển cộng 20 cmHg.',false],
+    ['Khi ống nằm ngang, chiều dài cột khí xấp xỉ 35,37 cm.',true]
    ]
   ));
   window.CH2_RANDOM_BANK={
