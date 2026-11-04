@@ -2579,20 +2579,41 @@ function chooseScoreMeme(score) {
   return { ...chosen, caption, band: key, fallbackEmoji, fallbackTitle };
 }
 
+function normalizePhysicsNotation(value){
+ return String(value??'')
+  .replace(/([pVTP])\\s*['’′]\\s*c\\b/gi,'$1₂')
+  .replace(/([pVTP])\\s*['’′]{2}/g,'$1₂')
+  .replace(/([pVTP])\\s*['’′]/g,'$1₁')
+  .replace(/([pVTP])!{1,2}/g,(m,v)=>v+'₁')
+  .replace(/([pVTP])"{1,2}/g,(m,v)=>v+'₂')
+  .replace(/\\b(p|V|T)([12])\\b/g,'$1$2'.replace('1','₁').replace('2','₂'));
+}
 function repairPhysicsWhy(q,why){
- const raw=String(why??'').trim();
  const prompt=String(q?.q||'');
+ const original=String(why??'').trim();
+ const raw=normalizePhysicsNotation(original);
  const malformed=raw.includes(']]]')||/(?:#{2,}|!{2,}|10A[C4]|10AC|10C|10A4|10A5|[#$!].{0,4}[=×]|[=×].{0,4}[#$!])/iu.test(raw);
- if(!malformed&&raw.length>=18)return raw;
- if(/nội năng.*đơn nguyên tử|đơn nguyên tử.*nội năng/i.test(prompt)&&/2p.?1|2V.?1/i.test(prompt))return 'Với khí lí tưởng đơn nguyên tử, nội năng U = 3/2 pV. Khi p₂ = 2p₁ và V₂ = 2V₁ thì p₂V₂ = 4p₁V₁, do đó U₂ = 4U₁ = 400 kJ. Độ biến thiên nội năng: ΔU = U₂ − U₁ = 400 − 100 = 300 kJ.';
+ const calculation=/(tính|bao nhiêu|xác định|tìm|độ biến thiên|thể tích|áp suất|nhiệt độ|khối lượng|số mol|mật độ|động năng|nội năng|lực|công|nhiệt lượng|tỉ số|bao nhiêu lần)/i.test(prompt)&&/\\d/.test(prompt);
+ if(!malformed&&raw.length>=18){
+  if(!calculation||raw.length>=95)return raw;
+  if(/Boyle|đẳng nhiệt/i.test(prompt))return raw+'\\n\\nCách làm: Xác định trạng thái đầu (p₁, V₁) và trạng thái cuối (p₂, V₂). Vì nhiệt độ không đổi nên p₁V₁ = p₂V₂. Biến đổi công thức để tìm đại lượng chưa biết, thay số kèm đơn vị rồi kết luận.';
+  if(/Charles|đẳng áp/i.test(prompt))return raw+'\\n\\nCách làm: Đổi nhiệt độ sang kelvin bằng T = t + 273. Vì áp suất không đổi nên V₁/T₁ = V₂/T₂. Thay các giá trị đã đổi đơn vị vào công thức, tính đại lượng cần tìm và ghi đơn vị.';
+  if(/phương trình trạng thái|khí lí tưởng|Clapeyron/i.test(prompt))return raw+'\\n\\nCách làm: Với một lượng khí xác định, dùng p₁V₁/T₁ = p₂V₂/T₂. Đổi nhiệt độ sang kelvin, đổi các đại lượng về hệ SI nếu cần, thay số rồi giải ẩn.';
+  if(/nội năng/i.test(prompt))return raw+'\\n\\nCách làm: Với khí lí tưởng đơn nguyên tử, U = 3/2 nRT = 3/2 pV. Tính nội năng ở từng trạng thái rồi lấy ΔU = U₂ − U₁; chú ý đơn vị J hoặc kJ.';
+  if(/áp suất.*phân tử|động năng.*phân tử|mật độ phân tử/i.test(prompt))return raw+'\\n\\nCách làm: Chọn hệ thức thuyết động học phân tử phù hợp, chẳng hạn p = 1/3·n₀·m₀·v²tb hoặc p = 2/3·n₀·W̄đ. Đổi về đơn vị SI, thay số và kiểm tra đơn vị Pa.';
+  return raw+'\\n\\nTrình tự giải: (1) Ghi dữ kiện và đổi về đơn vị SI; (2) chọn công thức vật lí phù hợp; (3) biến đổi để cô lập đại lượng cần tìm; (4) thay số, tính kết quả và ghi đơn vị.';
+ }
+ if(/nội năng.*đơn nguyên tử|đơn nguyên tử.*nội năng/i.test(prompt)&&/2p.?1|2V.?1/i.test(prompt))return 'Với khí lí tưởng đơn nguyên tử, U = 3/2 pV. Khi p₂ = 2p₁ và V₂ = 2V₁ thì p₂V₂ = 4p₁V₁, do đó U₂ = 4U₁ = 400 kJ. Độ biến thiên nội năng: ΔU = U₂ − U₁ = 400 − 100 = 300 kJ.';
  if(/Helium/i.test(prompt)&&/Methane/i.test(prompt)&&/nhiệt dung đẳng tích/i.test(prompt))return 'Helium là khí đơn nguyên tử nên Cᵥ,m = 3R/2. Theo mô hình nhiệt dung dùng trong bài, methane có Cᵥ,m = 3R. Gọi số mol methane là n. Ta có 2 × 3R/2 = n × 3R, suy ra n = 1,0 mol.';
  if(/Charles|thể tích.*mol|một mol khí/i.test(prompt)&&/60\\s*°?C|60°C/i.test(prompt))return 'Ở áp suất không đổi, định luật Charles cho V₁/T₁ = V₂/T₂. Đổi nhiệt độ sang kelvin: T₁ = 25 + 273 = 298 K; T₂ = 60 + 273 = 333 K. Suy ra V₂ = 24,79 × 333/298 ≈ 27,70 lít.';
- if(/Boyle|đẳng nhiệt/i.test(prompt))return 'Đây là quá trình đẳng nhiệt nên áp dụng định luật Boyle: p₁V₁ = p₂V₂. Thay số liệu của đề vào hệ thức để giải đại lượng cần tìm.';
- if(/Charles|đẳng áp/i.test(prompt))return 'Đây là quá trình đẳng áp nên áp dụng định luật Charles: V₁/T₁ = V₂/T₂. Đổi nhiệt độ sang kelvin theo T(K) = t(°C) + 273 trước khi thay số.';
- if(/nội năng/i.test(prompt))return 'Với khí lí tưởng, nội năng phụ thuộc vào nhiệt độ tuyệt đối. Dùng phương trình trạng thái pV = nRT để liên hệ hai trạng thái, sau đó tính ΔU = U₂ − U₁.';
- if(/áp suất.*phân tử|động năng.*phân tử|mật độ phân tử/i.test(prompt))return 'Theo thuyết động học phân tử, áp suất liên hệ với mật độ phân tử và động năng tịnh tiến trung bình bởi p = 2/3 · n₀ · W̄đ. Đổi các đại lượng về đơn vị SI trước khi thay số.';
- if(/mol|khối lượng mol|số phân tử/i.test(prompt))return 'Dùng n = m/M hoặc n = N/Nₐ, trong đó M là khối lượng mol và Nₐ = 6,02 × 10²³ mol⁻¹. Sau đó thay số để tính đại lượng đề bài yêu cầu.';
- return 'Lời giải gốc bị lỗi ký hiệu khi trích xuất nên không thể khôi phục phép biến đổi chính xác chỉ từ đoạn văn này. Không nên dùng đoạn lời giải lỗi để học thuộc; cần đối chiếu dữ kiện và đáp án của câu hỏi.';
+ if(/Boyle|đẳng nhiệt/i.test(prompt))return 'Đây là quá trình đẳng nhiệt nên áp dụng định luật Boyle: p₁V₁ = p₂V₂. Xác định p₁, V₁, p₂, V₂ từ đề; chuyển vế tìm ẩn, thay số có đơn vị và tính kết quả.';
+ if(/Charles|đẳng áp/i.test(prompt))return 'Đây là quá trình đẳng áp nên áp dụng định luật Charles: V₁/T₁ = V₂/T₂. Đổi nhiệt độ sang kelvin theo T(K) = t(°C) + 273, thay số rồi giải đại lượng chưa biết.';
+ if(/phương trình trạng thái|khí lí tưởng|Clapeyron/i.test(prompt))return 'Áp dụng phương trình trạng thái cho cùng một lượng khí: p₁V₁/T₁ = p₂V₂/T₂. Đổi nhiệt độ sang kelvin, thay dữ kiện của hai trạng thái vào công thức, biến đổi tìm ẩn và ghi đơn vị.';
+ if(/nội năng/i.test(prompt))return 'Với khí lí tưởng, nội năng phụ thuộc nhiệt độ. Nếu là khí đơn nguyên tử: U = 3/2 nRT = 3/2 pV. Tính U₁ và U₂ rồi lấy ΔU = U₂ − U₁; đổi J sang kJ nếu cần.';
+ if(/áp suất.*phân tử|động năng.*phân tử|mật độ phân tử/i.test(prompt))return 'Theo thuyết động học phân tử: p = 1/3·n₀·m₀·v²tb = 2/3·n₀·W̄đ. Xác định đại lượng đề cho, đổi về SI, thay vào hệ thức thích hợp rồi tính áp suất hoặc đại lượng cần tìm.';
+ if(/mol|khối lượng mol|số phân tử/i.test(prompt))return 'Tính số mol bằng n = m/M hoặc n = N/Nₐ (Nₐ = 6,02 × 10²³ mol⁻¹). Sau đó dùng pV = nRT với T tính bằng kelvin để tìm đại lượng đề yêu cầu.';
+ if(calculation)return 'Lời giải được khôi phục theo quy trình: (1) Liệt kê dữ kiện và đổi đơn vị; (2) chọn công thức phù hợp với quá trình hoặc đại lượng; (3) thay số và giải ẩn; (4) ghi kết quả kèm đơn vị. Cần đối chiếu số liệu gốc của câu trước khi chốt phép tính cụ thể.';
+ return 'Lời giải gốc bị lỗi ký hiệu khi trích xuất nên chưa thể khôi phục phép biến đổi chính xác chỉ từ đoạn văn này. Cần đối chiếu dữ kiện và đáp án của câu hỏi.';
 }
 function renderResult(h){const e= h.questions? h : null;const questions=h.questions||[];const isLegacy=questions.length===22;const meme=h.meme||chooseScoreMeme(h.totalScore);const quotes=SCORE_MEME_QUOTES[meme.band]||SCORE_MEME_QUOTES.low;if(!quotes.includes(meme.caption))meme.caption=quotes[Math.floor(Math.random()*quotes.length)];let body=`<div class="result-hero"><div class="scorecircle">${fmt(h.totalScore,2)}</div><div><div class="eyebrow">${h.auto?'HẾT GIỜ · ĐÃ TỰ ĐỘNG NỘP':'ĐÃ NỘP BÀI'} · ${esc(h.difficulty)}</div><h2>${h.totalScore>=8?'Làm tốt lắm!':h.totalScore>=5?'Bạn đang tiến bộ!':'Hãy xem kĩ lời giải và thử lại nhé!'}</h2><p class="tiny">${esc(h.title)} · ${new Date(h.date).toLocaleString('vi-VN')}</p><p>Điểm quy đổi theo cấu trúc THPT: <b>${fmt(h.totalScore,2)}/10</b>.</p><button class="btn outline small" onclick="${h.examType==='random'?`startSavedRandomExam('${h.id}')`:`startExam('${h.examId}')`}">Làm lại đề này ↻</button></div>
  <section class="score-meme">
