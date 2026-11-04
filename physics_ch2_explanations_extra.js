@@ -148,6 +148,7 @@
      (q.statements||[]).forEach(function(s,i){
       audit.tfStatements++;
       const flagged=/CẦN KIỂM TRA|CẦN ĐỐI CHIẾU|CHƯA ĐỦ DỮ KIỆN|⚠️|SAI nếu|ĐÚNG nếu|cần xem hình|ĐÚNG\/SAI phải/iu.test(String(s.explanation||''));
+      if(flagged)s.explanationStatus='needs_review';
       if(s.explanation&&s.explanationStatus!=='needs_review'&&!flagged)audit.tfExplained++;
       else audit.needsReview.push({qid:q.qid,type:'tf',statement:i});
      });
