@@ -58,7 +58,7 @@
  't08-mc-12-64543':'Ba điều kiện đều góp phần tạo hỗn hợp khí đồng đều: hai khí không phản ứng với nhau, giữa các phân tử có khoảng trống và các phân tử chuyển động nhiệt hỗn loạn liên tục. Chọn D.',
  't13-mc-41-39049':'Với lượng khí cố định, V∝T/p. Khi p tăng 9 lần và T tăng 3 lần, V₂/V₁=3/9=1/3. Thể tích giảm 3 lần, chọn C.',
  't11-mc-05-15892':'Phương trình Clapeyron cho n mol khí lí tưởng là pV=nRT. Chọn D.',
- 't12-mc-12-17823':'Nhiệt truyền từ vật nóng B sang vật lạnh A. Vì ban đầu phân tử ở A có động năng nhiệt ít hơn, nhận năng lượng qua va chạm nên chuyển động nhiệt nhanh hơn. Bộ từ thích hợp là A – nhanh – ít, chọn A.',
+ 't12-mc-12-17823':'Nhiệt truyền từ vật nóng B sang vật lạnh A. Vì ban đầu phân tử ở A có động năng nhiệt ít hơn, nhận năng lượng qua va chạm nên chuyển động nhiệt nhanh hơn. Bộ từ thích hợp là A – nhanh – ít, chọn D.',
  't09-mc-17-16722':'Khi bọt khí nổi lên, áp suất bên ngoài giảm theo độ sâu. Ở nhiệt độ gần như không đổi, định luật Boyle cho pV=hằng số nên áp suất giảm làm thể tích bọt tăng. Chọn A.',
  't13-mc-30-31854':'Số mol khí n=N/Nₐ=11,28×10²⁶/(6,02×10²³)≈1874 mol. Khối lượng m=30 kg=30000 g nên M=m/n≈16 g/mol. Công thức CₓHᵧ có khối lượng mol 16 g/mol là CH₄, chọn A. Dữ kiện Nₐ trong câu bị OCR thành 10⁴⁶; giá trị đúng là 6,02×10²³ mol⁻¹.',
  't11-mc-28-32870':'Hai trạng thái cùng lượng khí: p₁V₁/T₁=p₂V₂/T₂. Với bóng hình cầu, V∝r³ nên r₁=r₂[(p₂/p₁)(T₁/T₂)]^(1/3). Thay p₁=1,02×10⁵ Pa, T₁=300 K, p₂=0,3×10⁵ Pa, T₂=200 K, r₂=10 m: r₁≈10[(0,3/1,02)(300/200)]^(1/3)≈7,6 m, chọn A.',
@@ -130,8 +130,8 @@
     if(q.qid==='t09-mc-19-17941'&&q.correct!==0){
      audit.answerCorrections.push({qid:q.qid,from:q.correct,to:0,reason:'12 L nén còn 3 L đẳng nhiệt nên áp suất tăng 4 lần.'});q.correct=0;
     }
-    if(q.qid==='t12-mc-12-17823'&&q.correct!==0){
-     audit.answerCorrections.push({qid:q.qid,from:q.correct,to:0,reason:'Vật A lạnh nhận nhiệt, các phân tử chuyển động nhanh hơn; ban đầu chúng có ít động năng hơn.'});q.correct=0;
+    if(q.qid==='t12-mc-12-17823'&&q.correct!==3){
+     audit.answerCorrections.push({qid:q.qid,from:q.correct,to:3,reason:'Vật A lạnh nhận nhiệt; thứ tự đúng A–nhanh–ít tương ứng phương án D.'});q.correct=3;
     }
     if(q.qid==='t13-mc-30-31854')q.q=String(q.q).replace('6,02.1046','6,02×10²³');
    });
