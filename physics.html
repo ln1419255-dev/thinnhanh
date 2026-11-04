@@ -2483,7 +2483,8 @@ function buildCh2RandomExam(){
 function auditCh2Exams(){
  const exams=window.CH2_EXAMS||[];
  const expected={Dễ:2,'Khá':2,'Khó':4,'Siêu khó':2};
- const levels={},issues=[],seen=new Map();let mc=0,tf=0,short=0;
+ const levels={},issues=[],seen=new Map(),seenContent=new Map();let mc=0,tf=0,short=0;
+ const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
  exams.forEach(exam=>{
   levels[exam.difficulty]=(levels[exam.difficulty]||0)+1;
   const qs=Array.isArray(exam.questions)?exam.questions:[];
@@ -2498,6 +2499,9 @@ function auditCh2Exams(){
     if(seen.has(q.qid))issues.push('ID lặp giữa '+seen.get(q.qid)+' và '+exam.title+' ('+q.qid+')');
     else seen.set(q.qid,exam.title);
    }
+   const fingerprint=q.type==='mc'?norm(q.q)+'|'+(q.options||[]).map(norm).sort().join('|'):q.type==='tf'?norm(q.q)+'|'+(q.statements||[]).map(s=>norm(s.text)).join('|'):norm(q.q);
+   if(fingerprint&&seenContent.has(q.type+':'+fingerprint))issues.push('Nội dung có vẻ trùng giữa '+seenContent.get(q.type+':'+fingerprint)+' và '+exam.title+' (đã so sánh toàn bộ ý Đ/S)');
+   else if(fingerprint)seenContent.set(q.type+':'+fingerprint,exam.title);
    if(q.type==='mc'&&(!Array.isArray(q.options)||q.options.length!==4||!Number.isInteger(q.correct)||q.correct<0||q.correct>3))issues.push(exam.title+': MC lỗi cấu trúc');
    if(q.type==='tf'&&(!Array.isArray(q.statements)||q.statements.length!==4||q.statements.some(s=>typeof s.correct!=='boolean')))issues.push(exam.title+': Đ/S lỗi cấu trúc');
    if(q.type==='short'&&(!Number.isFinite(Number(q.answer))||!Number.isFinite(Number(q.tol))))issues.push(exam.title+': TLN thiếu đáp án số/độ sai số');
