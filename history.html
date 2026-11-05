@@ -220,6 +220,9 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
 .history-view.active{display:block}
 .card-link{border:0;cursor:pointer;font-family:inherit;font-size:13px;font-weight:900;line-height:1.2}
 .lesson-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 18px}
+.lesson-toolbar-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.history-open-practice{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:9px 14px;border:0;border-radius:12px;background:linear-gradient(120deg,#078b91,#5674dc);color:#fff;font-family:inherit;font-size:13px;font-weight:900;line-height:1.2;cursor:pointer;box-shadow:0 7px 18px rgba(7,139,145,.18);transition:transform .2s,filter .2s}
+.history-open-practice:hover{transform:translateY(-2px);filter:brightness(1.07)}
 .lesson-back-button{display:inline-flex;align-items:center;gap:9px;min-height:42px;padding:9px 15px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;font-weight:800;line-height:1.2;cursor:pointer;box-shadow:0 5px 16px rgba(22,48,78,.06);transition:transform .2s,border-color .2s}
 .lesson-back-button:hover{transform:translateY(-2px);border-color:var(--accent)}
 .lesson-back-button span{font-size:17px;color:var(--accent)}
@@ -455,7 +458,10 @@ button.history-exam-option{cursor:pointer}
 
   <section class="history-view lesson-view" id="view-bai6" hidden aria-labelledby="bai6-page-title">
     <div class="lesson-toolbar">
-      <button class="lesson-back-button" type="button" data-back-lessons><span aria-hidden="true">←</span> Quay lại các bài ôn tập</button>
+      <div class="lesson-toolbar-actions">
+        <button class="lesson-back-button" type="button" data-back-lessons><span aria-hidden="true">←</span> Quay lại các bài ôn tập</button>
+        <button class="history-open-practice" type="button" data-open-random-space>🎲 Không gian luyện thi</button>
+      </div>
       <span class="lesson-page-tag">LỊCH SỬ · BÀI 06</span>
     </div>
     <div class="lesson-heading">
@@ -545,7 +551,10 @@ button.history-exam-option{cursor:pointer}
 
   <section class="history-view lesson-view" id="view-bai7" hidden aria-labelledby="bai7-page-title">
     <div class="lesson-toolbar">
-      <button class="lesson-back-button" type="button" data-back-lessons><span aria-hidden="true">←</span> Quay lại các bài ôn tập</button>
+      <div class="lesson-toolbar-actions">
+        <button class="lesson-back-button" type="button" data-back-lessons><span aria-hidden="true">←</span> Quay lại các bài ôn tập</button>
+        <button class="history-open-practice" type="button" data-open-random-space>🎲 Không gian luyện thi</button>
+      </div>
       <span class="lesson-page-tag">LỊCH SỬ · BÀI 07</span>
     </div>
     <div class="lesson-heading">
