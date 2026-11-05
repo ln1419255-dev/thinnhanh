@@ -746,6 +746,41 @@ button.history-exam-option{cursor:pointer}
       
 
 </article></div>
+
+    <section class="history-bank" aria-labelledby="bai6-bank-heading">
+      <div class="history-bank-head">
+        <div>
+          <div class="section-kicker">NGÂN HÀNG LUYỆN TẬP RIÊNG · BÀI 06</div>
+          <h2 class="history-bank-title" id="bai6-bank-heading">Luyện tập từng câu – Cách mạng tháng Tám năm 1945</h2>
+          <p class="history-bank-desc">Ôn riêng kiến thức Bài 6. Chọn từng câu, trả lời và xem đáp án cùng lời giải ngay sau mỗi lượt chọn.</p>
+          <div class="history-bank-counts">
+            <span>Trắc nghiệm: <b data-bank-mc-count="Bài 6">Đang tải…</b></span>
+            <span>Đúng/Sai: <b data-bank-tf-count="Bài 6">Đang tải…</b></span>
+          </div>
+        </div>
+        <button class="history-bank-toggle history-bank-hero-toggle" type="button" data-bank-toggle="Bài 6" aria-expanded="false">Mở ngân hàng Bài 6 ↓</button>
+      </div>
+    </section>
+    <div class="history-bank-top" data-history-bank="Bài 6" hidden>
+      <div class="history-bank-panel" hidden>
+        <div class="history-bank-tabs" role="group" aria-label="Chọn dạng câu hỏi Bài 6">
+          <button class="history-bank-tab" type="button" data-kind="mc" aria-pressed="true">Trắc nghiệm nhiều lựa chọn</button>
+          <button class="history-bank-tab" type="button" data-kind="tf" aria-pressed="false">Trắc nghiệm Đúng/Sai</button>
+        </div>
+        <div class="history-bank-toolbar">
+          <strong data-bank-progress>Đang tải ngân hàng câu hỏi…</strong>
+          <span class="history-bank-desc">Câu trả lời được kiểm tra ngay sau khi chọn.</span>
+        </div>
+        <div class="history-bank-nav" data-bank-nav aria-label="Danh sách câu hỏi Bài 6"></div>
+        <div class="history-bank-question" data-bank-question aria-live="polite">
+          <p class="muted">Đang tải dữ liệu Bài 6…</p>
+        </div>
+        <div class="history-bank-controls">
+          <button type="button" data-prev disabled>← Câu trước</button>
+          <button type="button" class="primary" data-next>Câu tiếp theo →</button>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="history-view lesson-view" id="view-bai7" hidden aria-labelledby="bai7-page-title">
@@ -996,6 +1031,10 @@ function initRoot(root){
   if(!window.HISTORY_BANK)return false;
   pools.mc=(window.HISTORY_BANK.mc||[]).filter(function(q){return matchesLesson(q,lesson);});
   pools.tf=(window.HISTORY_BANK.tf||[]).filter(function(q){return matchesLesson(q,lesson);});
+  var mcCount=document.querySelector('[data-bank-mc-count="'+lesson+'"]');
+  var tfCount=document.querySelector('[data-bank-tf-count="'+lesson+'"]');
+  if(mcCount)mcCount.textContent=pools.mc.length+" câu";
+  if(tfCount)tfCount.textContent=pools.tf.length+" nhóm";
   tabs.forEach(function(t){t.addEventListener("click",function(){state.kind=t.getAttribute("data-kind");state.index=0;updateTabs();render();});});
   prev.addEventListener("click",function(){if(state.index>0){state.index--;render();}});
   next.addEventListener("click",function(){if(state.index<activePool().length-1){state.index++;render();}});
