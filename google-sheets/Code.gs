@@ -1,6 +1,6 @@
 /**
  * ThiNhanh — nhận điểm từ tất cả môn và ghi vào Google Sheets.
- * Mọi điểm mới (Toán, Vật lí, Hóa học, Tin học và bộ Tin học mới)
+ * Mọi điểm mới (Toán, Vật lí, Hóa học, Tin học và Lịch sử)
  * được chèn ngay dưới tiêu đề để kết quả mới nhất luôn nằm đầu bảng.
  * Gắn script này với một Google Sheet bằng Extensions > Apps Script.
  * Chỉ nhận POST, không đọc hay chia sẻ dữ liệu trong bảng qua endpoint.
@@ -40,7 +40,8 @@ function doPost(e) {
     var subject = safeText(p.subject, 30);
     // Hỗ trợ cả bộ Tin học cũ và bộ Tin học mới.
     var isTinHoc = subject === 'Tin học' || subject === 'Tin học - 8 đề mới';
-    if (subject !== 'Toán' && subject !== 'Vật lí' && subject !== 'Hóa học' && !isTinHoc) {
+    var isHistory = subject === 'Lịch sử';
+    if (subject !== 'Toán' && subject !== 'Vật lí' && subject !== 'Hóa học' && !isTinHoc && !isHistory) {
       return jsonOutput({ ok: false, error: 'Môn học không hợp lệ.' });
     }
 
@@ -50,11 +51,12 @@ function doPost(e) {
       return jsonOutput({ ok: false, error: 'Thiếu tên người làm hoặc tên đề.' });
     }
 
-    // Tin học giữa kì hiện dùng 30 câu trắc nghiệm (6 điểm) + 16 ý Đúng/Sai (4 điểm).
+    // Tin học và Lịch sử dùng cấu trúc 6 điểm trắc nghiệm + 4 điểm Đúng/Sai.
     // Toán, Vật lí và Hóa học dùng cấu trúc 4,5 + 4 + 1,5.
-    var mc = boundedScore(p.mcPoints, isTinHoc ? 6 : 4.5);
+    var usesSixFour = isTinHoc || isHistory;
+    var mc = boundedScore(p.mcPoints, usesSixFour ? 6 : 4.5);
     var tf = boundedScore(p.tfPoints, 4);
-    var shortPart = boundedScore(p.shortPoints, isTinHoc ? 0 : 1.5);
+    var shortPart = boundedScore(p.shortPoints, usesSixFour ? 0 : 1.5);
     var total = boundedScore(p.totalScore, 10);
     if (Math.abs(total - (mc + tf + shortPart)) > 0.12) {
       return jsonOutput({ ok: false, error: 'Điểm tổng không khớp các phần.' });
