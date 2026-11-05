@@ -214,6 +214,34 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
 .history-bank-controls button:disabled{opacity:.4;cursor:not-allowed}
 @media(max-width:560px){.history-bank{padding:13px}.history-bank-head{align-items:stretch}.history-bank-toggle{width:100%}.history-bank-question{padding:12px}.history-bank-qtext{font-size:14px}}
 
+
+/* Điều hướng bài học theo mô hình chọn chương của Vật lí */
+.history-view[hidden]{display:none!important}
+.history-view.active{display:block}
+.card-link{border:0;cursor:pointer;font-family:inherit}
+.lesson-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 18px}
+.lesson-back-button{display:inline-flex;align-items:center;gap:9px;min-height:42px;padding:9px 15px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:800 13px/1.2 inherit;cursor:pointer;box-shadow:0 5px 16px rgba(22,48,78,.06);transition:transform .2s,border-color .2s}
+.lesson-back-button:hover{transform:translateY(-2px);border-color:var(--accent)}
+.lesson-back-button span{font-size:17px;color:var(--accent)}
+.lesson-page-tag{padding:7px 11px;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:999px;background:color-mix(in srgb,var(--accent) 9%,var(--surface));color:var(--accent);font-size:10px;font-weight:950;letter-spacing:1px}
+.lesson-heading{position:relative;overflow:hidden;margin:0 0 21px;padding:25px 28px;border:1px solid rgba(255,255,255,.12);border-radius:22px;color:#fff;background:linear-gradient(118deg,var(--hero-a),var(--hero-b) 58%,var(--hero-c));box-shadow:0 16px 38px rgba(11,38,53,.16)}
+.lesson-heading .section-kicker{color:#b8fff1}
+.lesson-heading h1{margin:7px 0 6px;font-size:clamp(25px,4vw,36px);line-height:1.18;letter-spacing:-.7px}
+.lesson-heading p{max-width:780px;margin:0;color:#e0f1f5;font-size:13px}
+.lesson-details{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-top:0}
+.lesson-details>.detail{padding:clamp(18px,3vw,27px);border-radius:20px}
+.lesson-details>.detail>h3{font-size:20px}
+.lesson-details>.detail>ul{gap:10px}
+.lesson-details>.detail>ul>li{font-size:14px}
+.lesson-details .history-bank{margin-top:22px}
+@media(max-width:600px){
+ .lesson-toolbar{align-items:flex-start;flex-direction:column}
+ .lesson-page-tag{align-self:flex-start}
+ .lesson-heading{padding:21px 19px;border-radius:18px}
+ .lesson-details>.detail{padding:16px}
+ .lesson-details>.detail>ul>li{font-size:13px}
+}
+
 </style>
 <script src="./history-data.js?rev=20261105" defer></script>
 </head>
@@ -226,6 +254,7 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
   </div>
 </header>
 <main>
+  <div class="history-view active" id="view-lessons">
   <section class="hero">
     <div class="eyebrow">MÔN LỊCH SỬ · LỚP 12</div>
     <h1>Học chắc từng dấu mốc.<br>Vững vàng mỗi kỳ thi.</h1>
@@ -236,7 +265,6 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
       <span class="hero-chip">🌗 Hỗ trợ sáng · tối</span>
     </div>
   </section>
-
   <section aria-labelledby="chooseTitle">
     <div class="section-head">
       <div><div class="section-kicker">CHỌN CHUYÊN ĐỀ</div><h2 id="chooseTitle">Các bài ôn tập</h2></div>
@@ -248,85 +276,32 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
         <h3>Cách mạng tháng Tám năm 1945</h3>
         <p>Hệ thống hóa bối cảnh lịch sử, thời cơ, diễn biến Tổng khởi nghĩa, sự ra đời của nước Việt Nam Dân chủ Cộng hòa và ý nghĩa của thắng lợi.</p>
         <div class="topic-preview"><span>Bối cảnh & thời cơ</span><span>Diễn biến</span><span>Ý nghĩa lịch sử</span></div>
-        <a class="card-link" href="#bai6-detail">Xem trọng tâm bài 6 <span aria-hidden="true">→</span></a>
-<section class="history-bank" data-history-bank="Bài 6">
-        <div class="history-bank-head">
-          <div>
-            <div class="section-kicker">NGÂN HÀNG CÂU HỎI · BÀI 6</div>
-            <div class="history-bank-title">Ngân hàng luyện tập Bài 6 · Cách mạng tháng Tám năm 1945</div>
-            <p class="history-bank-desc">Chỉ gồm câu hỏi của Bài 6. Bài còn lại có ngân hàng riêng, không trộn câu.</p>
-            <div class="history-bank-counts">
-              <span data-count-mc>Đang tải câu trắc nghiệm…</span>
-              <span data-count-tf>Đang tải câu Đúng/Sai…</span>
-            </div>
-          </div>
-          <button class="history-bank-toggle" type="button" aria-expanded="false">Mở ngân hàng Bài 6 ↓</button>
-        </div>
-        <div class="history-bank-panel" hidden>
-          <div class="history-bank-tabs">
-            <button class="history-bank-tab" type="button" data-kind="mc" aria-pressed="true">Trắc nghiệm</button>
-            <button class="history-bank-tab" type="button" data-kind="tf" aria-pressed="false">Đúng / Sai</button>
-          </div>
-          <div class="history-bank-toolbar">
-            <strong data-bank-progress>Chọn dạng câu hỏi để bắt đầu.</strong>
-            <span class="muted" data-bank-note style="font-size:11px">Chọn đáp án để xem lời giải ngay.</span>
-          </div>
-          <div class="history-bank-nav" data-bank-nav></div>
-          <div class="history-bank-question" data-bank-question><p class="muted">Đang tải ngân hàng câu hỏi…</p></div>
-          <div class="history-bank-controls">
-            <button type="button" data-prev>← Câu trước</button>
-            <button type="button" class="primary" data-next>Câu tiếp →</button>
-          </div>
-        </div>
-      </section>
+        <button class="card-link" type="button" data-open-lesson="bai6" aria-label="Mở nội dung ôn tập Bài 6">Xem trọng tâm bài 6 <span aria-hidden="true">→</span></button>
+
       </article>
       <article class="card c7">
         <div class="card-top"><div class="icon-wrap" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M5 48 21 25l8 11 9-16 21 28H5Z" fill="#4F9B91"/><path d="m5 48 16-23 8 11 9-16 21 28H5Z" fill="#78BDB0"/><path d="m21 25 5 7-5-2-4 3 4-8Zm17-5 6 10-6-3-5 4 5-11Z" fill="#EAF8F3"/><path d="M15 14h28v17H15z" rx="2" fill="#D9433D"/><path d="m29 16.5 2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7 2.2-4.5Z" fill="#FFE99B"/><path d="M12 50h43" stroke="#286C70" stroke-width="3" stroke-linecap="round"/></svg></div><span class="card-code">BÀI 07</span></div>
         <h3>Cuộc kháng chiến chống thực dân Pháp (1945–1954)</h3>
         <p>Ôn lại những chặng đường kháng chiến, các chiến dịch lớn, bước phát triển của cuộc kháng chiến và thắng lợi Điện Biên Phủ.</p>
         <div class="topic-preview"><span>Toàn quốc kháng chiến</span><span>Các chiến dịch</span><span>Điện Biên Phủ</span></div>
-        <a class="card-link" href="#bai7-detail">Xem trọng tâm bài 7 <span aria-hidden="true">→</span></a>
-<section class="history-bank" data-history-bank="Bài 7">
-        <div class="history-bank-head">
-          <div>
-            <div class="section-kicker">NGÂN HÀNG CÂU HỎI · BÀI 7</div>
-            <div class="history-bank-title">Ngân hàng luyện tập Bài 7 · Kháng chiến chống thực dân Pháp</div>
-            <p class="history-bank-desc">Chỉ gồm câu hỏi của Bài 7. Bài còn lại có ngân hàng riêng, không trộn câu.</p>
-            <div class="history-bank-counts">
-              <span data-count-mc>Đang tải câu trắc nghiệm…</span>
-              <span data-count-tf>Đang tải câu Đúng/Sai…</span>
-            </div>
-          </div>
-          <button class="history-bank-toggle" type="button" aria-expanded="false">Mở ngân hàng Bài 7 ↓</button>
-        </div>
-        <div class="history-bank-panel" hidden>
-          <div class="history-bank-tabs">
-            <button class="history-bank-tab" type="button" data-kind="mc" aria-pressed="true">Trắc nghiệm</button>
-            <button class="history-bank-tab" type="button" data-kind="tf" aria-pressed="false">Đúng / Sai</button>
-          </div>
-          <div class="history-bank-toolbar">
-            <strong data-bank-progress>Chọn dạng câu hỏi để bắt đầu.</strong>
-            <span class="muted" data-bank-note style="font-size:11px">Chọn đáp án để xem lời giải ngay.</span>
-          </div>
-          <div class="history-bank-nav" data-bank-nav></div>
-          <div class="history-bank-question" data-bank-question><p class="muted">Đang tải ngân hàng câu hỏi…</p></div>
-          <div class="history-bank-controls">
-            <button type="button" data-prev>← Câu trước</button>
-            <button type="button" class="primary" data-next>Câu tiếp →</button>
-          </div>
-        </div>
-      </section>
+        <button class="card-link" type="button" data-open-lesson="bai7" aria-label="Mở nội dung ôn tập Bài 7">Xem trọng tâm bài 7 <span aria-hidden="true">→</span></button>
+
       </article>
     </div>
   </section>
+  </div>
 
-  <section aria-label="Nội dung chính của Bài 6 và Bài 7">
-    <div class="section-head">
-      <div><div class="section-kicker">KIẾN THỨC CỐT LÕI</div><h2>Nội dung chính</h2></div>
-      <p>Tóm tắt những diễn biến, sự kiện và ý nghĩa quan trọng của từng bài.</p>
+  <section class="history-view lesson-view" id="view-bai6" hidden aria-labelledby="bai6-page-title">
+    <div class="lesson-toolbar">
+      <button class="lesson-back-button" type="button" data-back-lessons><span aria-hidden="true">←</span> Quay lại các bài ôn tập</button>
+      <span class="lesson-page-tag">LỊCH SỬ · BÀI 06</span>
     </div>
-    <div class="details">
-            <article class="detail" id="bai6-detail">
+    <div class="lesson-heading">
+      <div class="section-kicker">CHUYÊN ĐỀ ÔN TẬP · BÀI 06</div>
+      <h1 id="bai6-page-title">Cách mạng tháng Tám năm 1945</h1>
+      <p>Nắm vững bối cảnh, thời cơ, diễn biến, nguyên nhân và ý nghĩa lịch sử; sau đó luyện câu hỏi riêng của Bài 6.</p>
+    </div>
+    <div class="details lesson-details"><article class="detail" id="bai6-detail">
         <h3><span aria-hidden="true">✦</span> Bài 6 · Cách mạng tháng Tám năm 1945</h3>
         <ul>
           <li><strong>Bối cảnh và thời cơ:</strong> Nhật Bản đầu hàng Đồng minh ngày 15/8/1945; bộ máy tay sai hoang mang, quân Nhật rệu rã. Trong nước, lực lượng cách mạng đã được chuẩn bị và quần chúng sẵn sàng nổi dậy.</li>
@@ -398,8 +373,51 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
             </ul>
           </div>
         </details>
-      </article>
-<article class="detail" id="bai7-detail">
+      
+<section class="history-bank" data-history-bank="Bài 6">
+        <div class="history-bank-head">
+          <div>
+            <div class="section-kicker">NGÂN HÀNG CÂU HỎI · BÀI 6</div>
+            <div class="history-bank-title">Ngân hàng luyện tập Bài 6 · Cách mạng tháng Tám năm 1945</div>
+            <p class="history-bank-desc">Chỉ gồm câu hỏi của Bài 6. Bài còn lại có ngân hàng riêng, không trộn câu.</p>
+            <div class="history-bank-counts">
+              <span data-count-mc>Đang tải câu trắc nghiệm…</span>
+              <span data-count-tf>Đang tải câu Đúng/Sai…</span>
+            </div>
+          </div>
+          <button class="history-bank-toggle" type="button" aria-expanded="false">Mở ngân hàng Bài 6 ↓</button>
+        </div>
+        <div class="history-bank-panel" hidden>
+          <div class="history-bank-tabs">
+            <button class="history-bank-tab" type="button" data-kind="mc" aria-pressed="true">Trắc nghiệm</button>
+            <button class="history-bank-tab" type="button" data-kind="tf" aria-pressed="false">Đúng / Sai</button>
+          </div>
+          <div class="history-bank-toolbar">
+            <strong data-bank-progress>Chọn dạng câu hỏi để bắt đầu.</strong>
+            <span class="muted" data-bank-note style="font-size:11px">Chọn đáp án để xem lời giải ngay.</span>
+          </div>
+          <div class="history-bank-nav" data-bank-nav></div>
+          <div class="history-bank-question" data-bank-question><p class="muted">Đang tải ngân hàng câu hỏi…</p></div>
+          <div class="history-bank-controls">
+            <button type="button" data-prev>← Câu trước</button>
+            <button type="button" class="primary" data-next>Câu tiếp →</button>
+          </div>
+        </div>
+      </section>
+</article></div>
+  </section>
+
+  <section class="history-view lesson-view" id="view-bai7" hidden aria-labelledby="bai7-page-title">
+    <div class="lesson-toolbar">
+      <button class="lesson-back-button" type="button" data-back-lessons><span aria-hidden="true">←</span> Quay lại các bài ôn tập</button>
+      <span class="lesson-page-tag">LỊCH SỬ · BÀI 07</span>
+    </div>
+    <div class="lesson-heading">
+      <div class="section-kicker">CHUYÊN ĐỀ ÔN TẬP · BÀI 07</div>
+      <h1 id="bai7-page-title">Kháng chiến chống thực dân Pháp (1945–1954)</h1>
+      <p>Ôn tập những năm đầu sau Cách mạng tháng Tám, đường lối kháng chiến, các chiến dịch và thắng lợi Điện Biên Phủ; sau đó luyện câu hỏi riêng của Bài 7.</p>
+    </div>
+    <div class="details lesson-details"><article class="detail" id="bai7-detail">
         <h3><span aria-hidden="true">✦</span> Bài 7 · Kháng chiến chống thực dân Pháp (1945–1954)</h3>
         <ul>
           <li><strong>Hoàn cảnh:</strong> Sau Cách mạng tháng Tám, nước Việt Nam Dân chủ Cộng hòa đứng trước tình thế “ngàn cân treo sợi tóc”: ngoại xâm và nội phản, kinh tế kiệt quệ, tài chính khó khăn, nạn đói và nạn mù chữ.</li>
@@ -456,12 +474,39 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
             </ul>
           </div>
         </details>
-      </article>
-    </div>
+      
+<section class="history-bank" data-history-bank="Bài 7">
+        <div class="history-bank-head">
+          <div>
+            <div class="section-kicker">NGÂN HÀNG CÂU HỎI · BÀI 7</div>
+            <div class="history-bank-title">Ngân hàng luyện tập Bài 7 · Kháng chiến chống thực dân Pháp</div>
+            <p class="history-bank-desc">Chỉ gồm câu hỏi của Bài 7. Bài còn lại có ngân hàng riêng, không trộn câu.</p>
+            <div class="history-bank-counts">
+              <span data-count-mc>Đang tải câu trắc nghiệm…</span>
+              <span data-count-tf>Đang tải câu Đúng/Sai…</span>
+            </div>
+          </div>
+          <button class="history-bank-toggle" type="button" aria-expanded="false">Mở ngân hàng Bài 7 ↓</button>
+        </div>
+        <div class="history-bank-panel" hidden>
+          <div class="history-bank-tabs">
+            <button class="history-bank-tab" type="button" data-kind="mc" aria-pressed="true">Trắc nghiệm</button>
+            <button class="history-bank-tab" type="button" data-kind="tf" aria-pressed="false">Đúng / Sai</button>
+          </div>
+          <div class="history-bank-toolbar">
+            <strong data-bank-progress>Chọn dạng câu hỏi để bắt đầu.</strong>
+            <span class="muted" data-bank-note style="font-size:11px">Chọn đáp án để xem lời giải ngay.</span>
+          </div>
+          <div class="history-bank-nav" data-bank-nav></div>
+          <div class="history-bank-question" data-bank-question><p class="muted">Đang tải ngân hàng câu hỏi…</p></div>
+          <div class="history-bank-controls">
+            <button type="button" data-prev>← Câu trước</button>
+            <button type="button" class="primary" data-next>Câu tiếp →</button>
+          </div>
+        </div>
+      </section>
+</article></div>
   </section>
-
-
-  <aside class="info"><span class="info-icon" aria-hidden="true">💡</span><div><strong>Cách sử dụng ngân hàng:</strong> Câu hỏi được chia thành hai kho độc lập ngay trong mục Bài 6 và Bài 7. Mở kho của bài nào thì chỉ luyện câu hỏi thuộc bài đó; đáp án và giải thích hiện ngay sau khi chọn.</div></aside>
 </main>
 <footer>© 2026 Nguyễn Khánh Lâm · Bản quyền được bảo lưu.</footer>
 <script>
@@ -604,5 +649,41 @@ function initRoot(root){
 roots.forEach(initRoot);
 })();
 </script>
+
+<script id="history-lesson-navigation">
+(function(){
+  "use strict";
+  var views={
+    lessons:document.getElementById("view-lessons"),
+    bai6:document.getElementById("view-bai6"),
+    bai7:document.getElementById("view-bai7")
+  };
+  function show(name,writeHash){
+    if(!views[name])name="lessons";
+    Object.keys(views).forEach(function(key){
+      var active=key===name;
+      views[key].hidden=!active;
+      views[key].classList.toggle("active",active);
+    });
+    if(writeHash){
+      var hash=name==="lessons"?"":("#"+name);
+      history.replaceState(null,"",location.pathname+location.search+hash);
+    }
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  document.addEventListener("click",function(event){
+    var open=event.target.closest("[data-open-lesson]");
+    if(open){show(open.getAttribute("data-open-lesson"),true);return;}
+    if(event.target.closest("[data-back-lessons]"))show("lessons",true);
+  });
+  var initial=(location.hash||"").replace("#","");
+  show(initial==="bai6"||initial==="bai7"?initial:"lessons",false);
+  window.addEventListener("hashchange",function(){
+    var next=(location.hash||"").replace("#","");
+    show(next==="bai6"||next==="bai7"?next:"lessons",false);
+  });
+})();
+</script>
+
 </body>
 </html>
