@@ -157,6 +157,18 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
 .detail>ul>li{line-height:1.7}
 @media(max-width:720px){.study-detail summary{padding:11px 12px}.study-detail-body{padding:2px 12px 13px}}
 
+
+/* Khu vực mở ngân hàng luyện đề */
+.exam-launch{margin:26px 0 22px;padding:23px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 10%,var(--surface)),color-mix(in srgb,var(--accent-2) 9%,var(--surface)));box-shadow:var(--shadow)}
+.exam-launch-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.exam-launch h2{margin:3px 0 7px;font-size:24px}
+.exam-launch p{margin:0;color:var(--muted);max-width:720px;font-size:13px}
+.exam-launch-stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.exam-launch-stats span{padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-size:10px;font-weight:900;color:var(--ink)}
+.exam-launch-link{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 17px;border-radius:13px;background:linear-gradient(120deg,#078b91,#5674dc);color:#fff;text-decoration:none;font-size:13px;font-weight:950;box-shadow:0 8px 18px rgba(7,139,145,.18)}
+.exam-launch-link:hover{transform:translateY(-2px);filter:brightness(1.06)}
+@media(max-width:600px){.exam-launch{padding:17px}.exam-launch-link{width:100%}}
+
 </style>
 </head>
 <body>
@@ -342,7 +354,18 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
     </div>
   </section>
 
-  <aside class="info"><span class="info-icon" aria-hidden="true">💡</span><div><strong>Lưu ý về chức năng:</strong> Trang hiện cung cấp khu vực chọn bài và nội dung trọng tâm để ôn tập. Chức năng làm đề, chấm điểm và lưu kết quả riêng cho môn Lịch sử sẽ được bổ sung khi ngân hàng câu hỏi được tích hợp; các nút ở đây không giả lập đề thi.</div></aside>
+  <section class="exam-launch" aria-labelledby="historyExamTitle">
+    <div class="exam-launch-inner">
+      <div>
+        <div class="section-kicker">KHÔNG GIAN LUYỆN THI</div>
+        <h2 id="historyExamTitle">Ngân hàng luyện đề Lịch sử 12</h2>
+        <p>Làm đề ngẫu nhiên theo cấu trúc tốt nghiệp THPT: 24 câu trắc nghiệm nhiều lựa chọn, 4 câu Đúng/Sai, 50 phút. Có đồng hồ, đánh dấu phân vân, chấm điểm và giải thích sau khi nộp.</p>
+        <div class="exam-launch-stats"><span>26 câu trắc nghiệm</span><span>11 nhóm Đúng/Sai</span><span>10 điểm · 50 phút</span></div>
+      </div>
+      <a class="exam-launch-link" href="./history-exam.html">Vào ngân hàng luyện thi →</a>
+    </div>
+  </section>
+  <aside class="info"><span class="info-icon" aria-hidden="true">💡</span><div><strong>Lưu ý về dữ liệu:</strong> Ngân hàng hiện đã đưa vào các câu hỏi có đủ đề, phương án và đáp án trong tài liệu nguồn truy xuất được. Những bộ đáp án 139/35 và 214/34 hiện chỉ có đáp án/giải thích, chưa có toàn bộ câu hỏi gốc nên chưa thể nhập chính xác phần còn thiếu.</div></aside>
 </main>
 <footer>© 2026 Nguyễn Khánh Lâm · Bản quyền được bảo lưu.</footer>
 <script>
