@@ -49,6 +49,13 @@ function updateResume(){var b=$("historyRandomResume");if(b)b.hidden=!getDraft()
 function restoreDraft(){var d=getDraft();if(!d)return false;exam=d.exam;answers=d.answers;currentIndex=Math.max(0,Math.min(27,Number(d.currentIndex)||0));seconds=Math.max(1,Math.min(EXAM_SECONDS,Number(d.seconds)||EXAM_SECONDS));marked=new Set(Array.isArray(d.marked)?d.marked:[]);candidateName=String(d.candidateName||"");startedAt=Number(d.startedAt)||Date.now();finishing=false;renderExam();setView("exam");startTimer();toast("Đã khôi phục bài thi Lịch sử đang làm.");return true;}
 function startNewExam(){var old=getDraft();if(old&&!confirm("Bạn đang có bài thi chưa nộp. Tạo đề mới sẽ thay thế bài đang làm. Tiếp tục?"))return;var built=buildExam();if(built.error){toast(built.error);return;}var name=askName();if(!name)return;exam=built.exam;candidateName=name;answers=exam.questions.map(function(q){return q.type==="tf"?[null,null,null,null]:null;});currentIndex=0;seconds=EXAM_SECONDS;marked=new Set();startedAt=Date.now();finishing=false;recordUsage(exam.questions);clearDraft();saveDraft();renderExam();setView("exam");startTimer();}
 function resumeExam(){if(!restoreDraft())toast("Không tìm thấy bài thi đang làm.");}
+function openRandomSpace(){
+ setView("lessons");
+ window.setTimeout(function(){
+  var panel=document.querySelector(".history-random-launch");
+  if(panel)panel.scrollIntoView({behavior:"smooth",block:"center"});
+ },180);
+}
 function cancelExam(){
  if(!exam)return;
  var ok=window.confirm("Bạn có chắc chắn muốn hủy bài thi này? Toàn bộ câu trả lời, câu đã đánh dấu phân vân và thời gian đang lưu sẽ bị xóa. Lịch sử các bài đã nộp vẫn được giữ nguyên.");
@@ -80,6 +87,7 @@ function renderPastAttempts(){var host=$("historyPastAttempts");if(!host)return;
 function updateBankStatus(){var button=$("historyRandomStart"),status=$("historyRandomBankStatus"),bank=window.HISTORY_BANK;if(!button||!status)return;if(!bank){button.disabled=true;status.textContent="Đang tải ngân hàng câu hỏi…";return;}var mc=(bank.mc||[]).filter(validMC),tf=(bank.tf||[]).filter(validTF);button.disabled=mc.length<24||tf.length<4;status.textContent="Ngân hàng hiện có "+mc.length+" câu trắc nghiệm và "+tf.length+" nhóm Đúng/Sai hợp lệ. "+(mc.length>=24&&tf.length>=4?"Đủ số lượng cho một đề. Vì hiện chỉ dư "+(mc.length-24)+" câu trắc nghiệm, các đề liên tiếp sẽ còn trùng nhiều câu; cần bổ sung thêm câu gốc để tăng độ đa dạng.":"Chưa đủ dữ liệu để tạo một đề hoàn chỉnh.");}
 function bindEvents(){if(eventsBound)return;eventsBound=true;
  $("historyRandomStart").addEventListener("click",startNewExam);$("historyRandomResume").addEventListener("click",restoreDraft);
+ document.querySelectorAll("[data-open-random-space]").forEach(function(button){button.addEventListener("click",openRandomSpace);});
  $("historyExamBack").addEventListener("click",function(){saveDraft();setView("lessons");});
  $("historyExamCancel").addEventListener("click",cancelExam);
  $("historyExamPrev").addEventListener("click",function(){navigate(currentIndex-1);});$("historyExamNext").addEventListener("click",function(){navigate(currentIndex+1);});
