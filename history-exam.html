@@ -186,29 +186,13 @@ function updateTimer(){
  $("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
  $("timer").style.color=secondsLeft<300?"var(--red)":"var(--accent)";
 }
-function submit(auto){
- if(!session)return;
- var missing=totalAnswered()-activeAnsweredCount();
- if(missing>0&&!auto&&!window.confirm("Bạn còn "+missing+" ý chưa trả lời. Nộp bài ngay? Ý bỏ trống không có điểm."))return;
- clearInterval(timerHandle);timerHandle=null;
- var items=getItems(),mcCorrect=0,tfCorrect=0,tfScore=0,mcScore=0,tfBreak=[];
- items.mc.forEach(function(q,i){if(session.mcAnswers[i]===q.answer)mcCorrect++;});
- mcScore=mcCorrect*.25;
- items.tf.forEach(function(g,gi){var c=0;g.items.forEach(function(it,si){if(session.tfAnswers[gi][si]===it.answer)c++;});tfCorrect+=c;var p=TF_POINTS[c];tfScore+=p;tfBreak.push({correct:c,points:p});});
- var total=mcScore+tfScore,used=Math.max(0,EXAM_SECONDS-Math.max(0,Math.ceil((session.endAt-session.createdAt)/1000)-Math.max(0,secondsLeft)));
- var result={name:session.name,score:total,mcCorrect:mcCorrect,tfCorrect:tfCorrect,mcScore:mcScore,tfScore:tfScore,tfBreak:tfBreak,submittedAt:Date.now(),timeUsed:Math.max(0,Math.floor((Date.now()-session.createdAt)/1000))};
- try{var records=JSON.parse(localStorage.getItem(RESULT_KEY)||"[]");if(!Array.isArray(records))records=[];records.unshift(result);localStorage.setItem(RESULT_KEY,JSON.stringify(records.slice(0,30)));}catch(e){}
- try{localStorage.removeItem(SESSION_KEY);}catch(e){}
- showResult(result,items);session=null;
-}
 function showResult(r,items){
  $("scoreText").textContent=fmt(r.score)+"/10";
  $("resultCaption").textContent=r.score>=8.5?"Rất tốt! Bạn nắm kiến thức khá vững.":r.score>=6.5?"Khá tốt! Hãy xem lại các ý còn nhầm.":r.score>=5?"Bạn đã có nền tảng, hãy luyện thêm.":"Đừng nản, hãy xem giải thích và thử lại nhé.";
  $("mcResult").textContent=r.mcCorrect+"/24";$("tfResult").textContent=r.tfCorrect+"/16";
  var m=Math.floor(r.timeUsed/60),s=r.timeUsed%60;$("timeResult").textContent=m+" phút "+s+" giây";
  var h="";
- items.mc.forEach(function(q,i){var chosen=session?null:null;});
- // Result rendering uses captured answers before the session is cleared.
+ // Kết quả dùng bản sao câu trả lời được lưu trước khi đóng phiên làm bài.
  $("reviewList").innerHTML=buildReview(items,r);
  show("result");
 }
