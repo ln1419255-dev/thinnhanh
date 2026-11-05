@@ -416,7 +416,7 @@ button.history-exam-option{cursor:pointer}
   border:1px solid rgba(255,255,255,.35);border-radius:9px;font-size:16px;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 4px 10px rgba(20,40,70,.08);
 }
-.history-nav-button[data-history-nav="overview"] .history-nav-icon{background:linear-gradient(145deg,#d8f5e9,#c9e9ed)}
+.history-nav-button[data-history-nav="home"] .history-nav-icon{background:linear-gradient(145deg,#d8f5e9,#c9e9ed)}
 .history-nav-button[data-history-nav="chapters"] .history-nav-icon{background:linear-gradient(145deg,#e5defe,#f2e9ff)}
 .history-nav-button[data-history-nav="history"] .history-nav-icon{background:linear-gradient(145deg,#ffe0ec,#ffe9dc)}
 .history-nav-button[data-history-nav="statistics"] .history-nav-icon{background:linear-gradient(145deg,#fff0c9,#ffe3a8)}
@@ -477,6 +477,30 @@ button.history-exam-option{cursor:pointer}
   .history-stat-recent{padding:14px}
 }
 
+
+/* Tổng quan, Chương học và Lịch sử làm bài theo đúng cấu trúc điều hướng Vật lí */
+.history-overview-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:17px 0}
+.history-overview-stat{display:flex;align-items:center;gap:12px;min-width:0;padding:15px 16px;border:1px solid var(--line);border-radius:15px;background:var(--surface);box-shadow:0 6px 22px rgba(24,48,75,.045)}
+.history-overview-icon{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:13px;background:color-mix(in srgb,var(--accent) 12%,var(--surface-2));font-size:20px}
+.history-overview-stat strong{display:block;color:var(--ink);font-size:23px;line-height:1.15;font-weight:950}
+.history-overview-stat small{display:block;margin-top:4px;color:var(--muted);font-size:11px;font-weight:750}
+.history-home-actions{display:flex;justify-content:flex-end;margin:0 0 17px}
+.history-home-chapters{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:10px 15px;border:0;border-radius:11px;background:linear-gradient(110deg,#08aaa9,#087f8c);color:#fff;font:inherit;font-size:12px;font-weight:900;cursor:pointer;box-shadow:0 7px 17px rgba(7,139,145,.17);transition:transform .18s,filter .18s}
+.history-home-chapters:hover{transform:translateY(-2px);filter:brightness(1.06)}
+#view-chapters>.section-head{margin-top:22px}
+#view-history .history-attempts{margin-top:0}
+:root[data-theme="dark"] .history-overview-stat{background:var(--surface);border-color:var(--line);box-shadow:0 8px 24px rgba(0,0,0,.16)}
+:root[data-theme="dark"] .history-overview-icon{background:linear-gradient(145deg,#1d4050,#293957)}
+@media(max-width:820px){
+ .history-overview-stats{gap:9px}
+}
+@media(max-width:600px){
+ .history-overview-stats{grid-template-columns:1fr;gap:8px}
+ .history-overview-stat{padding:12px 14px}
+ .history-home-actions{justify-content:stretch}
+ .history-home-chapters{width:100%}
+}
+
 </style>
 <script src="./history-data.js?rev=20261105" defer></script>
 </head>
@@ -498,10 +522,10 @@ button.history-exam-option{cursor:pointer}
     <button class="history-nav-button" type="button" data-history-nav="tips"><span class="history-nav-icon">💡</span><span>Mẹo ôn tập</span></button>
   </aside>
 <main>
-  <div class="history-view active" id="view-lessons">
-  <section class="hero">
+  <section class="history-view active" id="view-home" aria-labelledby="historyHomeTitle">
+<section class="hero">
     <div class="eyebrow">MÔN LỊCH SỬ · LỚP 12</div>
-    <h1>Học chắc từng dấu mốc.<br>Vững vàng mỗi kỳ thi.</h1>
+    <h1 id="historyHomeTitle">Học chắc từng dấu mốc.<br>Vững vàng mỗi kỳ thi.</h1>
     <p>Khu vực ôn tập Lịch sử được sắp xếp theo từng bài học. Chọn chuyên đề để xem nội dung trọng tâm và hệ thống lại kiến thức trước khi luyện đề.</p>
     <div class="hero-foot">
       <span class="hero-chip">📚 02 bài học</span>
@@ -509,7 +533,40 @@ button.history-exam-option{cursor:pointer}
       <span class="hero-chip">🌗 Hỗ trợ sáng · tối</span>
     </div>
   </section>
-  <section aria-labelledby="chooseTitle">
+    <div class="history-overview-stats" aria-label="Tổng quan kết quả học tập">
+      <article class="history-overview-stat"><span class="history-overview-icon">📝</span><div><strong id="historyHomeAttempts">0</strong><small>Lượt thi đã hoàn thành</small></div></article>
+      <article class="history-overview-stat"><span class="history-overview-icon">📈</span><div><strong id="historyHomeAverage">—</strong><small>Điểm trung bình</small></div></article>
+      <article class="history-overview-stat"><span class="history-overview-icon">🏆</span><div><strong id="historyHomeBest">—</strong><small>Điểm cao nhất</small></div></article>
+    </div>
+    <div class="history-home-actions">
+      <button class="history-home-chapters" type="button" data-history-nav="chapters">📚 Chọn Bài 6 hoặc Bài 7 <span aria-hidden="true">→</span></button>
+    </div>
+<section class="history-random-launch" aria-labelledby="historyRandomTitle">
+    <div class="history-random-copy">
+      <div class="section-kicker">THI THỬ · ĐỀ NGẪU NHIÊN</div>
+      <h2 id="historyRandomTitle">Không gian luyện thi</h2>
+      <p>Đề tổng hợp câu hỏi nguyên văn từ ngân hàng Bài 6 và Bài 7. Mỗi lượt thi được chọn và sắp xếp ngẫu nhiên.</p>
+      <div class="history-random-stats">
+        <span>24 câu trắc nghiệm · 6 điểm</span>
+        <span>4 nhóm Đúng/Sai · 4 điểm</span>
+        <span>50 phút · 10 điểm</span>
+      </div>
+      <p class="history-random-note" id="historyRandomBankStatus" aria-live="polite">Đang tải ngân hàng câu hỏi…</p>
+    </div>
+    <div class="history-random-actions">
+      <button class="history-random-start" id="historyRandomStart" type="button" disabled>🎲 Tạo đề ngẫu nhiên</button>
+      <button class="history-random-resume" id="historyRandomResume" type="button" hidden>Tiếp tục bài đang làm →</button>
+    </div>
+  </section>
+  </section>
+
+  <section class="history-view" id="view-chapters" hidden aria-labelledby="chooseTitle">
+    <div class="history-utility-heading">
+      <div class="section-kicker">THƯ VIỆN LỊCH SỬ 12</div>
+      <h1>Chương học</h1>
+      <p>Chọn Bài 6 hoặc Bài 7 để xem nội dung trọng tâm và ôn tập riêng từng bài.</p>
+    </div>
+<section aria-labelledby="chooseTitle">
     <div class="section-head">
       <div><div class="section-kicker">CHỌN CHUYÊN ĐỀ</div><h2 id="chooseTitle">Các bài ôn tập</h2></div>
       <p>Chọn một bài để xem các nội dung cần nắm vững.</p>
@@ -534,33 +591,22 @@ button.history-exam-option{cursor:pointer}
     </div>
 
   </section>
-
-  <section class="history-random-launch" aria-labelledby="historyRandomTitle">
-    <div class="history-random-copy">
-      <div class="section-kicker">THI THỬ · ĐỀ NGẪU NHIÊN</div>
-      <h2 id="historyRandomTitle">Không gian luyện thi</h2>
-      <p>Đề tổng hợp câu hỏi nguyên văn từ ngân hàng Bài 6 và Bài 7. Mỗi lượt thi được chọn và sắp xếp ngẫu nhiên.</p>
-      <div class="history-random-stats">
-        <span>24 câu trắc nghiệm · 6 điểm</span>
-        <span>4 nhóm Đúng/Sai · 4 điểm</span>
-        <span>50 phút · 10 điểm</span>
-      </div>
-      <p class="history-random-note" id="historyRandomBankStatus" aria-live="polite">Đang tải ngân hàng câu hỏi…</p>
-    </div>
-    <div class="history-random-actions">
-      <button class="history-random-start" id="historyRandomStart" type="button" disabled>🎲 Tạo đề ngẫu nhiên</button>
-      <button class="history-random-resume" id="historyRandomResume" type="button" hidden>Tiếp tục bài đang làm →</button>
-    </div>
   </section>
 
-  <section class="history-attempts" aria-labelledby="historyPastTitle">
+  <section class="history-view history-utility-view" id="view-history" hidden aria-labelledby="historyPageTitle">
+    <div class="history-utility-heading">
+      <div class="section-kicker">THEO DÕI TIẾN ĐỘ · LỊCH SỬ 12</div>
+      <h1 id="historyPageTitle">Lịch sử làm bài</h1>
+      <p>Xem lại các lượt thi đã nộp, điểm số và phần chữa bài chi tiết.</p>
+    </div>
+<section class="history-attempts" aria-labelledby="historyPastTitle">
     <div class="history-attempts-heading">
       <div><div class="section-kicker">KẾT QUẢ CỦA BẠN</div><h2 id="historyPastTitle">Lịch sử thi thử</h2></div>
       <span>6 lượt gần nhất</span>
     </div>
     <div id="historyPastAttempts"><p class="history-exam-empty">Bạn chưa có lượt thi thử Lịch sử nào.</p></div>
   </section>
-  </div>
+  </section>
 
   <section class="history-view history-utility-view" id="view-statistics" hidden aria-labelledby="historyStatisticsTitle">
     <div class="history-utility-heading">
@@ -963,20 +1009,23 @@ roots.forEach(initRoot);
 (function(){
   "use strict";
   var views={
-    lessons:document.getElementById("view-lessons"),
+    home:document.getElementById("view-home"),
+    chapters:document.getElementById("view-chapters"),
+    history:document.getElementById("view-history"),
     bai6:document.getElementById("view-bai6"),
     bai7:document.getElementById("view-bai7"),
     statistics:document.getElementById("view-statistics"),
     tips:document.getElementById("view-tips")
   };
   var layout=document.getElementById("historyLayout");
-  function activateNav(key){
+  function setNav(key){
     document.querySelectorAll("[data-history-nav]").forEach(function(button){
       button.classList.toggle("active",button.getAttribute("data-history-nav")===key);
     });
   }
-  function show(name,writeHash,navKey){
-    if(!views[name])name="lessons";
+  function show(name,writeHash){
+    if(name==="lessons")name="home";
+    if(!views[name])name="home";
     document.querySelectorAll(".history-view").forEach(function(view){
       view.hidden=true;view.classList.remove("active");
     });
@@ -985,39 +1034,29 @@ roots.forEach(initRoot);
       views[key].hidden=!active;views[key].classList.toggle("active",active);
     });
     if(layout)layout.classList.remove("exam-focus");
-    var activeKey=navKey||(name==="bai6"||name==="bai7"?"chapters":name==="statistics"?"statistics":name==="tips"?"tips":"overview");
-    activateNav(activeKey);
+    setNav(name==="bai6"||name==="bai7"?"chapters":name);
     if(writeHash){
-      var hash=name==="lessons"?"":("#"+name);
+      var hash=name==="home"?"":("#"+name);
       history.replaceState(null,"",location.pathname+location.search+hash);
     }
     window.scrollTo({top:0,behavior:"smooth"});
   }
-  function scrollToSection(selector){
-    var target=document.querySelector(selector);
-    if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
-  }
   document.addEventListener("click",function(event){
     var nav=event.target.closest("[data-history-nav]");
-    if(nav){
-      var key=nav.getAttribute("data-history-nav");
-      if(key==="overview"){show("lessons",true,"overview");return;}
-      if(key==="chapters"){show("lessons",true,"chapters");window.setTimeout(function(){scrollToSection("#chooseTitle");},120);return;}
-      if(key==="history"){show("lessons",true,"history");window.setTimeout(function(){scrollToSection(".history-attempts");},120);return;}
-      if(key==="statistics"){show("statistics",true,"statistics");return;}
-      if(key==="tips"){show("tips",true,"tips");return;}
-    }
+    if(nav){show(nav.getAttribute("data-history-nav"),true);return;}
     var open=event.target.closest("[data-open-lesson]");
     if(open){show(open.getAttribute("data-open-lesson"),true);return;}
     var card=event.target.closest(".card.c6,.card.c7");
     if(card){show(card.classList.contains("c6")?"bai6":"bai7",true);return;}
-    if(event.target.closest("[data-back-lessons]"))show("lessons",true,"chapters");
+    if(event.target.closest("[data-back-lessons]")){show("chapters",true);return;}
   });
   var initial=(location.hash||"").replace("#","");
-  show(views[initial]?initial:"lessons",false);
+  if(initial==="lessons")initial="home";
+  show(views[initial]?initial:"home",false);
   window.addEventListener("hashchange",function(){
     var next=(location.hash||"").replace("#","");
-    show(views[next]?next:"lessons",false);
+    if(next==="lessons")next="home";
+    show(views[next]?next:"home",false);
   });
 })();
 </script>
