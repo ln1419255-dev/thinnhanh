@@ -140,6 +140,23 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
   .card h3{font-size:21px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Nội dung bài học có thể thu gọn */
+.study-detail{margin-top:14px;border:1px solid var(--line);border-radius:13px;background:var(--surface-2);overflow:hidden}
+.study-detail summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;padding:12px 15px;color:var(--accent);font-size:13px;font-weight:900;cursor:pointer;user-select:none}
+.study-detail summary::-webkit-details-marker{display:none}
+.study-detail summary:after{content:"＋";display:grid;place-items:center;width:25px;height:25px;flex:0 0 25px;border-radius:8px;background:color-mix(in srgb,var(--accent) 13%,var(--surface));font-size:17px;transition:transform .2s}
+.study-detail[open] summary:after{content:"−"}
+.study-detail summary:hover{background:color-mix(in srgb,var(--accent) 7%,var(--surface-2))}
+.study-detail-body{padding:2px 16px 15px;border-top:1px solid var(--line)}
+.study-detail-body h4{margin:14px 0 5px;color:var(--ink);font-size:14px}
+.study-detail-body p{margin:5px 0 9px;color:var(--muted);font-size:13px;line-height:1.75}
+.study-detail-body ul{margin:5px 0 10px;padding-left:19px;color:var(--muted);font-size:13px}
+.study-detail-body li{padding:3px 0}
+.study-detail-body li:before{content:none}
+.detail>ul>li{line-height:1.7}
+@media(max-width:720px){.study-detail summary{padding:11px 12px}.study-detail-body{padding:2px 12px 13px}}
+
 </style>
 </head>
 <body>
@@ -194,28 +211,89 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
       <article class="detail" id="bai6-detail">
         <h3><span aria-hidden="true">✦</span> Bài 6 · Cách mạng tháng Tám năm 1945</h3>
         <ul>
-          <li><strong>Bối cảnh lịch sử:</strong> Chiến tranh thế giới thứ hai bước vào giai đoạn kết thúc; phát xít Nhật đầu hàng Đồng minh vô điều kiện, tạo thời cơ thuận lợi cho cách mạng Việt Nam.</li>
-          <li><strong>Chớp thời cơ:</strong> Đảng và Chủ tịch Hồ Chí Minh kịp thời phát động toàn dân đứng lên Tổng khởi nghĩa giành chính quyền trên cả nước.</li>
-          <li><strong>Diễn biến tiêu biểu:</strong> Khởi nghĩa thắng lợi ở Hà Nội (19/8/1945), Huế (23/8/1945), Sài Gòn (25/8/1945), sau đó thắng lợi trên phạm vi cả nước.</li>
-          <li><strong>Thành lập nhà nước mới:</strong> Ngày 2/9/1945, tại Quảng trường Ba Đình, Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập, khai sinh nước Việt Nam Dân chủ Cộng hòa.</li>
-          <li><strong>Ý nghĩa lịch sử:</strong> Đập tan ách thống trị của thực dân, phát xít và chế độ phong kiến; mở ra kỷ nguyên độc lập, tự do; đồng thời để lại nhiều bài học về đoàn kết, chuẩn bị lực lượng và nắm bắt thời cơ.</li>
+          <li><strong>Bối cảnh và thời cơ:</strong> Chiến tranh thế giới thứ hai đi đến hồi kết; phát xít Nhật đầu hàng Đồng minh vô điều kiện, bộ máy tay sai hoang mang, tạo thời cơ thuận lợi để nhân dân ta nổi dậy giành chính quyền.</li>
+          <li><strong>Chủ trương của Đảng:</strong> Đảng và Chủ tịch Hồ Chí Minh nhận định thời cơ đã đến, phát động toàn dân tiến hành Tổng khởi nghĩa trên phạm vi cả nước.</li>
+          <li><strong>Diễn biến tiêu biểu:</strong> Hà Nội giành chính quyền ngày 19/8, Huế ngày 23/8, Sài Gòn ngày 25/8/1945; nhiều địa phương khác lần lượt giành được chính quyền.</li>
+          <li><strong>Kết quả:</strong> Ngày 2/9/1945, tại Quảng trường Ba Đình, Chủ tịch Hồ Chí Minh đọc Tuyên ngôn Độc lập, khai sinh nước Việt Nam Dân chủ Cộng hòa.</li>
         </ul>
+        <details class="study-detail">
+          <summary>Xem thêm nội dung chi tiết Bài 6</summary>
+          <div class="study-detail-body">
+            <h4>1. Bối cảnh lịch sử và thời cơ cách mạng</h4>
+            <p>Ở trong nước, dưới sự lãnh đạo của Đảng và Mặt trận Việt Minh, lực lượng chính trị và lực lượng vũ trang cách mạng đã được chuẩn bị, phong trào đấu tranh phát triển. Khi Nhật đầu hàng Đồng minh, chính quyền tay sai rệu rã, quân Đồng minh chưa kịp vào Đông Dương giải giáp quân Nhật. Đây là thời cơ khách quan thuận lợi nhưng có thể nhanh chóng mất đi.</p>
+            <h4>2. Chủ trương phát động Tổng khởi nghĩa</h4>
+            <p>Trước tình hình khẩn trương, Đảng kịp thời lãnh đạo toàn dân đứng lên giành chính quyền. Chủ trương thể hiện sự chủ động, nhạy bén trong đánh giá tình hình và quyết tâm không bỏ lỡ thời cơ giành độc lập.</p>
+            <h4>3. Diễn biến chính</h4>
+            <ul>
+              <li>Ngày 19/8/1945: khởi nghĩa thắng lợi ở Hà Nội, tạo tiếng vang và cổ vũ các địa phương.</li>
+              <li>Ngày 23/8/1945: nhân dân giành chính quyền ở Huế.</li>
+              <li>Ngày 25/8/1945: khởi nghĩa thắng lợi ở Sài Gòn; phong trào tiếp tục lan rộng ở các tỉnh, thành.</li>
+              <li>Đến cuối tháng 8/1945, chính quyền về cơ bản đã thuộc về nhân dân trên cả nước.</li>
+            </ul>
+            <h4>4. Sự ra đời của nước Việt Nam Dân chủ Cộng hòa</h4>
+            <p>Ngày 2/9/1945, tại Quảng trường Ba Đình (Hà Nội), Chủ tịch Hồ Chí Minh thay mặt Chính phủ lâm thời đọc Tuyên ngôn Độc lập, tuyên bố với quốc dân và thế giới sự ra đời của nước Việt Nam Dân chủ Cộng hòa.</p>
+            <h4>5. Ý nghĩa lịch sử và bài học kinh nghiệm</h4>
+            <p>Cách mạng tháng Tám lật đổ ách thống trị của thực dân, phát xít và chế độ phong kiến, đưa nhân dân Việt Nam từ thân phận nô lệ trở thành người làm chủ đất nước, mở ra kỷ nguyên độc lập, tự do. Thắng lợi để lại bài học về sự lãnh đạo đúng đắn, xây dựng khối đoàn kết toàn dân, chuẩn bị lực lượng và nắm bắt thời cơ.</p>
+          </div>
+        </details>
       </article>
       <article class="detail" id="bai7-detail">
         <h3><span aria-hidden="true">✦</span> Bài 7 · Kháng chiến chống thực dân Pháp (1945–1954)</h3>
         <ul>
-          <li><strong>Bối cảnh sau Cách mạng tháng Tám:</strong> Nước ta có thuận lợi cơ bản là độc lập, nhân dân tin tưởng vào Đảng và Chủ tịch Hồ Chí Minh. Tuy nhiên, đất nước đối mặt với ngoại xâm và nội phản, kinh tế kiệt quệ, tài chính trống rỗng, hơn 90% dân số mù chữ; tình thế được ví như “ngàn cân treo sợi tóc”. Trên thế giới, phong trào cách mạng phát triển nhưng quan hệ quốc tế ngày càng phức tạp.</li>
-          <li><strong>Nam Bộ kháng chiến (23/9/1945):</strong> Pháp đánh úp trụ sở Ủy ban nhân dân Nam Bộ và cơ quan tự vệ ở Sài Gòn. Quân dân Nam Bộ chiến đấu, kìm chân quân Pháp; cả nước tổ chức chi viện, lập các “đoàn quân Nam tiến”. Cuộc chiến đấu bước đầu làm thất bại âm mưu “đánh nhanh, thắng nhanh” và tạo thời gian chuẩn bị kháng chiến lâu dài.</li>
-          <li><strong>Con đường đi đến Toàn quốc kháng chiến:</strong> Trước tình thế Pháp ngày càng lấn tới, ta ký Hiệp định Sơ bộ (6/3/1946) và Tạm ước (14/9/1946) để tranh thủ thời gian hòa hoãn, củng cố lực lượng. Khi Pháp gửi tối hậu thư, ngày 19/12/1946, Chủ tịch Hồ Chí Minh ra Lời kêu gọi Toàn quốc kháng chiến.</li>
-          <li><strong>Đường lối kháng chiến:</strong> Toàn dân, toàn diện, trường kỳ, tự lực cánh sinh và tranh thủ sự ủng hộ quốc tế. Đường lối thể hiện tư tưởng chiến tranh nhân dân, phát huy sức mạnh đoàn kết toàn dân trên các mặt trận quân sự, chính trị, kinh tế, văn hóa và ngoại giao.</li>
-          <li><strong>Những thắng lợi quân sự đầu tiên:</strong> Cuộc chiến đấu ở các đô thị phía Bắc vĩ tuyến 16 (19/12/1946–17/2/1947) giam chân địch, tạo điều kiện để cơ quan đầu não và chủ lực rút lui an toàn. Chiến dịch Việt Bắc thu – đông 1947 đánh bại cuộc tiến công của Pháp, bảo vệ căn cứ địa và làm phá sản kế hoạch “đánh nhanh, thắng nhanh”.</li>
-          <li><strong>Chiến dịch Biên giới thu – đông 1950:</strong> Ta chủ động tiến công, mở màn bằng trận Đông Khê; chiến dịch thắng lợi, khai thông biên giới Việt – Trung, mở rộng căn cứ Việt Bắc, phá thế bao vây và giành quyền chủ động trên chiến trường chính Bắc Bộ.</li>
-          <li><strong>Bước phát triển mới (1951–1953):</strong> Đại hội đại biểu toàn quốc lần thứ II (2/1951) quyết định đưa Đảng ra hoạt động công khai với tên Đảng Lao động Việt Nam. Hậu phương được củng cố; các mặt trận chính trị, quân sự, kinh tế, văn hóa đều có bước phát triển, tạo thêm sức mạnh cho kháng chiến.</li>
-          <li><strong>Cuộc tiến công Đông – Xuân 1953–1954:</strong> Ta tiến công vào những hướng chiến lược quan trọng mà địch tương đối yếu, buộc Pháp phân tán lực lượng, làm kế hoạch Nava bước đầu bị phá sản và tạo điều kiện chuẩn bị chiến dịch Điện Biên Phủ.</li>
-          <li><strong>Chiến dịch Điện Biên Phủ (13/3–7/5/1954):</strong> Chiến dịch diễn ra qua ba đợt: tiến công các cứ điểm Him Lam, Độc Lập; đánh vào phía đông phân khu Trung tâm; tổng công kích phân khu Trung tâm và phân khu Nam. Chiều 7/5/1954, tập đoàn cứ điểm Điện Biên Phủ bị tiêu diệt, kế hoạch Nava phá sản hoàn toàn.</li>
-          <li><strong>Kết quả và ý nghĩa:</strong> Thắng lợi Điện Biên Phủ tạo cơ sở để ký Hiệp định Giơ-ne-vơ năm 1954, chấm dứt chiến tranh, lập lại hòa bình ở Đông Dương. Cuộc kháng chiến kết thúc ách thống trị thực dân Pháp ở miền Bắc, cổ vũ mạnh mẽ phong trào giải phóng dân tộc trên thế giới.</li>
-          <li><strong>Nguyên nhân thắng lợi:</strong> Sự lãnh đạo đúng đắn của Đảng và Chủ tịch Hồ Chí Minh; tinh thần đoàn kết, chiến đấu của toàn dân, toàn quân; chính quyền, mặt trận, lực lượng vũ trang và hậu phương được xây dựng vững chắc; sự liên minh chiến đấu và ủng hộ quốc tế.</li>
+          <li><strong>Hoàn cảnh:</strong> Sau Cách mạng tháng Tám, nước Việt Nam Dân chủ Cộng hòa đứng trước tình thế “ngàn cân treo sợi tóc”: ngoại xâm và nội phản, kinh tế kiệt quệ, tài chính khó khăn, nạn đói và nạn mù chữ.</li>
+          <li><strong>Mở đầu kháng chiến:</strong> Nam Bộ kháng chiến ngày 23/9/1945; sau các biện pháp hòa hoãn để tranh thủ thời gian, toàn quốc bước vào kháng chiến ngày 19/12/1946.</li>
+          <li><strong>Đường lối:</strong> Kháng chiến toàn dân, toàn diện, trường kỳ, tự lực cánh sinh và tranh thủ sự ủng hộ quốc tế.</li>
+          <li><strong>Các thắng lợi lớn:</strong> Việt Bắc thu – đông 1947, Biên giới thu – đông 1950, các hoạt động quân sự 1951–1953 và cuộc tiến công chiến lược Đông – Xuân 1953–1954.</li>
+          <li><strong>Kết thúc:</strong> Chiến dịch Điện Biên Phủ (13/3–7/5/1954) toàn thắng, tạo điều kiện ký Hiệp định Giơ-ne-vơ năm 1954.</li>
         </ul>
+        <details class="study-detail">
+          <summary>Xem thêm nội dung chi tiết Bài 7</summary>
+          <div class="study-detail-body">
+            <h4>I. Những năm đầu sau Cách mạng tháng Tám và cuộc kháng chiến toàn quốc</h4>
+            <h4>1. Tình hình nước Việt Nam Dân chủ Cộng hòa</h4>
+            <p>Sau ngày độc lập, chính quyền cách mạng còn non trẻ phải đối mặt với nhiều khó khăn cùng lúc. Ở miền Bắc, quân đội nước ngoài vào giải giáp quân Nhật; ở miền Nam, quân Pháp quay trở lại với sự hỗ trợ của quân Anh. Các lực lượng phản cách mạng chống phá chính quyền. Kinh tế nghèo nàn, hậu quả nạn đói và thiên tai nặng nề, ngân sách nhà nước trống rỗng, hơn 90% dân số mù chữ. Những khó khăn đó khiến tình thế đất nước được ví như “ngàn cân treo sợi tóc”.</p>
+            <h4>2. Nam Bộ kháng chiến (23/9/1945)</h4>
+            <p>Ngày 23/9/1945, thực dân Pháp nổ súng đánh chiếm một số cơ quan ở Sài Gòn, mở đầu cuộc chiến tranh xâm lược trở lại Việt Nam. Quân dân Nam Bộ đứng lên chiến đấu, bảo vệ chính quyền cách mạng và các cơ sở trọng yếu. Nhân dân cả nước hướng về Nam Bộ, tổ chức quyên góp, chi viện sức người, sức của và các “đoàn quân Nam tiến”. Cuộc chiến đấu làm chậm bước tiến của Pháp, góp phần bảo vệ thành quả cách mạng và tạo thời gian để cả nước chuẩn bị kháng chiến.</p>
+            <h4>3. Những nỗ lực hòa hoãn và Toàn quốc kháng chiến</h4>
+            <p>Trong năm 1946, Đảng và Chính phủ chủ trương hòa hoãn có nguyên tắc để tránh phải đối phó cùng lúc với nhiều kẻ thù và tranh thủ thời gian củng cố lực lượng. Hiệp định Sơ bộ ngày 6/3/1946 và Tạm ước ngày 14/9/1946 là những bước nhân nhượng cần thiết, nhưng thực dân Pháp liên tiếp gây hấn và tìm cách mở rộng chiến tranh.</p>
+            <p>Trước hành động khiêu khích và tối hậu thư của Pháp, nhân dân Việt Nam không còn con đường nào khác ngoài đứng lên bảo vệ độc lập. Đêm 19/12/1946, cuộc kháng chiến toàn quốc bùng nổ; Chủ tịch Hồ Chí Minh ra Lời kêu gọi Toàn quốc kháng chiến, thể hiện quyết tâm chiến đấu bảo vệ nền độc lập.</p>
+            <h4>4. Đường lối kháng chiến chống Pháp</h4>
+            <ul>
+              <li><strong>Toàn dân:</strong> Mọi người dân tham gia kháng chiến, mỗi người tùy khả năng đảm nhiệm một nhiệm vụ.</li>
+              <li><strong>Toàn diện:</strong> Đấu tranh trên các mặt trận quân sự, chính trị, kinh tế, văn hóa và ngoại giao.</li>
+              <li><strong>Trường kỳ:</strong> Xác định cuộc kháng chiến lâu dài, từng bước chuyển hóa tương quan lực lượng để đi đến thắng lợi.</li>
+              <li><strong>Tự lực cánh sinh:</strong> Dựa vào sức mình là chính, đồng thời tranh thủ sự đồng tình và ủng hộ quốc tế.</li>
+            </ul>
+            <h4>II. Những thắng lợi quân sự và sự phát triển của cuộc kháng chiến</h4>
+            <h4>1. Chiến đấu ở các đô thị phía Bắc vĩ tuyến 16</h4>
+            <p>Từ ngày 19/12/1946, quân dân ta chiến đấu quyết liệt tại các đô thị, tiêu biểu là Hà Nội, nhằm tiêu hao và giam chân quân Pháp. Sau thời gian chiến đấu, lực lượng chủ lực và cơ quan đầu não của ta rút lui an toàn về căn cứ, cả nước có thêm thời gian chuyển sang kháng chiến lâu dài. Cuộc chiến đấu kéo dài đến ngày 17/2/1947 ở nhiều vị trí trọng điểm.</p>
+            <h4>2. Chiến dịch Việt Bắc thu – đông 1947</h4>
+            <p>Thực dân Pháp mở cuộc tiến công quy mô lớn lên căn cứ địa Việt Bắc, nhằm tiêu diệt cơ quan đầu não kháng chiến và bộ đội chủ lực, đồng thời nhanh chóng kết thúc chiến tranh. Quân dân ta chủ động tổ chức phản công, đánh vào các cánh quân và tuyến vận chuyển của địch. Chiến dịch kết thúc với thắng lợi của ta, buộc Pháp rút khỏi Việt Bắc; căn cứ địa được bảo vệ, cơ quan đầu não và lực lượng chủ lực được giữ vững, kế hoạch “đánh nhanh, thắng nhanh” bị phá sản.</p>
+            <h4>3. Chiến dịch Biên giới thu – đông 1950</h4>
+            <p>Sau những thay đổi của tình hình quốc tế và sự trưởng thành của lực lượng kháng chiến, ta chủ động mở chiến dịch trên tuyến biên giới Việt – Trung. Trận Đông Khê là trận mở màn quan trọng. Quân ta tiến công các vị trí then chốt, đánh quân Pháp ứng cứu và rút chạy, làm thất bại một phần hệ thống phòng thủ của địch trên Đường số 4. Thắng lợi giúp khai thông biên giới, mở rộng căn cứ địa Việt Bắc, tăng cường liên lạc với quốc tế và đưa cuộc kháng chiến chuyển sang thế chủ động hơn trên chiến trường chính Bắc Bộ.</p>
+            <h4>4. Sự phát triển của cuộc kháng chiến trong những năm 1951–1953</h4>
+            <p>Đại hội đại biểu toàn quốc lần thứ II của Đảng (tháng 2/1951) đánh dấu bước phát triển về tổ chức và đường lối lãnh đạo; Đảng hoạt động công khai với tên gọi Đảng Lao động Việt Nam. Hậu phương kháng chiến tiếp tục được củng cố, chính quyền dân chủ nhân dân được kiện toàn, lực lượng vũ trang phát triển, sản xuất và đời sống ở vùng tự do được quan tâm. Trên mặt trận quân sự, ta tiếp tục mở các chiến dịch và phối hợp chiến đấu, buộc địch phải đối phó trên nhiều hướng.</p>
+            <h4>III. Cuộc kháng chiến kết thúc thắng lợi</h4>
+            <h4>1. Kế hoạch Nava và cuộc tiến công Đông – Xuân 1953–1954</h4>
+            <p>Trong tình thế sa lầy, Pháp đề ra kế hoạch Nava nhằm tập trung lực lượng cơ động, giành thắng lợi quân sự quyết định trong thời gian ngắn. Ta chủ trương mở các cuộc tiến công vào những hướng quan trọng, nơi địch tương đối sơ hở, buộc chúng phải phân tán lực lượng để đối phó. Việc điều động quân của Pháp làm cho khối cơ động bị phân tán, kế hoạch Nava từng bước bị phá vỡ và Điện Biên Phủ trở thành nơi tập trung lực lượng lớn của địch.</p>
+            <h4>2. Chiến dịch lịch sử Điện Biên Phủ (13/3–7/5/1954)</h4>
+            <p>Điện Biên Phủ được Pháp xây dựng thành tập đoàn cứ điểm mạnh, gồm nhiều cứ điểm liên kết thành các phân khu, với ý đồ thu hút và tiêu diệt chủ lực của ta. Bộ Chính trị quyết định mở chiến dịch, huy động lực lượng và hậu cần lớn, chuẩn bị kỹ lưỡng cho cuộc tiến công.</p>
+            <ul>
+              <li><strong>Đợt 1 (13/3–17/3/1954):</strong> Ta tiến công và tiêu diệt các cứ điểm Him Lam, Độc Lập, mở toang cửa ngõ phía Bắc và Đông Bắc tập đoàn cứ điểm.</li>
+              <li><strong>Đợt 2 (30/3–26/4/1954):</strong> Ta tiến công các cứ điểm phía Đông phân khu Trung tâm, giành giật quyết liệt từng vị trí, siết chặt vòng vây và làm cho hệ thống phòng ngự của địch ngày càng bị chia cắt.</li>
+              <li><strong>Đợt 3 (1/5–7/5/1954):</strong> Ta tổng công kích các cứ điểm còn lại ở phân khu Trung tâm và phân khu Nam. Chiều 7/5/1954, quân ta đánh chiếm sở chỉ huy, tướng Đờ Ca-xtơ-ri cùng bộ tham mưu bị bắt, chiến dịch toàn thắng.</li>
+            </ul>
+            <h4>3. Kết quả, ý nghĩa lịch sử</h4>
+            <p>Thắng lợi Điện Biên Phủ giáng đòn quyết định vào ý chí xâm lược của thực dân Pháp, làm phá sản hoàn toàn kế hoạch Nava và tạo điều kiện thuận lợi cho cuộc đấu tranh ngoại giao tại Hội nghị Giơ-ne-vơ. Hiệp định Giơ-ne-vơ năm 1954 về Đông Dương được ký kết, chấm dứt chiến tranh, lập lại hòa bình ở Đông Dương. Thắng lợi cổ vũ mạnh mẽ phong trào giải phóng dân tộc và phong trào đấu tranh vì hòa bình trên thế giới.</p>
+            <h4>4. Nguyên nhân thắng lợi</h4>
+            <ul>
+              <li>Sự lãnh đạo đúng đắn của Đảng, đứng đầu là Chủ tịch Hồ Chí Minh, với đường lối kháng chiến phù hợp.</li>
+              <li>Truyền thống yêu nước, tinh thần đoàn kết, ý chí chiến đấu và sự hy sinh của toàn dân, toàn quân.</li>
+              <li>Hậu phương được xây dựng, củng cố; lực lượng vũ trang trưởng thành; sự phối hợp giữa các mặt trận được phát huy.</li>
+              <li>Sự đoàn kết chiến đấu của nhân dân ba nước Đông Dương và sự ủng hộ, giúp đỡ của các lực lượng tiến bộ, nhân dân yêu chuộng hòa bình trên thế giới.</li>
+            </ul>
+          </div>
+        </details>
       </article>
     </div>
   </section>
