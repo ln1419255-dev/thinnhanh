@@ -466,20 +466,23 @@ button.history-exam-option{cursor:pointer}
 .history-tips-note strong{color:var(--accent)}
 .history-layout.exam-focus{grid-template-columns:minmax(0,1fr);max-width:1160px}
 .history-layout.exam-focus>.history-sidebar{display:none}
-@media(max-width:820px){
-  .history-layout{grid-template-columns:minmax(0,1fr);gap:15px;margin:20px auto 0;padding:0 18px}
-  .history-sidebar{position:relative;top:auto;display:flex;align-items:center;gap:4px;overflow-x:auto;overscroll-behavior-x:contain;padding:8px;margin:0;border-radius:16px}
+@media(max-width:1000px){
+  .history-layout{grid-template-columns:180px minmax(0,1fr);gap:13px;padding:0 14px}
+}
+@media(max-width:680px){
+  .history-layout{display:flex;flex-direction:column;gap:11px;padding:0 10px;margin:11px auto;width:100%}
+  .history-sidebar{position:static;top:auto;display:flex;align-items:center;gap:5px;overflow-x:auto;overflow-y:hidden;white-space:nowrap;width:100%;max-width:100%;padding:6px;margin:0;border-radius:13px;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .history-sidebar::-webkit-scrollbar{display:none}
   .history-side-label{display:none}
-  .history-nav-button{flex:0 0 auto;width:auto;min-height:40px;white-space:nowrap;margin:0;padding:6px 10px}
-  .history-nav-button .history-nav-icon{width:27px;height:27px;flex-basis:27px}
-  .history-layout>main{padding-bottom:22px}
+  .history-nav-button{display:inline-flex;flex:0 0 auto;width:auto;min-height:39px;padding:8px 11px;font-size:12px;margin:0;border-radius:9px}
+  .history-nav-button .history-nav-icon{width:25px;height:25px;flex-basis:25px;font-size:14px}
+  .history-layout>main{width:100%;min-width:0;padding-bottom:22px}
   .history-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .history-header-pill{display:none}
 }
 @media(max-width:600px){
-  .history-layout{padding:0 14px;margin-top:15px}
-  .history-sidebar{gap:3px;padding:6px}
+  .history-layout{padding:0 10px;margin-top:11px}
   .history-nav-button{font-size:11px;padding:6px 8px;gap:7px}
-  .history-nav-button .history-nav-icon{width:25px;height:25px;flex-basis:25px;font-size:14px}
   .history-utility-heading{padding:21px 18px;border-radius:18px}
   .history-tips-grid{grid-template-columns:1fr}
   .history-stat-recent{padding:14px}
