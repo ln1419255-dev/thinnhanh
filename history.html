@@ -553,6 +553,55 @@ button.history-exam-option{cursor:pointer}
 @media(max-width:900px){.history-lesson-exam-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:560px){.history-lesson-exams{padding:14px;}.history-lesson-exams-head{align-items:flex-start;}.history-lesson-exams-total{flex-basis:67px;width:67px;height:67px;border-radius:17px;}.history-lesson-exams-total strong{font-size:24px;}.history-lesson-exams-total span{font-size:7px;}.history-lesson-exams-title{font-size:17px;}.history-lesson-exam-grid{grid-template-columns:1fr;gap:10px;}.history-lesson-exam-card{padding:14px;}.history-lesson-exam-card p{min-height:0;}}
 
+
+/* Kết quả Lịch sử đồng bộ kiểu hiển thị điểm với Vật lí và Hóa học */
+.history-result-hero{
+ display:grid;grid-template-columns:100px minmax(0,1fr) 176px;align-items:center;gap:18px;
+ margin:0 0 16px;padding:23px;border:1px solid var(--line);border-radius:18px;
+ background:linear-gradient(120deg,var(--surface),var(--surface-2));box-shadow:var(--shadow);
+}
+.history-result-hero .scorecircle{
+ width:96px;height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ border:7px solid color-mix(in srgb,var(--accent) 25%,transparent);border-radius:50%;
+ background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--accent);
+ font-size:25px;font-weight:950;line-height:1.1;flex:0 0 96px;
+}
+.history-result-hero .scorecircle small{margin-top:4px;font-size:10px;font-weight:850}
+.history-result-copy{min-width:0}
+.history-result-copy .section-kicker{color:var(--accent);font-size:10px;font-weight:950;letter-spacing:1px}
+.history-result-copy h1{margin:4px 0 5px;color:var(--ink);font-size:clamp(20px,2.7vw,28px);line-height:1.25}
+.history-result-copy p{margin:0;color:var(--muted);font-size:11px;line-height:1.55;overflow-wrap:anywhere}
+.history-result-copy h2{margin:8px 0 0;color:var(--ink);font-size:17px;line-height:1.35}
+.history-result-meme{
+ min-width:0;margin:0;padding:9px;border:1px solid var(--line);border-radius:14px;
+ background:var(--surface-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+}
+.history-result-meme .score-meme-visual{width:150px;height:128px;max-width:100%;display:grid;place-items:center}
+.history-result-meme .score-meme-visual img{width:100%;height:100%;object-fit:contain;border:1px solid var(--line);border-radius:10px;background:#fff}
+.history-result-meme .meme-fallback{display:none;place-items:center;align-content:center;gap:5px;width:100%;height:100%;border-radius:10px;background:var(--surface);color:var(--ink);text-align:center;font-size:11px}
+.history-result-meme .meme-fallback-emoji{font-size:34px}
+.history-result-meme .score-meme-caption{width:100%;text-align:center;color:var(--ink);font-size:11px;font-weight:900;line-height:1.4}
+.history-result-summary{margin:0 0 15px}
+.history-result-stat{box-shadow:0 5px 16px rgba(24,48,75,.035)}
+.history-result-stat strong{font-variant-numeric:tabular-nums}
+@media(max-width:760px){
+ .history-result-hero{grid-template-columns:72px minmax(0,1fr) 112px;gap:10px;padding:15px;border-radius:15px}
+ .history-result-hero .scorecircle{width:70px;height:70px;flex-basis:70px;font-size:19px;border-width:5px}
+ .history-result-hero .scorecircle small{font-size:8px}
+ .history-result-copy h1{font-size:17px}
+ .history-result-copy h2{font-size:13px;margin-top:5px}
+ .history-result-copy p{font-size:9px}
+ .history-result-meme{padding:6px;gap:5px}
+ .history-result-meme .score-meme-visual{width:100px;height:82px}
+ .history-result-meme .score-meme-caption{font-size:9px}
+}
+@media(max-width:390px){
+ .history-result-hero{grid-template-columns:58px minmax(0,1fr) 82px;gap:7px;padding:10px}
+ .history-result-hero .scorecircle{width:56px;height:56px;flex-basis:56px;font-size:16px}
+ .history-result-meme .score-meme-visual{height:68px}
+ .history-result-meme .score-meme-caption{font-size:8px}
+}
+
 </style>
 <script src="./history-data.js?rev=20261105" defer></script>
 </head>
@@ -956,11 +1005,15 @@ button.history-exam-option{cursor:pointer}
   </section>
 
   <section class="history-view history-result-view" id="view-result" hidden aria-labelledby="historyResultTitle">
-    <div class="history-result-heading">
-      <div class="section-kicker">KẾT QUẢ THI THỬ · LỊCH SỬ</div>
-      <h1 id="historyResultTitle">Kết quả đề thi Lịch sử</h1>
-      <p id="historyResultName"></p>
-      <div class="history-result-score"><span>TỔNG ĐIỂM</span><strong id="historyResultTotal">0,00/10</strong></div>
+    <div class="history-result-hero result-hero">
+      <div class="scorecircle" aria-label="Tổng điểm trên 10"><strong id="historyResultTotal">0,00</strong><small>/10 điểm</small></div>
+      <div class="history-result-copy">
+        <div class="section-kicker" id="historyResultStatus">ĐÃ NỘP BÀI</div>
+        <h1 id="historyResultTitle">Kết quả đề thi Lịch sử</h1>
+        <p id="historyResultName"></p>
+        <h2 id="historyResultPraise">Bạn đã hoàn thành bài thi!</h2>
+      </div>
+      <div class="score-meme history-result-meme" id="historyResultMeme" aria-live="polite"></div>
     </div>
     <div class="history-result-summary">
       <div class="history-result-stat"><span>Phần I · Trắc nghiệm</span><strong id="historyResultMC">0/6</strong><small id="historyResultMCCount">0/24 câu đúng</small></div>
@@ -1068,6 +1121,6 @@ button.history-exam-option{cursor:pointer}
 })();
 </script>
 
-<script src="./history-exam.js?rev=20261105-scroll-fix-v2"></script>
+<script src="./history-exam.js?rev=20261105-score-card-v1"></script>
 </body>
 </html>
