@@ -853,6 +853,10 @@ roots.forEach(initRoot);
   };
   function show(name,writeHash){
     if(!views[name])name="lessons";
+    document.querySelectorAll(".history-view").forEach(function(view){
+      view.hidden=true;
+      view.classList.remove("active");
+    });
     Object.keys(views).forEach(function(key){
       var active=key===name;
       views[key].hidden=!active;
