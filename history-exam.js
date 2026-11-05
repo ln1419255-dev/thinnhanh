@@ -50,12 +50,13 @@ function uniqueLessonPool(type,lesson){
 }
 function updateLessonExamCards(){
  var mc=uniqueLessonPool("mc","Bài 6"),tf=uniqueLessonPool("tf","Bài 6");
- var ready=mc.length>=24&&tf.length>=4;
  var status=$("bai6ExamBankStatus");
+ var readyCount=Math.min(5,Math.floor(mc.length/MC_TOTAL),Math.floor(tf.length/TF_TOTAL));
  if(status){
-  status.textContent="Ngân hàng Bài 6 hiện có "+mc.length+"/139 câu trắc nghiệm và "+tf.length+"/35 nhóm Đúng/Sai. Mỗi đề cần tối thiểu 24 câu trắc nghiệm và 4 nhóm Đúng/Sai."+(ready?" Đã đủ dữ liệu để mở các đề luyện tập.":" Hiện các đề đang khóa vì dữ liệu chưa đủ; hệ thống không tự bịa hoặc lặp câu để lấp chỗ trống.");
+  status.textContent="Ngân hàng Bài 6 hiện có "+mc.length+"/139 câu trắc nghiệm và "+tf.length+"/35 nhóm Đúng/Sai. Có thể tạo "+readyCount+"/5 đề hoàn chỉnh (mỗi đề 24 câu trắc nghiệm + 4 nhóm Đúng/Sai). Các câu được chia cố định giữa các đề, không lặp giữa Đề 1–5.";
  }
  document.querySelectorAll("[data-lesson-exam]").forEach(function(button){
+  var n=Number(button.getAttribute("data-lesson-exam")),ready=mc.length>=n*MC_TOTAL&&tf.length>=n*TF_TOTAL;
   button.disabled=!ready;
   button.textContent=ready?"Vào làm đề →":"Chưa đủ dữ liệu";
   var card=button.closest("[data-lesson-exam-card]");
@@ -64,17 +65,17 @@ function updateLessonExamCards(){
 }
 function buildLessonExam(lesson,examNumber){
  var mc=uniqueLessonPool("mc",lesson),tf=uniqueLessonPool("tf",lesson);
- if(mc.length<24||tf.length<4){
-  return {error:"Ngân hàng "+lesson+" hiện có "+mc.length+" câu trắc nghiệm và "+tf.length+" nhóm Đúng/Sai. Một đề THPT cần 24 câu trắc nghiệm và 4 nhóm Đúng/Sai."};
+ var n=Math.max(1,Math.min(5,Number(examNumber)||1));
+ var mcStart=(n-1)*MC_TOTAL,tfStart=(n-1)*TF_TOTAL;
+ var selectedMC=mc.slice(mcStart,mcStart+MC_TOTAL);
+ var selectedTF=tf.slice(tfStart,tfStart+TF_TOTAL);
+ if(selectedMC.length<MC_TOTAL||selectedTF.length<TF_TOTAL){
+  return {error:"Ngân hàng "+lesson+" chưa đủ dữ liệu cho Đề "+n+". Cần ít nhất "+(n*MC_TOTAL)+" câu trắc nghiệm và "+(n*TF_TOTAL)+" nhóm Đúng/Sai; hiện có "+mc.length+" câu và "+tf.length+" nhóm."};
  }
- var selectedMC=pickLeastUsed(mc,24),selectedTF=pickLeastUsed(tf,4);
- selectedMC=shuffle(selectedMC).map(function(q){
-  var pair=shuffle(q.options.map(function(text,index){return {text:text,index:index};}));
-  return Object.assign({},q,{type:"mc",options:pair.map(function(x){return x.text;}),answer:pair.findIndex(function(x){return x.index===q.answer;})});
- });
- selectedTF=shuffle(selectedTF).map(function(q){return Object.assign({},q,{type:"tf",items:q.items.map(function(x){return Object.assign({},x);})});});
- var no=String(examNumber).padStart(2,"0");
- return {exam:{id:(lesson==="Bài 6"?"LS-B6":"LS-B7")+"-E"+no,title:lesson+" · Đề "+no,minutes:50,createdAt:Date.now(),sourceLesson:lesson,examNumber:Number(examNumber),questions:selectedMC.concat(selectedTF)}};
+ selectedMC=selectedMC.map(function(q){return Object.assign({},q,{type:"mc",options:q.options.slice()});});
+ selectedTF=selectedTF.map(function(q){return Object.assign({},q,{type:"tf",items:q.items.map(function(x){return Object.assign({},x);})});});
+ var no=String(n).padStart(2,"0");
+ return {exam:{id:(lesson==="Bài 6"?"LS-B6":"LS-B7")+"-E"+no,title:lesson+" · Đề "+no,minutes:50,createdAt:Date.now(),sourceLesson:lesson,examNumber:n,questions:selectedMC.concat(selectedTF)}};
 }
 function startLessonExam(examNumber){
  var old=getDraft();
