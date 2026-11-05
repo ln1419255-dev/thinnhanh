@@ -124,7 +124,30 @@ function renderTF(g,index){var n=index-24,vals=Array.isArray(answers[index])?ans
 function timerDisplay(){var m=Math.floor(seconds/60),s=seconds%60;$("historyExamTimer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");$("historyExamTimer").classList.toggle("urgent",seconds<=300);}
 function renderExam(){if(!exam)return;var q=exam.questions[currentIndex];$("historyExamTitle").textContent=exam.title;$("historyExamMeta").textContent=exam.sourceLesson?("LỊCH SỬ · "+exam.sourceLesson.toUpperCase()+" · ĐỀ "+String(exam.examNumber||"").padStart(2,"0")+" · 50 PHÚT"):"LỊCH SỬ · TỔNG HỢP BÀI 6 + BÀI 7 · 50 PHÚT";$("historyExamCurrent").textContent=currentIndex<24?"Câu "+(currentIndex+1)+" / 24":"Đúng/Sai "+(currentIndex-23)+" / 4";$("historyExamQuestion").innerHTML=q.type==="mc"?renderMC(q,currentIndex):renderTF(q,currentIndex);$("historyExamMark").textContent=marked.has(currentIndex)?"⚑ Bỏ đánh dấu phân vân":"⚑ Đánh dấu phân vân";$("historyExamMark").classList.toggle("marked",marked.has(currentIndex));$("historyExamPrev").disabled=currentIndex===0;$("historyExamNext").hidden=currentIndex===27;$("historyExamSubmit").hidden=false;renderNav();timerDisplay();}
 function startTimer(){clearInterval(timer);timerDisplay();timer=setInterval(function(){if(!exam){clearInterval(timer);return;}seconds=Math.max(0,seconds-1);timerDisplay();saveDraft();if(seconds===0){clearInterval(timer);finishExam(true);}},1000);}
-function navigate(index){if(!exam)return;currentIndex=Math.max(0,Math.min(27,index));renderExam();saveDraft();}
+function restoreExamViewport(left,top){
+ var root=document.documentElement,oldBehavior=root.style.scrollBehavior;
+ root.style.scrollBehavior="auto";
+ window.scrollTo(left,top);
+ requestAnimationFrame(function(){
+  window.scrollTo(left,top);
+  requestAnimationFrame(function(){
+   window.scrollTo(left,top);
+   root.style.scrollBehavior=oldBehavior;
+  });
+ });
+}
+function navigate(index){
+ if(!exam)return;
+ var left=window.pageXOffset||document.documentElement.scrollLeft||0;
+ var top=window.pageYOffset||document.documentElement.scrollTop||0;
+ currentIndex=Math.max(0,Math.min(27,index));
+ renderExam();
+ saveDraft();
+ // Ngăn trình duyệt tự cuộn theo nút đang được focus khi nội dung câu hỏi đổi chiều cao.
+ var active=document.activeElement;
+ if(active&&active.closest&&active.closest("#view-exam"))active.blur();
+ restoreExamViewport(left,top);
+}
 function scoreExam(){var correctMC=0,fullyCorrectTF=0,mcPoints=0,tfPoints=0,detail=[];exam.questions.forEach(function(q,i){var a=answers[i];if(q.type==="mc"){var ok=a===q.answer;if(ok){correctMC++;mcPoints+=.25;}detail.push({type:"mc",correct:ok,answer:a});}else{var vals=Array.isArray(a)?a:[null,null,null,null],right=0;q.items.forEach(function(item,j){if(vals[j]===item.answer)right++;});var points=TF_POINTS[right];if(right===4)fullyCorrectTF++;tfPoints+=points;detail.push({type:"tf",correct:right,points:points,answers:vals.slice()});}});mcPoints=Number(mcPoints.toFixed(2));tfPoints=Number(tfPoints.toFixed(2));return {correctMC:correctMC,fullyCorrectTF:fullyCorrectTF,mcPoints:mcPoints,tfPoints:tfPoints,total:Number((mcPoints+tfPoints).toFixed(2)),detail:detail};}
 function sendScore(item){var payload={candidateName:item.candidateName,subject:"Lịch sử",examId:item.examId,examTitle:item.title,difficulty:"",submittedAt:new Date(item.date).toISOString(),submittedAutomatically:!!item.auto,mcPoints:item.mcPoints,tfPoints:item.tfPoints,shortPoints:0,totalScore:item.totalScore,attemptId:item.id};try{fetch(SHEETS_ENDPOINT,{method:"POST",mode:"no-cors",body:new URLSearchParams({payload:JSON.stringify(payload)})}).then(function(){toast("Đã gửi yêu cầu lưu điểm Lịch sử lên Google Sheets.");}).catch(function(){toast("Không gửi được điểm lên Google Sheets; điểm vẫn được lưu trên thiết bị.");});}catch(e){toast("Không gửi được điểm lên Google Sheets; điểm vẫn được lưu trên thiết bị.");}}
 function finishExam(auto){if(!exam||finishing)return;var incomplete=exam.questions.filter(function(q,i){return !isComplete(i);}).length;if(!auto&&!confirm("Bạn còn "+incomplete+" câu chưa hoàn thành. Bạn chắc chắn muốn nộp bài thi Lịch sử?"))return;finishing=true;clearInterval(timer);var score=scoreExam(),item={id:"history-"+Date.now(),candidateName:candidateName,subject:"Lịch sử",examId:exam.id,title:exam.title,sourceLesson:exam.sourceLesson||"",examNumber:exam.examNumber||0,date:Date.now(),auto:!!auto,elapsedSeconds:EXAM_SECONDS-seconds,questions:exam.questions,answers:answers.map(function(a){return Array.isArray(a)?a.slice():a;}),uncertainQuestions:Array.from(marked),correctMC:score.correctMC,fullyCorrectTF:score.fullyCorrectTF,mcPoints:score.mcPoints,tfPoints:score.tfPoints,shortPoints:0,totalScore:score.total,detail:score.detail};attemptHistory.unshift(item);saveHistory();clearDraft();sendScore(item);exam=null;finishing=false;renderResult(item);renderPastAttempts();renderStatistics();renderOverviewStats();setView("result");}
