@@ -112,7 +112,7 @@ function bindEvents(){if(eventsBound)return;eventsBound=true;
  $("historyExamNav").addEventListener("click",function(e){var b=e.target.closest("[data-question-index]");if(b)navigate(Number(b.getAttribute("data-question-index")));});
  $("historyExamQuestion").addEventListener("click",function(e){var mc=e.target.closest("[data-mc-choice]");if(mc){answers[currentIndex]=Number(mc.getAttribute("data-mc-choice"));renderExam();saveDraft();return;}var tf=e.target.closest("[data-tf-index]");if(tf){var j=Number(tf.getAttribute("data-tf-index")),v=tf.getAttribute("data-tf-value")==="true";if(!Array.isArray(answers[currentIndex]))answers[currentIndex]=[null,null,null,null];answers[currentIndex][j]=v;renderExam();saveDraft();}});
  $("historyResultRetry").addEventListener("click",startNewExam);
- $("historyPastAttempts").addEventListener("click",function(e){var b=e.target.closest("[data-review-history]");if(!b)return;var item=attemptHistory.find(function(x){return x.id===b.getAttribute("data-review-history");});if(item){renderResult(item);setView("result");}});
+ document.addEventListener("click",function(e){var b=e.target.closest("[data-review-history]");if(!b)return;var item=attemptHistory.find(function(x){return x.id===b.getAttribute("data-review-history");});if(item){renderResult(item);setView("result");}});
  window.addEventListener("pagehide",saveDraft);window.addEventListener("beforeunload",saveDraft);window.setInterval(updateResume,2500);
 }
 function boot(){bindEvents();renderPastAttempts();renderStatistics();updateBankStatus();updateResume();if(!restoreDraft()){var hash=(location.hash||"").replace("#","");if(hash==="exam"||hash==="result")setView("lessons");}}
