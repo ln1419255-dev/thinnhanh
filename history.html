@@ -290,6 +290,10 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
 .history-exam-empty{margin:0;color:var(--muted);font-size:13px}
 .history-exam-view,.history-result-view{max-width:1120px;margin:0 auto}
 .history-exam-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.history-exam-toolbar-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.history-exam-cancel{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:9px 14px;border:1px solid color-mix(in srgb,#dc4957 42%,var(--line));border-radius:12px;background:color-mix(in srgb,#dc4957 10%,var(--surface));color:#d64552;font-family:inherit;font-size:13px;font-weight:900;line-height:1.2;cursor:pointer;box-shadow:0 5px 16px rgba(22,48,78,.05);transition:transform .2s,background .2s,border-color .2s}
+.history-exam-cancel:hover{transform:translateY(-2px);border-color:#dc4957;background:color-mix(in srgb,#dc4957 16%,var(--surface))}
+.history-exam-cancel span{font-size:14px}
 .history-exam-timer-wrap{display:flex;align-items:center;gap:10px;padding:8px 13px;border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.7px}
 .history-exam-timer-wrap strong{color:var(--accent);font-size:22px;font-variant-numeric:tabular-nums;letter-spacing:0}
 .history-exam-timer-wrap strong.urgent{color:#e34b43}
@@ -371,7 +375,7 @@ button.history-exam-option{cursor:pointer}
 .history-exam-toast{position:fixed;z-index:1000;left:50%;bottom:24px;transform:translate(-50%,12px);max-width:min(620px,calc(100% - 28px));padding:12px 16px;border-radius:12px;background:#142b49;color:#fff;font-size:12px;font-weight:800;box-shadow:0 14px 36px rgba(0,0,0,.24);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
 .history-exam-toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:820px){.history-exam-layout{grid-template-columns:1fr}.history-exam-sidebar{position:static}.history-exam-nav{grid-template-columns:repeat(7,minmax(0,1fr))}.history-exam-sidebar-title{margin-bottom:9px}}
-@media(max-width:650px){.history-random-launch{align-items:stretch;flex-direction:column;padding:18px}.history-random-actions{flex:auto}.history-attempts{padding:15px}.history-attempt-row{grid-template-columns:minmax(0,1fr) auto;gap:8px}.history-attempt-row button{grid-column:1/-1;width:100%}.history-exam-toolbar{align-items:stretch;flex-direction:column}.history-exam-timer-wrap{justify-content:space-between}.history-exam-heading,.history-result-heading{padding:21px 18px;border-radius:18px}.history-exam-progress-top{align-items:flex-start;flex-direction:column}.history-exam-sidebar{padding:12px}.history-exam-nav{grid-template-columns:repeat(7,minmax(0,1fr))}.history-exam-question{padding:14px;min-height:0}.history-exam-qtext{font-size:14px}.history-exam-controls{flex-wrap:wrap}.history-exam-control{flex:1}.history-result-summary{grid-template-columns:1fr}.history-result-question{padding:13px}.history-result-qhead{align-items:flex-start;flex-direction:column}.review-mark{white-space:normal}}
+@media(max-width:650px){.history-random-launch{align-items:stretch;flex-direction:column;padding:18px}.history-random-actions{flex:auto}.history-attempts{padding:15px}.history-attempt-row{grid-template-columns:minmax(0,1fr) auto;gap:8px}.history-attempt-row button{grid-column:1/-1;width:100%}.history-exam-toolbar{align-items:stretch;flex-direction:column}.history-exam-toolbar-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.history-exam-toolbar-actions>.lesson-back-button,.history-exam-cancel{width:100%;padding-left:8px;padding-right:8px}.history-exam-timer-wrap{justify-content:space-between}.history-exam-heading,.history-result-heading{padding:21px 18px;border-radius:18px}.history-exam-progress-top{align-items:flex-start;flex-direction:column}.history-exam-sidebar{padding:12px}.history-exam-nav{grid-template-columns:repeat(7,minmax(0,1fr))}.history-exam-question{padding:14px;min-height:0}.history-exam-qtext{font-size:14px}.history-exam-controls{flex-wrap:wrap}.history-exam-control{flex:1}.history-result-summary{grid-template-columns:1fr}.history-result-question{padding:13px}.history-result-qhead{align-items:flex-start;flex-direction:column}.review-mark{white-space:normal}}
 
 </style>
 <script src="./history-data.js?rev=20261105" defer></script>
@@ -616,7 +620,10 @@ button.history-exam-option{cursor:pointer}
 
   <section class="history-view history-exam-view" id="view-exam" hidden aria-labelledby="historyExamTitle">
     <div class="history-exam-toolbar">
-      <button class="lesson-back-button" id="historyExamBack" type="button"><span aria-hidden="true">←</span> Tạm rời bài thi</button>
+      <div class="history-exam-toolbar-actions">
+        <button class="lesson-back-button" id="historyExamBack" type="button"><span aria-hidden="true">←</span> Tạm rời bài thi</button>
+        <button class="history-exam-cancel" id="historyExamCancel" type="button"><span aria-hidden="true">✕</span> Hủy bài thi</button>
+      </div>
       <div class="history-exam-timer-wrap"><span>THỜI GIAN CÒN LẠI</span><strong id="historyExamTimer">50:00</strong></div>
     </div>
     <div class="history-exam-heading">
