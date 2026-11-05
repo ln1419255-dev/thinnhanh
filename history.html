@@ -495,7 +495,7 @@ button.history-exam-option{cursor:pointer}
 .history-overview-icon{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:13px;background:color-mix(in srgb,var(--accent) 12%,var(--surface-2));font-size:20px}
 .history-overview-stat strong{display:block;color:var(--ink);font-size:23px;line-height:1.15;font-weight:950}
 .history-overview-stat small{display:block;margin-top:4px;color:var(--muted);font-size:11px;font-weight:750}
-.history-home-actions{display:flex;justify-content:flex-end;margin:0 0 17px}
+.history-home-actions{position:absolute;right:20px;bottom:18px;z-index:2;display:flex;justify-content:flex-end;margin:0}
 .history-home-chapters{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:10px 15px;border:0;border-radius:11px;background:linear-gradient(110deg,#08aaa9,#087f8c);color:#fff;font:inherit;font-size:12px;font-weight:900;cursor:pointer;box-shadow:0 7px 17px rgba(7,139,145,.17);transition:transform .18s,filter .18s}
 .history-home-chapters:hover{transform:translateY(-2px);filter:brightness(1.06)}
 #view-chapters>.section-head{margin-top:22px}
@@ -508,7 +508,7 @@ button.history-exam-option{cursor:pointer}
 @media(max-width:600px){
  .history-overview-stats{grid-template-columns:1fr;gap:8px}
  .history-overview-stat{padding:12px 14px}
- .history-home-actions{justify-content:stretch}
+ .history-home-actions{position:static;justify-content:stretch;margin:17px 0 0}
  .history-home-chapters{width:100%}
 }
 
@@ -548,14 +548,14 @@ button.history-exam-option{cursor:pointer}
       <span class="hero-chip">🧭 Trọng tâm kiến thức</span>
       <span class="hero-chip">🌗 Hỗ trợ sáng · tối</span>
     </div>
+    <div class="history-home-actions">
+      <button class="history-home-chapters" type="button" data-history-nav="chapters">📚 Chọn Bài 6 hoặc Bài 7 <span aria-hidden="true">→</span></button>
+    </div>
   </section>
     <div class="history-overview-stats" aria-label="Tổng quan kết quả học tập">
       <article class="history-overview-stat"><span class="history-overview-icon">📝</span><div><strong id="historyHomeAttempts">0</strong><small>Lượt thi đã hoàn thành</small></div></article>
       <article class="history-overview-stat"><span class="history-overview-icon">📈</span><div><strong id="historyHomeAverage">—</strong><small>Điểm trung bình</small></div></article>
       <article class="history-overview-stat"><span class="history-overview-icon">🏆</span><div><strong id="historyHomeBest">—</strong><small>Điểm cao nhất</small></div></article>
-    </div>
-    <div class="history-home-actions">
-      <button class="history-home-chapters" type="button" data-history-nav="chapters">📚 Chọn Bài 6 hoặc Bài 7 <span aria-hidden="true">→</span></button>
     </div>
 <section class="history-random-launch" aria-labelledby="historyRandomTitle">
     <div class="history-random-copy">
