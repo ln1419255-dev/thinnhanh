@@ -752,7 +752,7 @@ button.history-exam-option{cursor:pointer}
         <div>
           <div class="section-kicker">NGÂN HÀNG LUYỆN TẬP RIÊNG · BÀI 06</div>
           <h2 class="history-bank-title" id="bai6-bank-heading">Luyện tập từng câu – Cách mạng tháng Tám năm 1945</h2>
-          <p class="history-bank-desc">Ôn riêng kiến thức Bài 6. Chọn từng câu, trả lời và xem đáp án cùng lời giải ngay sau mỗi lượt chọn.</p>
+          <p class="history-bank-desc">Ôn riêng kiến thức Bài 6. Chọn từng câu, trả lời và xem đáp án cùng lời giải ngay sau mỗi lượt chọn. Bộ tài liệu mục tiêu gồm 139 câu trắc nghiệm và 35 nhóm Đúng/Sai.</p>
           <div class="history-bank-counts">
             <span>Trắc nghiệm: <b data-bank-mc-count="Bài 6">Đang tải…</b></span>
             <span>Đúng/Sai: <b data-bank-tf-count="Bài 6">Đang tải…</b></span>
@@ -1033,8 +1033,8 @@ function initRoot(root){
   pools.tf=(window.HISTORY_BANK.tf||[]).filter(function(q){return matchesLesson(q,lesson);});
   var mcCount=document.querySelector('[data-bank-mc-count="'+lesson+'"]');
   var tfCount=document.querySelector('[data-bank-tf-count="'+lesson+'"]');
-  if(mcCount)mcCount.textContent=pools.mc.length+" câu";
-  if(tfCount)tfCount.textContent=pools.tf.length+" nhóm";
+  if(mcCount)mcCount.textContent=pools.mc.length+"/139 câu";
+  if(tfCount)tfCount.textContent=pools.tf.length+"/35 nhóm";
   tabs.forEach(function(t){t.addEventListener("click",function(){state.kind=t.getAttribute("data-kind");state.index=0;updateTabs();render();});});
   prev.addEventListener("click",function(){if(state.index>0){state.index--;render();}});
   next.addEventListener("click",function(){if(state.index<activePool().length-1){state.index++;render();}});
