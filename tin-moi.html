@@ -559,7 +559,7 @@ activeExamCleanup();
 }
 setView(view);
 }
-function activeExamCleanup(){clearInterval(timerTick);timerTick=null;submitted=false;}
+function activeExamCleanup(){clearInterval(timerTick);timerTick=null;tnClearDraft();submitted=false;activeQuestion=0;mcQuestions=[];tfQuestions=[];mcAnswers=[];tfAnswers=[];uncertainQuestions=new Set();currentCandidateName="";secondsLeft=EXAM_SECONDS;}
 document.querySelectorAll(".navbtn[data-view]").forEach(function(button){button.addEventListener("click",function(){goView(button.dataset.view);});});
 document.querySelectorAll("[data-goto]").forEach(function(button){button.addEventListener("click",function(){goView(button.dataset.goto);});});
 function startExam(index){
