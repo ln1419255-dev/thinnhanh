@@ -457,8 +457,8 @@ try{var h=JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]");if(!Array.isArray(
 }
 function sendScoreToSheets(record){
 if(!GOOGLE_SHEETS_ENDPOINT)return;
-var payload={candidateName:record.candidateName,subject:"Tin học",examId:"NG-"+record.exam,examTitle:record.title,difficulty:"Ngân hàng ngẫu nhiên",submittedAt:record.submittedAt,submittedAutomatically:!!record.autoSubmitted,mcPoints:record.mcPoints,tfPoints:record.tfPoints,totalScore:record.score,attemptId:record.id};
-try{fetch(GOOGLE_SHEETS_ENDPOINT,{method:"POST",mode:"no-cors",body:new URLSearchParams({payload:JSON.stringify(payload)})}).catch(function(){});}catch(e){}
+var payload={candidateName:record.candidateName,subject:"Tin học",examId:"NG-"+record.exam,examTitle:record.title,difficulty:"Ngân hàng ngẫu nhiên",submittedAt:record.submittedAt,submittedAutomatically:!!record.autoSubmitted,mcPoints:record.mcPoints,tfPoints:record.tfPoints,shortPoints:0,totalScore:record.score,attemptId:record.id};
+try{fetch(GOOGLE_SHEETS_ENDPOINT,{method:"POST",mode:"no-cors",body:new URLSearchParams({payload:JSON.stringify(payload)})}).then(function(){notify("Đã gửi yêu cầu lưu điểm lên Google Sheets.");}).catch(function(){notify("Không gửi được điểm lên bảng chung; kết quả vẫn lưu trên thiết bị.");});}catch(e){notify("Không gửi được điểm lên bảng chung; kết quả vẫn lưu trên thiết bị.");}
 }
 function renderResult(record){
 var remainingMC=bank.mc.length-countMastered(bank.mc,currentProgress);
