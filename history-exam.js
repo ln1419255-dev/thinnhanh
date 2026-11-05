@@ -49,6 +49,17 @@ function updateResume(){var b=$("historyRandomResume");if(b)b.hidden=!getDraft()
 function restoreDraft(){var d=getDraft();if(!d)return false;exam=d.exam;answers=d.answers;currentIndex=Math.max(0,Math.min(27,Number(d.currentIndex)||0));seconds=Math.max(1,Math.min(EXAM_SECONDS,Number(d.seconds)||EXAM_SECONDS));marked=new Set(Array.isArray(d.marked)?d.marked:[]);candidateName=String(d.candidateName||"");startedAt=Number(d.startedAt)||Date.now();finishing=false;renderExam();setView("exam");startTimer();toast("Đã khôi phục bài thi Lịch sử đang làm.");return true;}
 function startNewExam(){var old=getDraft();if(old&&!confirm("Bạn đang có bài thi chưa nộp. Tạo đề mới sẽ thay thế bài đang làm. Tiếp tục?"))return;var built=buildExam();if(built.error){toast(built.error);return;}var name=askName();if(!name)return;exam=built.exam;candidateName=name;answers=exam.questions.map(function(q){return q.type==="tf"?[null,null,null,null]:null;});currentIndex=0;seconds=EXAM_SECONDS;marked=new Set();startedAt=Date.now();finishing=false;recordUsage(exam.questions);clearDraft();saveDraft();renderExam();setView("exam");startTimer();}
 function resumeExam(){if(!restoreDraft())toast("Không tìm thấy bài thi đang làm.");}
+function cancelExam(){
+ if(!exam)return;
+ var ok=window.confirm("Bạn có chắc chắn muốn hủy bài thi này? Toàn bộ câu trả lời, câu đã đánh dấu phân vân và thời gian đang lưu sẽ bị xóa. Lịch sử các bài đã nộp vẫn được giữ nguyên.");
+ if(!ok)return;
+ clearInterval(timer);timer=null;
+ clearDraft();
+ exam=null;answers=[];currentIndex=0;seconds=EXAM_SECONDS;marked=new Set();startedAt=0;finishing=false;
+ updateResume();
+ setView("lessons");
+ toast("Đã hủy bài thi. Bạn có thể tạo đề mới bất cứ lúc nào.");
+}
 function isComplete(i){var q=exam.questions[i],a=answers[i];if(q.type==="mc")return Number.isInteger(a)&&a>=0&&a<4;return Array.isArray(a)&&a.length===4&&a.every(function(v){return v===true||v===false;});}
 function isPartial(i){var a=answers[i],q=exam.questions[i];if(q.type==="mc")return a!==null&&a!==undefined&&!isComplete(i);return Array.isArray(a)&&a.some(function(v){return v===true||v===false;})&&!isComplete(i);}
 function renderNav(){var html="";exam.questions.forEach(function(q,i){var classes=[];if(i===currentIndex)classes.push("current");if(isComplete(i))classes.push("complete");else if(isPartial(i))classes.push("partial");if(marked.has(i))classes.push("flagged");var label=i<24?String(i+1):"Đ"+String(i-23);html+='<button type="button" class="history-exam-nav-btn '+classes.join(" ")+'" data-question-index="'+i+'">'+label+'</button>';});$("historyExamNav").innerHTML=html;var complete=exam.questions.filter(function(q,i){return isComplete(i);}).length;var partial=exam.questions.filter(function(q,i){return isPartial(i);}).length;$("historyExamProgressText").textContent="Đã hoàn thành "+complete+"/28 câu"+(partial?" · "+partial+" câu đang làm dở":"");$("historyExamProgressBar").style.width=(complete/28*100)+"%";}
@@ -70,6 +81,7 @@ function updateBankStatus(){var button=$("historyRandomStart"),status=$("history
 function bindEvents(){if(eventsBound)return;eventsBound=true;
  $("historyRandomStart").addEventListener("click",startNewExam);$("historyRandomResume").addEventListener("click",restoreDraft);
  $("historyExamBack").addEventListener("click",function(){saveDraft();setView("lessons");});
+ $("historyExamCancel").addEventListener("click",cancelExam);
  $("historyExamPrev").addEventListener("click",function(){navigate(currentIndex-1);});$("historyExamNext").addEventListener("click",function(){navigate(currentIndex+1);});
  $("historyExamSubmit").addEventListener("click",function(){finishExam(false);});
  $("historyExamMark").addEventListener("click",function(){if(marked.has(currentIndex))marked.delete(currentIndex);else marked.add(currentIndex);renderExam();saveDraft();});
