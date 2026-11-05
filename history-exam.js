@@ -22,7 +22,7 @@ function toast(message){var node=$("historyExamToast");if(!node){node=document.c
 function readUsage(){try{var x=JSON.parse(localStorage.getItem(RECENT_KEY)||"{}");return x&&typeof x==="object"?x:{};}catch(e){return {};}}
 function recordUsage(items){var usage=readUsage(),now=Date.now();items.forEach(function(q){var id=stable(q);usage[id]={count:Number(usage[id]&&usage[id].count||0)+1,last:now};});var keys=Object.keys(usage);if(keys.length>600){keys.sort(function(a,b){return Number(usage[a].last||0)-Number(usage[b].last||0);});keys.slice(0,keys.length-600).forEach(function(k){delete usage[k];});}try{localStorage.setItem(RECENT_KEY,JSON.stringify(usage));}catch(e){}}
 function pickLeastUsed(pool,count){var usage=readUsage();var ranked=pool.slice().sort(function(a,b){var x=usage[stable(a)]||{},y=usage[stable(b)]||{};return Number(x.count||0)-Number(y.count||0)||Number(x.last||0)-Number(y.last||0)||(Math.random()-.5);});return shuffle(ranked.slice(0,count));}
-function splitCount(a,b,count){if(a.length+b.length<count)return null;var x=Math.round(count*a.length/(a.length+b.length));x=Math.max(0,Math.min(a.length,x));var y=count-x;if(y>b.length){y=b.length;x=count-y;}if(x>a.length){x=a.length;y=count-x;}return [x,y];}
+function splitCount(a,b,count){if(count<2||!a.length||!b.length||a.length+b.length<count)return null;var minA=Math.max(1,count-b.length),maxA=Math.min(a.length,count-1);var x=Math.max(minA,Math.min(maxA,Math.round(count*a.length/(a.length+b.length))));return [x,count-x];}
 function buildExam(){
  var bank=window.HISTORY_BANK;if(!bank)return {error:"Ngân hàng câu hỏi chưa tải xong."};
  var mc=[],tf=[],seenMC={},seenTF={};
