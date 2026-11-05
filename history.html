@@ -242,6 +242,18 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
  .lesson-details>.detail>ul>li{font-size:13px}
 }
 
+
+/* Đưa nút mở ngân hàng lên khoảng trống bên phải banner bài học */
+.lesson-heading{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.lesson-heading-copy{min-width:0;flex:1}
+.history-bank-hero-toggle{flex:0 0 auto;min-width:174px;min-height:46px;padding:11px 16px;border:1px solid rgba(255,255,255,.18);white-space:nowrap;box-shadow:0 9px 22px rgba(0,0,0,.16);transition:transform .2s,filter .2s,box-shadow .2s}
+.history-bank-hero-toggle:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 13px 26px rgba(0,0,0,.2)}
+.history-bank-head{justify-content:flex-start}
+@media(max-width:650px){
+ .lesson-heading{align-items:stretch;flex-direction:column;gap:17px}
+ .history-bank-hero-toggle{width:100%;min-width:0}
+}
+
 </style>
 <script src="./history-data.js?rev=20261105" defer></script>
 </head>
@@ -297,9 +309,13 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
       <span class="lesson-page-tag">LỊCH SỬ · BÀI 06</span>
     </div>
     <div class="lesson-heading">
+      <div class="lesson-heading-copy">
       <div class="section-kicker">CHUYÊN ĐỀ ÔN TẬP · BÀI 06</div>
       <h1 id="bai6-page-title">Cách mạng tháng Tám năm 1945</h1>
       <p>Nắm vững bối cảnh, thời cơ, diễn biến, nguyên nhân và ý nghĩa lịch sử; sau đó luyện câu hỏi riêng của Bài 6.</p>
+    
+      </div>
+      <button class="history-bank-toggle history-bank-hero-toggle" type="button" data-bank-toggle="Bài 6" aria-expanded="false">Mở ngân hàng Bài 6 ↓</button>
     </div>
     <div class="details lesson-details"><article class="detail" id="bai6-detail">
         <h3><span aria-hidden="true">✦</span> Bài 6 · Cách mạng tháng Tám năm 1945</h3>
@@ -385,7 +401,7 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
               <span data-count-tf>Đang tải câu Đúng/Sai…</span>
             </div>
           </div>
-          <button class="history-bank-toggle" type="button" aria-expanded="false">Mở ngân hàng Bài 6 ↓</button>
+          
         </div>
         <div class="history-bank-panel" hidden>
           <div class="history-bank-tabs">
@@ -413,9 +429,13 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
       <span class="lesson-page-tag">LỊCH SỬ · BÀI 07</span>
     </div>
     <div class="lesson-heading">
+      <div class="lesson-heading-copy">
       <div class="section-kicker">CHUYÊN ĐỀ ÔN TẬP · BÀI 07</div>
       <h1 id="bai7-page-title">Kháng chiến chống thực dân Pháp (1945–1954)</h1>
       <p>Ôn tập những năm đầu sau Cách mạng tháng Tám, đường lối kháng chiến, các chiến dịch và thắng lợi Điện Biên Phủ; sau đó luyện câu hỏi riêng của Bài 7.</p>
+    
+      </div>
+      <button class="history-bank-toggle history-bank-hero-toggle" type="button" data-bank-toggle="Bài 7" aria-expanded="false">Mở ngân hàng Bài 7 ↓</button>
     </div>
     <div class="details lesson-details"><article class="detail" id="bai7-detail">
         <h3><span aria-hidden="true">✦</span> Bài 7 · Kháng chiến chống thực dân Pháp (1945–1954)</h3>
@@ -486,7 +506,7 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
               <span data-count-tf>Đang tải câu Đúng/Sai…</span>
             </div>
           </div>
-          <button class="history-bank-toggle" type="button" aria-expanded="false">Mở ngân hàng Bài 7 ↓</button>
+          
         </div>
         <div class="history-bank-panel" hidden>
           <div class="history-bank-tabs">
@@ -552,7 +572,7 @@ function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){retur
 function matchesLesson(item,lesson){return String(item.lesson||"").toLowerCase().indexOf(lesson.toLowerCase())===0;}
 function initRoot(root){
  var lesson=root.getAttribute("data-history-bank");
- var toggle=root.querySelector(".history-bank-toggle"),panel=root.querySelector(".history-bank-panel");
+ var toggle=document.querySelector('[data-bank-toggle="'+lesson+'"]')||root.querySelector(".history-bank-toggle"),panel=root.querySelector(".history-bank-panel");
  var tabs=[].slice.call(root.querySelectorAll(".history-bank-tab"));
  var nav=root.querySelector("[data-bank-nav]"),box=root.querySelector("[data-bank-question]");
  var progress=root.querySelector("[data-bank-progress]"),prev=root.querySelector("[data-prev]"),next=root.querySelector("[data-next]");
@@ -632,7 +652,7 @@ function initRoot(root){
    var opening=panel.hidden;
    roots.forEach(function(other){
     if(other===root)return;
-    var p=other.querySelector(".history-bank-panel"),b=other.querySelector(".history-bank-toggle");
+    var p=other.querySelector(".history-bank-panel"),b=document.querySelector('[data-bank-toggle="'+other.getAttribute("data-history-bank")+'"]')||other.querySelector(".history-bank-toggle");
     p.hidden=true;b.setAttribute("aria-expanded","false");b.textContent="Mở ngân hàng "+other.getAttribute("data-history-bank")+" ↓";
    });
    panel.hidden=!opening;toggle.setAttribute("aria-expanded",opening?"true":"false");
