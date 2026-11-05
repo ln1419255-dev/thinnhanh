@@ -261,6 +261,118 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
 .history-bank-top .history-bank-panel{margin:0;padding:16px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 9%,var(--surface)),var(--surface-2));}
 .history-bank-top .history-bank-tabs{margin-top:0}
 
+
+/* Thi thử Lịch sử ngẫu nhiên */
+.history-random-launch{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:28px 0 20px;padding:25px;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:22px;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 12%,var(--surface)),color-mix(in srgb,var(--accent-2) 10%,var(--surface-2)));box-shadow:var(--shadow)}
+.history-random-copy{min-width:0;flex:1}
+.history-random-copy h2{margin:5px 0 7px;font-size:clamp(22px,3vw,28px);line-height:1.2}
+.history-random-copy>p{margin:0;color:var(--muted);font-size:13px}
+.history-random-stats{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 12px}
+.history-random-stats span{padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-size:11px;font-weight:850}
+.history-random-copy .history-random-note{max-width:760px;font-size:11px;line-height:1.6}
+.history-random-actions{display:flex;flex:0 0 220px;flex-direction:column;gap:9px}
+.history-random-start,.history-random-resume{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 16px;border:0;border-radius:13px;background:linear-gradient(120deg,#078b91,#5674dc);color:#fff;font:900 13px/1.25 inherit;cursor:pointer;box-shadow:0 9px 20px rgba(7,139,145,.2);transition:transform .2s,filter .2s}
+.history-random-start:hover,.history-random-resume:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.history-random-start:disabled{opacity:.48;cursor:not-allowed;transform:none}
+.history-random-resume{background:linear-gradient(120deg,#9865df,#5674dc)}
+.history-random-resume[hidden]{display:none}
+.history-attempts{margin:22px 0 4px;padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:var(--shadow)}
+.history-attempts-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.history-attempts-heading h2{margin:4px 0 0;font-size:21px}
+.history-attempts-heading>span{color:var(--muted);font-size:11px}
+.history-attempt-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:12px;padding:12px 2px;border-top:1px solid var(--line)}
+.history-attempt-row>div{min-width:0}
+.history-attempt-row strong,.history-attempt-row small{display:block}
+.history-attempt-row strong{font-size:13px}
+.history-attempt-row small{margin-top:3px;color:var(--muted);font-size:11px}
+.history-attempt-score{color:var(--accent);font-size:15px;font-weight:950;white-space:nowrap}
+.history-attempt-row button{padding:7px 11px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2);color:var(--ink);font-size:11px;font-weight:850;cursor:pointer}
+.history-exam-empty{margin:0;color:var(--muted);font-size:13px}
+.history-exam-view,.history-result-view{max-width:1120px;margin:0 auto}
+.history-exam-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.history-exam-timer-wrap{display:flex;align-items:center;gap:10px;padding:8px 13px;border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.7px}
+.history-exam-timer-wrap strong{color:var(--accent);font-size:22px;font-variant-numeric:tabular-nums;letter-spacing:0}
+.history-exam-timer-wrap strong.urgent{color:#e34b43}
+.history-exam-heading{margin:0 0 17px;padding:23px 26px;border-radius:21px;color:#fff;background:linear-gradient(118deg,var(--hero-a),var(--hero-b) 58%,var(--hero-c));box-shadow:0 16px 38px rgba(11,38,53,.16)}
+.history-exam-heading .section-kicker{color:#b8fff1}
+.history-exam-heading h1{margin:6px 0;font-size:clamp(23px,4vw,34px);line-height:1.2}
+.history-exam-heading p{margin:0;color:#e0f1f5;font-size:11px;font-weight:850;letter-spacing:.7px}
+.history-exam-progress{margin-bottom:17px;padding:13px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.history-exam-progress-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.history-exam-progress-top strong{font-size:12px}
+.history-exam-progress-top span{color:var(--muted);font-size:11px}
+.history-exam-progress-track{height:7px;overflow:hidden;border-radius:99px;background:var(--surface-2)}
+.history-exam-progress-track span{display:block;width:0;height:100%;border-radius:99px;background:linear-gradient(90deg,#09b8b1,#5674dc);transition:width .2s}
+.history-exam-layout{display:grid;grid-template-columns:245px minmax(0,1fr);align-items:start;gap:17px}
+.history-exam-sidebar{position:sticky;top:12px;padding:15px;border:1px solid var(--line);border-radius:16px;background:var(--surface);box-shadow:0 8px 25px rgba(25,49,78,.05)}
+.history-exam-sidebar-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}
+.history-exam-sidebar-title strong{font-size:13px}
+.history-exam-sidebar-title span{color:var(--muted);font-size:10px}
+.history-exam-nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.history-exam-nav-btn{min-width:0;height:34px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);color:var(--muted);font-size:10px;font-weight:900;cursor:pointer}
+.history-exam-nav-btn.current{outline:2px solid var(--accent);outline-offset:1px;color:var(--accent)}
+.history-exam-nav-btn.complete{border-color:#1b9b70;background:color-mix(in srgb,#1b9b70 13%,var(--surface));color:var(--ink)}
+.history-exam-nav-btn.partial{border-color:#d79a35;background:color-mix(in srgb,#d79a35 14%,var(--surface));color:var(--ink)}
+.history-exam-nav-btn.flagged{box-shadow:inset 0 -3px #d79a35}
+.history-exam-legend{display:flex;flex-wrap:wrap;gap:8px 12px;margin:12px 0;color:var(--muted);font-size:10px}
+.history-exam-legend span{display:inline-flex;align-items:center;gap:5px}
+.history-exam-legend i{width:9px;height:9px;display:inline-block;border-radius:3px;background:var(--surface-2);border:1px solid var(--line)}
+.history-exam-legend .legend-current{border:2px solid var(--accent)}
+.history-exam-legend .legend-done{background:#1b9b70;border-color:#1b9b70}
+.history-exam-legend .legend-flag{background:#d79a35;border-color:#d79a35}
+.history-exam-mark{width:100%;min-height:39px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);color:var(--ink);font-size:11px;font-weight:900;cursor:pointer}
+.history-exam-mark.marked{border-color:#d79a35;background:color-mix(in srgb,#d79a35 14%,var(--surface));color:var(--ink)}
+.history-exam-main{min-width:0}
+.history-exam-question{min-height:330px;padding:21px;border:1px solid var(--line);border-radius:17px;background:var(--surface);box-shadow:0 8px 25px rgba(25,49,78,.05)}
+.history-exam-qmeta{display:flex;justify-content:space-between;gap:9px;flex-wrap:wrap;color:var(--accent);font-size:10px;font-weight:950;letter-spacing:.4px}
+.history-exam-qtext{margin:13px 0 16px;color:var(--ink);font-size:15px;line-height:1.75;font-weight:800;white-space:normal}
+.history-exam-options{display:grid;gap:9px}
+.history-exam-option{display:flex;align-items:flex-start;gap:10px;width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--surface-2);color:var(--ink);text-align:left;font:inherit;font-size:13px;line-height:1.6}
+button.history-exam-option{cursor:pointer}
+.history-exam-option.selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 11%,var(--surface))}
+.history-exam-letter{display:grid;place-items:center;flex:0 0 25px;height:25px;border-radius:8px;background:var(--surface);color:var(--accent);font-size:11px;font-weight:950}
+.history-exam-passage{margin:10px 0 15px;padding:13px 14px;border-left:3px solid var(--accent);border-radius:9px;background:var(--surface-2);color:var(--muted);font-size:12px;line-height:1.75;white-space:normal}
+.history-exam-tf-row{margin-top:10px;padding:13px;border:1px solid var(--line);border-radius:11px;background:var(--surface-2)}
+.history-exam-tf-text{font-size:13px;line-height:1.7;font-weight:750}
+.history-exam-tf-actions{display:flex;gap:8px;margin-top:9px}
+.history-exam-tf-actions button{min-width:86px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink);font-size:11px;font-weight:900;cursor:pointer}
+.history-exam-tf-actions button.selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--surface));color:var(--accent)}
+.history-exam-controls{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:13px}
+.history-exam-control{min-height:42px;padding:9px 14px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--ink);font-size:12px;font-weight:900;cursor:pointer}
+.history-exam-control.primary,.history-exam-control.submit{border:0;background:linear-gradient(120deg,#078b91,#5674dc);color:#fff}
+.history-exam-control.submit{background:linear-gradient(120deg,#16865f,#0b9d86)}
+.history-exam-control:disabled{opacity:.4;cursor:not-allowed}
+.history-result-heading{position:relative;overflow:hidden;padding:26px;border-radius:22px;color:#fff;background:linear-gradient(118deg,var(--hero-a),var(--hero-b) 58%,var(--hero-c));box-shadow:0 16px 38px rgba(11,38,53,.16)}
+.history-result-heading .section-kicker{color:#b8fff1}
+.history-result-heading h1{margin:5px 0;font-size:clamp(25px,4vw,36px)}
+.history-result-heading p{margin:0;color:#e0f1f5;font-size:12px}
+.history-result-score{display:flex;align-items:baseline;gap:13px;margin-top:15px}
+.history-result-score span{font-size:10px;font-weight:950;letter-spacing:1px;color:#b8fff1}
+.history-result-score strong{font-size:clamp(30px,5vw,42px);font-weight:950}
+.history-result-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}
+.history-result-stat{padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.history-result-stat span,.history-result-stat strong,.history-result-stat small{display:block}
+.history-result-stat span{color:var(--muted);font-size:11px;font-weight:800}
+.history-result-stat strong{margin:5px 0;color:var(--accent);font-size:20px;font-weight:950}
+.history-result-stat small{color:var(--muted);font-size:10px}
+.history-result-actions{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 25px}
+.history-result-review-head h2{margin:4px 0;font-size:22px}
+.history-result-review-head p{margin:0 0 12px;color:var(--muted);font-size:12px}
+.history-result-question{margin:12px 0;padding:17px;border:1px solid var(--line);border-radius:15px;background:var(--surface)}
+.history-result-qhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;font-size:12px}
+.is-correct{color:#16865f}.is-wrong{color:#d64d5a}
+.review-options .history-exam-option{cursor:default}
+.review-options .review-correct{border-color:#1b9b70;background:color-mix(in srgb,#1b9b70 10%,var(--surface))}
+.review-options .review-wrong{border-color:#d64d5a;background:color-mix(in srgb,#d64d5a 9%,var(--surface))}
+.review-mark{margin-left:auto;color:var(--accent);font-size:10px;font-weight:900;white-space:nowrap}
+.history-result-answer{margin-top:9px;padding:9px 11px;border-radius:9px;background:var(--surface-2);font-size:11px;line-height:1.65}
+.history-result-explanation{margin-top:8px;padding:10px 12px;border-left:3px solid var(--accent);border-radius:8px;background:var(--surface-2);color:var(--muted);font-size:12px;line-height:1.7}
+.history-result-tf-item{margin-top:10px;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.history-exam-toast{position:fixed;z-index:1000;left:50%;bottom:24px;transform:translate(-50%,12px);max-width:min(620px,calc(100% - 28px));padding:12px 16px;border-radius:12px;background:#142b49;color:#fff;font-size:12px;font-weight:800;box-shadow:0 14px 36px rgba(0,0,0,.24);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.history-exam-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:820px){.history-exam-layout{grid-template-columns:1fr}.history-exam-sidebar{position:static}.history-exam-nav{grid-template-columns:repeat(7,minmax(0,1fr))}.history-exam-sidebar-title{margin-bottom:9px}}
+@media(max-width:650px){.history-random-launch{align-items:stretch;flex-direction:column;padding:18px}.history-random-actions{flex:auto}.history-attempts{padding:15px}.history-attempt-row{grid-template-columns:minmax(0,1fr) auto;gap:8px}.history-attempt-row button{grid-column:1/-1;width:100%}.history-exam-toolbar{align-items:stretch;flex-direction:column}.history-exam-timer-wrap{justify-content:space-between}.history-exam-heading,.history-result-heading{padding:21px 18px;border-radius:18px}.history-exam-progress-top{align-items:flex-start;flex-direction:column}.history-exam-sidebar{padding:12px}.history-exam-nav{grid-template-columns:repeat(7,minmax(0,1fr))}.history-exam-question{padding:14px;min-height:0}.history-exam-qtext{font-size:14px}.history-exam-controls{flex-wrap:wrap}.history-exam-control{flex:1}.history-result-summary{grid-template-columns:1fr}.history-result-question{padding:13px}.history-result-qhead{align-items:flex-start;flex-direction:column}.review-mark{white-space:normal}}
+
 </style>
 <script src="./history-data.js?rev=20261105" defer></script>
 </head>
@@ -307,6 +419,33 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
 
       </article>
     </div>
+
+  </section>
+
+  <section class="history-random-launch" aria-labelledby="historyRandomTitle">
+    <div class="history-random-copy">
+      <div class="section-kicker">THI THỬ · ĐỀ NGẪU NHIÊN</div>
+      <h2 id="historyRandomTitle">Chinh phục đề thi Lịch sử</h2>
+      <p>Đề tổng hợp câu hỏi nguyên văn từ ngân hàng Bài 6 và Bài 7. Mỗi lượt thi được chọn và sắp xếp ngẫu nhiên.</p>
+      <div class="history-random-stats">
+        <span>24 câu trắc nghiệm · 6 điểm</span>
+        <span>4 nhóm Đúng/Sai · 4 điểm</span>
+        <span>50 phút · 10 điểm</span>
+      </div>
+      <p class="history-random-note" id="historyRandomBankStatus" aria-live="polite">Đang tải ngân hàng câu hỏi…</p>
+    </div>
+    <div class="history-random-actions">
+      <button class="history-random-start" id="historyRandomStart" type="button" disabled>🎲 Tạo đề ngẫu nhiên</button>
+      <button class="history-random-resume" id="historyRandomResume" type="button" hidden>Tiếp tục bài đang làm →</button>
+    </div>
+  </section>
+
+  <section class="history-attempts" aria-labelledby="historyPastTitle">
+    <div class="history-attempts-heading">
+      <div><div class="section-kicker">KẾT QUẢ CỦA BẠN</div><h2 id="historyPastTitle">Lịch sử thi thử</h2></div>
+      <span>6 lượt gần nhất</span>
+    </div>
+    <div id="historyPastAttempts"><p class="history-exam-empty">Bạn chưa có lượt thi thử Lịch sử nào.</p></div>
   </section>
   </div>
 
@@ -512,6 +651,56 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
 
 </article></div>
   </section>
+
+  <section class="history-view history-exam-view" id="view-exam" hidden aria-labelledby="historyExamTitle">
+    <div class="history-exam-toolbar">
+      <button class="lesson-back-button" id="historyExamBack" type="button"><span aria-hidden="true">←</span> Tạm rời bài thi</button>
+      <div class="history-exam-timer-wrap"><span>THỜI GIAN CÒN LẠI</span><strong id="historyExamTimer">50:00</strong></div>
+    </div>
+    <div class="history-exam-heading">
+      <div class="section-kicker">THI THỬ NGẪU NHIÊN · LỊCH SỬ 12</div>
+      <h1 id="historyExamTitle">Đề thi ngẫu nhiên Lịch sử</h1>
+      <p id="historyExamMeta">LỊCH SỬ · TỔNG HỢP BÀI 6 + BÀI 7 · 50 PHÚT</p>
+    </div>
+    <div class="history-exam-progress"><div class="history-exam-progress-top"><strong id="historyExamCurrent">Câu 1 / 24</strong><span id="historyExamProgressText">Đã hoàn thành 0/28 câu</span></div><div class="history-exam-progress-track"><span id="historyExamProgressBar"></span></div></div>
+    <div class="history-exam-layout">
+      <aside class="history-exam-sidebar">
+        <div class="history-exam-sidebar-title"><strong>Danh sách câu hỏi</strong><span>⚑ Câu phân vân</span></div>
+        <div class="history-exam-nav" id="historyExamNav"></div>
+        <div class="history-exam-legend"><span><i class="legend-current"></i>Đang xem</span><span><i class="legend-done"></i>Đã làm</span><span><i class="legend-flag"></i>Phân vân</span></div>
+        <button class="history-exam-mark" id="historyExamMark" type="button">⚑ Đánh dấu phân vân</button>
+      </aside>
+      <section class="history-exam-main">
+        <div class="history-exam-question" id="historyExamQuestion" aria-live="polite"></div>
+        <div class="history-exam-controls">
+          <button class="history-exam-control secondary" id="historyExamPrev" type="button" disabled>← Câu trước</button>
+          <button class="history-exam-control primary" id="historyExamNext" type="button">Câu tiếp theo →</button>
+          <button class="history-exam-control submit" id="historyExamSubmit" type="button" hidden>Nộp bài thi</button>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="history-view history-result-view" id="view-result" hidden aria-labelledby="historyResultTitle">
+    <div class="history-result-heading">
+      <div class="section-kicker">KẾT QUẢ THI THỬ · LỊCH SỬ</div>
+      <h1 id="historyResultTitle">Kết quả đề thi Lịch sử</h1>
+      <p id="historyResultName"></p>
+      <div class="history-result-score"><span>TỔNG ĐIỂM</span><strong id="historyResultTotal">0,00/10</strong></div>
+    </div>
+    <div class="history-result-summary">
+      <div class="history-result-stat"><span>Phần I · Trắc nghiệm</span><strong id="historyResultMC">0/6</strong><small id="historyResultMCCount">0/24 câu đúng</small></div>
+      <div class="history-result-stat"><span>Phần II · Đúng/Sai</span><strong id="historyResultTF">0/4</strong><small id="historyResultTFCount">0/4 nhóm đúng đủ ý</small></div>
+      <div class="history-result-stat"><span>Thời gian làm bài</span><strong id="historyResultTime">0 phút 0 giây</strong><small id="historyResultAuto"></small></div>
+    </div>
+    <div class="history-result-actions">
+      <button class="history-random-start" id="historyResultRetry" type="button">🎲 Tạo đề ngẫu nhiên mới</button>
+      <button class="lesson-back-button" type="button" data-back-lessons>← Về các bài ôn tập</button>
+    </div>
+    <div class="history-result-review-head"><div class="section-kicker">CHỮA BÀI CHI TIẾT</div><h2>Đáp án và giải thích từng câu</h2><p>Câu đúng, câu sai, đáp án đã chọn và lời giải đều được hiển thị bên dưới.</p></div>
+    <div id="historyResultQuestions" class="history-result-questions"></div>
+  </section>
+
 </main>
 <footer>© 2026 Nguyễn Khánh Lâm · Bản quyền được bảo lưu.</footer>
 <script>
@@ -691,5 +880,6 @@ roots.forEach(initRoot);
 })();
 </script>
 
+<script src="./history-exam.js?rev=20261105"></script>
 </body>
 </html>
