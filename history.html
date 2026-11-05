@@ -359,7 +359,7 @@ button.history-exam-option{cursor:pointer}
 .history-exam-tf-actions{display:flex;gap:8px;margin-top:9px}
 .history-exam-tf-actions button{min-width:86px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink);font-size:11px;font-weight:900;cursor:pointer}
 .history-exam-tf-actions button.selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,var(--surface));color:var(--accent)}
-.history-exam-controls{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:13px}
+.history-exam-controls{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:-3px}
 .history-exam-control{min-height:42px;padding:9px 14px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--ink);font-size:12px;font-weight:900;cursor:pointer}
 .history-exam-control.primary,.history-exam-control.submit{border:0;background:linear-gradient(120deg,#078b91,#5674dc);color:#fff}
 .history-exam-control.submit{background:linear-gradient(120deg,#16865f,#0b9d86)}
@@ -942,12 +942,12 @@ button.history-exam-option{cursor:pointer}
           <button class="history-exam-mark" id="historyExamMark" type="button">⚑ Đánh dấu phân vân</button>
           <span id="historyExamFlagHint">Đánh dấu câu bạn muốn xem lại sau.</span>
         </div>
-        <div class="history-exam-controls">
-          <button class="history-exam-control secondary" id="historyExamPrev" type="button" disabled>← Câu trước</button>
-          <button class="history-exam-control primary" id="historyExamNext" type="button">Câu tiếp theo →</button>
-          <button class="history-exam-control submit" id="historyExamSubmit" type="button" hidden>Nộp bài thi</button>
-        </div>
       </section>
+      <div class="history-exam-controls">
+        <button class="history-exam-control secondary" id="historyExamPrev" type="button" disabled>← Câu trước</button>
+        <button class="history-exam-control primary" id="historyExamNext" type="button">Câu tiếp theo →</button>
+        <button class="history-exam-control submit" id="historyExamSubmit" type="button" hidden>Nộp bài thi</button>
+      </div>
     </div>
   </section>
 
