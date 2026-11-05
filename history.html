@@ -218,9 +218,9 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
 /* Điều hướng bài học theo mô hình chọn chương của Vật lí */
 .history-view[hidden]{display:none!important}
 .history-view.active{display:block}
-.card-link{border:0;cursor:pointer;font-family:inherit}
+.card-link{border:0;cursor:pointer;font-family:inherit;font-size:13px;font-weight:900;line-height:1.2}
 .lesson-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 18px}
-.lesson-back-button{display:inline-flex;align-items:center;gap:9px;min-height:42px;padding:9px 15px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:800 13px/1.2 inherit;cursor:pointer;box-shadow:0 5px 16px rgba(22,48,78,.06);transition:transform .2s,border-color .2s}
+.lesson-back-button{display:inline-flex;align-items:center;gap:9px;min-height:42px;padding:9px 15px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font-family:inherit;font-size:13px;font-weight:800;line-height:1.2;cursor:pointer;box-shadow:0 5px 16px rgba(22,48,78,.06);transition:transform .2s,border-color .2s}
 .lesson-back-button:hover{transform:translateY(-2px);border-color:var(--accent)}
 .lesson-back-button span{font-size:17px;color:var(--accent)}
 .lesson-page-tag{padding:7px 11px;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));border-radius:999px;background:color-mix(in srgb,var(--accent) 9%,var(--surface));color:var(--accent);font-size:10px;font-weight:950;letter-spacing:1px}
@@ -674,6 +674,8 @@ roots.forEach(initRoot);
   document.addEventListener("click",function(event){
     var open=event.target.closest("[data-open-lesson]");
     if(open){show(open.getAttribute("data-open-lesson"),true);return;}
+    var card=event.target.closest(".card.c6,.card.c7");
+    if(card){show(card.classList.contains("c6")?"bai6":"bai7",true);return;}
     if(event.target.closest("[data-back-lessons]"))show("lessons",true);
   });
   var initial=(location.hash||"").replace("#","");
