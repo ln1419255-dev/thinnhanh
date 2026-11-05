@@ -2909,11 +2909,31 @@ setInterval(store,1000);
  var file=(location.pathname.split("/").pop()||"index.html").toLowerCase();
  var KEY="tn_screen_state_v1_"+file;
  var isIndex=file==="index.html"||file==="";
+ var leavingForSubjectMenu=false;
+ function clearSavedSubjectScreens(){
+  try{
+   var keys=[];
+   for(var i=0;i<localStorage.length;i++){
+    var key=localStorage.key(i);
+    if(key&&key.indexOf("tn_screen_state_v1_")===0&&key!=="tn_screen_state_v1_index.html")keys.push(key);
+   }
+   keys.forEach(function(key){localStorage.removeItem(key);});
+  }catch(e){}
+ }
+ function arrivedFromSubjectMenu(){
+  try{
+   if(!document.referrer)return false;
+   var ref=new URL(document.referrer);
+   if(ref.origin!==location.origin)return false;
+   return /(?:^|\/)index\.html$/.test(ref.pathname)||ref.pathname.replace(/\/$/,"")==="/thinnhanh";
+  }catch(e){return false;}
+ }
  function activeView(){
   var el=document.querySelector(".view.active");
   return el?el.id:"";
  }
  function store(){
+  if(leavingForSubjectMenu)return;
   try{
    var view=activeView();
    var state={viewId:view,scrollY:window.scrollY||window.pageYOffset||0,hash:location.hash||"",savedAt:Date.now()};
@@ -2928,6 +2948,9 @@ setInterval(store,1000);
  }
  function restore(){
   try{
+   // Vào môn học từ trang chọn môn thì mở Tổng quan; chỉ khôi phục màn hình
+   // cũ khi người dùng tải lại/tiếp tục ngay trong chính trang môn đó.
+   if(!isIndex&&arrivedFromSubjectMenu())clearSavedSubjectScreens();
    var raw=localStorage.getItem(KEY),st=raw?JSON.parse(raw):null;
    if(!st)return;
    if(!isIndex&&st.viewId&&st.viewId!=="view-take"&&st.viewId!=="view-result"){
@@ -2944,7 +2967,20 @@ setInterval(store,1000);
    requestAnimationFrame(function(){window.scrollTo(0,y);setTimeout(function(){window.scrollTo(0,y);},180);});
   }catch(e){}
  }
- document.addEventListener("click",function(){setTimeout(store,100);},true);
+ document.addEventListener("click",function(event){
+  var link=event.target.closest("a[href]");
+  if(!isIndex&&link){
+   try{
+    var target=new URL(link.href,location.href);
+    if(target.origin===location.origin&&/(?:^|\/)index\.html$/.test(target.pathname)){
+     leavingForSubjectMenu=true;
+     clearSavedSubjectScreens();
+     return;
+    }
+   }catch(e){}
+  }
+  setTimeout(store,100);
+ },true);
  document.addEventListener("input",function(){setTimeout(store,80);},true);
  document.addEventListener("change",function(){setTimeout(store,80);},true);
  window.addEventListener("scroll",function(){if(window.__tnScreenSaveTimer)return;window.__tnScreenSaveTimer=setTimeout(function(){window.__tnScreenSaveTimer=0;store();},180);},{passive:true});
