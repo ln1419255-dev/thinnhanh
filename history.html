@@ -40,8 +40,8 @@ body{
 }
 a{color:inherit}
 .topbar{
-  min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:12px max(20px,calc((100% - 1120px)/2));background:var(--surface);
+  min-height:70px;position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:0 max(18px,calc((100vw - 1240px)/2));background:var(--surface);
   border-bottom:1px solid var(--line);box-shadow:0 5px 22px rgba(25,49,78,.035);
 }
 .brand{display:inline-flex;align-items:center;gap:10px;font-size:22px;font-weight:950;color:var(--accent);text-decoration:none;letter-spacing:-.6px}
@@ -392,11 +392,11 @@ button.history-exam-option{cursor:pointer}
 /* Sidebar điều hướng đồng bộ với giao diện Không gian luyện thi Vật lí */
 .history-layout{
   max-width:1240px;margin:25px auto 0;padding:0 20px;
-  display:grid;grid-template-columns:214px minmax(0,1fr);gap:24px;align-items:start;
+  display:grid;grid-template-columns:220px minmax(0,1fr);gap:24px;align-items:start;
 }
 .history-layout>main{width:100%;min-width:0;margin:0;padding:0 0 28px}
 .history-sidebar{
-  position:sticky;top:20px;align-self:start;padding:12px;
+  position:sticky;top:92px;align-self:start;padding:12px;
   border:1px solid var(--line);border-radius:18px;background:var(--surface);
   box-shadow:var(--shadow);
 }
