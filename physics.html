@@ -2185,6 +2185,22 @@ html[data-theme="dark"] .tn-continue-card:before{
 .ch2-random-button{white-space:nowrap;min-height:46px}
 .ch2-random-status{grid-column:1/-1;margin:0;padding-top:10px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
 @media(max-width:680px){.ch2-random-panel{grid-template-columns:1fr;padding:16px}.ch2-random-copy h2{font-size:19px}.ch2-random-button{width:100%}.ch2-random-status{grid-column:1}}
+
+/* Dark mode consistency: keep the left navigation panel on the same palette as the page */
+html[data-theme="dark"] .sidebar{
+ background:linear-gradient(155deg,#122338,#14283d)!important;
+ border-color:#30465f!important;
+ box-shadow:0 12px 30px rgba(0,0,0,.2)!important;
+ color:#dce8f6!important;
+}
+html[data-theme="dark"] .sidebar .sidebox{
+ background:#17283d!important;
+ border-color:#30465f!important;
+ color:#dce8f6!important;
+}
+html[data-theme="dark"] .sidebar .sidebox p,
+html[data-theme="dark"] .sidebar .sidebox span{color:#aebfd3!important}
+html[data-theme="dark"] .sidebar .navbtn{color:#b9c9dc}
 </style>
 <script src="./physics_ch2_gzip_1.js"></script>
 <script src="./physics_ch2_gzip_2.js"></script>
