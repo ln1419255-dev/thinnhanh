@@ -512,6 +512,38 @@ button.history-exam-option{cursor:pointer}
  .history-home-chapters{width:100%}
 }
 
+
+/* Bài 6 · exam-card bank, matching the Physics/Chemistry exam-card workflow */
+.history-lesson-exams{margin:22px 0 22px;padding:20px;border:1px solid var(--line);border-radius:19px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 8%,var(--surface)),var(--surface-2));}
+.history-lesson-exams-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:15px;}
+.history-lesson-exams-title{margin:4px 0 6px;color:var(--ink);font-size:20px;font-weight:950;letter-spacing:-.35px;}
+.history-lesson-exams-desc{max-width:790px;margin:0;color:var(--muted);font-size:12px;line-height:1.7;}
+.history-lesson-exams-total{flex:0 0 88px;width:88px;height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));border-radius:22px;background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--accent);}
+.history-lesson-exams-total strong{font-size:30px;line-height:1;font-weight:1000;}
+.history-lesson-exams-total span{margin-top:5px;font-size:8px;font-weight:950;letter-spacing:.5px;}
+.history-lesson-exams-status{margin:0 0 14px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--muted);font-size:11px;line-height:1.6;}
+.history-lesson-exam-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;}
+.history-lesson-exam-card{min-width:0;display:flex;flex-direction:column;padding:16px;border:1px solid var(--line);border-radius:15px;background:var(--surface);box-shadow:0 5px 16px rgba(24,49,77,.06);transition:transform .18s,border-color .18s,box-shadow .18s;}
+.history-lesson-exam-card:not(.is-locked):hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 25px rgba(24,49,77,.11);}
+.history-lesson-exam-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.history-lesson-exam-number{padding:6px 9px;border-radius:8px;background:color-mix(in srgb,var(--accent) 13%,var(--surface));color:var(--accent);font-size:10px;font-weight:1000;letter-spacing:.5px;}
+.history-lesson-exam-tag{color:var(--muted);font-size:9px;font-weight:900;letter-spacing:.3px;}
+.history-lesson-exam-card h3{margin:13px 0 5px;color:var(--ink);font-size:17px;font-weight:950;}
+.history-lesson-exam-card p{min-height:38px;margin:0;color:var(--muted);font-size:11px;line-height:1.65;}
+.history-lesson-exam-meta{display:flex;flex-wrap:wrap;gap:6px;margin:13px 0 14px;}
+.history-lesson-exam-meta span{padding:5px 7px;border:1px solid var(--line);border-radius:7px;background:var(--surface-2);color:var(--muted);font-size:9px;font-weight:850;}
+.history-lesson-exam-start{width:100%;min-height:39px;margin-top:auto;padding:9px 12px;border:0;border-radius:10px;background:linear-gradient(120deg,#078b91,#5674dc);color:#fff;font-size:11px;font-weight:950;cursor:pointer;transition:filter .18s,transform .18s;}
+.history-lesson-exam-start:not(:disabled):hover{filter:brightness(1.08);transform:translateY(-1px);}
+.history-lesson-exam-start:disabled{background:var(--surface-2);border:1px solid var(--line);color:var(--muted);cursor:not-allowed;opacity:.82;}
+.history-lesson-exam-card.is-locked{opacity:.82;}
+:root[data-theme="dark"] .history-lesson-exams{background:linear-gradient(135deg,#172a3d,#17243a);border-color:#2d465c;}
+:root[data-theme="dark"] .history-lesson-exam-card{background:#142238;border-color:#30445e;box-shadow:0 8px 22px rgba(0,0,0,.18);}
+:root[data-theme="dark"] .history-lesson-exam-card h3{color:#e7eef8;}
+:root[data-theme="dark"] .history-lesson-exam-meta span{background:#1b2b42;border-color:#344a63;color:#aec0d5;}
+:root[data-theme="dark"] .history-lesson-exams-status{background:#121f32;border-color:#34475d;color:#b8c8da;}
+@media(max-width:900px){.history-lesson-exam-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:560px){.history-lesson-exams{padding:14px;}.history-lesson-exams-head{align-items:flex-start;}.history-lesson-exams-total{flex-basis:67px;width:67px;height:67px;border-radius:17px;}.history-lesson-exams-total strong{font-size:24px;}.history-lesson-exams-total span{font-size:7px;}.history-lesson-exams-title{font-size:17px;}.history-lesson-exam-grid{grid-template-columns:1fr;gap:10px;}.history-lesson-exam-card{padding:14px;}.history-lesson-exam-card p{min-height:0;}}
+
 </style>
 <script src="./history-data.js?rev=20261105" defer></script>
 </head>
@@ -747,40 +779,54 @@ button.history-exam-option{cursor:pointer}
 
 </article></div>
 
-    <section class="history-bank" aria-labelledby="bai6-bank-heading">
-      <div class="history-bank-head">
+    <section class="history-lesson-exams" id="bai6-exam-bank" aria-labelledby="bai6-exam-heading">
+      <div class="history-lesson-exams-head">
         <div>
-          <div class="section-kicker">NGÂN HÀNG LUYỆN TẬP RIÊNG · BÀI 06</div>
-          <h2 class="history-bank-title" id="bai6-bank-heading">Luyện tập từng câu – Cách mạng tháng Tám năm 1945</h2>
-          <p class="history-bank-desc">Ôn riêng kiến thức Bài 6. Chọn từng câu, trả lời và xem đáp án cùng lời giải ngay sau mỗi lượt chọn. Bộ tài liệu mục tiêu gồm 139 câu trắc nghiệm và 35 nhóm Đúng/Sai.</p>
-          <div class="history-bank-counts">
-            <span>Trắc nghiệm: <b data-bank-mc-count="Bài 6">Đang tải…</b></span>
-            <span>Đúng/Sai: <b data-bank-tf-count="Bài 6">Đang tải…</b></span>
-          </div>
+          <div class="section-kicker">NGÂN HÀNG ĐỀ RIÊNG · BÀI 06</div>
+          <h2 class="history-lesson-exams-title" id="bai6-exam-heading">Chọn đề luyện tập – Cách mạng tháng Tám năm 1945</h2>
+          <p class="history-lesson-exams-desc">Mỗi đề có cấu trúc THPT: 24 câu trắc nghiệm nhiều lựa chọn và 4 nhóm Đúng/Sai (mỗi nhóm 4 ý), thời gian 50 phút. Chỉ sử dụng câu hỏi thuộc Bài 6.</p>
         </div>
-        <button class="history-bank-toggle history-bank-hero-toggle" type="button" data-bank-toggle="Bài 6" aria-expanded="false">Mở ngân hàng Bài 6 ↓</button>
+        <div class="history-lesson-exams-total"><strong>05</strong><span>ĐỀ LUYỆN TẬP</span></div>
+      </div>
+      <div class="history-lesson-exams-status" id="bai6ExamBankStatus" role="status">Đang kiểm tra dữ liệu câu hỏi Bài 6…</div>
+      <div class="history-lesson-exam-grid">
+        <article class="history-lesson-exam-card" data-lesson-exam-card="1">
+          <div class="history-lesson-exam-card-top"><span class="history-lesson-exam-number">ĐỀ 01</span><span class="history-lesson-exam-tag">THPT · 50 PHÚT</span></div>
+          <h3>Đề luyện tập 1</h3>
+          <p>Đề tổng hợp riêng Bài 6, có chấm điểm và giải thích sau khi nộp bài.</p>
+          <div class="history-lesson-exam-meta"><span>24 câu trắc nghiệm</span><span>4 nhóm Đúng/Sai</span><span>Thang điểm 10</span></div>
+          <button class="history-lesson-exam-start" type="button" data-lesson-exam="1" disabled>Đang kiểm tra dữ liệu…</button>
+        </article>
+<article class="history-lesson-exam-card" data-lesson-exam-card="2">
+          <div class="history-lesson-exam-card-top"><span class="history-lesson-exam-number">ĐỀ 02</span><span class="history-lesson-exam-tag">THPT · 50 PHÚT</span></div>
+          <h3>Đề luyện tập 2</h3>
+          <p>Đề tổng hợp riêng Bài 6, có chấm điểm và giải thích sau khi nộp bài.</p>
+          <div class="history-lesson-exam-meta"><span>24 câu trắc nghiệm</span><span>4 nhóm Đúng/Sai</span><span>Thang điểm 10</span></div>
+          <button class="history-lesson-exam-start" type="button" data-lesson-exam="2" disabled>Đang kiểm tra dữ liệu…</button>
+        </article>
+<article class="history-lesson-exam-card" data-lesson-exam-card="3">
+          <div class="history-lesson-exam-card-top"><span class="history-lesson-exam-number">ĐỀ 03</span><span class="history-lesson-exam-tag">THPT · 50 PHÚT</span></div>
+          <h3>Đề luyện tập 3</h3>
+          <p>Đề tổng hợp riêng Bài 6, có chấm điểm và giải thích sau khi nộp bài.</p>
+          <div class="history-lesson-exam-meta"><span>24 câu trắc nghiệm</span><span>4 nhóm Đúng/Sai</span><span>Thang điểm 10</span></div>
+          <button class="history-lesson-exam-start" type="button" data-lesson-exam="3" disabled>Đang kiểm tra dữ liệu…</button>
+        </article>
+<article class="history-lesson-exam-card" data-lesson-exam-card="4">
+          <div class="history-lesson-exam-card-top"><span class="history-lesson-exam-number">ĐỀ 04</span><span class="history-lesson-exam-tag">THPT · 50 PHÚT</span></div>
+          <h3>Đề luyện tập 4</h3>
+          <p>Đề tổng hợp riêng Bài 6, có chấm điểm và giải thích sau khi nộp bài.</p>
+          <div class="history-lesson-exam-meta"><span>24 câu trắc nghiệm</span><span>4 nhóm Đúng/Sai</span><span>Thang điểm 10</span></div>
+          <button class="history-lesson-exam-start" type="button" data-lesson-exam="4" disabled>Đang kiểm tra dữ liệu…</button>
+        </article>
+<article class="history-lesson-exam-card" data-lesson-exam-card="5">
+          <div class="history-lesson-exam-card-top"><span class="history-lesson-exam-number">ĐỀ 05</span><span class="history-lesson-exam-tag">THPT · 50 PHÚT</span></div>
+          <h3>Đề luyện tập 5</h3>
+          <p>Đề tổng hợp riêng Bài 6, có chấm điểm và giải thích sau khi nộp bài.</p>
+          <div class="history-lesson-exam-meta"><span>24 câu trắc nghiệm</span><span>4 nhóm Đúng/Sai</span><span>Thang điểm 10</span></div>
+          <button class="history-lesson-exam-start" type="button" data-lesson-exam="5" disabled>Đang kiểm tra dữ liệu…</button>
+        </article>
       </div>
     </section>
-    <div class="history-bank-top" data-history-bank="Bài 6" hidden>
-      <div class="history-bank-panel" hidden>
-        <div class="history-bank-tabs" role="group" aria-label="Chọn dạng câu hỏi Bài 6">
-          <button class="history-bank-tab" type="button" data-kind="mc" aria-pressed="true">Trắc nghiệm nhiều lựa chọn</button>
-          <button class="history-bank-tab" type="button" data-kind="tf" aria-pressed="false">Trắc nghiệm Đúng/Sai</button>
-        </div>
-        <div class="history-bank-toolbar">
-          <strong data-bank-progress>Đang tải ngân hàng câu hỏi…</strong>
-          <span class="history-bank-desc">Câu trả lời được kiểm tra ngay sau khi chọn.</span>
-        </div>
-        <div class="history-bank-nav" data-bank-nav aria-label="Danh sách câu hỏi Bài 6"></div>
-        <div class="history-bank-question" data-bank-question aria-live="polite">
-          <p class="muted">Đang tải dữ liệu Bài 6…</p>
-        </div>
-        <div class="history-bank-controls">
-          <button type="button" data-prev disabled>← Câu trước</button>
-          <button type="button" class="primary" data-next>Câu tiếp theo →</button>
-        </div>
-      </div>
-    </div>
   </section>
 
   <section class="history-view lesson-view" id="view-bai7" hidden aria-labelledby="bai7-page-title">
@@ -947,116 +993,6 @@ button.history-exam-option{cursor:pointer}
     });
   });
   paint();
-})();
-</script>
-
-<script>
-(function(){
-"use strict";
-var roots=[].slice.call(document.querySelectorAll("[data-history-bank]"));
-var LETTERS=["A","B","C","D"];
-function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});}
-function matchesLesson(item,lesson){return String(item.lesson||"").toLowerCase().indexOf(lesson.toLowerCase())===0;}
-function initRoot(root){
- var lesson=root.getAttribute("data-history-bank");
- var toggle=document.querySelector('[data-bank-toggle="'+lesson+'"]')||root.querySelector(".history-bank-toggle"),panel=root.querySelector(".history-bank-panel");
-  root.hidden=true;
- var tabs=[].slice.call(root.querySelectorAll(".history-bank-tab"));
- var nav=root.querySelector("[data-bank-nav]"),box=root.querySelector("[data-bank-question]");
- var progress=root.querySelector("[data-bank-progress]"),prev=root.querySelector("[data-prev]"),next=root.querySelector("[data-next]");
- var state={kind:"mc",index:0,answers:{mc:{},tf:{}}};
- var pools={mc:[],tf:[]};
- var saveKey="thinnhanh_history_practice_"+lesson.replace(/\s+/g,"_");
- try{var old=JSON.parse(localStorage.getItem(saveKey)||"null");if(old&&old.answers)state.answers=old.answers;}catch(e){}
- function save(){try{localStorage.setItem(saveKey,JSON.stringify({answers:state.answers}));}catch(e){}}
- function activePool(){return pools[state.kind]||[];}
- function answered(item){
-  if(state.kind==="mc")return Object.prototype.hasOwnProperty.call(state.answers.mc,item.id);
-  var vals=state.answers.tf[item.id];return Array.isArray(vals)&&vals.filter(function(x){return x!==null;}).length===4;
- }
- function renderNav(){
-  var pool=activePool(),h="";
-  pool.forEach(function(item,i){h+='<button type="button" class="'+(i===state.index?"active ":"")+(answered(item)?"done":"")+'" data-qindex="'+i+'">'+(i+1)+'</button>';});
-  nav.innerHTML=h;
-  nav.querySelectorAll("[data-qindex]").forEach(function(b){b.addEventListener("click",function(){state.index=Number(b.getAttribute("data-qindex"));render();});});
-  var done=pool.filter(answered).length;
-  progress.textContent=(state.kind==="mc"?"Trắc nghiệm":"Đúng/Sai")+" · "+(pool.length?state.index+1:0)+"/"+pool.length+" câu · Đã hoàn thành "+done+"/"+pool.length;
-  prev.disabled=state.index<=0;next.disabled=state.index>=pool.length-1;
- }
- function feedback(correct,explanation){
-  return '<div class="history-bank-feedback"><strong>'+(correct?"✓ Chính xác!":"Chưa chính xác.")+'</strong> '+esc(explanation||"")+'</div>';
- }
- function renderMC(q){
-  var chosen=state.answers.mc[q.id];
-  var h='<div class="history-bank-qmeta"><span>'+esc(q.lesson||lesson)+' · TRẮC NGHIỆM</span><span>Câu '+(state.index+1)+' / '+pools.mc.length+'</span></div>';
-  h+='<div class="history-bank-qtext">'+esc(q.q)+'</div><div class="history-bank-options">';
-  (q.options||[]).forEach(function(op,i){
-   var selected=chosen===i,correct=q.answer===i,cls=chosen===undefined?"":(correct?"correct":selected?"incorrect":"");
-   h+='<button type="button" class="history-bank-option '+(selected?"chosen ":"")+cls+'" data-choice="'+i+'" '+(chosen!==undefined?"disabled":"")+'><span class="letter">'+LETTERS[i]+'</span><span>'+esc(op)+'</span></button>';
-  });
-  h+='</div>';
-  if(chosen!==undefined)h+=feedback(chosen===q.answer,"Đáp án đúng: "+LETTERS[q.answer]+". "+q.options[q.answer]+(q.explanation?" · "+q.explanation:""));
-  box.innerHTML=h;
-  box.querySelectorAll("[data-choice]").forEach(function(b){b.addEventListener("click",function(){state.answers.mc[q.id]=Number(b.getAttribute("data-choice"));save();render();});});
- }
- function renderTF(g){
-  var answers=state.answers.tf[g.id]||[null,null,null,null];
-  var h='<div class="history-bank-qmeta"><span>'+esc(g.lesson||lesson)+' · ĐÚNG / SAI</span><span>Câu '+(state.index+1)+' / '+pools.tf.length+'</span></div>';
-  h+='<div class="history-bank-qtext">'+esc(g.title||"Câu hỏi Đúng/Sai")+'</div>';
-  if(g.prompt||g.passage)h+='<div class="history-bank-source">'+(g.prompt?'<strong>'+esc(g.prompt)+'</strong><br>':"")+esc(g.passage||"")+'</div>';
-  (g.items||[]).forEach(function(it,i){
-   var val=answers[i],has=val!==null&&val!==undefined,correct=has&&val===!!it.answer;
-   h+='<div class="history-bank-tfitem"><div class="history-bank-tftext">'+String.fromCharCode(97+i)+') '+esc(it.text)+'</div><div class="history-bank-tfactions">';
-   h+='<button type="button" data-tf="'+i+'" data-value="true" class="'+(val===true?"chosen ":"")+(has&&it.answer===true?"correct":has&&val===true?"incorrect":"")+'" '+(has?"disabled":"")+'>Đúng</button>';
-   h+='<button type="button" data-tf="'+i+'" data-value="false" class="'+(val===false?"chosen ":"")+(has&&it.answer===false?"correct":has&&val===false?"incorrect":"")+'" '+(has?"disabled":"")+'>Sai</button></div>';
-   if(has)h+=feedback(correct,"Đáp án: "+(it.answer?"Đúng":"Sai")+(it.explanation?" · "+it.explanation:""));
-   h+='</div>';
-  });
-  box.innerHTML=h;
-  box.querySelectorAll("[data-tf]").forEach(function(b){b.addEventListener("click",function(){
-   var i=Number(b.getAttribute("data-tf")),v=b.getAttribute("data-value")==="true";
-   if(!state.answers.tf[g.id])state.answers.tf[g.id]=[null,null,null,null];
-   state.answers.tf[g.id][i]=v;save();render();
-  });});
- }
- function render(){
-  var pool=activePool();renderNav();
-  if(!pool.length){box.innerHTML='<p class="muted">Chưa có câu hỏi thuộc dạng này trong '+esc(lesson)+'.</p>';return;}
-  if(state.index>=pool.length)state.index=pool.length-1;
-  var item=pool[state.index];
-  if(state.kind==="mc")renderMC(item);else renderTF(item);
- }
- function updateTabs(){tabs.forEach(function(t){t.setAttribute("aria-pressed",t.getAttribute("data-kind")===state.kind?"true":"false");});}
- function load(){
-  if(!window.HISTORY_BANK)return false;
-  pools.mc=(window.HISTORY_BANK.mc||[]).filter(function(q){return matchesLesson(q,lesson);});
-  pools.tf=(window.HISTORY_BANK.tf||[]).filter(function(q){return matchesLesson(q,lesson);});
-  var mcCount=document.querySelector('[data-bank-mc-count="'+lesson+'"]');
-  var tfCount=document.querySelector('[data-bank-tf-count="'+lesson+'"]');
-  if(mcCount)mcCount.textContent=pools.mc.length+"/139 câu";
-  if(tfCount)tfCount.textContent=pools.tf.length+"/35 nhóm";
-  tabs.forEach(function(t){t.addEventListener("click",function(){state.kind=t.getAttribute("data-kind");state.index=0;updateTabs();render();});});
-  prev.addEventListener("click",function(){if(state.index>0){state.index--;render();}});
-  next.addEventListener("click",function(){if(state.index<activePool().length-1){state.index++;render();}});
-  toggle.addEventListener("click",function(){
-   var opening=panel.hidden;
-   roots.forEach(function(other){
-    if(other===root)return;
-    var p=other.querySelector(".history-bank-panel"),b=document.querySelector('[data-bank-toggle="'+other.getAttribute("data-history-bank")+'"]')||other.querySelector(".history-bank-toggle");
-    p.hidden=true;other.hidden=true;b.setAttribute("aria-expanded","false");b.textContent="Mở ngân hàng "+other.getAttribute("data-history-bank")+" ↓";
-   });
-   panel.hidden=!opening;root.hidden=!opening;toggle.setAttribute("aria-expanded",opening?"true":"false");
-   toggle.textContent=opening?"Thu gọn ngân hàng ↑":"Mở ngân hàng "+lesson+" ↓";
-   if(opening)root.scrollIntoView({behavior:"smooth",block:"nearest"});
-  });
-  updateTabs();render();return true;
- }
- if(!load()){
-  window.addEventListener("historybankready",function(){load();},{once:true});
-  window.addEventListener("historybankerror",function(e){box.innerHTML='<p class="muted">Không tải được ngân hàng. '+esc(e.detail||"Bạn hãy tải lại trang.")+'</p>';},{once:true});
- }
-}
-roots.forEach(initRoot);
 })();
 </script>
 
