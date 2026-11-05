@@ -629,8 +629,6 @@ function initRoot(root){
   if(!window.HISTORY_BANK)return false;
   pools.mc=(window.HISTORY_BANK.mc||[]).filter(function(q){return matchesLesson(q,lesson);});
   pools.tf=(window.HISTORY_BANK.tf||[]).filter(function(q){return matchesLesson(q,lesson);});
-  root.querySelector("[data-count-mc]").textContent=pools.mc.length+" câu trắc nghiệm";
-  root.querySelector("[data-count-tf]").textContent=pools.tf.length+" nhóm Đúng/Sai";
   tabs.forEach(function(t){t.addEventListener("click",function(){state.kind=t.getAttribute("data-kind");state.index=0;updateTabs();render();});});
   prev.addEventListener("click",function(){if(state.index>0){state.index--;render();}});
   next.addEventListener("click",function(){if(state.index<activePool().length-1){state.index++;render();}});
