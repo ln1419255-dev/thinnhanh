@@ -352,16 +352,17 @@ var tf=a.tf.reduce(function(n,row){return n+row.filter(function(v){return v!==nu
 return mc+tf;
 }
 function totalUnits(){return 56;}
+function isTinTFValue(value){return value===true||value===false||value==="true"||value==="false";}
 function questionAnswered(index){
 var a=currentSession.answers||{};
 if(index<40){var choice=Array.isArray(a.mc)?a.mc[index]:null;return Number.isInteger(choice)&&choice>=0&&choice<4;}
 var row=Array.isArray(a.tf)?a.tf[index-40]:null;
-return Array.isArray(row)&&row.length===4&&row.every(function(v){return v===true||v===false;});
+return Array.isArray(row)&&row.length===4&&row.every(isTinTFValue);
 }
 function questionPartiallyAnswered(index){
 if(index<40)return false;
 var row=currentSession.answers&&Array.isArray(currentSession.answers.tf)?currentSession.answers.tf[index-40]:null;
-return Array.isArray(row)&&row.some(function(v){return v===true||v===false;})&&!questionAnswered(index);
+return Array.isArray(row)&&row.some(isTinTFValue)&&!questionAnswered(index);
 }
 function renderNav(){
 var html="",flagged=new Set(currentSession.flagged||[]);
