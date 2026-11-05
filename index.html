@@ -1262,4 +1262,28 @@ html[data-theme="dark"] .tn-side-nav a.history-entry{background:linear-gradient(
 })();
 </script>
 
+<script id="tn-reset-subject-overview-on-open">
+(function(){
+ "use strict";
+ var defaults={
+  "physics.html":"home",
+  "chem.html":"home",
+  "math.html":"home",
+  "tin-moi.html":"exams",
+  "tin-moi-de.html":"exams"
+ };
+ document.addEventListener("click",function(event){
+  var link=event.target.closest("a[href]");
+  if(!link)return;
+  var href=(link.getAttribute("href")||"").split("#")[0].split("?")[0];
+  var file=href.split("/").pop().toLowerCase();
+  var view=defaults[file];
+  if(!view)return;
+  try{
+   var state={viewId:"view-"+view,navView:view,scrollY:0,hash:"",savedAt:Date.now()};
+   localStorage.setItem("tn_screen_state_v1_"+file,JSON.stringify(state));
+  }catch(e){}
+ },true);
+})();
+</script>
 </body></html>
