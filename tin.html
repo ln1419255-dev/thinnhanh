@@ -136,6 +136,14 @@ html[data-theme="dark"] .flag-btn.active{background:#57431d;color:#ffe8b6}
  .result{padding:13px}.result-hero{padding:16px}.result-actions{display:grid}.result-actions .btn{width:100%}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+/* Tin học: trạng thái câu đã làm, câu đang làm dở và giao diện tối */
+.nav-btn.partial:not(.current){background:#fff8e8;border-color:#edd49b;color:#946b17}
+.legend .lg-partial{background:#e0b24c}
+html[data-theme="dark"] .nav-btn.answered:not(.current){background:#153b30!important;border-color:#2d8968!important;color:#aaf0c5!important;box-shadow:inset 0 0 0 1px rgba(85,213,156,.12)!important}
+html[data-theme="dark"] .nav-btn.partial:not(.current){background:#3b321e!important;border-color:#8b7138!important;color:#ffe2a0!important}
+html[data-theme="dark"] .nav-btn.current{background:linear-gradient(135deg,#087f83,#1598a1)!important;border-color:#55d8cf!important;color:#fff!important}
+html[data-theme="dark"] .legend .lg-done{background:#5bce91}
+html[data-theme="dark"] .legend .lg-partial{background:#d9ae50}
 </style>
 </head>
 <body>
@@ -181,7 +189,7 @@ html[data-theme="dark"] .flag-btn.active{background:#57431d;color:#ffe8b6}
    <aside class="quiz-sidebar">
     <div class="side-head"><b>Danh sách câu hỏi</b><span id="answeredCount">0/56 ý</span></div>
     <div class="nav-grid" id="questionNav"></div>
-    <div class="legend"><span><i class="lg-now"></i>Đang xem</span><span><i class="lg-done"></i>Đã trả lời</span><span>⚑ Phân vân</span></div>
+    <div class="legend"><span><i class="lg-now"></i>Đang xem</span><span><i class="lg-done"></i>Đã trả lời</span><span><i class="lg-partial"></i>Đang làm</span><span>⚑ Phân vân</span></div>
     <button class="flag-btn" id="flagBtn" type="button">⚑ Đánh dấu phân vân</button>
     <p class="muted-small" id="submitHint">Bạn có thể chuyển câu bằng danh sách bên trên. Câu bỏ trống không có điểm và vẫn được giữ lại để ôn tập.</p>
     <button class="btn" id="submitBtn" type="button" style="width:100%;margin-top:9px">Nộp bài & xem kết quả</button>
@@ -345,14 +353,20 @@ return mc+tf;
 }
 function totalUnits(){return 56;}
 function questionAnswered(index){
-var a=currentSession.answers;
-if(index<40)return a.mc[index]!==null;
-return a.tf[index-40].every(function(v){return v!==null;});
+var a=currentSession.answers||{};
+if(index<40){var choice=Array.isArray(a.mc)?a.mc[index]:null;return Number.isInteger(choice)&&choice>=0&&choice<4;}
+var row=Array.isArray(a.tf)?a.tf[index-40]:null;
+return Array.isArray(row)&&row.length===4&&row.every(function(v){return v===true||v===false;});
+}
+function questionPartiallyAnswered(index){
+if(index<40)return false;
+var row=currentSession.answers&&Array.isArray(currentSession.answers.tf)?currentSession.answers.tf[index-40]:null;
+return Array.isArray(row)&&row.some(function(v){return v===true||v===false;})&&!questionAnswered(index);
 }
 function renderNav(){
 var html="",flagged=new Set(currentSession.flagged||[]);
 for(var i=0;i<44;i++){
-var cls=[];if(i===currentSession.active)cls.push("current");if(questionAnswered(i))cls.push("answered");if(flagged.has(i))cls.push("flagged");
+var cls=[];if(i===currentSession.active)cls.push("current");if(questionAnswered(i))cls.push("answered");else if(questionPartiallyAnswered(i))cls.push("partial");if(flagged.has(i))cls.push("flagged");
 html+='<button type="button" class="nav-btn '+cls.join(" ")+'" data-nav="'+i+'" aria-label="Đến '+escapeHtml(navLabel(i))+'">'+escapeHtml(navLabel(i))+'</button>';
 }
 $("questionNav").innerHTML=html;
