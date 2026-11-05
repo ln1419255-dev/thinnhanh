@@ -74,7 +74,7 @@ function buildLessonExam(lesson,examNumber){
  });
  selectedTF=shuffle(selectedTF).map(function(q){return Object.assign({},q,{type:"tf",items:q.items.map(function(x){return Object.assign({},x);})});});
  var no=String(examNumber).padStart(2,"0");
- return {exam:{id:"LS-"+lesson.replace(/\\s+/g,"").toUpperCase()+"-E"+no,title:lesson+" · Đề "+no,minutes:50,createdAt:Date.now(),sourceLesson:lesson,examNumber:Number(examNumber),questions:selectedMC.concat(selectedTF)}};
+ return {exam:{id:(lesson==="Bài 6"?"LS-B6":"LS-B7")+"-E"+no,title:lesson+" · Đề "+no,minutes:50,createdAt:Date.now(),sourceLesson:lesson,examNumber:Number(examNumber),questions:selectedMC.concat(selectedTF)}};
 }
 function startLessonExam(examNumber){
  var old=getDraft();
