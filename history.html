@@ -366,6 +366,15 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
       root.dataset.theme=e.newValue;paint();
     }
   });
+  // Chỉ mở một phần "Xem thêm" tại một thời điểm.
+  document.querySelectorAll("details.study-detail").forEach(function(item){
+    item.addEventListener("toggle",function(){
+      if(!item.open) return;
+      document.querySelectorAll("details.study-detail[open]").forEach(function(other){
+        if(other!==item) other.open=false;
+      });
+    });
+  });
   paint();
 })();
 </script>
