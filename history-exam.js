@@ -24,10 +24,13 @@ function recordUsage(items){var usage=readUsage(),now=Date.now();items.forEach(f
 function pickLeastUsed(pool,count){var usage=readUsage();var ranked=pool.slice().sort(function(a,b){var x=usage[stable(a)]||{},y=usage[stable(b)]||{};return Number(x.count||0)-Number(y.count||0)||Number(x.last||0)-Number(y.last||0)||(Math.random()-.5);});return shuffle(ranked.slice(0,count));}
 function splitCount(a,b,count){if(count<2||!a.length||!b.length||a.length+b.length<count)return null;var minA=Math.max(1,count-b.length),maxA=Math.min(a.length,count-1);var x=Math.max(minA,Math.min(maxA,Math.round(count*a.length/(a.length+b.length))));return [x,count-x];}
 function buildExam(){
- var bank=window.HISTORY_BANK;if(!bank)return {error:"Ngân hàng câu hỏi chưa tải xong."};
+ var base=window.HISTORY_BANK;if(!base)return {error:"Ngân hàng câu hỏi chưa tải xong."};
+ var b6=window.HISTORY_BAI6_BANK;
+ var mcSource=b6?(b6.mc||[]).concat((base.mc||[]).filter(function(q){return lessonOf(q)==="Bài 7";})):(base.mc||[]);
+ var tfSource=b6?(b6.tf||[]).concat((base.tf||[]).filter(function(q){return lessonOf(q)==="Bài 7";})):(base.tf||[]);
  var mc=[],tf=[],seenMC={},seenTF={};
- (bank.mc||[]).forEach(function(q){if(validMC(q)&&!seenMC[stable(q)]){seenMC[stable(q)]=1;mc.push(q);}});
- (bank.tf||[]).forEach(function(q){if(validTF(q)&&!seenTF[stable(q)]){seenTF[stable(q)]=1;tf.push(q);}});
+ mcSource.forEach(function(q){if(validMC(q)&&!seenMC[stable(q)]){seenMC[stable(q)]=1;mc.push(q);}});
+ tfSource.forEach(function(q){if(validTF(q)&&!seenTF[stable(q)]){seenTF[stable(q)]=1;tf.push(q);}});
  if(mc.length<MC_TOTAL||tf.length<TF_TOTAL)return {error:"Ngân hàng hiện có "+mc.length+" câu trắc nghiệm và "+tf.length+" nhóm Đúng/Sai hợp lệ. Cần tối thiểu 24 câu trắc nghiệm và 4 nhóm Đúng/Sai. Không tự tạo câu để lấp chỗ trống."};
  var mc6=mc.filter(function(q){return lessonOf(q)==="Bài 6";}),mc7=mc.filter(function(q){return lessonOf(q)==="Bài 7";});
  var tf6=tf.filter(function(q){return lessonOf(q)==="Bài 6";}),tf7=tf.filter(function(q){return lessonOf(q)==="Bài 7";});
