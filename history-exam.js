@@ -141,10 +141,14 @@ function renderMC(q,index){var chosen=answers[index],html='<div class="history-e
 function renderPassage(g){
  var rawImage=g.image||g.imageUrl||g.image_url||"";
  var image=typeof rawImage==="string"&&/^https?:\/\//i.test(rawImage)?rawImage:"";
- // Chuẩn hóa xuống dòng do PDF trích xuất: chuyển ngắt dòng giữa câu thành khoảng trắng
- // để đoạn tư liệu tự chảy hết chiều ngang thay vì bị bó thành các dòng ngắn.
- var passage=String(g.passage||"").replace(/\\r\\n?/g,"\\n").replace(/[ \\t]*\\n+[ \\t]*/g," ").replace(/[ \\t]{2,}/g," ").trim();
- var text=(g.prompt?("<strong>"+safe(String(g.prompt).replace(/\\s+/g," ").trim())+"</strong><br>"):"")+safe(passage);
+ // PDF thường ngắt dòng theo chiều rộng trang; nối các dòng thành đoạn văn liên tục.
+ var passage=String(g.passage||"")
+  .replace(/\r\n?/g,"\n")
+  .replace(/[ \t]*\n+[ \t]*/g," ")
+  .replace(/[ \t]{2,}/g," ")
+  .trim();
+ var prompt=String(g.prompt||"").replace(/\s+/g," ").trim();
+ var text=(prompt?("<strong>"+safe(prompt)+"</strong><br>"):"")+safe(passage);
  return '<div class="history-exam-passage '+(image?"has-image":"")+'"><div class="history-exam-passage-text">'+text+'</div>'+(image?'<img class="history-exam-passage-image" src="'+esc(image)+'" alt="Hình ảnh tư liệu lịch sử" loading="lazy" referrerpolicy="no-referrer">':"")+'</div>';
 }
 function renderTF(g,index){var n=index-24,vals=Array.isArray(answers[index])?answers[index]:[null,null,null,null];var html='<div class="history-exam-qmeta"><span>PHẦN II · TRẮC NGHIỆM ĐÚNG / SAI</span><span>Câu '+(n+1)+' / 4 · '+esc(g.lesson)+'</span></div>';if(g.title)html+='<div class="history-exam-qtext">'+safe(g.title)+'</div>';if(g.prompt||g.passage||g.image||g.imageUrl||g.image_url)html+=renderPassage(g);g.items.forEach(function(item,i){var v=vals[i];html+='<div class="history-exam-tf-row"><div class="history-exam-tf-text">'+String.fromCharCode(97+i)+') '+safe(item.text)+'</div><div class="history-exam-tf-actions"><button type="button" class="'+(v===true?"selected":"")+'" data-tf-index="'+i+'" data-tf-value="true">Đúng</button><button type="button" class="'+(v===false?"selected":"")+'" data-tf-index="'+i+'" data-tf-value="false">Sai</button></div></div>';});return html;}
