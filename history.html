@@ -353,7 +353,7 @@ footer{text-align:center;color:var(--muted);padding:24px 18px 30px;font-size:13p
 button.history-exam-option{cursor:pointer}
 .history-exam-option.selected{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 11%,var(--surface))}
 .history-exam-letter{display:grid;place-items:center;flex:0 0 25px;height:25px;border-radius:8px;background:var(--surface);color:var(--accent);font-size:11px;font-weight:950}
-.history-exam-passage{margin:10px 0 15px;padding:13px 14px;border-left:3px solid var(--accent);border-radius:9px;background:var(--surface-2);color:var(--muted);font-size:12px;line-height:1.75;white-space:normal}
+.history-exam-passage{display:block;width:100%;max-width:none;margin:10px 0 15px;padding:13px 14px;border-left:3px solid var(--accent);border-radius:9px;background:var(--surface-2);color:var(--muted);font-size:12px;line-height:1.75;white-space:normal}.history-exam-passage.has-image{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,30%);align-items:center;gap:16px}.history-exam-passage-text{min-width:0;overflow-wrap:anywhere}.history-exam-passage-image{display:block;width:100%;max-height:260px;object-fit:contain;border:1px solid var(--line);border-radius:9px;background:var(--surface)}@media(max-width:620px){.history-exam-passage.has-image{grid-template-columns:1fr}.history-exam-passage-image{max-height:220px}}
 .history-exam-tf-row{margin-top:10px;padding:13px;border:1px solid var(--line);border-radius:11px;background:var(--surface-2)}
 .history-exam-tf-text{font-size:13px;line-height:1.7;font-weight:750}
 .history-exam-tf-actions{display:flex;gap:8px;margin-top:9px}
